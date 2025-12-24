@@ -6,7 +6,6 @@
   <title>Wh1teBear Territory</title>
 
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
 <body>
@@ -16,42 +15,33 @@
       <img src="bear.png" alt="Wh1teBear" class="avatar" />
       <div>
         <h1>Wh1teBear</h1>
-        <p class="tagline">My space to post what I learn toward my journey</p>
+        <p>My space to post what I learn toward my journey</p>
       </div>
     </div>
 
     <div class="header-right">
-      <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      <button onclick="toggleTheme()">🌙</button>
       <button class="burger" onclick="toggleSidebar()">☰</button>
     </div>
   </header>
 
-  <!-- OVERLAY -->
-  <div class="overlay" onclick="closeSidebar()"></div>
-
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <section>
-      <h3>Navigation</h3>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#featured">Featured</a>
-      <a href="#contact">Contact</a>
-    </section>
+    <h3>Navigation</h3>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#featured">Featured</a>
+    <a href="#contact">Contact</a>
 
-    <section>
-      <h3>Latest Growl</h3>
-      <a href="#">MCC 2025</a>
-      <a href="#">Cyberskills Level Up</a>
-      <a href="#">CYDES 2025</a>
-    </section>
+    <h3>Latest Growl</h3>
+    <a href="#">MCC 2025</a>
+    <a href="#">Cyberskills Level Up</a>
+    <a href="#">CYDES 2025</a>
 
-    <section>
-      <h3>CTF Writeups</h3>
-      <a href="#">WGMY 24</a>
-      <a href="#">UMCS 2025</a>
-      <a href="#">MCC Malware</a>
-    </section>
+    <h3>CTF Writeups</h3>
+    <a href="#">WGMY 24</a>
+    <a href="#">UMCS 2025</a>
+    <a href="#">MCC Malware</a>
   </aside>
 
   <!-- MAIN -->
@@ -71,23 +61,23 @@
     </section>
 
     <section id="featured">
-      <h2 class="section-title">Featured Posts</h2>
+      <h2>Featured Posts</h2>
 
-      <div class="grid">
-        <article class="post">
-          <span class="date">Dec 01, 2025</span>
+      <div class="posts">
+        <article>
+          <span>Dec 01, 2025</span>
           <h3>MCC 2025</h3>
           <p>Notes and lessons from MCC.</p>
         </article>
 
-        <article class="post">
-          <span class="date">Aug 02, 2025</span>
+        <article>
+          <span>Aug 02, 2025</span>
           <h3>Cyberskills Level Up</h3>
           <p>Reverse + mobile skills growth.</p>
         </article>
 
-        <article class="post">
-          <span class="date">Jul 02, 2025</span>
+        <article>
+          <span>Jul 02, 2025</span>
           <h3>CYDES 2025</h3>
           <p>Conference takeaways.</p>
         </article>
@@ -96,11 +86,9 @@
 
     <section class="card" id="contact">
       <h2>📬 Contact</h2>
-      <div class="links">
-        <a href="#">LinkedIn</a>
-        <a href="#">Discord</a>
-        <a href="mailto:you@example.com">Email</a>
-      </div>
+      <a href="#">LinkedIn</a> ·
+      <a href="#">Discord</a> ·
+      <a href="mailto:you@example.com">Email</a>
     </section>
   </main>
 
