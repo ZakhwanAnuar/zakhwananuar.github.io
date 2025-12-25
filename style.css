@@ -1,21 +1,26 @@
-/* ===== VARIABLES ===== */
 :root {
-  --bg: #0b0f14;
-  --panel: rgba(255,255,255,.06);
-  --text: #fff;
-  --muted: #b0b8c4;
+  --bg1: #0b0f14;
+  --bg2: #121a24;
   --accent: #3aa7ff;
-  --radius: 18px;
+  --text: #ffffff;
+  --muted: #b4bdc9;
+  --panel: rgba(255,255,255,.06);
   font-family: Inter, sans-serif;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
   color: var(--text);
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  min-height: 100vh;
 }
 
-/* ===== LAYOUT ===== */
+body.hacker-mode {
+  background: linear-gradient(135deg, #020b06, #06140d);
+  --accent: #00ff7a;
+}
+
+/* Layout */
 .container {
   width: min(1100px, 90%);
   margin: auto;
@@ -27,16 +32,16 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
   gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-/* ===== HEADER ===== */
+/* Header */
 .header {
   position: sticky;
   top: 0;
-  background: rgba(0,0,0,.6);
   backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.5);
 }
 
 .header__inner {
@@ -49,38 +54,43 @@ body {
 .nav a {
   margin-left: 16px;
   color: var(--muted);
+  text-decoration: none;
 }
 
-/* ===== HERO ===== */
-.hero__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
-  gap: 32px;
+/* Hero */
+.hero {
+  text-align: center;
 }
 
-/* ===== CARDS ===== */
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 12px;
+}
+
+.lead {
+  max-width: 620px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Cards */
 .card {
   padding: 20px;
   background: var(--panel);
-  border-radius: var(--radius);
+  border-radius: 16px;
 }
 
-.glass {
-  backdrop-filter: blur(12px);
-}
-
-/* ===== BUTTONS ===== */
-.btn, .wcard__link {
-  margin-top: 10px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--accent);
+button {
   background: transparent;
+  border: 1px solid var(--accent);
   color: var(--text);
+  padding: 8px 14px;
+  border-radius: 999px;
   cursor: pointer;
 }
 
-/* ===== MODAL ===== */
+/* Modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -90,7 +100,7 @@ body {
   pointer-events: none;
 }
 
-.modal[aria-hidden="false"] {
+.modal.show {
   opacity: 1;
   pointer-events: auto;
 }
@@ -102,9 +112,10 @@ body {
 }
 
 .modal__panel {
-  max-width: 600px;
-  width: 90%;
+  background: var(--bg2);
   padding: 20px;
+  border-radius: 16px;
+  width: min(600px, 90%);
   position: relative;
 }
 
@@ -114,28 +125,18 @@ body {
   right: 10px;
 }
 
-/* ===== CURSOR ===== */
-.cursor {
+/* Cursor Dot */
+.cursor-dot {
   position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.cursor__ring {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-}
-
-.cursor__dot {
   width: 6px;
   height: 6px;
   background: var(--accent);
   border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .nav{display:none;}
+/* Responsive */
+@media (max-width: 768px) {
+  .nav { display: none; }
 }
