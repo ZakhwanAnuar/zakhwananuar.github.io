@@ -97,7 +97,6 @@ body.terminal .mode{
 }
 .title{
   font-size: clamp(2.2rem, 5vw, 3.3rem);
-  text-transform: lowercase;
 }
 .subtitle{
   margin-top:10px;
