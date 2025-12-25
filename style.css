@@ -1,158 +1,141 @@
+/* ===== VARIABLES ===== */
 :root {
-  --bg: #0f1115;
-  --card: #151922;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #3b82f6;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+  --bg: #0b0f14;
+  --panel: rgba(255,255,255,.06);
+  --text: #fff;
+  --muted: #b0b8c4;
+  --accent: #3aa7ff;
+  --radius: 18px;
+  font-family: Inter, sans-serif;
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  margin: 0;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
 }
 
-/* Cursor */
-.cursor {
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.15s, height 0.15s;
-  z-index: 999;
+/* ===== LAYOUT ===== */
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
 }
 
-/* Header */
+.section {
+  padding: 80px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 16px;
+}
+
+/* ===== HEADER ===== */
 .header {
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(10px);
+}
+
+.header__inner {
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 8%;
 }
 
-.logo {
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-nav a {
-  margin-left: 24px;
+.nav a {
+  margin-left: 16px;
   color: var(--muted);
-  text-decoration: none;
 }
 
-nav a:hover {
-  color: var(--accent);
+/* ===== HERO ===== */
+.hero__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap: 32px;
 }
 
-/* Hero */
-.hero {
-  padding: 120px 8% 80px;
+/* ===== CARDS ===== */
+.card {
+  padding: 20px;
+  background: var(--panel);
+  border-radius: var(--radius);
 }
 
-.hero-content h2 {
-  font-size: 3rem;
+.glass {
+  backdrop-filter: blur(12px);
 }
 
-.hero-tagline {
-  color: var(--muted);
-  margin: 12px 0 24px;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-/* Pulse */
-.pulse {
-  width: 10px;
-  height: 10px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.6); }
-  70% { box-shadow: 0 0 0 10px rgba(59,130,246,0); }
-  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
-}
-
-/* Buttons */
-.copy-btn {
-  background: transparent;
+/* ===== BUTTONS ===== */
+.btn, .wcard__link {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
   border: 1px solid var(--accent);
-  color: var(--accent);
-  padding: 10px 18px;
-  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
   cursor: pointer;
 }
 
-.copy-btn.copied {
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+}
+
+.modal__panel {
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* ===== CURSOR ===== */
+.cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.cursor__ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+}
+
+.cursor__dot {
+  width: 6px;
+  height: 6px;
   background: var(--accent);
-  color: #000;
+  border-radius: 50%;
 }
 
-/* Bento Grid */
-.bento {
-  padding: 40px 8% 80px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.card {
-  background: var(--card);
-  padding: 24px;
-  border-radius: 16px;
-}
-
-/* CTF Cards */
-.ctf-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.ctf-card {
-  background: #0f1320;
-  padding: 16px;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
-}
-
-.ctf-card:hover {
-  transform: scale(1.05);
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 24px;
-  color: var(--muted);
-}
-
-/* Mobile tweaks */
-@media (max-width: 768px) {
-  .hero-content h2 {
-    font-size: 2.2rem;
-  }
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav{display:none;}
 }
