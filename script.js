@@ -1,49 +1,38 @@
-/* Magnetic Cursor */
-const cursor = document.querySelector(".cursor");
+// ===== CUSTOM CURSOR =====
+const ring = document.querySelector(".cursor__ring");
+const dot = document.querySelector(".cursor__dot");
 
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = `${e.clientX}px`;
-  cursor.style.top = `${e.clientY}px`;
+document.addEventListener("mousemove", e => {
+  ring.style.transform = `translate(${e.clientX-20}px,${e.clientY-20}px)`;
+  dot.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
 });
 
-document.querySelectorAll("a, button").forEach(el => {
-  el.addEventListener("mouseenter", () => {
-    cursor.style.transform = "translate(-50%, -50%) scale(1.8)";
-  });
-  el.addEventListener("mouseleave", () => {
-    cursor.style.transform = "translate(-50%, -50%) scale(1)";
-  });
+// ===== MODAL =====
+const modal = document.getElementById("modal");
+const title = document.getElementById("modalTitle");
+const body = document.getElementById("modalBody");
+const cat = document.getElementById("modalCategory");
+const diff = document.getElementById("modalDifficulty");
+
+document.querySelectorAll(".wcard__link").forEach(btn => {
+  btn.onclick = () => {
+    title.textContent = btn.dataset.title;
+    body.innerHTML = btn.dataset.content;
+    cat.textContent = btn.dataset.category;
+    diff.textContent = btn.dataset.difficulty;
+    modal.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+  };
 });
 
-/* Copy Button */
-const copyBtn = document.querySelector(".copy-btn");
-
-copyBtn.addEventListener("click", () => {
-  navigator.clipboard.writeText(copyBtn.dataset.copy);
-  copyBtn.classList.add("copied");
-  copyBtn.textContent = "Copied!";
-  setTimeout(() => {
-    copyBtn.classList.remove("copied");
-    copyBtn.textContent = "Copy Discord";
-  }, 1500);
-});
-
-/* GSAP Animations */
-gsap.from(".hero-content > *", {
-  opacity: 0,
-  y: 30,
-  duration: 0.8,
-  stagger: 0.15,
-  ease: "power3.out"
-});
-
-gsap.from(".card", {
-  opacity: 0,
-  y: 40,
-  duration: 0.8,
-  stagger: 0.2,
-  scrollTrigger: {
-    trigger: ".bento",
-    start: "top 80%"
+modal.addEventListener("click", e=>{
+  if(e.target.dataset.close!==undefined){
+    modal.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
   }
 });
+
+// ===== HACKER MODE =====
+document.getElementById("toggleHacker").onclick = ()=>{
+  document.body.classList.toggle("hacker-mode");
+};
