@@ -3,42 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cybersecurity Portfolio | CTF Player</title>
+  <title>Zakhwan Anuar | Cybersecurity Portfolio</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- GSAP (optional polish) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
 
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor">
-  <div class="cursor__ring"></div>
-  <div class="cursor__dot"></div>
-</div>
+<!-- Cursor Dot -->
+<div class="cursor-dot"></div>
 
-<!-- Glitch Overlay -->
-<div class="glitch-overlay">
-  <div class="glitch-overlay__scanlines"></div>
-  <div class="glitch-overlay__noise"></div>
-</div>
-
-<!-- Header -->
 <header class="header">
   <div class="container header__inner">
-    <div class="brand mono">zk//portfolio</div>
-
+    <span class="brand mono">zk//portfolio</span>
     <nav class="nav">
-      <a href="#experience" data-cursor="hover">Events</a>
-      <a href="#writeups" data-cursor="hover">Write-ups</a>
-      <a href="#identity" data-cursor="hover">Identity</a>
+      <a href="#experience">Events</a>
+      <a href="#writeups">Write-ups</a>
+      <a href="#identity">Identity</a>
     </nav>
   </div>
 </header>
@@ -47,41 +32,16 @@
 
 <!-- HERO -->
 <section class="hero section">
-  <div class="container hero__grid">
-    <div>
-      <span class="pill">Cybersecurity Student • CTF Player</span>
-
-      <h1>
-        Defender by day,<br/>
-        <span class="accent">Breaker</span> by night.
-      </h1>
-
-      <p class="lead">
-        I’m learning cybersecurity fundamentals through hands-on Capture The Flag challenges,
-        focusing on web security, binary exploitation, and reverse engineering.
-      </p>
-
-      <div class="hero__cta">
-        <a href="#writeups" class="btn magnetic" data-cursor="hover">
-          View Write-ups
-          <span class="btn__glow"></span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card glass">
-      <h3>Current Focus</h3>
-      <ul class="mono">
-        <li>Web vulnerabilities (XSS, SQLi)</li>
-        <li>Linux fundamentals</li>
-        <li>Reverse engineering basics</li>
-        <li>Clear documentation</li>
-      </ul>
-    </div>
+  <div class="container hero__content">
+    <h1>Zakhwan Anuar</h1>
+    <p class="lead">
+      Cybersecurity student & CTF player documenting my learning journey in web security,
+      binary exploitation, and reverse engineering.
+    </p>
   </div>
 </section>
 
-<!-- EVENTS -->
+<!-- EXPERIENCE -->
 <section class="section" id="experience">
   <div class="container">
     <h2>CTF Events Joined</h2>
@@ -89,15 +49,15 @@
     <div class="grid">
       <div class="card">
         <h3>University CTF</h3>
-        <p>Learned CTF workflow, note-taking, and collaboration.</p>
+        <p>Introduced to CTF workflow, tooling, and team collaboration.</p>
       </div>
       <div class="card">
-        <h3>Weekend Online CTF</h3>
-        <p>Focused on reversing basics using Ghidra.</p>
+        <h3>Online Weekend CTF</h3>
+        <p>Focused on beginner reversing and Linux fundamentals.</p>
       </div>
       <div class="card">
-        <h3>First Public CTF</h3>
-        <p>Built confidence solving beginner challenges.</p>
+        <h3>Public Beginner CTF</h3>
+        <p>Built confidence solving real-world styled challenges.</p>
       </div>
     </div>
   </div>
@@ -111,58 +71,54 @@
     <div class="grid">
       <div class="card">
         <h3>Login Logic Bypass</h3>
-        <button class="wcard__link magnetic"
+        <button class="open-modal"
           data-title="Login Logic Bypass"
           data-category="Web"
           data-difficulty="Easy"
           data-content="
-            <p>This challenge involved weak authentication logic.</p>
+            <p>This challenge demonstrated weak authentication logic.</p>
             <ul>
-              <li>Tested parameters manually</li>
-              <li>Used Burp Repeater</li>
-              <li>Confirmed missing validation</li>
+              <li>Manual parameter testing</li>
+              <li>Burp Repeater validation</li>
+              <li>Identified missing checks</li>
             </ul>
-            <p><strong>Lesson:</strong> Always validate assumptions.</p>
+            <p><strong>Lesson:</strong> Always trust the server, not the UI.</p>
           ">
           Read →
-          <span class='btn__glow'></span>
         </button>
       </div>
 
       <div class="card">
         <h3>Stack Overflow Basics</h3>
-        <button class="wcard__link magnetic"
+        <button class="open-modal"
           data-title="Stack Overflow Basics"
           data-category="Pwn"
           data-difficulty="Intro"
           data-content="
-            <p>An introduction to stack memory corruption.</p>
+            <p>Intro to memory corruption.</p>
             <ul>
-              <li>Found offset using patterns</li>
-              <li>Learned about protections</li>
+              <li>Offset discovery</li>
+              <li>Understanding stack layout</li>
             </ul>
           ">
           Read →
-          <span class='btn__glow'></span>
         </button>
       </div>
 
       <div class="card">
         <h3>Simple Crackme</h3>
-        <button class="wcard__link magnetic"
+        <button class="open-modal"
           data-title="Simple Crackme"
           data-category="Reversing"
           data-difficulty="Easy"
           data-content="
             <p>Basic reversing workflow.</p>
             <ul>
-              <li>Used strings</li>
-              <li>Analyzed conditions</li>
-              <li>Confirmed logic</li>
+              <li>Strings analysis</li>
+              <li>Conditional logic tracing</li>
             </ul>
           ">
           Read →
-          <span class='btn__glow'></span>
         </button>
       </div>
     </div>
@@ -173,24 +129,28 @@
 <section class="section" id="identity">
   <div class="container">
     <h2>Identity</h2>
-
-    <div class="card glass identity">
-      <p>Click to reveal hacker mode.</p>
-      <button class="btn magnetic" id="toggleHacker" data-cursor="hover">
-        Decrypt Identity
-        <span class="btn__glow"></span>
-      </button>
-    </div>
+    <button id="toggleHacker" class="btn">Decrypt Identity</button>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
-  <div class="container">
-    <span class="mono dim">© 2025 Cybersecurity Portfolio</span>
+  <div class="container mono dim">
+    © 2025 Zakhwan Anuar
   </div>
 </footer>
 
 <!-- MODAL -->
-<div class="modal" id="modal" aria-hidden="true">
-  <div class="modal__backdrop" data-close></d
+<div class="modal" aria-hidden="true">
+  <div class="modal__backdrop"></div>
+  <div class="modal__panel">
+    <button class="modal__close">✕</button>
+    <span class="tag" id="modalCategory"></span>
+    <h3 id="modalTitle"></h3>
+    <span class="mono dim" id="modalDifficulty"></span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>
