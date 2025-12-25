@@ -1,156 +1,241 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zakhwan Anuar | Cybersecurity Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zakhwan Anuar — Portfolio</title>
+  <meta name="description" content="Zakhwan Anuar — Cybersecurity student & CTF player. Write-ups, events, skills, and contact." />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 
 <body>
+  <header class="header">
+    <div class="container header__inner">
+      <nav class="nav mono" aria-label="Primary">
+        <a class="nav__link" href="#about">about</a>
+        <a class="nav__link" href="#events">events</a>
+        <a class="nav__link" href="#writeups">write-ups</a>
+        <a class="nav__link" href="#skills">skills</a>
+        <a class="nav__link" href="#contact">contact</a>
+      </nav>
 
-<!-- Cursor Dot -->
-<div class="cursor-dot"></div>
+      <button class="mode mono" type="button" id="modeBtn" aria-pressed="false" title="Toggle terminal mode">
+        terminal: off
+      </button>
+    </div>
+  </header>
 
-<header class="header">
-  <div class="container header__inner">
-    <span class="brand mono">zk//portfolio</span>
-    <nav class="nav">
-      <a href="#experience">Events</a>
-      <a href="#writeups">Write-ups</a>
-      <a href="#identity">Identity</a>
-    </nav>
-  </div>
-</header>
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <h1 class="title">zakhwan anuar</h1>
+      <p class="subtitle mono">cybersecurity student</p>
+      <p class="intro">
+        Hi, I’m Zakhwan — a beginner CTF player focused on building strong fundamentals in
+        web exploitation, Linux, and reverse engineering. I document what I learn with clean,
+        reproducible notes.
+      </p>
+    </section>
 
-<main>
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <h2 class="h2">about</h2>
+      <p>
+        I’m currently growing my security skillset through labs, CTF challenges, and small tooling experiments.
+        My goal is to become reliable at the fundamentals: understanding systems, validating assumptions, and
+        communicating findings clearly.
+      </p>
 
-<!-- HERO -->
-<section class="hero section">
-  <div class="container hero__content">
-    <h1>Zakhwan Anuar</h1>
-    <p class="lead">
-      Cybersecurity student & CTF player documenting my learning journey in web security,
-      binary exploitation, and reverse engineering.
-    </p>
-  </div>
-</section>
+      <ul class="list">
+        <li><span class="mono dim">focus:</span> web • pwn basics • reversing • linux</li>
+        <li><span class="mono dim">learning style:</span> curiosity + consistency + strong notes</li>
+        <li><span class="mono dim">output:</span> write-ups that future-me can reuse</li>
+      </ul>
+    </section>
 
-<!-- EXPERIENCE -->
-<section class="section" id="experience">
-  <div class="container">
-    <h2>CTF Events Joined</h2>
+    <!-- EVENTS -->
+    <section class="section" id="events">
+      <h2 class="h2">ctf events</h2>
+      <p class="dim">A lightweight timeline of what I’ve joined and what I learned.</p>
 
-    <div class="grid">
-      <div class="card">
-        <h3>University CTF</h3>
-        <p>Introduced to CTF workflow, tooling, and team collaboration.</p>
+      <div class="items">
+        <article class="item">
+          <div class="item__meta mono dim">2025 • placeholder</div>
+          <div class="item__title">campus ctf sprint</div>
+          <div class="item__desc">
+            Practiced web basics (input handling, auth checks) and improved my note-taking format for repeatability.
+          </div>
+          <div class="chips mono">
+            <span class="chip">web</span>
+            <span class="chip">fundamentals</span>
+            <span class="chip">notes</span>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item__meta mono dim">2025 • placeholder</div>
+          <div class="item__title">online weekend ctf</div>
+          <div class="item__desc">
+            Focused on reversing workflow: strings → entry points → conditions → confirm behavior.
+          </div>
+          <div class="chips mono">
+            <span class="chip">reversing</span>
+            <span class="chip">ghidra</span>
+            <span class="chip">workflow</span>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item__meta mono dim">2025 • placeholder</div>
+          <div class="item__title">first public ctf</div>
+          <div class="item__desc">
+            Learned triage: choose solvable tasks, keep calm, write down assumptions, then test systematically.
+          </div>
+          <div class="chips mono">
+            <span class="chip">triage</span>
+            <span class="chip">teamwork</span>
+            <span class="chip">momentum</span>
+          </div>
+        </article>
       </div>
-      <div class="card">
-        <h3>Online Weekend CTF</h3>
-        <p>Focused on beginner reversing and Linux fundamentals.</p>
+    </section>
+
+    <!-- WRITE-UPS -->
+    <section class="section" id="writeups">
+      <h2 class="h2">write-ups</h2>
+      <p class="dim">Click a write-up to open the modal (no links, no page change).</p>
+
+      <div class="writeups">
+        <button class="wcard" type="button"
+          data-title="login logic & auth bypass (placeholder)"
+          data-category="web"
+          data-difficulty="easy"
+          data-body="
+            <p>This challenge was about weak authentication logic.</p>
+            <p class='mono dim'>approach</p>
+            <ul>
+              <li>mapped request/response behavior (don’t trust the UI)</li>
+              <li>validated assumptions with repeatable requests</li>
+              <li>documented the exact payload + expected outcome</li>
+            </ul>
+            <p><b>lesson:</b> slow thinking beats blind fuzzing.</p>
+          ">
+          <div class="wcard__row">
+            <span class="mono">web</span>
+            <span class="mono dim">easy</span>
+          </div>
+          <div class="wcard__title">login logic & auth bypass</div>
+          <div class="wcard__desc dim">Parameter testing, weak server checks, reproducible steps.</div>
+        </button>
+
+        <button class="wcard" type="button"
+          data-title="stack basics: overwrite & control flow (placeholder)"
+          data-category="pwn"
+          data-difficulty="intro"
+          data-body="
+            <p>My first structured notes on memory corruption.</p>
+            <p class='mono dim'>what i practiced</p>
+            <ul>
+              <li>finding offsets using patterns</li>
+              <li>understanding crash control and registers</li>
+              <li>writing a simple, reusable pwntools template</li>
+            </ul>
+            <p><b>lesson:</b> small templates reduce mistakes under pressure.</p>
+          ">
+          <div class="wcard__row">
+            <span class="mono">pwn</span>
+            <span class="mono dim">intro</span>
+          </div>
+          <div class="wcard__title">stack overflow basics</div>
+          <div class="wcard__desc dim">Offsets, protections, and first exploit notes.</div>
+        </button>
+
+        <button class="wcard" type="button"
+          data-title="strings → conditions → aha moment (placeholder)"
+          data-category="reversing"
+          data-difficulty="easy"
+          data-body="
+            <p>A beginner reversing workflow using static analysis.</p>
+            <p class='mono dim'>workflow</p>
+            <ul>
+              <li>identify inputs/outputs (where does user data go?)</li>
+              <li>trace key branches (what decides pass/fail?)</li>
+              <li>confirm with minimal dynamic checks</li>
+            </ul>
+            <p><b>lesson:</b> reduce guesswork by proving each step.</p>
+          ">
+          <div class="wcard__row">
+            <span class="mono">reversing</span>
+            <span class="mono dim">easy</span>
+          </div>
+          <div class="wcard__title">simple crackme notes</div>
+          <div class="wcard__desc dim">Ghidra basics, conditions, confirmation steps.</div>
+        </button>
       </div>
-      <div class="card">
-        <h3>Public Beginner CTF</h3>
-        <p>Built confidence solving real-world styled challenges.</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <h2 class="h2">skills</h2>
+      <p class="dim">Beginner-to-intermediate fundamentals (growing steadily).</p>
+
+      <div class="skills">
+        <div class="skill">
+          <div class="skill__k mono">web</div>
+          <div class="skill__v dim">burp • http • auth logic • xss/sql basics</div>
+        </div>
+        <div class="skill">
+          <div class="skill__k mono">linux</div>
+          <div class="skill__v dim">shell • permissions • processes • tooling</div>
+        </div>
+        <div class="skill">
+          <div class="skill__k mono">pwn</div>
+          <div class="skill__v dim">stack basics • gdb • pwntools templates</div>
+        </div>
+        <div class="skill">
+          <div class="skill__k mono">reversing</div>
+          <div class="skill__v dim">ghidra • strings • control flow mapping</div>
+        </div>
       </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <h2 class="h2">contact</h2>
+      <p class="dim">Replace placeholders with your real links.</p>
+
+      <div class="contact mono">
+        <a class="link" href="#" aria-label="GitHub">github</a>
+        <a class="link" href="#" aria-label="LinkedIn">linkedin</a>
+        <a class="link" href="#" aria-label="Email">email</a>
+      </div>
+
+      <footer class="footer mono dim">
+        © <span id="year"></span> zakhwan anuar
+      </footer>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="document">
+      <button class="modal__close mono" type="button" data-close aria-label="Close">esc / close</button>
+
+      <div class="modal__meta mono dim">
+        <span id="mCategory">web</span>
+        <span>•</span>
+        <span id="mDifficulty">easy</span>
+      </div>
+      <h3 class="modal__title" id="mTitle">title</h3>
+      <div class="modal__body" id="mBody"></div>
     </div>
   </div>
-</section>
-
-<!-- WRITEUPS -->
-<section class="section" id="writeups">
-  <div class="container">
-    <h2>CTF Write-ups</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Login Logic Bypass</h3>
-        <button class="open-modal"
-          data-title="Login Logic Bypass"
-          data-category="Web"
-          data-difficulty="Easy"
-          data-content="
-            <p>This challenge demonstrated weak authentication logic.</p>
-            <ul>
-              <li>Manual parameter testing</li>
-              <li>Burp Repeater validation</li>
-              <li>Identified missing checks</li>
-            </ul>
-            <p><strong>Lesson:</strong> Always trust the server, not the UI.</p>
-          ">
-          Read →
-        </button>
-      </div>
-
-      <div class="card">
-        <h3>Stack Overflow Basics</h3>
-        <button class="open-modal"
-          data-title="Stack Overflow Basics"
-          data-category="Pwn"
-          data-difficulty="Intro"
-          data-content="
-            <p>Intro to memory corruption.</p>
-            <ul>
-              <li>Offset discovery</li>
-              <li>Understanding stack layout</li>
-            </ul>
-          ">
-          Read →
-        </button>
-      </div>
-
-      <div class="card">
-        <h3>Simple Crackme</h3>
-        <button class="open-modal"
-          data-title="Simple Crackme"
-          data-category="Reversing"
-          data-difficulty="Easy"
-          data-content="
-            <p>Basic reversing workflow.</p>
-            <ul>
-              <li>Strings analysis</li>
-              <li>Conditional logic tracing</li>
-            </ul>
-          ">
-          Read →
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IDENTITY -->
-<section class="section" id="identity">
-  <div class="container">
-    <h2>Identity</h2>
-    <button id="toggleHacker" class="btn">Decrypt Identity</button>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container mono dim">
-    © 2025 Zakhwan Anuar
-  </div>
-</footer>
-
-<!-- MODAL -->
-<div class="modal" aria-hidden="true">
-  <div class="modal__backdrop"></div>
-  <div class="modal__panel">
-    <button class="modal__close">✕</button>
-    <span class="tag" id="modalCategory"></span>
-    <h3 id="modalTitle"></h3>
-    <span class="mono dim" id="modalDifficulty"></span>
-    <div id="modalBody"></div>
-  </div>
-</div>
-
-</main>
 </body>
 </html>
