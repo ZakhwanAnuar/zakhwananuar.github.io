@@ -2,101 +2,195 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zakhwan Anuar | Wh1teB3ar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cybersecurity Portfolio | CTF Player</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- GSAP (optional polish) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="script.js"></script>
 </head>
+
 <body>
 
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
+<!-- Custom Cursor -->
+<div class="cursor">
+  <div class="cursor__ring"></div>
+  <div class="cursor__dot"></div>
+</div>
 
-  <!-- Header -->
-  <header class="header">
-    <h1 class="logo">Wh1teB3ar</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#ctf">CTF Hub</a>
-      <a href="writeups.html">Write-ups</a>
+<!-- Glitch Overlay -->
+<div class="glitch-overlay">
+  <div class="glitch-overlay__scanlines"></div>
+  <div class="glitch-overlay__noise"></div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header__inner">
+    <div class="brand mono">zk//portfolio</div>
+
+    <nav class="nav">
+      <a href="#experience" data-cursor="hover">Events</a>
+      <a href="#writeups" data-cursor="hover">Write-ups</a>
+      <a href="#identity" data-cursor="hover">Identity</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Zakhwan Anuar</h2>
-      <p class="hero-tagline">
-        Digital Forensics Student <span>•</span> Clicq Divide CTF Team
+<main>
+
+<!-- HERO -->
+<section class="hero section">
+  <div class="container hero__grid">
+    <div>
+      <span class="pill">Cybersecurity Student • CTF Player</span>
+
+      <h1>
+        Defender by day,<br/>
+        <span class="accent">Breaker</span> by night.
+      </h1>
+
+      <p class="lead">
+        I’m learning cybersecurity fundamentals through hands-on Capture The Flag challenges,
+        focusing on web security, binary exploitation, and reverse engineering.
       </p>
 
-      <div class="status">
-        <span class="pulse"></span>
-        Currently focusing on Forensics
+      <div class="hero__cta">
+        <a href="#writeups" class="btn magnetic" data-cursor="hover">
+          View Write-ups
+          <span class="btn__glow"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card glass">
+      <h3>Current Focus</h3>
+      <ul class="mono">
+        <li>Web vulnerabilities (XSS, SQLi)</li>
+        <li>Linux fundamentals</li>
+        <li>Reverse engineering basics</li>
+        <li>Clear documentation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section" id="experience">
+  <div class="container">
+    <h2>CTF Events Joined</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>University CTF</h3>
+        <p>Learned CTF workflow, note-taking, and collaboration.</p>
+      </div>
+      <div class="card">
+        <h3>Weekend Online CTF</h3>
+        <p>Focused on reversing basics using Ghidra.</p>
+      </div>
+      <div class="card">
+        <h3>First Public CTF</h3>
+        <p>Built confidence solving beginner challenges.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITEUPS -->
+<section class="section" id="writeups">
+  <div class="container">
+    <h2>CTF Write-ups</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Login Logic Bypass</h3>
+        <button class="wcard__link magnetic"
+          data-title="Login Logic Bypass"
+          data-category="Web"
+          data-difficulty="Easy"
+          data-content="
+            <p>This challenge involved weak authentication logic.</p>
+            <ul>
+              <li>Tested parameters manually</li>
+              <li>Used Burp Repeater</li>
+              <li>Confirmed missing validation</li>
+            </ul>
+            <p><strong>Lesson:</strong> Always validate assumptions.</p>
+          ">
+          Read →
+          <span class='btn__glow'></span>
+        </button>
       </div>
 
-      <button class="copy-btn" data-copy="wh1tebear#1337">
-        Copy Discord
+      <div class="card">
+        <h3>Stack Overflow Basics</h3>
+        <button class="wcard__link magnetic"
+          data-title="Stack Overflow Basics"
+          data-category="Pwn"
+          data-difficulty="Intro"
+          data-content="
+            <p>An introduction to stack memory corruption.</p>
+            <ul>
+              <li>Found offset using patterns</li>
+              <li>Learned about protections</li>
+            </ul>
+          ">
+          Read →
+          <span class='btn__glow'></span>
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>Simple Crackme</h3>
+        <button class="wcard__link magnetic"
+          data-title="Simple Crackme"
+          data-category="Reversing"
+          data-difficulty="Easy"
+          data-content="
+            <p>Basic reversing workflow.</p>
+            <ul>
+              <li>Used strings</li>
+              <li>Analyzed conditions</li>
+              <li>Confirmed logic</li>
+            </ul>
+          ">
+          Read →
+          <span class='btn__glow'></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section class="section" id="identity">
+  <div class="container">
+    <h2>Identity</h2>
+
+    <div class="card glass identity">
+      <p>Click to reveal hacker mode.</p>
+      <button class="btn magnetic" id="toggleHacker" data-cursor="hover">
+        Decrypt Identity
+        <span class="btn__glow"></span>
       </button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Bento Grid -->
-  <main class="bento">
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <span class="mono dim">© 2025 Cybersecurity Portfolio</span>
+  </div>
+</footer>
 
-    <section class="card about" id="about">
-      <h3>About Me</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        I enjoy digital investigations, analyzing artifacts, and 
-        breaking down complex systems into understandable narratives.
-      </p>
-    </section>
-
-    <section class="card focus">
-      <h3>Focus Areas</h3>
-      <ul>
-        <li>Digital Forensics</li>
-        <li>Incident Response</li>
-        <li>CTF Challenges</li>
-        <li>Linux & Networking</li>
-      </ul>
-    </section>
-
-    <section class="card ctf" id="ctf">
-      <h3>CTF Hub — Wh1teB3ar</h3>
-
-      <div class="ctf-grid">
-        <div class="ctf-card">
-          <h4>CTF Event Alpha</h4>
-          <p>Lorem ipsum dolor sit amet, event description placeholder.</p>
-        </div>
-
-        <div class="ctf-card">
-          <h4>CTF Event Beta</h4>
-          <p>Lorem ipsum dolor sit amet, event description placeholder.</p>
-        </div>
-
-        <div class="ctf-card">
-          <h4>CTF Event Gamma</h4>
-          <p>Lorem ipsum dolor sit amet, event description placeholder.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© 2025 Zakhwan Anuar — Wh1teB3ar</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<!-- MODAL -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></d
