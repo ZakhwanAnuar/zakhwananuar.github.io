@@ -1,71 +1,338 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wh1teBear Territory</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Cybersecurity student & CTF player portfolio — clean dark mode with optional hacker terminal aesthetic." />
+  <title>Portfolio — CTF / Cybersecurity</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Optional GSAP (used only for the "glitch pulse" on toggle) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="left">
-      <img src="bear.png" class="avatar" />
-      <div>
-        <h1>Wh1teBear</h1>
-        <p>My space to post what I learn toward my journey</p>
-      </div>
-    </div>
-    <button class="burger" onclick="toggleSidebar()">☰</button>
-  </header>
-
-  <!-- LAYOUT -->
-  <div class="layout">
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <h3>Navigation</h3>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#featured">Featured</a>
-      <a href="#contact">Contact</a>
-
-      <h3>Latest Growl</h3>
-      <a>MCC 2025</a>
-      <a>Cyberskills Level Up</a>
-      <a>CYDES 2025</a>
-
-      <h3>CTF Writeups</h3>
-      <a>WGMY 24</a>
-      <a>UMCS 2025</a>
-      <a>MCC Malware</a>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main" id="home">
-      <section class="card">
-        <h2>🐻 Welcome to My Territory</h2>
-        <p>I’m Wh1teBear — a beginner cybersecurity enthusiast.</p>
-      </section>
-
-      <section class="card" id="about">
-        <h2>About Me</h2>
-        <p>🎯 Digital Forensics & Mobile Security</p>
-        <p>🏆 CTF Player & Learner</p>
-      </section>
-
-      <section class="card" id="featured">
-        <h2>Featured Posts</h2>
-        <p>MCC 2025, CYDES 2025, Cyberskills</p>
-      </section>
-
-      <section class="card" id="contact">
-        <h2>Contact</h2>
-        <p>LinkedIn · Discord · Email</p>
-      </section>
-    </main>
+  <!-- Custom Cursor -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__ring"></div>
+    <div class="cursor__dot"></div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Glitch Overlay (used during theme switch) -->
+  <div class="glitch-overlay" aria-hidden="true">
+    <div class="glitch-overlay__scanlines"></div>
+    <div class="glitch-overlay__noise"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="#top" data-cursor="hover">
+        <span class="brand__mark"></span>
+        <span class="brand__text">zk//portfolio</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="nav__link" href="#experience" data-cursor="hover">Events</a>
+        <a class="nav__link" href="#writeups" data-cursor="hover">Write-ups</a>
+        <a class="nav__link" href="#identity" data-cursor="hover">Identity</a>
+      </nav>
+
+      <a class="btn btn--primary magnetic" href="#writeups" data-cursor="hover">
+        <span>View Write-ups</span>
+        <span class="btn__glow" aria-hidden="true"></span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="section hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <div class="pill enter" style="--d: 0ms;">
+            <span class="pill__dot"></span>
+            Cybersecurity Student • CTF Player • Always Learning
+          </div>
+
+          <h1 class="h1 enter" style="--d: 80ms;">
+            Defender by day,<br/>
+            <span class="accent">Breaker</span> by night.
+          </h1>
+
+          <p class="lead enter" style="--d: 140ms;">
+            I’m building fundamentals in web security, binary exploitation, and reverse engineering — one challenge at a time.
+            I document what I learn through clean, beginner-friendly CTF write-ups and reproducible notes.
+          </p>
+
+          <div class="hero__cta enter" style="--d: 200ms;">
+            <a class="btn btn--primary magnetic" href="#experience" data-cursor="hover">
+              <span>Explore My Journey</span>
+              <span class="btn__glow" aria-hidden="true"></span>
+            </a>
+
+            <a class="btn btn--ghost magnetic" href="#identity" data-cursor="hover">
+              <span>Decrypt Identity</span>
+              <span class="btn__glow" aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="meta enter" style="--d: 260ms;">
+            <div class="meta__item">
+              <div class="meta__label">Focus</div>
+              <div class="meta__value">Web • Pwn • Reversing • Linux</div>
+            </div>
+            <div class="meta__item">
+              <div class="meta__label">Mindset</div>
+              <div class="meta__value">Curiosity, consistency, and clean notes</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero__card enter" style="--d: 120ms;">
+          <div class="card card--glass">
+            <div class="card__top">
+              <div class="card__title">Current Mission</div>
+              <div class="card__chip">Beginner → Intermediate</div>
+            </div>
+
+            <div class="stack">
+              <div class="stack__row">
+                <span class="mono dim">Target</span>
+                <span class="mono">CTF fundamentals + habit</span>
+              </div>
+              <div class="stack__row">
+                <span class="mono dim">Practice</span>
+                <span class="mono">Labs, mini-projects, write-ups</span>
+              </div>
+              <div class="stack__row">
+                <span class="mono dim">Output</span>
+                <span class="mono">Notes that future-me can trust</span>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="mini-grid">
+              <div class="mini">
+                <div class="mini__k">Web</div>
+                <div class="mini__v">SQLi • XSS • Auth</div>
+              </div>
+              <div class="mini">
+                <div class="mini__k">Pwn</div>
+                <div class="mini__v">Stack basics • pwntools</div>
+              </div>
+              <div class="mini">
+                <div class="mini__k">Rev</div>
+                <div class="mini__v">Ghidra • strings • logic</div>
+              </div>
+              <div class="mini">
+                <div class="mini__k">Ops</div>
+                <div class="mini__v">Linux • tooling • scripts</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero__bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- Experience / Events -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section__head enter" style="--d: 0ms;">
+          <h2 class="h2">CTF Events Joined</h2>
+          <p class="sub">
+            A timeline of hands-on learning — small wins, new techniques, and steady progress.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="tcard card enter" style="--d: 80ms;">
+            <div class="tcard__date mono">2025 • Q4</div>
+            <h3 class="tcard__title">Campus CTF Sprint (Placeholder)</h3>
+            <p class="tcard__desc">
+              Focused on fundamentals: web input validation, basic crypto patterns, and Linux forensics.
+              Learned to write clean notes and reproduce steps.
+            </p>
+            <div class="badges">
+              <span class="badge">Beginner</span>
+              <span class="badge">Web</span>
+              <span class="badge">Forensics</span>
+            </div>
+          </article>
+
+          <article class="tcard card enter" style="--d: 120ms;">
+            <div class="tcard__date mono">2025 • Q3</div>
+            <h3 class="tcard__title">Online Weekend CTF (Placeholder)</h3>
+            <p class="tcard__desc">
+              Explored reversing workflows with Ghidra, practiced recognizing common patterns,
+              and started using templates for write-ups.
+            </p>
+            <div class="badges">
+              <span class="badge">Reversing</span>
+              <span class="badge">Ghidra</span>
+              <span class="badge">Notes</span>
+            </div>
+          </article>
+
+          <article class="tcard card enter" style="--d: 160ms;">
+            <div class="tcard__date mono">2025 • Q2</div>
+            <h3 class="tcard__title">First Public CTF (Placeholder)</h3>
+            <p class="tcard__desc">
+              Learned how to collaborate, keep calm under time pressure, and prioritize solvable challenges.
+              Built confidence through simple, repeatable steps.
+            </p>
+            <div class="badges">
+              <span class="badge">Teamwork</span>
+              <span class="badge">Triage</span>
+              <span class="badge">Momentum</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Write-ups -->
+    <section class="section" id="writeups">
+      <div class="container">
+        <div class="section__head enter" style="--d: 0ms;">
+          <h2 class="h2">CTF Write-ups</h2>
+          <p class="sub">
+            Beginner-friendly breakdowns: what I tried, what worked, and what I’d do faster next time.
+          </p>
+        </div>
+
+        <div class="filters enter" style="--d: 80ms;">
+          <button class="chip chip--active" type="button" data-filter="all" data-cursor="hover">All</button>
+          <button class="chip" type="button" data-filter="web" data-cursor="hover">Web</button>
+          <button class="chip" type="button" data-filter="pwn" data-cursor="hover">Pwn</button>
+          <button class="chip" type="button" data-filter="rev" data-cursor="hover">Reversing</button>
+        </div>
+
+        <div class="grid">
+          <article class="wcard card enter" data-cat="web" style="--d: 120ms;">
+            <div class="wcard__top">
+              <span class="tag">Web</span>
+              <span class="mono dim">Easy</span>
+            </div>
+            <h3 class="wcard__title">Login Logic & Auth Bypass (Placeholder)</h3>
+            <p class="wcard__desc">
+              A careful walkthrough of parameter tampering, weak session logic, and verifying assumptions with tooling.
+            </p>
+            <a class="wcard__link magnetic" href="#" aria-label="Read write-up (placeholder)" data-cursor="hover">
+              <span class="mono">Read →</span>
+              <span class="btn__glow" aria-hidden="true"></span>
+            </a>
+          </article>
+
+          <article class="wcard card enter" data-cat="pwn" style="--d: 160ms;">
+            <div class="wcard__top">
+              <span class="tag">Pwn</span>
+              <span class="mono dim">Intro</span>
+            </div>
+            <h3 class="wcard__title">Stack Basics: Overwrite & Control Flow (Placeholder)</h3>
+            <p class="wcard__desc">
+              My first structured exploit notes: offsets, protections, and a simple pwntools template.
+            </p>
+            <a class="wcard__link magnetic" href="#" aria-label="Read write-up (placeholder)" data-cursor="hover">
+              <span class="mono">Read →</span>
+              <span class="btn__glow" aria-hidden="true"></span>
+            </a>
+          </article>
+
+          <article class="wcard card enter" data-cat="rev" style="--d: 200ms;">
+            <div class="wcard__top">
+              <span class="tag">Reversing</span>
+              <span class="mono dim">Easy</span>
+            </div>
+            <h3 class="wcard__title">Strings, Conditions, and the “Aha” Moment (Placeholder)</h3>
+            <p class="wcard__desc">
+              A guided approach: identify I/O, map conditions, and confirm behavior with minimal guesswork.
+            </p>
+            <a class="wcard__link magnetic" href="#" aria-label="Read write-up (placeholder)" data-cursor="hover">
+              <span class="mono">Read →</span>
+              <span class="btn__glow" aria-hidden="true"></span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Identity / Toggle -->
+    <section class="section" id="identity">
+      <div class="container">
+        <div class="section__head enter" style="--d: 0ms;">
+          <h2 class="h2">Identity</h2>
+          <p class="sub">
+            There are two aesthetics here: a polished portfolio… and the terminal that built it.
+            Click the identity key to switch without breaking layout.
+          </p>
+        </div>
+
+        <div class="identity card card--glass enter" style="--d: 90ms;">
+          <div class="identity__left">
+            <div class="identity__key" id="identityKey" role="button" tabindex="0" aria-label="Toggle hacker mode" data-cursor="hover">
+              <div class="identity__glyph mono">ID</div>
+              <div>
+                <div class="identity__label">Identity Key</div>
+                <div class="identity__hint mono dim">click to glitch</div>
+              </div>
+            </div>
+
+            <div class="identity__copy">
+              <h3 class="h3">Decrypt the signal.</h3>
+              <p class="lead small">
+                In “Hacker Mode”, the UI shifts into a terminal-inspired theme with scanlines and CRT flicker.
+                Your content stays readable; only the atmosphere changes.
+              </p>
+              <div class="identity__actions">
+                <button class="btn btn--primary magnetic" id="decryptBtn" type="button" data-cursor="hover">
+                  <span>Decrypt</span>
+                  <span class="btn__glow" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn--ghost magnetic" id="resetBtn" type="button" data-cursor="hover">
+                  <span>Reset</span>
+                  <span class="btn__glow" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="identity__right">
+            <pre class="terminal" aria-label="Terminal preview">
+<span class="dim"># profile</span>
+<span class="mono">$</span> whoami
+<span class="accent-mono">cybersec_student</span>
+
+<span class="mono">$</span> motto
+<span class="accent-mono">defend • break • learn • repeat</span>
+
+<span class="mono">$</span> status
+<span class="accent-mono">curious, consistent, improving</span>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="mono dim">© <span id="year"></span> zk//portfolio • Built for speed & clarity</div>
+        <a class="mono footer__top magnetic" href="#top" data-cursor="hover">
+          Back to top ↑ <span class="btn__glow" aria-hidden="true"></span>
+        </a>
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
