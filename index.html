@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wh1teBear Territory</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="left">
+      <img src="bear.png" class="avatar" />
+      <div>
+        <h1>Wh1teBear</h1>
+        <p>My space to post what I learn toward my journey</p>
+      </div>
+    </div>
+    <button class="burger" onclick="toggleSidebar()">☰</button>
+  </header>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#featured">Featured</a>
+      <a href="#contact">Contact</a>
+
+      <h3>Latest Growl</h3>
+      <a>MCC 2025</a>
+      <a>Cyberskills Level Up</a>
+      <a>CYDES 2025</a>
+
+      <h3>CTF Writeups</h3>
+      <a>WGMY 24</a>
+      <a>UMCS 2025</a>
+      <a>MCC Malware</a>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main" id="home">
+      <section class="card">
+        <h2>🐻 Welcome to My Territory</h2>
+        <p>I’m Wh1teBear — a beginner cybersecurity enthusiast.</p>
+      </section>
+
+      <section class="card" id="about">
+        <h2>About Me</h2>
+        <p>🎯 Digital Forensics & Mobile Security</p>
+        <p>🏆 CTF Player & Learner</p>
+      </section>
+
+      <section class="card" id="featured">
+        <h2>Featured Posts</h2>
+        <p>MCC 2025, CYDES 2025, Cyberskills</p>
+      </section>
+
+      <section class="card" id="contact">
+        <h2>Contact</h2>
+        <p>LinkedIn · Discord · Email</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
