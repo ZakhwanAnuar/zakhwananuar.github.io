@@ -37,20 +37,22 @@
    Hacker Mode Overrides
 ========================= */
 body.mode-hacker {
-  --bg: #050707;
-  --bg2: #070b0b;
-  --card: rgba(16, 255, 140, 0.08);
-  --card2: rgba(16, 255, 140, 0.12);
-  --stroke: rgba(16, 255, 140, 0.22);
-  --stroke2: rgba(16, 255, 140, 0.30);
+  --bg: #070404;
+  --bg2: #0b0505;
 
-  --text: rgba(200, 255, 230, 0.92);
-  --muted: rgba(200, 255, 230, 0.62);
-  --faint: rgba(200, 255, 230, 0.45);
+  --card: rgba(255, 60, 60, 0.08);
+  --card2: rgba(255, 60, 60, 0.12);
+  --stroke: rgba(255, 60, 60, 0.22);
+  --stroke2: rgba(255, 60, 60, 0.30);
 
-  --accent: #10ff8c;   /* green */
-  --accent2: #b7ffdf;
+  --text: rgba(255, 220, 220, 0.92);
+  --muted: rgba(255, 220, 220, 0.62);
+  --faint: rgba(255, 220, 220, 0.45);
+
+  --accent: #ff3c3c;   /* RED */
+  --accent2: #ff9a9a;
 }
+
 
 /* Amber variant (optional hook) */
 body.mode-hacker[data-hacker="amber"] {
