@@ -218,7 +218,7 @@ qs("#year").textContent = String(new Date().getFullYear());
       body.classList.toggle("mode-hacker", next);
     }
 
-    modeHint.textContent = next ? "Identity Mode: Hacker" : "Identity Mode: Clean";
+    modeHint.textContent = next ? "Identity Mode: Changed" : "Identity Mode: Clean";
   };
 
   const onKey = (e) => {
