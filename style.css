@@ -946,14 +946,14 @@ body.mode-hacker .crt {
   opacity: 0.55;
 }
 
-.crt::after {
-  content: "";
-  position: absolute;
-  inset: -20px;
-  background: radial-gradient(closest-side at 50% 50%, rgba(255,255,255,0.06), transparent 60%);
-  opacity: 0.55;
-  animation: crtFlicker 5.5s infinite linear;
+body.mode-hacker .crt::after {
+  background: radial-gradient(
+    closest-side at 50% 50%,
+    rgba(255, 80, 80, 0.18),
+    transparent 60%
+  );
 }
+
 
 @keyframes crtFlicker {
   0% { transform: translate3d(0,0,0); opacity: 0.30; }
