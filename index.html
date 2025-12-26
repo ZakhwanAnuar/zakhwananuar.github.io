@@ -1,126 +1,439 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zakhwan Anuar — Terminal Logbook</title>
-  <meta name="description" content="Terminal-style cybersecurity logbook by Zakhwan Anuar, CTF player." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity Student • CTF Portfolio</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
-</head>
+    <link rel="stylesheet" href="style.css" />
 
-<body>
-  <main class="terminal">
+    <!-- GSAP (optional but used for the mode glitch) -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
 
-    <section class="block">
-      <div class="cmd">$ whoami</div>
-      <div class="out">zakhwan_anuar</div>
-      <div class="out dim">cybersecurity student / ctf player</div>
-    </section>
-
-    <section class="block">
-      <div class="cmd">$ about</div>
-      <div class="out">
-        I’m a cybersecurity student learning through hands-on CTF challenges.
-        I focus on understanding fundamentals, validating assumptions, and
-        writing clear, reusable notes.
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="cmd">$ ctf_events</div>
-
-      <div class="out">
-        <ul>
-          <li><strong>campus_ctf_2025</strong> — web basics, auth logic, note structure</li>
-          <li><strong>weekend_ctf_online</strong> — reversing workflow, ghidra basics</li>
-          <li><strong>public_beginner_ctf</strong> — triage, calm solving, teamwork</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="cmd">$ writeups</div>
-
-      <div class="out list">
-        <button class="item"
-          data-title="login logic & auth bypass"
-          data-body="
-            <p>This challenge involved weak server-side authentication logic.</p>
-            <ul>
-              <li>Mapped request/response behavior</li>
-              <li>Tested parameters manually</li>
-              <li>Confirmed missing validation</li>
-            </ul>
-            <p><strong>lesson:</strong> never trust client-side checks.</p>
-          ">
-          [web] login_logic_bypass
-        </button>
-
-        <button class="item"
-          data-title="stack overflow basics"
-          data-body="
-            <p>Introductory notes on stack-based memory corruption.</p>
-            <ul>
-              <li>Offset discovery using patterns</li>
-              <li>Understanding crash control</li>
-            </ul>
-            <p><strong>lesson:</strong> templates reduce mistakes.</p>
-          ">
-          [pwn] stack_overflow_basics
-        </button>
-
-        <button class="item"
-          data-title="simple crackme notes"
-          data-body="
-            <p>Beginner reversing workflow.</p>
-            <ul>
-              <li>Strings analysis</li>
-              <li>Tracing conditions</li>
-              <li>Confirming logic</li>
-            </ul>
-            <p><strong>lesson:</strong> prove each assumption.</p>
-          ">
-          [rev] simple_crackme
-        </button>
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="cmd">$ skills</div>
-      <div class="out">
-        web · linux · reversing · burp · ghidra · gdb · pwntools
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="cmd">$ contact</div>
-      <div class="out">
-        github: <span class="dim">github.com/yourname</span><br/>
-        email: <span class="dim">you@email.com</span>
-      </div>
-    </section>
-
-    <footer class="block dim">
-      <div>$ exit</div>
-    </footer>
-
-  </main>
-
-  <!-- MODAL -->
-  <div class="modal" aria-hidden="true">
-    <div class="backdrop"></div>
-    <div class="modal__panel">
-      <div class="cmd" id="modalTitle">$ writeup</div>
-      <div class="out" id="modalBody"></div>
-      <button class="close">close</button>
+  <body>
+    <!-- Custom cursor (hidden automatically on touch devices) -->
+    <div class="cursor" aria-hidden="true">
+      <div class="cursor__ring"></div>
+      <div class="cursor__dot"></div>
     </div>
-  </div>
 
-</body>
+    <!-- CRT/Scanline overlay (only visible in Hacker mode) -->
+    <div class="crt" aria-hidden="true"></div>
+
+    <header class="header" id="top">
+      <div class="container header__inner">
+        <a class="brand magnetic" href="#top" data-magnetic="true">
+          <span class="brand__mark">▮</span>
+          <span class="brand__name">ZK</span>
+          <span class="brand__role">Cybersecurity / CTF</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav__link" href="#experience">Events</a>
+          <a class="nav__link" href="#writeups">Write-ups</a>
+          <a class="nav__link" href="#about">About</a>
+          <a class="nav__link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="header__actions">
+          <button class="btn btn--ghost magnetic" data-magnetic="true" id="modeHint" type="button">
+            Identity Mode
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="section hero">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <div class="pill">
+              <span class="pill__dot"></span>
+              Beginner CTF Player • Building real security intuition
+            </div>
+
+            <h1 class="headline">
+              Defender by day,
+              <span class="headline__accent">Breaker by night</span>.
+            </h1>
+
+            <p class="subhead">
+              Cybersecurity student focused on fundamentals: web exploitation, forensics workflows,
+              and reproducible write-ups. I’m here to learn loudly, iterate fast, and ship clean
+              tooling.
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary magnetic" data-magnetic="true" href="#writeups">
+                View Write-ups
+                <span class="btn__icon">↗</span>
+              </a>
+
+              <a class="btn btn--glass magnetic" data-magnetic="true" href="#contact">
+                Let’s Connect
+              </a>
+            </div>
+
+            <div class="meta">
+              <div class="meta__item">
+                <span class="meta__k">Focus</span>
+                <span class="meta__v">Web • Forensics • Linux</span>
+              </div>
+              <div class="meta__item">
+                <span class="meta__k">Currently</span>
+                <span class="meta__v">Learning exploitation basics & workflow automation</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero__card">
+            <div class="identity" id="identity" role="button" tabindex="0" aria-label="Toggle Hacker Mode">
+              <div class="identity__top">
+                <span class="tag">Identity</span>
+                <span class="tag tag--hint">Click me</span>
+              </div>
+
+              <div class="identity__name glitch" data-text="Zakhwan Anuar">
+                Zakhwan Anuar
+              </div>
+
+              <div class="identity__role">
+                Cybersecurity Student • CTF Player
+              </div>
+
+              <div class="identity__grid">
+                <div class="stat">
+                  <span class="stat__k">CTFs joined</span>
+                  <span class="stat__v">6</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__k">Write-ups</span>
+                  <span class="stat__v">12</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__k">Main tools</span>
+                  <span class="stat__v">Burp • Wireshark • Python</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__k">Mindset</span>
+                  <span class="stat__v">Curious • Methodical • Ethical</span>
+                </div>
+              </div>
+
+              <div class="identity__footer">
+                <span class="mono">Tip:</span>
+                <span class="mono">Toggle “Hacker” aesthetic without changing layout.</span>
+              </div>
+            </div>
+
+            <div class="hero__cardFooter">
+              <div class="chip">Clean UI</div>
+              <div class="chip chip--accent">Glitch Toggle</div>
+              <div class="chip">60fps</div>
+              <div class="chip">Responsive</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- EVENTS / EXPERIENCE -->
+      <section class="section" id="experience">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="h2">CTF Events Joined</h2>
+            <p class="lead">
+              A lightweight log of competitions and learning milestones—focused on progress,
+              not perfection.
+            </p>
+          </div>
+
+          <div class="events">
+            <!-- Timeline-ish cards -->
+            <article class="event card">
+              <div class="event__top">
+                <span class="badge">Beginner</span>
+                <span class="event__date mono">2025 • Q2</span>
+              </div>
+              <h3 class="h3">Campus CTF Night</h3>
+              <p class="muted">
+                First structured exposure to challenge categories. Learned the habit of writing down
+                assumptions and verifying them with tooling.
+              </p>
+              <div class="event__tags">
+                <span class="pill2">Web</span>
+                <span class="pill2">Forensics</span>
+                <span class="pill2">Linux</span>
+              </div>
+              <div class="event__foot">
+                <span class="mini">
+                  Badge:
+                  <span class="placeholderBadge" title="Placeholder badge"></span>
+                  <span class="placeholderBadge" title="Placeholder badge"></span>
+                  <span class="placeholderBadge" title="Placeholder badge"></span>
+                </span>
+              </div>
+            </article>
+
+            <article class="event card">
+              <div class="event__top">
+                <span class="badge badge--blue">Online</span>
+                <span class="event__date mono">2025 • Q3</span>
+              </div>
+              <h3 class="h3">Weekend Jeopardy CTF</h3>
+              <p class="muted">
+                Built repeatable workflows: recon notes, Burp project structure, and post-solve
+                “why it worked” summaries.
+              </p>
+              <div class="event__tags">
+                <span class="pill2">Web</span>
+                <span class="pill2">Crypto</span>
+                <span class="pill2">OSINT</span>
+              </div>
+              <div class="event__foot">
+                <span class="mini">
+                  Badge:
+                  <span class="placeholderBadge"></span>
+                  <span class="placeholderBadge"></span>
+                </span>
+              </div>
+            </article>
+
+            <article class="event card">
+              <div class="event__top">
+                <span class="badge badge--green">Team</span>
+                <span class="event__date mono">2025 • Q4</span>
+              </div>
+              <h3 class="h3">CTF League Sprint</h3>
+              <p class="muted">
+                Practiced collaboration: handoffs, clean write-ups, and documenting partial leads so
+                others can continue efficiently.
+              </p>
+              <div class="event__tags">
+                <span class="pill2">Forensics</span>
+                <span class="pill2">Pwn (Intro)</span>
+                <span class="pill2">Scripting</span>
+              </div>
+              <div class="event__foot">
+                <span class="mini">
+                  Badge:
+                  <span class="placeholderBadge"></span>
+                  <span class="placeholderBadge"></span>
+                  <span class="placeholderBadge"></span>
+                  <span class="placeholderBadge"></span>
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- WRITE-UPS -->
+      <section class="section" id="writeups">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="h2">Write-ups</h2>
+            <p class="lead">
+              Short, reproducible notes: what I tried, what failed, what worked, and what I’ll do
+              faster next time.
+            </p>
+          </div>
+
+          <div class="filters" role="tablist" aria-label="Write-up categories">
+            <button class="filter is-active magnetic" data-magnetic="true" data-filter="all" type="button">All</button>
+            <button class="filter magnetic" data-magnetic="true" data-filter="forensics" type="button">Forensics</button>
+            <button class="filter magnetic" data-magnetic="true" data-filter="web" type="button">Web</button>
+            <button class="filter magnetic" data-magnetic="true" data-filter="pwn" type="button">Pwn</button>
+            <button class="filter magnetic" data-magnetic="true" data-filter="misc" type="button">Misc</button>
+          </div>
+
+          <div class="cards" id="writeupGrid">
+            <article class="card writeup" data-cat="forensics">
+              <div class="writeup__top">
+                <span class="pill2 pill2--accent">Forensics</span>
+                <span class="mono muted">Beginner</span>
+              </div>
+              <h3 class="h3">“Hidden in Plain Sight” — Metadata Trail</h3>
+              <p class="muted">
+                Learned to validate file headers, extract metadata safely, and build a timeline of
+                artifact creation without guesswork.
+              </p>
+              <div class="writeup__foot">
+                <a class="btn btn--sm btn--glass magnetic" data-magnetic="true" href="#" aria-disabled="true">
+                  Read (Placeholder)
+                </a>
+                <span class="mini">Tools: exiftool • strings • file</span>
+              </div>
+            </article>
+
+            <article class="card writeup" data-cat="web">
+              <div class="writeup__top">
+                <span class="pill2 pill2--accent">Web</span>
+                <span class="mono muted">Beginner</span>
+              </div>
+              <h3 class="h3">“Cookie Crumbs” — Session Misconfig</h3>
+              <p class="muted">
+                Practiced reading request/response behavior, mapping trust boundaries, and writing
+                minimal proof notes.
+              </p>
+              <div class="writeup__foot">
+                <a class="btn btn--sm btn--glass magnetic" data-magnetic="true" href="#" aria-disabled="true">
+                  Read (Placeholder)
+                </a>
+                <span class="mini">Tools: Burp • curl</span>
+              </div>
+            </article>
+
+            <article class="card writeup" data-cat="pwn">
+              <div class="writeup__top">
+                <span class="pill2 pill2--accent">Pwn</span>
+                <span class="mono muted">Intro</span>
+              </div>
+              <h3 class="h3">“Stack Snacks” — First Buffer Notes</h3>
+              <p class="muted">
+                A careful intro: observing crashes, understanding offsets, and documenting what I
+                don’t know yet (on purpose).
+              </p>
+              <div class="writeup__foot">
+                <a class="btn btn--sm btn--glass magnetic" data-magnetic="true" href="#" aria-disabled="true">
+                  Read (Placeholder)
+                </a>
+                <span class="mini">Tools: GDB • pwndbg</span>
+              </div>
+            </article>
+
+            <article class="card writeup" data-cat="misc">
+              <div class="writeup__top">
+                <span class="pill2 pill2--accent">Misc</span>
+                <span class="mono muted">Workflow</span>
+              </div>
+              <h3 class="h3">My CTF Workflow Template</h3>
+              <p class="muted">
+                Folder structure, note-taking, command history hygiene, and a “post-solve checklist”
+                to convert wins into learning.
+              </p>
+              <div class="writeup__foot">
+                <a class="btn btn--sm btn--glass magnetic" data-magnetic="true" href="#" aria-disabled="true">
+                  Read (Placeholder)
+                </a>
+                <span class="mini">Tools: Obsidian • Git</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section" id="about">
+        <div class="container">
+          <div class="about card">
+            <div class="about__left">
+              <h2 class="h2">About</h2>
+              <p class="lead">
+                I’m a cybersecurity student who treats CTFs like a lab: observe, test, document,
+                repeat. I care about clean methodology, reproducible notes, and ethical practice.
+              </p>
+              <p class="muted">
+                My goal is to grow from “solves” into “understanding”—building fundamentals in web
+                security, forensics analysis, and exploitation basics while improving tooling and
+                workflow automation.
+              </p>
+            </div>
+
+            <div class="about__right">
+              <div class="skills">
+                <div class="skills__title mono">Current skill focus</div>
+                <ul class="skills__list">
+                  <li><span class="dot"></span>HTTP mechanics & auth patterns</li>
+                  <li><span class="dot"></span>Forensics triage & artifact timelines</li>
+                  <li><span class="dot"></span>Linux & scripting for speed</li>
+                  <li><span class="dot"></span>Intro reverse engineering + debugging</li>
+                </ul>
+              </div>
+
+              <div class="quick">
+                <div class="quick__row">
+                  <span class="mono muted">Stack</span>
+                  <span class="mono">HTML • CSS • JS • Python</span>
+                </div>
+                <div class="quick__row">
+                  <span class="mono muted">Prefs</span>
+                  <span class="mono">Inter + Mono • Minimal • Fast</span>
+                </div>
+                <div class="quick__row">
+                  <span class="mono muted">Ethics</span>
+                  <span class="mono">Learn • Verify • Report responsibly</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="contact card">
+            <div class="contact__copy">
+              <h2 class="h2">Contact</h2>
+              <p class="lead">
+                Want to collaborate on beginner-friendly CTF practice, tooling, or write-up reviews?
+              </p>
+              <p class="muted">
+                Send a message—happy to share notes, learn together, and improve systematically.
+              </p>
+
+              <div class="contact__actions">
+                <a class="btn btn--primary magnetic" data-magnetic="true" href="mailto:hello@example.com">
+                  Email me
+                  <span class="btn__icon">✉</span>
+                </a>
+                <a class="btn btn--glass magnetic" data-magnetic="true" href="#" aria-disabled="true">
+                  GitHub (Placeholder)
+                </a>
+              </div>
+
+              <div class="fineprint mono muted">
+                Tip: Click the “Identity” card in the hero to toggle Hacker Mode.
+              </div>
+            </div>
+
+            <div class="contact__panel">
+              <div class="panelTitle mono">Status</div>
+              <div class="panelRow">
+                <span class="panelKey muted">Availability</span>
+                <span class="panelVal">Open to internships & CTF teams</span>
+              </div>
+              <div class="panelRow">
+                <span class="panelKey muted">Learning goal</span>
+                <span class="panelVal">Ship 1 write-up/week</span>
+              </div>
+              <div class="panelRow">
+                <span class="panelKey muted">Now practicing</span>
+                <span class="panelVal">Web vuln patterns + triage speed</span>
+              </div>
+            </div>
+          </div>
+
+          <footer class="footer">
+            <div class="mono muted">© <span id="year"></span> Zakhwan Anuar • Built for speed • 60fps UI</div>
+            <a class="mono footer__top" href="#top">Back to top ↑</a>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
