@@ -58,9 +58,10 @@ function initTyping() {
 
   // EDIT: Add or remove lines here
   const strings = [
-    'CS Student | Cybersecurity',
+    'Cybersecurity Student',
     'CTF Player',
-    'Web & Binary Exploitation',
+    'Digital Forensics',
+    'Web Exploitation',
     'Always Learning',
   ];
 

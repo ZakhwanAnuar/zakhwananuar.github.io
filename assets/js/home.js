@@ -106,7 +106,7 @@ function initTerminal() {
     { type: 'cmd',    text: 'cat whoami.txt' },
     { type: 'output', text: '<span class="key">name:</span>     <span class="val">Zakhwan Anuar</span>' },
     { type: 'output', text: '<span class="key">role:</span>     <span class="val">Cybersecurity Student</span>' },
-    { type: 'output', text: '<span class="key">location:</span> <span class="val">Kuala Lumpur</span>' },
+    { type: 'output', text: '<span class="key">location:</span> <span class="val">Kuala Lumpur, Malaysia</span>' },
     { type: 'blank',  text: '' },
     { type: 'cmd',    text: 'cat interests.txt' },
     { type: 'output', text: '<span class="val">▸ Digital Forensics</span>' },
