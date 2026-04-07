@@ -61,9 +61,10 @@ function initTyping() {
   if (!el) return;
 
   const strings = [
-    'CS Student | Cybersecurity',
+    'Cybersecurity Student',
     'CTF Player',
     'Digital Forensics',
+    'Web Exploitation',
     'Always Learning',
   ];
 
