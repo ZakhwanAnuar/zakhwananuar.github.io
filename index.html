@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ============================================================
+       EDIT: Change the title and description to your own info
+       ============================================================ -->
+  <title>Zakhwan Anuar — Cybersecurity Student</title>
+  <meta name="description" content="Computer Science student specializing in Cybersecurity, CTF player, and developer." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- EDIT: Change this to your name or handle -->
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <canvas id="matrixCanvas"></canvas>
+      <div class="hero-grid-overlay"></div>
+    </div>
+    <div class="hero-content container">
+      <div class="hero-text">
+        <!-- EDIT: Change greeting, name, title, and summary -->
+        <p class="hero-greeting">Hello, world. I'm</p>
+        <h1 class="hero-name">
+          <span class="name-line">Zakhwan</span>
+          <span class="name-line accent">Anuar</span>
+        </h1>
+        <p class="hero-title">
+          <span class="typed-text" id="typedText"></span>
+          <span class="cursor">|</span>
+        </p>
+        <p class="hero-summary">
+          <!-- EDIT: Write a short 2–3 sentence bio about yourself -->
+          Computer Science student specializing in <span class="highlight">Cybersecurity</span>. 
+          Active CTF player with a focus on Digital Forensics and Web Exploitation. 
+          Building things, breaking things — learning from both.
+        </p>
+        <!-- EDIT: Update href values with your real links -->
+        <div class="hero-actions">
+          <a href="projects.html" class="btn btn-primary">View Projects</a>
+          <a href="writeups.html" class="btn btn-secondary">CTF Writeups</a>
+          <a href="https://drive.google.com/drive/folders/1nH8GX2w_jPtPmlvKncR_uCtixUjM6lip?usp=sharing" class="btn btn-ghost" target="_blank">
+            <i class="fas fa-download"></i> Resume
+          </a>
+        </div>
+        <div class="hero-social">
+          <!-- EDIT: Replace # with your actual profile URLs -->
+          <a href="https://github.com/zakhwananuar" class="social-link" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/zakhwan-anuar-88800a217/" class="social-link" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <!-- EDIT: Replace with your CTF profile if you use one (e.g., CTFtime) -->
+          <a href="https://ctftime.org/user" class="social-link" target="_blank" aria-label="CTFtime">
+            <i class="fas fa-flag"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title">whoami.sh</span>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATS BAR
+       ============================================================ -->
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <!-- EDIT: Update numbers to reflect your real stats -->
+      <div class="stat-item">
+        <span class="stat-number" data-target="15">0</span>
+        <span class="stat-label">CTFs Competed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="10">0</span>
+        <span class="stat-label">Event Management</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="3">0</span>
+        <span class="stat-label">Projects Built</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="5">0</span>
+        <span class="stat-label">Writeups Published</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RECENT WRITEUPS PREVIEW
+       ============================================================ -->
+  <section class="section" id="recent-writeups">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// recent_writeups</span>
+        <h2 class="section-title">Latest CTF Writeups</h2>
+      </div>
+      <div class="writeups-preview-grid" id="recentWriteupsGrid">
+        <!-- Populated by JS from data/writeups.js -->
+      </div>
+      <div class="section-cta">
+        <a href="writeups.html" class="btn btn-secondary">All Writeups <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURED PROJECTS PREVIEW
+       ============================================================ -->
+  <section class="section section-alt" id="featured-projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// featured_projects</span>
+        <h2 class="section-title">Selected Projects</h2>
+      </div>
+      <div class="projects-preview-grid" id="featuredProjectsGrid">
+        <!-- Populated by JS from data/projects.js -->
+      </div>
+      <div class="section-cta">
+        <a href="projects.html" class="btn btn-secondary">All Projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <!-- EDIT: Change name -->
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar. Built with ☕ and curiosity.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/projects.js"></script>
+  <script src="data/writeups.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

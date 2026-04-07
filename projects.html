@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Zakhwan Anuar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link active">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// projects</span>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-subtitle">Things I've built, broken, and learned from.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <!-- EDIT: Add/remove filter categories to match your project tags -->
+        <button class="filter-btn" data-filter="security">Security</button>
+        <button class="filter-btn" data-filter="tool">Tools</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="system">System</button>
+      </div>
+
+      <!-- Projects grid — populated from data/projects.js -->
+      <div class="projects-full-grid" id="projectsGrid">
+        <!-- JS inserts cards here -->
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/projects.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// contact</span>
+      <h1 class="page-title">Get In Touch</h1>
+      <p class="page-subtitle">Open to opportunities, collaborations, and CTF teams.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h2 class="contact-section-title">Let's Connect</h2>
+          <!-- EDIT: Update the bio/intro text -->
+          <p class="contact-intro">
+            I'm always open to new opportunities, interesting projects, and CTF team collaborations. 
+            Whether you're a recruiter, fellow student, or CTF enthusiast — feel free to reach out.
+          </p>
+
+          <div class="contact-links">
+            <!-- EDIT: Replace with your actual email and URLs -->
+            <a href="mailto:your@email.com" class="contact-card">
+              <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+              <div class="contact-card-info">
+                <span class="contact-card-label">Email</span>
+                <span class="contact-card-value">zakhwananuar05@email.com</span>
+              </div>
+              <i class="fas fa-external-link-alt contact-card-arrow"></i>
+            </a>
+
+            <a href="https://github.com/zakhwananuar" target="_blank" class="contact-card">
+              <div class="contact-card-icon"><i class="fab fa-github"></i></div>
+              <div class="contact-card-info">
+                <span class="contact-card-label">GitHub</span>
+                <span class="contact-card-value">@ZakhwanAnuar</span>
+              </div>
+              <i class="fas fa-external-link-alt contact-card-arrow"></i>
+            </a>
+
+            <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank" class="contact-card">
+              <div class="contact-card-icon"><i class="fab fa-linkedin"></i></div>
+              <div class="contact-card-info">
+                <span class="contact-card-label">LinkedIn</span>
+                <span class="contact-card-value">Zakhwan Anuar</span>
+              </div>
+              <i class="fas fa-external-link-alt contact-card-arrow"></i>
+            </a>
+
+            
+            <a href="https://instagram.com/mzakhwanuar" target="_blank" class="contact-card">
+              <div class="contact-card-icon"><i class="fab fa-instagram"></i></div>
+              <div class="contact-card-info">
+                <span class="contact-card-label">Instagram</span>
+                <span class="contact-card-value">@mzakhwanuar</span>
+              </div>
+              <i class="fas fa-external-link-alt contact-card-arrow"></i>
+            </a>
+
+            <!-- EDIT: Add or remove social links as needed. Remove any you don't use. 
+            OPTIONAL: Twitter/X — uncomment if you use it
+            <a href="https://twitter.com/yourusername" target="_blank" class="contact-card">
+              <div class="contact-card-icon"><i class="fab fa-twitter"></i></div>
+              <div class="contact-card-info">
+                <span class="contact-card-label">Twitter / X</span>
+                <span class="contact-card-value">@yourusername</span>
+              </div>
+              <i class="fas fa-external-link-alt contact-card-arrow"></i>
+            </a>
+            -->
+
+            
+            <a href="#" class="contact-card">
+              <div class="contact-card-icon"><i class="fab fa-discord"></i></div>
+              <div class="contact-card-info">
+                <span class="contact-card-label">Discord</span>
+                <span class="contact-card-value">mzakhwanuar</span>
+              </div>
+            </a>
+            
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <!-- NOTE: GitHub Pages is static — forms need a third-party service.
+             This form is wired to Formspree (free tier). 
+             Setup: go to formspree.io, create a form, get your form ID, 
+             then replace YOUR_FORM_ID below. -->
+        <div class="contact-form-wrapper">
+          <h2 class="contact-section-title">Send a Message</h2>
+          
+          <p class="contact-form-note">
+            Powered by 
+            <a href="https://formspree.io" target="_blank" class="inline-link">Formspree</a> 
+            for secure and reliable message delivery.
+          </p>
+
+          <form id="contactForm" action="https://formspree.io/f/xkopyree" method="POST" class="contact-form">
+            <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?" />
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="Your message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Your Name.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

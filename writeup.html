@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- This title is set dynamically by writeup-post.js based on the URL parameter -->
+  <title>Writeup — Wh1teB3ar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Syntax highlighting for code blocks in writeups -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link active">Writeups</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container writeup-container">
+
+      <!-- Back link -->
+      <a href="writeups.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> All Writeups
+      </a>
+
+      <!-- Post header — filled by JS -->
+      <div class="writeup-post-header" id="writeupPostHeader"></div>
+
+      <!-- Post body — filled by JS from the writeup's content field -->
+      <article class="writeup-post-body prose" id="writeupPostBody"></article>
+
+      <!-- Navigation between posts -->
+      <div class="writeup-post-nav" id="writeupPostNav"></div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Your Name.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Markdown parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <!-- Syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="data/writeups.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/writeup-post.js"></script>
+</body>
+</html>

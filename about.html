@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- EDIT: Update title -->
+  <title>About Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// about_me</span>
+      <h1 class="page-title">About Me</h1>
+      <p class="page-subtitle">Background, skills, and what drives me.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+
+      <!-- BIO SECTION -->
+      <section class="about-grid section">
+        <div class="about-left">
+          <div class="about-photo-wrapper">
+            <!-- EDIT: Replace with your photo. Put your image in assets/images/profile.jpg -->
+            <!-- If you don't have a photo yet, the placeholder will show -->
+            
+            <img src="assets/images/profile.jpg" alt="Your Name" class="about-photo" />
+            
+          </div>
+          <div class="about-quick-info">
+            <!-- EDIT: Update with your real info -->
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Kuala Lumpur, Malaysia</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>BSc Computer Science (Cybersecurity)</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>Cybersecurity Focus</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-flag"></i>
+              <span>Active CTF Player</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <!-- EDIT: Write your full bio here. Multiple paragraphs are fine. -->
+          <h2 class="about-section-title">Hi, I'm <span class="accent">Zakhwan Anuar</span></h2>
+          <div class="about-bio">
+            <p>
+              I'm a Computer Science student specializing in Cybersecurity, currently in my 2nd year at Universiti Tenaga nasional. 
+              I'm passionate about understanding how systems work — and more importantly, how they fail.
+            </p>
+            <p>
+              My interest in security started when i was in secondary school.  
+              Since then, I've been actively competing in CTF competitions, building security tools, and studying 
+              offensive and defensive security techniques.
+            </p>
+            <p>
+              When I’m not working on tech, I’m usually into event planning or reading something interesting. There’s always something new to learn.
+            </p>
+          </div>
+
+          <!-- EDIT: Update your interests/focus areas -->
+          <h3 class="about-sub-title">Focus Areas</h3>
+          <div class="focus-tags">
+            <span class="focus-tag">Web Security</span>
+            <span class="focus-tag">Digital Forensics</span>
+            <span class="focus-tag">Reverse Engineering</span>
+            <span class="focus-tag">Binary Exploitation</span>
+            <span class="focus-tag">Network Security</span>
+            <span class="focus-tag">CTF Competitions</span>
+          </div>
+
+          <!-- EDIT: Update career goals -->
+          <h3 class="about-sub-title">Career Goals</h3>
+          <p class="about-bio">
+            I'm looking to internship opportunities in offensive security, penetration testing and Cybersecurity Analyst. I'm particularly interested in Digital Forensics. 
+            Feel free to <a href="contact.html" class="inline-link">reach out</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SKILLS SECTION -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-tag">// skills_and_tools</span>
+          <h2 class="section-title">Technical Skills</h2>
+        </div>
+
+        <div class="skills-grid">
+
+          <!-- EDIT: Add or remove skills in each category as needed -->
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-code"></i> Languages
+            </h3>
+            <div class="skill-list">
+              <div class="skill-item">
+                <span class="skill-name">Python</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">C / C++</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Bash / Shell</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">JavaScript</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Assembly (x86)</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="55"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-shield-alt"></i> Security
+            </h3>
+            <div class="skill-list">
+              <div class="skill-item">
+                <span class="skill-name">Digital Forensics</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Web Exploitation</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Binary Exploitation</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="50"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Reverse Engineering</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="50"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">OSINT</span>
+                <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-tools"></i> Tools
+            </h3>
+            <div class="tools-grid">
+              <!-- EDIT: Add or remove tools as needed -->
+              <span class="tool-tag">Burp Suite</span>
+              <span class="tool-tag">Ghidra</span>
+              <span class="tool-tag">GDB / pwndbg</span>
+              <span class="tool-tag">Wireshark</span>
+              <span class="tool-tag">Nmap</span>
+              <span class="tool-tag">Metasploit</span>
+              <span class="tool-tag">IDA Free</span>
+              <span class="tool-tag">pwntools</span>
+              <span class="tool-tag">John the Ripper</span>
+              <span class="tool-tag">Volatility</span>
+              <span class="tool-tag">Docker</span>
+              <span class="tool-tag">Git</span>
+              <span class="tool-tag">Linux</span>
+              <span class="tool-tag">SQLmap</span>
+              <span class="tool-tag">Autopsy</span>
+
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-server"></i> Platforms & OS
+            </h3>
+            <div class="tools-grid">
+              <!-- EDIT: Add or remove platforms as needed -->
+              <span class="tool-tag">Kali Linux</span>
+              <span class="tool-tag">Ubuntu</span>
+              <span class="tool-tag">Blue Team Labs Online</span>
+              <span class="tool-tag">TryHackMe</span>
+              <span class="tool-tag">HackTheBox</span>
+              <span class="tool-tag">PicoCTF</span>
+              <span class="tool-tag">CTFtime</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/zakhwan-anuar-88800a217/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/about.js"></script>
+</body>
+</html>
