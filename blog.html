@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Zakhwan Anuar</title>
+  <meta name="description" content="Thoughts, experiences, and ideas from Zakhwan Anuar." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    /* ── Blog listing ── */
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .blog-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 28px 32px;
+      background: var(--bg-3);
+      text-decoration: none;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.18s ease;
+      position: relative;
+    }
+
+    .blog-card:last-child { border-bottom: none; }
+
+    .blog-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+
+    .blog-card:hover {
+      background: var(--bg-4);
+    }
+
+    .blog-card:hover::before {
+      opacity: 1;
+    }
+
+    .blog-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: var(--text);
+      transition: color 0.18s ease;
+    }
+
+    .blog-card:hover .blog-card-title {
+      color: var(--accent);
+    }
+
+    .blog-card-summary {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin: 0 0 12px;
+    }
+
+    .blog-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .blog-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    .blog-card-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .blog-card-date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    .blog-card-arrow {
+      display: block;
+      margin-top: 8px;
+      color: var(--text-3);
+      font-size: 0.75rem;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .blog-card:hover .blog-card-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* Search */
+    .blog-search-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .blog-search-input {
+      flex: 1;
+      padding: 10px 16px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.18s;
+    }
+
+    .blog-search-input::placeholder { color: var(--text-3); }
+    .blog-search-input:focus { border-color: var(--accent); }
+
+    /* Empty state */
+    .blog-empty {
+      padding: 60px 32px;
+      text-align: center;
+      color: var(--text-2);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: var(--bg-3);
+    }
+
+    /* Tag filter row */
+    .blog-tag-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag-filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      background: var(--bg-3);
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tag-filter-btn:hover,
+    .tag-filter-btn.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .blog-card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      .blog-card-meta {
+        text-align: left;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .blog-card-arrow { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// blog</span>
+      <h1 class="page-title">Blog</h1>
+      <p class="page-subtitle">Things I think about. Written down so I don't forget.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Search -->
+      <div class="blog-search-bar">
+        <input
+          type="text"
+          class="blog-search-input"
+          id="blogSearch"
+          placeholder="search posts..."
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Tag filters -->
+      <div class="blog-tag-filters" id="tagFilters">
+        <button class="tag-filter-btn active" data-tag="all">all</button>
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Post list -->
+      <div class="blog-list" id="blogList">
+        <!-- populated by JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar. Built with ☕ and curiosity.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/blog.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // ── State ──────────────────────────────────────────────────────────
+    let activeTag    = 'all';
+    let searchQuery  = '';
+
+    // ── Build tag filter buttons ───────────────────────────────────────
+    function buildTagFilters() {
+      const allTags = [...new Set(BLOG_DATA.flatMap(p => p.tags))].sort();
+      const container = document.getElementById('tagFilters');
+      allTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'tag-filter-btn';
+        btn.dataset.tag = tag;
+        btn.textContent = tag;
+        btn.addEventListener('click', () => setTag(tag));
+        container.appendChild(btn);
+      });
+    }
+
+    document.querySelector('[data-tag="all"]').addEventListener('click', () => setTag('all'));
+
+    function setTag(tag) {
+      activeTag = tag;
+      document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tag === tag);
+      });
+      renderList();
+    }
+
+    // ── Render ─────────────────────────────────────────────────────────
+    function renderList() {
+      const q = searchQuery.toLowerCase();
+
+      const filtered = BLOG_DATA.filter(post => {
+        const matchTag    = activeTag === 'all' || post.tags.includes(activeTag);
+        const matchSearch = !q
+          || post.title.toLowerCase().includes(q)
+          || post.summary.toLowerCase().includes(q)
+          || post.tags.some(t => t.includes(q));
+        return matchTag && matchSearch;
+      });
+
+      const container = document.getElementById('blogList');
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="blog-empty">// no posts found</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(post => `
+        <a href="blog-post.html?id=${post.id}" class="blog-card">
+          <div class="blog-card-content">
+            <h2 class="blog-card-title">${post.title}</h2>
+            <p class="blog-card-summary">${post.summary}</p>
+            <div class="blog-card-tags">
+              ${post.tags.map(t => `<span class="blog-tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="blog-card-meta">
+            <span class="blog-card-date">${post.date}</span>
+            <i class="fas fa-arrow-right blog-card-arrow"></i>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // ── Init ───────────────────────────────────────────────────────────
+    buildTagFilters();
+    renderList();
+
+    document.getElementById('blogSearch').addEventListener('input', e => {
+      searchQuery = e.target.value;
+      renderList();
+    });
+  </script>
+</body>
+</html>

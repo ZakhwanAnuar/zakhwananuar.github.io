@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post — Zakhwan Anuar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    /* ── Blog post container ── */
+    .blog-post-container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-2);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.15s ease;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Post header ── */
+    .blog-post-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .blog-post-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    .blog-post-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    .blog-post-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-3);
+    }
+
+    /* ── Post nav (prev / next) ── */
+    .blog-post-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .post-nav-link {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px 20px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .post-nav-link:hover {
+      border-color: var(--accent);
+      background: var(--bg-4);
+    }
+    .post-nav-link.next { text-align: right; }
+
+    .post-nav-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .post-nav-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Placeholder when no prev/next */
+    .post-nav-empty { background: transparent; border: 1px solid transparent; }
+
+    /* 404 */
+    .blog-not-found {
+      text-align: center;
+      padding: 80px 0;
+      font-family: var(--font-mono);
+      color: var(--text-2);
+    }
+    .blog-not-found h2 { font-size: 1.4rem; color: var(--text); margin-bottom: 12px; }
+    .blog-not-found a  { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container blog-post-container">
+
+      <a href="blog.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> All Posts
+      </a>
+
+      <!-- Header — filled by JS -->
+      <div id="blogPostHeader"></div>
+
+      <!-- Body — filled by JS (Markdown → HTML) -->
+      <article class="prose" id="blogPostBody"></article>
+
+      <!-- Prev / Next nav — filled by JS -->
+      <nav class="blog-post-nav" id="blogPostNav"></nav>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Markdown parser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <!-- Syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <!-- Blog data -->
+  <script src="data/blog.js"></script>
+  <!-- Site main JS (footer year, nav scroll, etc.) -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // ── Configure marked ──────────────────────────────────────────────
+    marked.setOptions({
+      highlight: (code, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(code, { language: lang }).value;
+        }
+        return hljs.highlightAuto(code).value;
+      },
+      breaks: true,
+      gfm: true,
+    });
+
+    // ── Load post ─────────────────────────────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+    const id     = params.get('id');
+    const idx    = BLOG_DATA.findIndex(p => p.id === id);
+    const post   = idx !== -1 ? BLOG_DATA[idx] : null;
+
+    if (!post) {
+      document.getElementById('blogPostHeader').innerHTML = `
+        <div class="blog-not-found">
+          <h2>// post not found</h2>
+          <p>That post doesn't exist (or not yet). <a href="blog.html">Go back to all posts.</a></p>
+        </div>`;
+    } else {
+      // Set page title
+      document.title = `${post.title} — Zakhwan Anuar`;
+
+      // Render header
+      document.getElementById('blogPostHeader').innerHTML = `
+        <div class="blog-post-header">
+          <div class="blog-post-tags">
+            ${post.tags.map(t => `<span class="blog-post-tag">${t}</span>`).join('')}
+          </div>
+          <h1 class="blog-post-title">${post.title}</h1>
+          <span class="blog-post-date">${post.date}</span>
+        </div>`;
+
+      // Render body
+      document.getElementById('blogPostBody').innerHTML = marked.parse(post.content.trim());
+
+      // Highlight code blocks that weren't caught by marked
+      document.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+
+      // Prev / Next navigation (array order = newest first)
+      const prev = BLOG_DATA[idx - 1] ?? null;   // older entry in array (published before)
+      const next = BLOG_DATA[idx + 1] ?? null;   // newer entry in array (published after)
+
+      document.getElementById('blogPostNav').innerHTML = `
+        ${prev
+          ? `<a href="blog-post.html?id=${prev.id}" class="post-nav-link prev">
+               <span class="post-nav-label"><i class="fas fa-arrow-left"></i> Previous</span>
+               <span class="post-nav-title">${prev.title}</span>
+             </a>`
+          : `<div class="post-nav-empty"></div>`
+        }
+        ${next
+          ? `<a href="blog-post.html?id=${next.id}" class="post-nav-link next">
+               <span class="post-nav-label">Next <i class="fas fa-arrow-right"></i></span>
+               <span class="post-nav-title">${next.title}</span>
+             </a>`
+          : `<div class="post-nav-empty"></div>`
+        }`;
+    }
+  </script>
+</body>
+</html>
