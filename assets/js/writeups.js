@@ -1,85 +1,186 @@
 /* ================================================================
-   writeups.js — Writeups listing page
-   - Renders writeup cards from data/writeups.js
-   - Handles category filtering
-   - Handles search
+   assets/js/writeups.js — CTF Events listing page
+   Groups writeups by CTF event name, renders event cards,
+   supports search by event name and year filter.
 ================================================================ */
 
-let currentFilter = 'all';
+let currentYear = 'all';
 let currentSearch = '';
 
-function renderWriteups() {
-  const list = document.getElementById('writeupsList');
-  if (!list || typeof WRITEUPS_DATA === 'undefined') return;
+/* ── Helpers ── */
 
-  let data = WRITEUPS_DATA;
+function extractYear(dateStr) {
+  const m = (dateStr || '').match(/\d{4}/);
+  return m ? m[0] : 'Unknown';
+}
 
-  // Apply category filter
-  if (currentFilter !== 'all') {
-    data = data.filter(wu => wu.category.toLowerCase() === currentFilter);
+function inferType(ctfName) {
+  const n = ctfName.toLowerCase();
+  if (n.includes('international') || n.includes('intl')) return 'international';
+  if (n.includes('national'))  return 'national';
+  if (n.includes('local') || n.includes('uni') || n.includes('college') || n.includes('uniten')) return 'local';
+  return 'open';
+}
+
+function typeLabel(type) {
+  const map = { international: 'International', national: 'National', local: 'Local / Uni', open: 'Open' };
+  return map[type] || 'Open';
+}
+
+function typeTagClass(type) {
+  const map = { international: 'ctf-tag-intl', national: 'ctf-tag-year', local: 'ctf-tag-type', open: 'ctf-tag-type' };
+  return map[type] || 'ctf-tag-type';
+}
+
+const CAT_COLORS = {
+  web:       { bg: 'rgba(0,217,255,0.15)',   color: '#00d9ff' },
+  crypto:    { bg: 'rgba(124,58,237,0.15)',  color: '#a78bfa' },
+  pwn:       { bg: 'rgba(255,71,87,0.2)',    color: '#ff6b7a' },
+  rev:       { bg: 'rgba(255,107,53,0.15)',  color: '#ff9a72' },
+  forensics: { bg: 'rgba(0,255,136,0.12)',   color: '#00ff88' },
+  misc:      { bg: 'rgba(255,211,42,0.15)',  color: '#ffd32a' },
+};
+
+function catPill(cat) {
+  const key = cat.toLowerCase();
+  const c = CAT_COLORS[key] || { bg: 'rgba(100,100,100,0.2)', color: '#aaa' };
+  return `<span class="ctf-event-cat-pill" style="background:${c.bg};color:${c.color};">${cat}</span>`;
+}
+
+/* ── Build event groups from WRITEUPS_DATA ── */
+
+function buildEventGroups() {
+  if (typeof WRITEUPS_DATA === 'undefined') return [];
+  const map = {};
+  WRITEUPS_DATA.forEach(wu => {
+    const key = wu.ctf || 'Unknown CTF';
+    if (!map[key]) {
+      map[key] = {
+        name: key,
+        year: extractYear(wu.date),
+        type: inferType(key),
+        challenges: [],
+        categories: new Set(),
+      };
+    }
+    map[key].challenges.push(wu);
+    map[key].categories.add(wu.category);
+  });
+  // Sort by year descending, then name
+  return Object.values(map).sort((a, b) => {
+    if (b.year !== a.year) return b.year.localeCompare(a.year);
+    return a.name.localeCompare(b.name);
+  });
+}
+
+/* ── Render ── */
+
+function renderEventGrid() {
+  const grid = document.getElementById('ctfEventsGrid');
+  if (!grid) return;
+
+  let events = buildEventGroups();
+
+  // Year filter
+  if (currentYear !== 'all') {
+    events = events.filter(e => e.year === currentYear);
   }
 
-  // Apply search filter
+  // Search
   if (currentSearch) {
     const q = currentSearch.toLowerCase();
-    data = data.filter(wu =>
-      wu.title.toLowerCase().includes(q)   ||
-      wu.summary.toLowerCase().includes(q) ||
-      wu.category.toLowerCase().includes(q)
+    events = events.filter(e =>
+      e.name.toLowerCase().includes(q) ||
+      e.year.includes(q) ||
+      typeLabel(e.type).toLowerCase().includes(q) ||
+      [...e.categories].some(c => c.toLowerCase().includes(q))
     );
   }
 
-  if (data.length === 0) {
-    list.innerHTML = `
-      <div style="padding:40px;text-align:center;color:var(--text-3);font-size:0.9rem;">
-        No writeups found. Try a different filter or search term.
+  if (events.length === 0) {
+    grid.innerHTML = `
+      <div class="no-results">
+        <i class="fas fa-flag" style="color:var(--text-3);"></i>
+        No CTF events found. Try a different search or filter.
       </div>`;
     return;
   }
 
-  list.innerHTML = data.map(wu => `
-    <a href="writeup.html?id=${wu.id}" class="writeup-card fade-in-element">
-      <div class="writeup-card-badge">
-        <span class="writeup-category cat-${wu.category.toLowerCase()}">${wu.category}</span>
-        <span class="writeup-difficulty">${wu.difficulty}</span>
-      </div>
-      <div class="writeup-card-body">
-        <h3 class="writeup-card-title">${wu.title}</h3>
-        <div class="writeup-card-meta">
-          <span class="writeup-card-meta-item"><i class="fas fa-flag"></i> ${wu.ctf || 'CTF'}</span>
-          <span class="writeup-card-meta-item"><i class="far fa-calendar"></i> ${wu.date}</span>
-        </div>
-        <p class="writeup-card-summary">${wu.summary}</p>
-      </div>
-      <i class="fas fa-chevron-right writeup-card-arrow"></i>
-    </a>
-  `).join('');
+  grid.innerHTML = events.map(ev => {
+    const cats = [...ev.categories];
+    const count = ev.challenges.length;
+    const slug  = encodeURIComponent(ev.name);
 
-  // Animate new elements
-  list.querySelectorAll('.fade-in-element').forEach(el => {
+    return `
+    <a href="ctf-event.html?ctf=${slug}" class="ctf-event-card fade-in-element">
+      <h3 class="ctf-event-name">${ev.name}</h3>
+
+      <div class="ctf-event-meta">
+        <span class="ctf-tag ctf-tag-year">${ev.year}</span>
+        <span class="ctf-tag ${typeTagClass(ev.type)}">${typeLabel(ev.type)}</span>
+      </div>
+
+      <div class="ctf-event-card-footer">
+        <span class="ctf-event-challenge-count">
+          <i class="fas fa-terminal" style="margin-right:5px;font-size:0.65rem;"></i>
+          View writeups
+        </span>
+        <i class="fas fa-chevron-right ctf-event-arrow"></i>
+      </div>
+    </a>`;
+  }).join('');
+
+  // Animate
+  grid.querySelectorAll('.fade-in-element').forEach(el => {
     requestAnimationFrame(() => el.classList.add('visible'));
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderWriteups();
+function renderYearFilters() {
+  const bar = document.getElementById('yearFilterBar');
+  if (!bar) return;
 
-  // Category filter
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  const all = buildEventGroups();
+  const years = [...new Set(all.map(e => e.year))].sort((a, b) => b.localeCompare(a));
+
+  bar.innerHTML = `<button class="tag-filter-btn active" data-year="all">All Years</button>` +
+    years.map(y => `<button class="tag-filter-btn" data-year="${y}">${y}</button>`).join('');
+
+  bar.querySelectorAll('.tag-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      bar.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentFilter = btn.dataset.filter;
-      renderWriteups();
+      currentYear = btn.dataset.year;
+      renderEventGrid();
     });
   });
+}
 
-  // Search
+function renderStats() {
+  if (typeof WRITEUPS_DATA === 'undefined') return;
+  const events = buildEventGroups();
+  const totalChallenges = WRITEUPS_DATA.length;
+  const allCats = new Set(WRITEUPS_DATA.map(w => w.category));
+
+  const se = document.getElementById('statEvents');
+  const sc = document.getElementById('statChallenges');
+  const sk = document.getElementById('statCategories');
+  if (se) se.textContent = events.length;
+  if (sc) sc.textContent = totalChallenges;
+  if (sk) sk.textContent = allCats.size;
+}
+
+/* ── Init ── */
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderYearFilters();
+  renderEventGrid();
+
   const searchInput = document.getElementById('writeupSearch');
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       currentSearch = searchInput.value.trim();
-      renderWriteups();
+      renderEventGrid();
     });
   }
 });

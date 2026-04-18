@@ -27,6 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Set page title
   document.title = `${writeup.title} — Writeup`;
 
+  // ---- Update back link to CTF event page ----
+  const backLink = document.getElementById('backLink');
+  const backLinkText = document.getElementById('backLinkText');
+  if (backLink && writeup.ctf) {
+    const ctfSlug = encodeURIComponent(writeup.ctf);
+    backLink.href = `ctf-event.html?ctf=${ctfSlug}`;
+    if (backLinkText) backLinkText.textContent = writeup.ctf;
+  }
+
   // ---- Render header ----
   const header = document.getElementById('writeupPostHeader');
   header.innerHTML = `

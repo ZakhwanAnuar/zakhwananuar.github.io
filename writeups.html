@@ -3,12 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CTF Writeups — Your Name</title>
+  <title>CTF Writeups — Wh1teB3ar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    .ctf-events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 8px;
+    }
+    .ctf-event-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .ctf-event-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .ctf-event-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      color: inherit;
+    }
+    .ctf-event-card:hover::before { opacity: 1; }
+    .ctf-event-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .ctf-event-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,217,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .ctf-event-count-badge {
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,217,255,0.15);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .ctf-event-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .ctf-event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+    }
+    .ctf-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .ctf-tag-year { color:#ffd32a; background:rgba(255,211,42,0.1); border-color:rgba(255,211,42,0.2); }
+    .ctf-tag-type { color:#a78bfa; background:rgba(124,58,237,0.12); border-color:rgba(124,58,237,0.2); }
+    .ctf-tag-intl { color:#00ff88; background:rgba(0,255,136,0.1); border-color:rgba(0,255,136,0.2); }
+    .ctf-event-categories { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ctf-event-cat-pill {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .ctf-event-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .ctf-event-arrow {
+      color: var(--text-3);
+      font-size: 0.8rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .ctf-event-card:hover .ctf-event-arrow { transform: translateX(4px); color: var(--accent); }
+    .ctf-event-challenge-count { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
+    .tag-filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .tag-filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--text-2);
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag-filter-btn:hover, .tag-filter-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .no-results { padding: 60px 40px; text-align: center; color: var(--text-3); font-size: 0.88rem; grid-column: 1 / -1; }
+    .no-results i { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .writeups-stats {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 32px;
+      padding: 16px 24px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 2px; }
+    .stat-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-family: var(--font-mono); font-size: 0.63rem; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
+  </style>
 </head>
 <body>
 
@@ -45,30 +196,16 @@
   <main class="main-content">
     <div class="container">
 
-      <!-- Search bar -->
       <div class="writeups-search">
         <div class="search-input-wrapper">
           <i class="fas fa-search"></i>
-          <input type="text" id="writeupSearch" placeholder="Search writeups..." class="search-input" />
+          <input type="text" id="writeupSearch" placeholder="Search CTF events..." class="search-input" />
         </div>
       </div>
 
-      <!-- Filter bar -->
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <!-- EDIT: These match the categories in data/writeups.js -->
-        <button class="filter-btn" data-filter="web">Web</button>
-        <button class="filter-btn" data-filter="crypto">Crypto</button>
-        <button class="filter-btn" data-filter="pwn">Pwn</button>
-        <button class="filter-btn" data-filter="rev">Rev</button>
-        <button class="filter-btn" data-filter="forensics">Forensics</button>
-        <button class="filter-btn" data-filter="misc">Misc</button>
-      </div>
+      <div class="tag-filter-bar" id="yearFilterBar"></div>
 
-      <!-- Writeups list — populated from data/writeups.js -->
-      <div class="writeups-list" id="writeupsList">
-        <!-- JS inserts cards here -->
-      </div>
+      <div class="ctf-events-grid" id="ctfEventsGrid"></div>
 
     </div>
   </main>
@@ -77,8 +214,8 @@
     <div class="container footer-inner">
       <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
       <div class="footer-links">
-        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
   </footer>
