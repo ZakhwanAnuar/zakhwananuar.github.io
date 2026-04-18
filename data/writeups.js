@@ -514,7 +514,7 @@ An image there reveals the second part of the flag:
     title:      'Malware or not?',
     ctf:        'Hack@10 International CTF 2026',
     category:   'Forensics',
-    difficulty: 'Medium',
+    difficulty: 'Easy',
     points:     null,
     date:       'April 2026',
     summary:    'A suspicious .doc file is analysed for macros and embedded content. Inspecting the document relationships file exposes a Follina-style (CVE-2022-30190) external URL as the IoC flag.',
