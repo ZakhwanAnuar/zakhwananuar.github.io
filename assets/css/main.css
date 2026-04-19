@@ -740,6 +740,10 @@ code {
   color: var(--accent);
 }
 
+/* Responsive visibility utilities */
+.mobile-only { display: none; }
+.desktop-only { display: block; }
+
 /* ================================================================
    11. WRITEUP CARDS
 ================================================================ */
@@ -775,12 +779,14 @@ code {
   color: inherit;
 }
 
+/* Desktop: badge is a fixed-width left column */
 .writeup-card-badge {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  min-width: 80px;
 }
 
 .writeup-category {
@@ -809,8 +815,10 @@ code {
   font-family: var(--font-mono);
 }
 
+/* Desktop: body is the right column containing title, date, description */
 .writeup-card-body {
   flex: 1;
+  min-width: 0;
 }
 
 .writeup-card-title {
@@ -1842,22 +1850,33 @@ code {
     align-items: flex-start;
   }
 
+  .mobile-only { display: block; }
+  .desktop-only { display: none; }
+
   .writeup-card {
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: flex-start;
-    gap: 12px;
-  }
-  .writeup-card-badge {
-    flex-direction: row;
     gap: 8px;
-    order: 2;
   }
   .writeup-card-body {
     order: 1;
-    width: 100%;
+    flex: 1 1 100%;
+  }
+  .writeup-card-badge {
+    order: 2;
+    flex: 1 1 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    min-width: unset;
+  }
+  .writeup-card .mobile-only.writeup-card-summary {
+    order: 3;
+    flex: 1 1 100%;
   }
   .writeup-card-arrow {
-    order: 3;
+    order: 4;
+    align-self: flex-end;
   }
 
   .resume-entry-header {

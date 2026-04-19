@@ -143,8 +143,9 @@ function renderChallenges() {
         <div class="writeup-card-meta">
           <span class="writeup-card-meta-item"><i class="far fa-calendar"></i> ${wu.date}</span>
         </div>
-        <p class="writeup-card-summary">${wu.summary}</p>
+        <p class="writeup-card-summary desktop-only">${wu.summary}</p>
       </div>
+      <p class="writeup-card-summary mobile-only">${wu.summary}</p>
       <i class="fas fa-chevron-right writeup-card-arrow"></i>
     </a>
   `).join('');
