@@ -18,12 +18,19 @@ function inferType(ctfName) {
   const n = ctfName.toLowerCase();
   if (n.includes('international') || n.includes('intl')) return 'international';
   if (n.includes('national'))  return 'national';
+  if (n.includes('divide')) return 'internal';   // ← add more lines like this
   if (n.includes('local') || n.includes('uni') || n.includes('college') || n.includes('uniten')) return 'local';
   return 'open';
 }
 
 function typeLabel(type) {
-  const map = { international: 'International', national: 'National', local: 'Local / Uni', open: 'Open' };
+  const map = {
+    international: 'International',
+    national:      'National',
+    local:         'Local / Uni',
+    open:          'Open',
+    internal:      'Internal',   // ← add your custom label here
+  };
   return map[type] || 'Open';
 }
 
