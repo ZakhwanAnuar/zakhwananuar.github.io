@@ -206,6 +206,27 @@ function renderFeaturedProjects() {
 }
 
 // ================================================================
+// RENDER LATEST BLOG POST
+// ================================================================
+function renderLatestBlog() {
+  const container = document.getElementById('latestBlogContainer');
+  if (!container || typeof BLOG_DATA === 'undefined' || !BLOG_DATA.length) return;
+
+  const post = BLOG_DATA[0];
+
+  container.innerHTML =
+    '<a href="blog-post.html?id=' + post.id + '" class="latest-blog-card fade-in-element">' +
+      '<div class="latest-blog-meta">' +
+        '<span class="latest-blog-date">' + post.date + '</span>' +
+        post.tags.map(function(t) { return '<span class="latest-blog-tag">#' + t + '</span>'; }).join('') +
+      '</div>' +
+      '<h3 class="latest-blog-title">' + post.title + '</h3>' +
+      '<p class="latest-blog-summary">' + post.summary + '</p>' +
+      '<span class="latest-blog-read">Read more <i class="fas fa-arrow-right"></i></span>' +
+    '</a>';
+}
+
+// ================================================================
 // INIT
 // ================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -214,5 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initTerminal();
   renderRecentWriteups();
   renderFeaturedProjects();
+  renderLatestBlog();
   initFadeInAnimations();
 });

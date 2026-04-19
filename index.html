@@ -119,26 +119,19 @@
   </section>
 
   <!-- ============================================================
-       STATS BAR
+       LATEST BLOG PREVIEW
        ============================================================ -->
-  <section class="stats-bar">
-    <div class="container stats-grid">
-      <!-- EDIT: Update numbers to reflect your real stats -->
-      <div class="stat-item">
-        <span class="stat-number" data-target="15">0</span>
-        <span class="stat-label">CTFs Competed</span>
+  <section class="section" id="latest-blog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// latest_thoughts</span>
+        <h2 class="section-title">Latest Blog Post</h2>
       </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="10">0</span>
-        <span class="stat-label">Event Management</span>
+      <div id="latestBlogContainer">
+        <!-- Populated by JS from data/blog.js -->
       </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="3">0</span>
-        <span class="stat-label">Projects Built</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="5">0</span>
-        <span class="stat-label">Writeups Published</span>
+      <div class="section-cta">
+        <a href="blog.html" class="btn btn-secondary">All Posts <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -146,7 +139,7 @@
   <!-- ============================================================
        RECENT WRITEUPS PREVIEW
        ============================================================ -->
-  <section class="section" id="recent-writeups">
+  <section class="section section-alt" id="recent-writeups">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">// recent_writeups</span>
@@ -164,7 +157,7 @@
   <!-- ============================================================
        FEATURED PROJECTS PREVIEW
        ============================================================ -->
-  <section class="section section-alt" id="featured-projects">
+  <section class="section" id="featured-projects">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">// featured_projects</span>
@@ -194,6 +187,7 @@
   <!-- Scripts -->
   <script src="data/projects.js"></script>
   <script src="data/writeups.js"></script>
+  <script src="data/blog.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/home.js"></script>
 </body>

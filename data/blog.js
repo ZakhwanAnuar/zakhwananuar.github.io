@@ -22,6 +22,142 @@
 const BLOG_DATA = [
 
   {
+    id:      'scholarship-journey',
+    title:   'Schoarship Journey — From Rejections to Peace',
+    date:    'April 2026',
+    tags:    ['personal', 'scholarship', 'life'],
+    summary: 'No CTF, no cybersecurity. Just an email that brought me back to one of the hardest chapters of my life — rejections, pressure, guilt, and eventually, peace.',
+
+    content: `
+Today's post is a bit different. No CTF, no cybersecurity. It's a bit long, but I'd really appreciate it if you could read through the whole thing.
+ ![Question](assets/images/Blog/scholarship.jpg)
+This is about my scholarship journey.
+
+---
+
+## The Email
+
+This email brought me back to a chapter of my life that I will never forget.
+
+Reading it again made me pause. It reminded me of a time when everything felt uncertain, heavy, and overwhelming.
+
+## The Choice I Made
+
+After SPM, I was offered a scholarship in the medical/engineering field. It was a good opportunity, but deep down I knew it wasn't my path.
+
+I chose to reject it and pursue Computer Science instead — because it's my dream.
+
+I accepted a scholarship for Foundation in Computer Science at UNITEN, even though it felt like stepping into the unknown.
+
+## When Things Changed
+
+For my foundation, things were stable. I did well. But when I moved on to degree, everything changed.
+
+The scholarship only covered my foundation, and I had to face how expensive the fees at UNITEN were. That was when the pressure started. Every semester came with the same question — *how am I going to get through this?*
+
+I started applying for scholarships again.
+
+## The MARA Rejection
+
+One of the moments I will never forget was my MARA application. I worked hard and truly believed I had a strong chance, especially with my foundation results. I allowed myself to feel hopeful.
+
+But in the end, I was rejected.
+
+Not because I was not good enough — but because of a small mistake. I submitted the wrong document.
+
+That silence after trying to appeal was painful. It felt like all my effort disappeared just like that.
+
+## Rejection After Rejection
+
+After that, I kept going. I applied again and again. Some ended early, some reached the final stage — but the result was still the same.
+
+Rejection.
+
+During that time, my parents supported me financially, even when I knew it was not easy for them. That stayed with me the most.
+
+I felt the pressure.
+
+I felt the guilt.
+
+I felt like I was becoming a burden.
+
+But I kept going.
+
+## And Then Everything Changed
+
+Receiving the **Dato' Low Tuck Kwong Foundation Scholarship** gave me something I needed the most — peace of mind. It allowed me to finally breathe and focus again.
+
+During my intake, only three candidates were selected. That made it even more meaningful, and reminded me how rare this opportunity is.
+
+## What This Email Reminded Me
+
+This email reminded me of everything. The risks, the rejections, the mistakes, and the people who stood by me.
+
+Thank you to those who gave me emotional support during that time — especially the one who stayed when things were at my lowest. You know who you are. We were going through the same struggles, and we kept each other going. Looking back, I wish I had managed my stress better. I didn't… and things fell apart. But still — thank you.
+
+---
+
+This journey was not easy, but it shaped me a lot.
+
+I will never forget this.
+
+*Alhamdulillah.*
+    `,
+  },
+
+  {
+    id:      'micromanagement-trap-leadership',
+    title:   'The Micromanagement Trap in Leadership',
+    date:    'April 2026',
+    tags:    ['leadership', 'thoughts', 'seasel25'],
+    summary: 'A reflection from my conversation with a colleague at Southeast Asia Sustainable Environmental Leadership Program 2025 (SEASEL\'25) on why micromanaging erodes trust — and what it really means to lead with confidence instead of control.',
+
+    content: `
+
+![Question](assets/images/Blog/seasel.jpg)
+    ## A Lesson From a Conversation
+
+One of my most valuable leadership lessons at SEASEL'25 didn't come from a keynote or a panel session — it came from a simple conversation with a colleague.
+
+We found ourselves reflecting on a common pattern among young leaders: the tendency to micromanage or come across as overly bossy. At first glance, both behaviors can feel justified. Micromanaging creates a sense of control — an illusion of safety. Being bossy can feel like confidence — an illusion of strength.
+
+But the reality is far less flattering.
+
+Both approaches slowly erode the very foundation that leadership is built on: **trust**.
+
+That realization stayed with me.
+
+## What Leadership Actually Is
+
+Leadership is not about controlling every detail or ensuring everything goes exactly your way. It's about creating an environment where people feel empowered to take ownership, contribute meaningfully, and grow alongside you.
+
+Instead of tightening control, effective leaders learn to let go — strategically and intentionally.
+
+- **Micromanage less, guide more.**
+- **Command less, listen more.**
+- **Interfere less, trust more.**
+
+It sounds simple, but it requires a shift in mindset.
+
+Because here's the truth: **When you trust people, they rise. When you control them, they shrink.**
+
+## What I Saw at SEASEL'25
+
+Throughout SEASEL'25, I saw this principle play out repeatedly. The most successful teams weren't driven by authority or rigid control — they thrived on mutual trust, collaboration, and shared ownership.
+
+That's when it became clear to me:
+
+> Leadership is not measured by how tightly you hold control, but by how confidently others can move when you let go.
+
+## Carrying It Forward
+
+This reflection was sparked by an insightful thought shared by Yasin Shahrozaini — a reminder that sometimes the most impactful lessons come from conversations, not stages.
+
+As I continue growing in my leadership journey, this is something I'll carry forward: Not just leading people, but trusting them enough to lead *with* me.
+    `,
+  },
+
+  {
     id:      'why-i-chose-cybersecurity',
     title:   'Why I Chose Cybersecurity',
     date:    'April 2026',
