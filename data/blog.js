@@ -23,7 +23,7 @@ const BLOG_DATA = [
 
   {
     id:      'scholarship-journey',
-    title:   'Schoarship Journey — From Rejections to Peace',
+    title:   'Scholarship Journey — From Rejections to Peace',
     date:    'April 2026',
     tags:    ['personal', 'scholarship', 'life'],
     summary: 'No CTF, no cybersecurity. Just an email that brought me back to one of the hardest chapters of my life — rejections, pressure, guilt, and eventually, peace.',
