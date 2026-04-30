@@ -32,7 +32,7 @@ const BLOG_DATA = [
 
 The "Experiment".
 
- ![Question](assets/images/Blog/CodeRush.JPG)
+ ![Question](assets/images/Blog/coderush.JPG)
 ---
 
 ## The Quote That Started It All
