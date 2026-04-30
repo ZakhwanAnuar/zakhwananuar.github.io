@@ -113,6 +113,8 @@ A legitimate CAPTCHA page never calls itself that — this is a textbook **Click
 
 **Flag:** \`UMCS{Ra-T4-TA-Ta_BU7_1_doN7_w4nT_tO}\`
 
+![Repository file listing with b.mp4, index.html, and test.txt](assets/images/CTF/UMCS/Metamon/m3_repo_contents.png)
+
 ### Visiting the Phishing Page
 
 Now that we have the URL, we visit it and confirm the fake CAPTCHA behaviour. Clicking the checkbox silently places a command on the clipboard. The command calls \`mshta\` against a file hosted on the same GitHub Pages site.
@@ -121,15 +123,14 @@ Now that we have the URL, we visit it and confirm the fake CAPTCHA behaviour. Cl
 
 Navigating to \`https://github.com/pinarat\` reveals a single public repository named \`a\`. Inside it sits \`b.mp4\` along with \`index.html\` and \`test.txt\`. More interestingly, the commit log shows that \`profile.png\` was added and then deleted — we make a note of that for later.
 
-![Repository file listing with b.mp4, index.html, and test.txt](assets/images/CTF/UMCS/Metamon/m3_repo_contents.png)
-
 ![Commit history showing the upload and subsequent deletion of profile.png](assets/images/CTF/UMCS/Metamon/m3_commit_history.png)
+![binwalk scan of b.mp4 confirming an appended HTML document](assets/images/CTF/UMCS/Metamon/m3_binwalk_bmp4.png)
 
 ### Digging Into b.mp4
 
 Running \`exiftool\` against the file reports a warning about unrecognised trailer data near the end of the container. \`binwalk\` makes it concrete — there is an HTML document hiding inside the MP4 wrapper.
 
-![binwalk scan of b.mp4 confirming an appended HTML document](assets/images/CTF/UMCS/Metamon/m3_binwalk_bmp4.png)
+![rizzler.bat content showing the registry write with the flag embedded as the value](assets/images/CTF/UMCS/Metamon/m3_rizzler_registry.png)
 
 We carve it out with:
 
@@ -151,8 +152,6 @@ Pulling \`rizzler.bat\` from the Gist, we find a **fodhelper.exe UAC bypass** �
 reg add "HKCU\\Software\\Classes\\ms-settings\\CurVer" /ve /d "UMCS{Ra-T4-TA-Ta_BU7_1_doN7_w4nT_tO}" /f
 start /b "" "C:\\Windows\\System32\\fodhelper.exe"
 \`\`\`
-
-![rizzler.bat content showing the registry write with the flag embedded as the value](assets/images/CTF/UMCS/Metamon/m3_rizzler_registry.png)
 
 **Flag:** \`UMCS{Ra-T4-TA-Ta_BU7_1_doN7_w4nT_tO}\`
 
