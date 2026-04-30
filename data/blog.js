@@ -31,7 +31,7 @@ const BLOG_DATA = [
     content: `
 
 The "Experiment".
- ![Question](assets/images/Blog/CodeRush.jpg)
+ ![Question](assets/images/Blog/scholarship.jpg)
 ---
 
 ## The Quote That Started It All
