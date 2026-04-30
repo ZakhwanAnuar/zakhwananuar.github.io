@@ -22,6 +22,69 @@
 const BLOG_DATA = [
 
   {
+    id:      'mbot-coderush-2026',
+    title:   'MBOT CodeRush 2026 — An Experiment in Letting Go',
+    date:    'April 2026',
+    tags:    ['personal', 'leadership', 'life'],
+    summary: 'No code, no competition results. Just a reflection on stepping back, trusting others, and discovering that the best leadership sometimes means giving others the space to lead.',
+
+    content: `
+
+The "Experiment".
+ ![Question](assets/images/Blog/CodeRush.jpg)
+---
+
+## The Quote That Started It All
+
+> "Before you are a leader, success is about growing yourself. When you become a leader, success is about growing others."
+
+MBOT CodeRush 2026 was my experiment.
+
+An experiment in letting go, trusting others, and opening opportunities.
+
+## Stepping Back
+
+This year, I stepped back from being Program Director and took on the role of VPD — so my junior could lead this event.
+
+It wasn't easy.
+
+There were moments I wanted to step in, fix things, and take control.
+
+But this time, I practiced what I've been learning.
+
+Not to micromanage. To delegate properly. To trust my team.
+
+## When It All Came Together
+
+Alhamdulillah, this turned out to be one of the smoothest events I've been part of.
+
+One of my favorite moments was during our postmortem. Hearing everyone share that they learned something new from organizing this event really meant a lot to me.
+
+That's when I knew — *this experiment worked.*
+
+## What CodeRush Became
+
+As a leader, we open opportunities for others. We give them the space to try, to make mistakes, and to grow.
+
+CodeRush may be a coding competition, but for me, it became something more.
+
+It became a place where people grow into who they are meant to be.
+
+## Thank You
+
+Thank you to all committee members involved. None of this would have been possible without your effort, patience, and commitment.
+
+---
+
+Still learning. But this experience reminded me that sometimes the best leadership is choosing to step back — so others can step up.
+
+I hope I can continue to contribute and create more opportunities like this in the future.
+
+Alhamdulillah.
+    `,
+  },
+
+  {
     id:      'scholarship-journey',
     title:   'Scholarship Journey — From Rejections to Peace',
     date:    'April 2026',
@@ -154,52 +217,6 @@ That's when it became clear to me:
 This reflection was sparked by an insightful thought shared by Yasin Shahrozaini — a reminder that sometimes the most impactful lessons come from conversations, not stages.
 
 As I continue growing in my leadership journey, this is something I'll carry forward: Not just leading people, but trusting them enough to lead *with* me.
-    `,
-  },
-
-  {
-    id:      'why-i-chose-cybersecurity',
-    title:   'Why I Chose Cybersecurity',
-    date:    'April 2026',
-    tags:    ['thoughts', 'cybersecurity', 'personal'],
-    summary: 'Everyone asks me why I picked cybersecurity over regular software engineering. Here\'s my honest answer — it\'s not just about the money or hype.',
-
-    content: `
-## The Real Reason
-
-People assume I chose cybersecurity because of movies. Mr. Robot. Hackers. The whole "typing fast in a dark room" aesthetic.
-
-That's not it.
-
-The real reason? I broke something and had no idea how.
-
-Back in secondary school, I was playing around with a game — trying to mod it, change some values, the usual. I accidentally triggered some kind of anti-cheat and got banned. And I just sat there staring at the screen thinking: *how did it know?*
-
-That question sent me down a rabbit hole I never climbed out of.
-
-## What Actually Got Me Hooked
-
-It wasn't hacking for the sake of hacking. It was the **understanding**. Every vulnerability tells a story about how something was built — what assumption the developer made, where that assumption breaks down, and why.
-
-When I solve a CTF challenge, I'm not just getting a flag. I'm reading a story written in code.
-
-That's addictive in a way most things aren't.
-
-## The Honest Part
-
-I won't pretend cybersecurity is all exciting. A lot of it is reading documentation for hours. Running tools that return nothing. Staring at hex dumps trying to find a pattern.
-
-But when it clicks? When you find the thing — the weird byte offset, the misconfigured header, the base64-in-base64 — there's nothing quite like it.
-
-It's puzzle-solving with real stakes. And I think that's why I stayed.
-
-## What I'd Tell My Past Self
-
-Stop trying to learn everything at once. Pick one thing — forensics, web, crypto, whatever — and go deep. The breadth comes naturally after you have a foundation.
-
-And don't be embarrassed to not know things. Everyone in this field Googles constantly.
-
-That's all. Just wanted to write this down somewhere.
     `,
   },
 
