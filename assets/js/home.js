@@ -112,7 +112,7 @@ function initTerminal() {
     { type: 'cmd',    text: 'cat interests.txt' },
     { type: 'output', text: '<span class="val">▸ Digital Forensics</span>' },
     { type: 'output', text: '<span class="val">▸ Reverse Engineering</span>' },
-    { type: 'output', text: '<span class="val">▸ Web Exploitation</span>' },
+    { type: 'output', text: '<span class="val">▸ Malware Analysis</span>' },
     { type: 'blank',  text: '' },
     { type: 'cmd',    text: 'echo $STATUS' },
     { type: 'output', text: '<span class="val" style="color:var(--green)">Open to internships & collaborations ✓</span>' },
