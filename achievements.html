@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Achievements — Zakhwan Anuar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    /* ── Achievement card grid ── */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+      margin-top: 8px;
+    }
+    .ach-card {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      outline: none;
+    }
+    .ach-card.has-gallery { cursor: pointer; }
+    .ach-card:hover, .ach-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    }
+    .ach-cover {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: var(--bg-4);
+      overflow: hidden;
+    }
+    .ach-cover-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+      filter: grayscale(0.15);
+    }
+    .ach-card:hover .ach-cover-img { transform: scale(1.04); filter: grayscale(0); }
+    .ach-cover-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-size: 2.4rem;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(0,217,255,0.12), transparent 60%),
+        linear-gradient(135deg, var(--bg-4), var(--bg-3));
+      opacity: 0.75;
+    }
+    .ach-count {
+      position: absolute;
+      right: 10px; bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+    .ach-count i { margin-right: 4px; font-size: 0.62rem; }
+    .ach-card-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .ach-badge {
+      align-self: flex-start;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .ach-badge-gold   { color:#ffd32a; background:rgba(255,211,42,0.1);  border-color:rgba(255,211,42,0.25); }
+    .ach-badge-silver { color:#c9d3e0; background:rgba(201,211,224,0.1); border-color:rgba(201,211,224,0.25); }
+    .ach-badge-bronze { color:#e0955f; background:rgba(224,149,95,0.1);  border-color:rgba(224,149,95,0.25); }
+    .ach-badge-accent { color:var(--accent); background:var(--accent-dim); border-color:rgba(0,217,255,0.2); }
+    .ach-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .ach-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ach-date {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+    .ach-date i { margin-right: 5px; }
+    .ach-issuer {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-3);
+      margin: 4px 0 0;
+    }
+    .ach-issuer span { color: var(--accent); }
+    .ach-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--text-3);
+      padding: 60px 40px;
+      font-size: 0.9rem;
+    }
+    .ach-empty i { display: block; font-size: 2rem; margin-bottom: 14px; }
+
+    /* ── Lightbox ── */
+    .ach-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .ach-lightbox.open { display: flex; }
+    .ach-lb-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5,7,10,0.92);
+      backdrop-filter: blur(6px);
+    }
+    .ach-lb-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1000px, 100%);
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .ach-lb-stage {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ach-lb-img {
+      max-width: 100%;
+      max-height: 68vh;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-2);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+    }
+    .ach-lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border-2);
+      background: rgba(15,17,23,0.75);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .ach-lb-nav:hover { background: var(--accent); color: #04121a; border-color: var(--accent); }
+    .ach-lb-prev { left: 14px; }
+    .ach-lb-next { right: 14px; }
+    .ach-lb-close {
+      position: absolute;
+      top: -6px; right: 0;
+      transform: translateY(-100%);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-2);
+      background: rgba(15,17,23,0.75);
+      color: var(--text-2);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .ach-lb-close:hover { background: var(--red); color: #fff; }
+    .ach-lb-thumbs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+    }
+    .ach-lb-thumb {
+      width: 64px; height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      opacity: 0.5;
+      cursor: pointer;
+      transition: opacity 0.2s, border-color 0.2s;
+    }
+    .ach-lb-thumb:hover { opacity: 0.85; }
+    .ach-lb-thumb.active { opacity: 1; border-color: var(--accent); }
+    .ach-lb-info { text-align: center; }
+    .ach-lb-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 4px;
+    }
+    .ach-lb-caption { font-size: 0.82rem; color: var(--text-2); margin: 0 0 6px; }
+    .ach-lb-counter {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+    }
+    @media (max-width: 600px) {
+      .ach-lb-img { max-height: 56vh; }
+      .ach-lb-nav { width: 38px; height: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="achievements.html" class="nav-link active">Achievements</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// achievements</span>
+      <h1 class="page-title">Achievements</h1>
+      <p class="page-subtitle">Competitions, awards, and moments worth keeping.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </div>
+  </main>
+
+  <!-- Lightbox gallery (populated by JS) -->
+  <div class="ach-lightbox" id="achLightbox" role="dialog" aria-modal="true" aria-label="Achievement gallery">
+    <div class="ach-lb-backdrop" id="lbBackdrop"></div>
+    <div class="ach-lb-inner">
+      <div class="ach-lb-stage">
+        <button class="ach-lb-close" id="lbClose" aria-label="Close gallery"><i class="fas fa-times"></i></button>
+        <button class="ach-lb-nav ach-lb-prev" id="lbPrev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <img class="ach-lb-img" id="lbImage" src="" alt="" />
+        <button class="ach-lb-nav ach-lb-next" id="lbNext" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="ach-lb-thumbs" id="lbThumbs"></div>
+      <div class="ach-lb-info">
+        <h3 class="ach-lb-title" id="lbTitle"></h3>
+        <p class="ach-lb-caption" id="lbCaption"></p>
+        <span class="ach-lb-counter" id="lbCounter"></span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/achievements.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/achievements.js"></script>
+</body>
+</html>
