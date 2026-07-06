@@ -99,7 +99,6 @@ const ACHIEVEMENTS_DATA = [
     summary:   'Representing UNITEN at the national-level competition.',
     images:    [
       'assets/images/Achievements/iboh/1.jpg',
-      'assets/images/Achievements/iboh/2.jpg',
     ],
   },
 
