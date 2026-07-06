@@ -22,6 +22,90 @@
 const BLOG_DATA = [
 
   {
+    id:      'csm-cyberjaya-visit',
+    title:   'A Visit to CyberSecurity Malaysia — My Last Event Leading MBOT',
+    date:    'July 2026',
+    tags:    ['personal', 'leadership', 'cybersecurity'],
+    summary: 'My final event leading the MBOT UNITEN Student Chapter — a visit to CyberSecurity Malaysia in Cyberjaya, and a reflection on growth, leadership, and becoming someone new.',
+
+    content: `
+
+![CSM Visit](assets/images/Blog/csm.jpg)
+
+> "You pernah nampak tak orang tu, orang yang sama je lepas 3 tahun tak jumpa?"
+
+That was a conversation I had with an old friend about a year ago. She is a very good friend. We were talking about personal growth, and we agreed on one thing — if a person doesn't change or learn something new every 6 months, they're just stuck.
+
+## A Year Ago, That Was Almost Me
+
+A year ago, that was almost me. I was just a normal student at UNITEN. Go to class, play sports in the evening, hangout with friends at night. It was a comfortable routine.
+
+But now felt different. Throughout the years, I have been rebuilding myself. This event was the final event I led with my club, MBOT UNITEN Student Chapter — a visit to CyberSecurity Malaysia (CSM).
+
+## Standing There in Cyberjaya
+
+Standing there in Cyberjaya, looking at the team and the participants, that conversation from a year ago hit me. Leading this wasn't easy, and it forced me completely out of my comfort zone. It made me change.
+
+But I realized something important along the way: When you are not a leader, success is about yourself. When you become a leader, success is about growing others to their fullness.
+
+## What Leading Is Actually About
+
+Throughout running this program, my only real hope was that everyone who joined walked away with something. I hope everyone learned something new about cybersecurity, or at the very least, just had a good time and created happy memories with their friends. To me, that's what leading is actually about. It's not about the title — it's about making sure the people around you are leveling up and enjoying the journey together.
+
+Cybersecurity moves fast. If we don't keep learning, we get left behind. Seeing everyone engage and ask questions to the experts at CSM made all the stress of putting this together worth it.
+
+## Not the End
+
+This might be my last event leading the club, but it's definitely not the end of my journey in UNITEN Cybersecurity Community. Big thanks to the committee who stuck by me for this event — Afrina Johar, Fathiah Hulwani, Iqbal Zaim, Izz Ryan, Hanis Hannani Mohd Yusoff, 'Imran Zaqwan, Nurin Aiman, Yusriena and Iman Madihah — and to CyberSecurity Malaysia for having us.
+
+I'm definitely not the same person I was a year ago. Alhamdulillah.
+
+---
+
+Also… my weight increased throughout the years 😅. Since I'm off the club, let's start building this again. Give me 6 months to lose weight. Or at least before grad...
+    `,
+  },
+
+  {
+    id:      'cybershield-summit-2026',
+    title:   'Speaking at CyberShield Summit 2026',
+    date:    'July 2026',
+    tags:    ['speaking', 'cybersecurity', 'ctf'],
+    summary: 'How one simple conversation led to speaking at a national-level cybersecurity summit — sharing CTF, cybersecurity, and the Malaysia Board of Technologists with 360+ students across the country.',
+
+    content: `
+
+![CyberShield Summit 2026](assets/images/Blog/cybershield.jpg)
+
+I had the privilege of speaking at **CyberShield Summit 2026**, a national-level cybersecurity event organized by Persatuan Teknologi Maklumat UPSI, Universiti Pendidikan Sultan Idris, Universiti Malaysia Kelantan, and Universiti Utara Malaysia, with co-organization by MBOT UNITEN Student Chapter.
+
+## How It Started
+
+This opportunity started earlier this year when I met Encik Muhammad Hakimi Mastor from Bright Scholar Academy at an event in Universiti Pendidikan Sultan Idris. We had a simple conversation about the Malaysia Board of Technologists, technology, education, cybersecurity, Capture The Flag (CTF), and student involvement in the field. From that discussion, he later recommended me to his juniors at UPSI, which eventually led to an invitation to speak at this program.
+
+## The Session
+
+On the day of the session, I had the chance to share my experiences in cybersecurity and CTF competitions with more than 360+ participants from across the country. It was a meaningful experience to connect with students who are genuinely interested in exploring cybersecurity, regardless of their background or level of experience.
+
+I also took the opportunity to introduce and explain what the Malaysia Board of Technologists is, along with its role in developing and supporting Malaysia's technical talent ecosystem. Many participants were not familiar with the Malaysia Board of Technologists before the session, so it was good to share how it contributes to professional recognition and growth in technical fields.
+
+## CTF Is the First Step
+
+One of the key points I focused on during the talk was that CTF is often the first step into cybersecurity. It is one of the most practical ways to get exposure to real-world cybersecurity thinking, where learners can develop problem-solving skills, technical understanding, and a hands-on mindset.
+
+## The Engagement
+
+What I appreciated most was the engagement from the participants. There were many thoughtful questions throughout the session, and most participants stayed until the very end. That level of curiosity and commitment made the session even more meaningful.
+
+I'm sincerely thankful to Persatuan Teknologi Maklumat UPSI and the organizing team for the opportunity, trust, and support throughout this journey.
+
+---
+
+One conversation can open different opportunities.
+    `,
+  },
+
+  {
     id:      'mbot-coderush-2026',
     title:   'MBOT CodeRush 2026 — An Experiment in Letting Go',
     date:    'April 2026',
