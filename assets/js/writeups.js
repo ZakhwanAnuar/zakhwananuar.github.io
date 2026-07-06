@@ -59,6 +59,7 @@ function catPill(cat) {
 function buildEventGroups() {
   if (typeof WRITEUPS_DATA === 'undefined') return [];
   const map = {};
+  let order = 0;
   WRITEUPS_DATA.forEach(wu => {
     const key = wu.ctf || 'Unknown CTF';
     if (!map[key]) {
@@ -66,6 +67,7 @@ function buildEventGroups() {
         name: key,
         year: extractYear(wu.date),
         type: inferType(key),
+        order: order++,        // first-appearance order in the data file
         challenges: [],
         categories: new Set(),
       };
@@ -73,10 +75,11 @@ function buildEventGroups() {
     map[key].challenges.push(wu);
     map[key].categories.add(wu.category);
   });
-  // Sort by year descending, then name
+  // Sort by year descending, then by order in the data file
+  // (so events within the same year follow the arrangement in data/writeups.js)
   return Object.values(map).sort((a, b) => {
     if (b.year !== a.year) return b.year.localeCompare(a.year);
-    return a.name.localeCompare(b.name);
+    return a.order - b.order;
   });
 }
 
