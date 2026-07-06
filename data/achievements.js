@@ -68,6 +68,8 @@ const ACHIEVEMENTS_DATA = [
     images:    [
       'assets/images/Achievements/divide-hunting-hidden-data/1.jpg',
       'assets/images/Achievements/divide-hunting-hidden-data/2.jpg',
+      'assets/images/Achievements/divide-hunting-hidden-data/3.jpg',
+      'assets/images/Achievements/divide-hunting-hidden-data/4.jpg',
     ],
   },
 
@@ -82,6 +84,9 @@ const ACHIEVEMENTS_DATA = [
     images:    [
       'assets/images/Achievements/divide-delete-not-gone/1.jpg',
       'assets/images/Achievements/divide-delete-not-gone/2.jpg',
+      'assets/images/Achievements/divide-delete-not-gone/3.jpg',
+      'assets/images/Achievements/divide-delete-not-gone/4.jpg',
+      'assets/images/Achievements/divide-delete-not-gone/5.jpg',
     ],
   },
 
