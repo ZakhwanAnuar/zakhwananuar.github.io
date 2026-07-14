@@ -236,6 +236,14 @@
       // Highlight code blocks that weren't caught by marked
       document.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
 
+      // Wrap tables so they scroll horizontally on narrow screens
+      document.querySelectorAll('#blogPostBody table').forEach(table => {
+        const wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+      });
+
       // Prev / Next navigation (array order = newest first)
       const prev = BLOG_DATA[idx - 1] ?? null;   // older entry in array (published before)
       const next = BLOG_DATA[idx + 1] ?? null;   // newer entry in array (published after)

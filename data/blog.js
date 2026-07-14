@@ -22,6 +22,118 @@
 const BLOG_DATA = [
 
   {
+    id:      'building-bad-usb',
+    title:   'Building a Bad USB — What a $5 Pico Taught Me About HID Attacks',
+    date:    'July 2026',
+    tags:    ['security', 'hardware', 'project'],
+    summary: 'A Raspberry Pi Pico running CircuitPython that enumerates as a USB HID keyboard and runs a DuckyScript payload — a full breakdown of the boot-time USB toggle, the payload parser, the key map, and the GP0 arming logic.',
+
+    content: `
+
+A "Bad USB" is a device that looks like a flash drive but tells the host it's a **keyboard**. Operating systems trust HID keyboards implicitly — no drivers, no prompts — so once enumerated it can inject keystrokes faster than any human. I built one on a **Raspberry Pi Pico** to understand that trust boundary from the inside. This is a walk through how the firmware actually works.
+
+> The host never authenticates a keyboard. It authenticates *nothing* — a keyboard is just a USB device that claims the HID keyboard descriptor.
+
+## Bill of materials
+
+- **Raspberry Pi Pico** (RP2040)
+- A **data** USB cable (charge-only cables won't enumerate)
+- An optional jumper wire on **GP0** for mode switching
+
+The Pico runs **CircuitPython**, which exposes USB HID through the \`adafruit_hid\` library. No Arduino, no C — the whole thing is Python on the microcontroller.
+
+## Repo layout
+
+\`\`\`
+boot.py                  # runs first; decides USB drive visibility
+boot_SILENT_DEPLOY.py    # alt boot: always hidden for deployment
+code.py                  # the payload interpreter
+payload.dd               # the DuckyScript to execute
+lib/adafruit_hid/        # HID keyboard + keycode library
+\`\`\`
+
+CircuitPython runs \`boot.py\` once at power-on (before USB is fully exposed), then hands off to \`code.py\`.
+
+## Step 1 — hide the drive at boot
+
+The clever part is that whether the host sees a removable drive is decided in \`boot.py\`, because \`storage.disable_usb_drive()\` only works during boot. A jumper on GP0 selects the mode:
+
+\`\`\`python
+import board, digitalio, storage
+
+jmp = digitalio.DigitalInOut(board.GP0)
+jmp.switch_to_input(pull=digitalio.Pull.UP)
+hide = jmp.value is False        # False == GP0 tied to GND
+jmp.deinit()                     # release GP0 so code.py can reuse it
+
+if hide:
+    storage.disable_usb_drive()  # host sees NO removable drive -> no popup
+    print("Deploy mode: USB drive hidden")
+else:
+    print("Edit mode: USB drive enabled")
+\`\`\`
+
+- **No jumper** → GP0 floats high via the internal pull-up → drive is visible → I can edit \`payload.dd\`.
+- **GP0 → GND** → reads low → drive is hidden → on a target there's no "removable disk" popup to give it away.
+
+\`deinit()\` matters: it frees GP0 so the payload interpreter can read the same pin again as an arming switch.
+
+## Step 2 — parse the payload
+
+\`code.py\` reads \`payload.dd\` line by line, strips whitespace, skips blanks, and splits each line into a command plus its argument. The dialect is a trimmed-down **DuckyScript**:
+
+| Command | Effect |
+|---|---|
+| \`REM ...\` | comment, ignored |
+| \`DELAY ms\` | sleep for \`ms\` milliseconds |
+| \`DEFAULT_DELAY ms\` | delay inserted after *every* command |
+| \`STRING text\` | type literal text |
+| \`STRINGLN text\` | type text, then press Enter |
+| \`GUI r\` / \`CTRL ALT DELETE\` | chord — keys pressed simultaneously |
+| \`REPEAT n\` | re-run the previous line \`n\` times |
+
+Anything that isn't a keyword is treated as a chord and looked up token-by-token in a \`KEYS\` dictionary (~40 entries) that maps DuckyScript names to CircuitPython \`Keycode\` constants — \`GUI\`, \`CTRL\`, \`ALT\`, \`SHIFT\`, arrows, and \`F1\`–\`F12\`. Because modifiers and the final key are pressed together and then released, \`GUI r\` opens the Run dialog exactly like a human holding Win and tapping R.
+
+A minimal payload looks like this:
+
+\`\`\`
+REM Demo: open Notepad and type a message
+DELAY 1500
+GUI r
+DELAY 600
+STRING notepad
+ENTER
+DELAY 1200
+STRINGLN Hello from my Raspberry Pi Pico rubber ducky!
+STRING It works.
+\`\`\`
+
+Keeping the payload as **data** rather than firmware means changing behaviour is a text edit and a replug — no reflash.
+
+## Step 3 — arming and status feedback
+
+To avoid the device firing the instant it's powered for editing, \`code.py\` has a \`REQUIRE_JUMPER\` flag. When it's \`True\`, it re-reads GP0 (with pull-up): floating-high = **safe**, tied to GND = **armed**. The on-board LED reports state:
+
+- **Armed:** three quick blinks as the payload starts, then solid-on when it finishes.
+- **Safe:** a slow ~0.5 s heartbeat blink; the payload never runs.
+
+With the default (\`False\`) it simply runs once on power-up. It's a small state machine, but it's the difference between a tool and an accident.
+
+## What it actually taught me
+
+- **Physical access is its own threat model.** People harden the network and forget the two seconds a stranger has at an unlocked machine.
+- **Speed defeats supervision.** The payload types and hits Enter faster than you can read the first token — "I'll just watch it" isn't a control.
+- **Defenses are boring on purpose.** Lock the screen; don't plug in unknown devices; on managed fleets, USB device-control policy (Group Policy / USBGuard) and EDR that flags a storage device suddenly enumerating as a keyboard shut most of this down.
+
+## Responsible use
+
+This is built for **education and authorized testing only** — on hardware you own or have explicit permission to test. Understanding how HID injection works is the first step to defending against it; using it against someone else's machine is on you, not the tool.
+
+Full source, the complete \`KEYS\` map, and setup steps are on [GitHub](https://github.com/ZakhwanAnuar/Bad-USB).
+    `,
+  },
+
+  {
     id:      'csm-cyberjaya-visit',
     title:   'A Visit to CyberSecurity Malaysia — My Last Event Leading MBOT',
     date:    'July 2026',
