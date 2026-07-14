@@ -27,7 +27,7 @@ const PROJECTS_DATA = [
   {
     id:          'Bad-USB',
     title:       'Bad-USB — DIY Keystroke Injection Tool',
-    description: 'An educational keystroke-injection device built on a Raspberry Pi Pico running CircuitPython. It emulates a USB keyboard and runs DuckyScript-style payloads, with separate edit and silent deploy modes plus LED status feedback. Built to understand and demonstrate HID-based attacks for defensive security awareness.',
+    description: 'A Raspberry Pi Pico rubber ducky running CircuitPython. Enumerates as a USB HID keyboard and executes DuckyScript payloads, with a GP0 jumper toggling between edit and silent-deploy modes. Built to study HID injection for defensive awareness.',
     tech:        ['CircuitPython', 'Raspberry Pi Pico', 'USB HID', 'DuckyScript'],
     tags:        ['security', 'tool', 'system'],
     icon:        'fas fa-usb',
