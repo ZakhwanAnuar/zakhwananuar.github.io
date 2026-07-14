@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Title + social tags are refined at runtime by the inline script (see setSocialMeta). -->
   <title>Blog Post — Zakhwan Anuar</title>
+  <meta name="description" content="Notes and thoughts on cybersecurity, CTF, and building security tools — the blog of Zakhwan Anuar." />
+
+  <!-- Canonical (refined per-post by JS) -->
+  <link rel="canonical" href="https://zakhwananuar.my/blog-post.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <!-- Open Graph / Twitter (refined per-post by JS) -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Zakhwan Anuar" />
+  <meta property="og:title" content="Blog — Zakhwan Anuar" />
+  <meta property="og:description" content="Notes and thoughts on cybersecurity, CTF, and building security tools — the blog of Zakhwan Anuar." />
+  <meta property="og:url" content="https://zakhwananuar.my/blog-post.html" />
+  <meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog — Zakhwan Anuar" />
+  <meta name="twitter:description" content="Notes and thoughts on cybersecurity, CTF, and building security tools — the blog of Zakhwan Anuar." />
+  <meta name="twitter:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -217,8 +238,18 @@
           <p>That post doesn't exist (or not yet). <a href="blog.html">Go back to all posts.</a></p>
         </div>`;
     } else {
-      // Set page title
-      document.title = `${post.title} — Zakhwan Anuar`;
+      // Set page title + social/SEO meta (canonical, OG, Twitter) from the post
+      if (typeof setSocialMeta === 'function') {
+        setSocialMeta({
+          title:       `${post.title} — Zakhwan Anuar`,
+          description: post.summary || post.title,
+          url:         `blog-post.html?id=${post.id}`,
+          image:       post.ogImage,   // falls back to og-default.png
+          type:        'article',
+        });
+      } else {
+        document.title = `${post.title} — Zakhwan Anuar`;
+      }
 
       // Render header
       document.getElementById('blogPostHeader').innerHTML = `

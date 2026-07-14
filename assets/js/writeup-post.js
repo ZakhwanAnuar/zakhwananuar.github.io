@@ -24,8 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Set page title
-  document.title = `${writeup.title} — Writeup`;
+  // Set page title + social/SEO meta (canonical, OG, Twitter) from the writeup
+  if (typeof setSocialMeta === 'function') {
+    setSocialMeta({
+      title:       `${writeup.title} — ${writeup.ctf || 'CTF'} Writeup`,
+      description: writeup.summary || writeup.title,
+      url:         `writeup.html?id=${writeup.id}`,
+      image:       writeup.ogImage,   // falls back to og-default.png
+      type:        'article',
+    });
+  } else {
+    document.title = `${writeup.title} — Writeup`;
+  }
 
   // ---- Update back link to CTF event page ----
   const backLink = document.getElementById('backLink');

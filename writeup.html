@@ -3,8 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- This title is set dynamically by writeup-post.js based on the URL parameter -->
-  <title>Writeup — Wh1teB3ar</title>
+  <!-- Title + social tags are refined at runtime by writeup-post.js (see setSocialMeta).
+       These defaults are the fallback for crawlers and when no ?id= is given. -->
+  <title>Writeup — Zakhwan Anuar</title>
+  <meta name="description" content="CTF challenge writeups by Zakhwan Anuar — digital forensics, reverse engineering, web, crypto, and pwn." />
+
+  <!-- Canonical (refined per-writeup by JS) -->
+  <link rel="canonical" href="https://zakhwananuar.my/writeup.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <!-- Open Graph / Twitter (refined per-writeup by JS) -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Zakhwan Anuar" />
+  <meta property="og:title" content="Writeup — Zakhwan Anuar" />
+  <meta property="og:description" content="CTF challenge writeups by Zakhwan Anuar — digital forensics, reverse engineering, web, crypto, and pwn." />
+  <meta property="og:url" content="https://zakhwananuar.my/writeup.html" />
+  <meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Writeup — Zakhwan Anuar" />
+  <meta name="twitter:description" content="CTF challenge writeups by Zakhwan Anuar — digital forensics, reverse engineering, web, crypto, and pwn." />
+  <meta name="twitter:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />

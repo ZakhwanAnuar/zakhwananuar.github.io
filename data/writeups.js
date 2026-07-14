@@ -18,6 +18,9 @@
    - points:     Point value (optional, set to null to hide)
    - date:       Display date string, e.g. "January 2025"
    - summary:    1–2 sentence description shown on the listing page
+   - ogImage:    (optional) social-share image path for this writeup, e.g.
+                 'assets/images/CTF/my-writeup.png'. Omit or set to null to
+                 use the site default (assets/images/og-default.png).
    - content:    Full writeup in MARKDOWN format (see examples below)
 
 ================================================================ */
@@ -37,6 +40,7 @@ const WRITEUPS_DATA = [
     points:     null,
     date:       'April 2026',
     summary:    'A seven-part digital forensics investigation tracking the full compromise of a Windows workstation. The attacker leveraged ClickFix social engineering, mshta-based payload delivery, privilege escalation via fodhelper, pixel-encoded PowerShell stages, and a Discord-backed command-and-control implant.',
+    ogImage:    null,   // optional per-writeup share image; null → site default
 
     content: `
 ## Challenge Overview

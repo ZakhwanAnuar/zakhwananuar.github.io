@@ -47,7 +47,19 @@ function renderEventHeader(ctfName, challenges) {
     return acc;
   }, {});
 
-  document.title = `${ctfName} — Writeups`;
+  // Page title + social/SEO meta (canonical, OG, Twitter) for this event
+  const catList = categories.join(', ');
+  const eventDesc = `${challenges.length} CTF writeup${challenges.length === 1 ? '' : 's'} from ${ctfName} by Zakhwan Anuar${catList ? ` — ${catList}.` : '.'}`;
+  if (typeof setSocialMeta === 'function') {
+    setSocialMeta({
+      title:       `${ctfName} — Writeups`,
+      description: eventDesc,
+      url:         `ctf-event.html?ctf=${encodeURIComponent(ctfName)}`,
+      type:        'website',
+    });
+  } else {
+    document.title = `${ctfName} — Writeups`;
+  }
 
   header.innerHTML = `
     <div class="event-header-card">

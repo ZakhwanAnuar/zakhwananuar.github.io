@@ -27,7 +27,7 @@ const PROJECTS_DATA = [
   {
     id:          'DiscordC2Dump',
     title:       'DiscordC2Dump — Discord C2 Threat-Intel Dumper',
-    description: 'A Python threat-intelligence tool for malware analysis. Given a bot token and guild ID recovered from a sample abusing Discord as C2, it walks the Discord REST API to dump channels, messages, and attachments, then scans everything for IOCs.',
+    description: 'A Python threat-intelligence tool for authorized malware analysis. Given a bot token and guild ID recovered from a sample abusing Discord as C2, it walks the Discord REST API to dump channels, messages, and attachments, then scans everything for IOCs.',
     tech:        ['Python', 'Discord REST API', 'Threat Intel', 'DFIR'],
     tags:        ['security', 'tool'],
     icon:        'fas fa-satellite-dish',
@@ -48,20 +48,6 @@ const PROJECTS_DATA = [
     featured:    true,
   },
 
-  // ---- EXAMPLE PROJECT 1 ---- (EDIT THIS)
-  {
-    id:          'Student-Enrollment-Management-System',
-    title:       'Student Enrollment Management System',
-    description: 'A C++-based system for managing student records, course enrollments, and academic data. Implements object-oriented design with features for adding, updating, and retrieving student information efficiently.',
-    tech:        ['C++', 'OOP', 'File Handling'],
-    tags:        ['system', 'management', 'software'],
-    icon:        'fas fa-user-graduate',
-    github:      'https://github.com/ZakhwanAnuar/Student-Enrollment-Management-System',
-    demo:        null,
-    featured:    true,
-  },
-
-  // ---- EXAMPLE PROJECT 2 ---- (EDIT THIS)
   {
     id:          'PassHunter',
     title:       'PassHunter',
@@ -70,6 +56,18 @@ const PROJECTS_DATA = [
     tags:        ['security', 'tool', 'scripting'],
     icon:        'fas fa-key',
     github:      'https://github.com/ZakhwanAnuar/PassHunter',
+    demo:        null,
+    featured:    true,
+  },
+
+  {
+    id:          'Student-Enrollment-Management-System',
+    title:       'Student Enrollment Management System',
+    description: 'A C++-based system for managing student records, course enrollments, and academic data. Implements object-oriented design with features for adding, updating, and retrieving student information efficiently.',
+    tech:        ['C++', 'OOP', 'File Handling'],
+    tags:        ['system', 'management', 'software'],
+    icon:        'fas fa-user-graduate',
+    github:      'https://github.com/ZakhwanAnuar/Student-Enrollment-Management-System',
     demo:        null,
     featured:    true,
   },

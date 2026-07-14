@@ -15,6 +15,9 @@
    - date:     Display date string, e.g. "April 2026"
    - tags:     Array of tag strings, e.g. ["thoughts", "security", "life"]
    - summary:  1–2 sentence description shown on the listing page
+   - ogImage:  (optional) social-share image path for this post, e.g.
+               'assets/images/Blog/my-post.png'. Omit or set to null to use
+               the site default (assets/images/og-default.png).
    - content:  Full post in MARKDOWN format
 
 ================================================================ */
@@ -27,6 +30,7 @@ const BLOG_DATA = [
     date:    'July 2026',
     tags:    ['security', 'malware-analysis', 'project'],
     summary: 'Malware increasingly uses Discord as a command-and-control channel. When you pull a bot token and guild ID out of a sample in the lab, this Python tool walks the Discord REST API to dump everything the bot can see and scan it for IOCs.',
+    ogImage: null,   // optional per-post share image; null → site default
 
     content: `
 
@@ -78,6 +82,14 @@ Discord will throttle you. The shared \`request()\` method watches for **HTTP 42
 
 Attachments are where the interesting artifacts usually are — dropped payloads, exfiltrated files, screenshots. \`_download_attachment()\` does a direct GET, computes a **SHA256** of the bytes, and saves it as \`{hash-prefix}_{filename}\` under \`./dump/attachments/\`, recording the URL and hash.
 
+For flag/IOC hunting, it runs a regex across every message and field. The default pattern:
+
+\`\`\`
+[A-Za-z0-9_]{2,20}\\{[^{}]{3,200}\\}
+\`\`\`
+
+matches \`flag{...}\`-style tokens (override it with \`--pattern\`). Author IDs and attachment URLs are collected as IOCs too.
+
 ## What you get
 
 Everything lands under \`./dump/\` in formats you can grep and pivot on:
@@ -107,7 +119,7 @@ Code and full usage are on [GitHub](https://github.com/ZakhwanAnuar/DiscordC2Dum
 
   {
     id:      'building-bad-usb',
-    title:   'Building a Bad USB — HID Attacks',
+    title:   'Building a Bad USB — What a $5 Pico Taught Me About HID Attacks',
     date:    'July 2026',
     tags:    ['security', 'hardware', 'project'],
     summary: 'A Raspberry Pi Pico running CircuitPython that enumerates as a USB HID keyboard and runs a DuckyScript payload — a full breakdown of the boot-time USB toggle, the payload parser, the key map, and the GP0 arming logic.',

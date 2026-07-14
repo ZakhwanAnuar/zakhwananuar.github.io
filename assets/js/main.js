@@ -91,6 +91,59 @@ function animateCounters() {
   counters.forEach(c => observer.observe(c));
 }
 
+// ---- Dynamic social / SEO meta (used by the query-param detail pages) ----
+// Detail pages (writeup.html, blog-post.html, ctf-event.html) render from data
+// at runtime, so their <head> only carries default tags. Once the item is known
+// the render script calls setSocialMeta(...) to fill in the per-item title,
+// description, canonical URL, and Open Graph / Twitter image.
+const SITE_BASE = 'https://zakhwananuar.my';
+
+function absoluteUrl(path) {
+  if (!path) return '';
+  if (/^https?:\/\//i.test(path)) return path;
+  return SITE_BASE + '/' + String(path).replace(/^\.?\//, '');
+}
+
+function upsertMeta(attr, key, content) {
+  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function setSocialMeta({ title, description, url, image, type } = {}) {
+  if (title) {
+    document.title = title;
+    upsertMeta('property', 'og:title', title);
+    upsertMeta('name', 'twitter:title', title);
+  }
+  if (description) {
+    upsertMeta('name', 'description', description);
+    upsertMeta('property', 'og:description', description);
+    upsertMeta('name', 'twitter:description', description);
+  }
+  if (type) upsertMeta('property', 'og:type', type);
+  if (url) {
+    const abs = absoluteUrl(url);
+    upsertMeta('property', 'og:url', abs);
+    let link = document.head.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      document.head.appendChild(link);
+    }
+    link.setAttribute('href', abs);
+  }
+  // Fall back to the default share image when no per-item image is set.
+  const img = absoluteUrl(image || 'assets/images/og-default.png');
+  upsertMeta('property', 'og:image', img);
+  upsertMeta('name', 'twitter:image', img);
+}
+window.setSocialMeta = setSocialMeta;
+
 // ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();

@@ -33,8 +33,10 @@ function renderAchievements() {
     const cover = hasImg
       ? `<img src="${a.images[0]}" alt="${a.title}" class="ach-cover-img" loading="lazy" />`
       : `<div class="ach-cover-placeholder"><i class="fas fa-trophy"></i></div>`;
-    const countBadge = hasImg
-      ? `<span class="ach-count"><i class="fas fa-images"></i> ${a.images.length}</span>`
+    // Only show the gallery-size badge for multi-photo galleries, and label it
+    // clearly ("N photos") so a bare number is never mistaken for a rank/placement.
+    const countBadge = hasImg && a.images.length > 1
+      ? `<span class="ach-count"><i class="fas fa-images"></i> ${a.images.length} photos</span>`
       : '';
     const badge = a.placement
       ? `<span class="ach-badge ${placementClass(a.placement)}">${a.placement}</span>`
