@@ -22,8 +22,92 @@
 const BLOG_DATA = [
 
   {
+    id:      'discord-c2-dump',
+    title:   'DiscordC2Dump — Turning a Recovered Bot Token into Threat Intel',
+    date:    'July 2026',
+    tags:    ['security', 'malware-analysis', 'project'],
+    summary: 'Malware increasingly uses Discord as a command-and-control channel. When you pull a bot token and guild ID out of a sample in the lab, this Python tool walks the Discord REST API to dump everything the bot can see and scan it for IOCs.',
+
+    content: `
+
+A surprising amount of modern malware doesn't bother standing up its own infrastructure — it just uses **Discord as a command-and-control (C2) channel**. A bot token gets baked into the sample, and the malware talks to a private guild to receive commands and exfiltrate data. It's cheap, it blends into normal HTTPS traffic, and it's someone else's servers to take down.
+
+So when you're doing malware analysis and you recover a **bot token** and **guild ID** from a sample, that's an opportunity: with those credentials you can enumerate exactly what the operator's bot could see. That's what **DiscordC2Dump** does.
+
+> This is a lab tool. It touches **live Discord infrastructure with real credentials**, so it's for malware analysis in a sandbox and authorized research only — credentials you own, or a challenge you're allowed to solve.
+
+## The idea
+
+Given a token and a guild ID, walk the **Discord REST API (v10)** the same way the bot would, and pull down everything reachable: channels, message history, attachments, and metadata. Then scan all of it for indicators of compromise (IOCs) and flag-like strings, and save it to disk for offline analysis.
+
+It's ~one Python file, standard library plus \`requests\`.
+
+## Authentication
+
+Everything hangs off a \`DiscordClient\` that injects a bot auth header into every request:
+
+\`\`\`
+Authorization: Bot <token>
+\`\`\`
+
+- \`whoami()\` → \`GET /users/@me\` confirms the token is valid and logs the bot identity.
+- \`guild_info()\` → \`GET /guilds/{guild_id}?with_counts=true\` grabs the server name and member counts.
+
+If the token is dead or was already revoked, you find out immediately.
+
+## Enumerating channels
+
+\`list_channels()\` calls \`GET /guilds/{guild_id}/channels\` and filters to the types worth reading via \`READABLE_CHANNEL_TYPES\` — text (0), announcement (5), and forum (15). Voice and category entries get skipped since there's no message history to pull.
+
+## Paging message history
+
+The core is \`_fetch_all_messages()\`, which walks a channel backwards in time:
+
+- 100 messages per request against \`GET /channels/{channel_id}/messages\`
+- uses the \`before\` cursor to page into older history
+- in **incremental mode** it stops once it hits the \`last_message_id\` saved from a previous run
+- \`--full\` ignores that checkpoint and re-pulls everything
+
+That state lives in \`state.json\`, so re-running the tool only fetches what's new — handy when you're monitoring an active sample.
+
+## Respecting rate limits
+
+Discord will throttle you. The shared \`request()\` method watches for **HTTP 429**, reads \`retry_after\` from the response, sleeps, and retries (falling back to a 1-second delay). Without this the dump falls apart on any busy guild.
+
+## Attachments and IOCs
+
+Attachments are where the interesting artifacts usually are — dropped payloads, exfiltrated files, screenshots. \`_download_attachment()\` does a direct GET, computes a **SHA256** of the bytes, and saves it as \`{hash-prefix}_{filename}\` under \`./dump/attachments/\`, recording the URL and hash.
+
+## What you get
+
+Everything lands under \`./dump/\` in formats you can grep and pivot on:
+
+\`\`\`
+./dump/
+├── channels/{name}_{id}.json     # per-channel message arrays
+├── attachments/{hash}_{file}     # downloaded files
+├── digest.txt                    # greppable plaintext transcript
+├── iocs.json                     # author IDs, attachment hashes, matches
+└── state.json                    # last-seen message id per channel
+\`\`\`
+
+Channel dumps are fanned out across a \`ThreadPoolExecutor\` (\`--workers\`, default 4), so a large guild doesn't take all afternoon.
+
+## Why build it
+
+Doing this by hand — clicking through channels, saving attachments, grepping for indicators — is slow and easy to get wrong. Automating it means that the moment you extract a token from a sample, you can snapshot the operator's guild before they notice and rotate it. And writing the tool forced me to actually understand the Discord API surface that this malware family abuses, which is the whole point.
+
+## Responsible use
+
+Treat a recovered bot token like a password: use it only where you're authorized, and revoke it when you're done. This exists for **DFIR and authorized research** — the accountability for how it's used sits with the operator, not the script.
+
+Code and full usage are on [GitHub](https://github.com/ZakhwanAnuar/DiscordC2Dump).
+    `,
+  },
+
+  {
     id:      'building-bad-usb',
-    title:   'Building a Bad USB — What a $5 Pico Taught Me About HID Attacks',
+    title:   'Building a Bad USB — HID Attacks',
     date:    'July 2026',
     tags:    ['security', 'hardware', 'project'],
     summary: 'A Raspberry Pi Pico running CircuitPython that enumerates as a USB HID keyboard and runs a DuckyScript payload — a full breakdown of the boot-time USB toggle, the payload parser, the key map, and the GP0 arming logic.',

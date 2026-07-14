@@ -25,6 +25,18 @@
 const PROJECTS_DATA = [
 
   {
+    id:          'DiscordC2Dump',
+    title:       'DiscordC2Dump — Discord C2 Threat-Intel Dumper',
+    description: 'A Python threat-intelligence tool for malware analysis. Given a bot token and guild ID recovered from a sample abusing Discord as C2, it walks the Discord REST API to dump channels, messages, and attachments, then scans everything for IOCs.',
+    tech:        ['Python', 'Discord REST API', 'Threat Intel', 'DFIR'],
+    tags:        ['security', 'tool'],
+    icon:        'fas fa-satellite-dish',
+    github:      'https://github.com/ZakhwanAnuar/DiscordC2Dump',
+    demo:        null,
+    featured:    true,
+  },
+
+  {
     id:          'Bad-USB',
     title:       'Bad-USB — DIY Keystroke Injection Tool',
     description: 'A Raspberry Pi Pico rubber ducky running CircuitPython. Enumerates as a USB HID keyboard and executes DuckyScript payloads, with a GP0 jumper toggling between edit and silent-deploy modes. Built to study HID injection for defensive awareness.',
