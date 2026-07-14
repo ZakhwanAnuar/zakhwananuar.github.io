@@ -2,8 +2,6 @@
 
 My personal portfolio and blog, live at **[zakhwananuar.my](https://zakhwananuar.my)** 🌐
 
-> Cybersecurity student · CTF player · builder of things I can break and learn from.
-
 If you found this repository, come say hi on the site — it's where I keep my projects, CTF writeups, and the occasional blog post.
 
 [![Website preview](assets/images/blog.png)](https://zakhwananuar.my)
@@ -30,20 +28,6 @@ If you found this repository, come say hi on the site — it's where I keep my p
 - Plain **HTML, CSS, and JavaScript** — no framework, no build step
 - Content driven by simple data files in [`data/`](data/) (projects, blog posts, writeups)
 - Hosted on **GitHub Pages** with a custom domain
-
-## Running it locally
-
-It's a static site, so any web server works:
-
-```bash
-# clone
-git clone https://github.com/ZakhwanAnuar/zakhwananuar.github.io.git
-cd zakhwananuar.github.io
-
-# serve (pick one)
-python -m http.server 8000
-# then open http://localhost:8000
-```
 
 ## Connect
 
