@@ -656,26 +656,33 @@ code {
   color: var(--accent);
 }
 
-.project-links {
+/* Link row pinned to the bottom of each card */
+.project-footer {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
 }
 
 .project-link-btn {
   display: flex;
+  flex: 1;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.72rem;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
   border: 1px solid var(--border);
-  color: var(--text-3);
+  color: var(--text-2);
   background: none;
   transition: all var(--trans);
 }
 .project-link-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--accent-dim);
 }
 
 .project-title {

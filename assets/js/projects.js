@@ -21,16 +21,17 @@ function renderProjects(filter = 'all') {
     <div class="project-card fade-in-element">
       <div class="project-card-header">
         <div class="project-icon"><i class="${p.icon || 'fas fa-code'}"></i></div>
-        <div class="project-links">
-          ${p.github ? `<a href="${p.github}" target="_blank" class="project-link-btn"><i class="fab fa-github"></i> Code</a>` : ''}
-          ${p.demo   ? `<a href="${p.demo}"   target="_blank" class="project-link-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
-        </div>
       </div>
       <h3 class="project-title">${p.title}</h3>
       <p class="project-description">${p.description}</p>
       <div class="project-tech">
         ${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
       </div>
+      ${(p.github || p.demo) ? `
+      <div class="project-footer">
+        ${p.github ? `<a href="${p.github}" target="_blank" class="project-link-btn"><i class="fab fa-github"></i> Code</a>` : ''}
+        ${p.demo   ? `<a href="${p.demo}"   target="_blank" class="project-link-btn"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
+      </div>` : ''}
     </div>
   `).join('');
 
