@@ -35,7 +35,7 @@ function typeLabel(type) {
 }
 
 function typeTagClass(type) {
-  const map = { international: 'ctf-tag-intl', national: 'ctf-tag-year', local: 'ctf-tag-type', open: 'ctf-tag-type' };
+  const map = { international: 'ctf-tag-intl', national: 'ctf-tag-type', local: 'ctf-tag-type', open: 'ctf-tag-type' };
   return map[type] || 'ctf-tag-type';
 }
 

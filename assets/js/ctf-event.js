@@ -29,7 +29,7 @@ function typeLabel(type) {
 }
 
 function typeTagClass(type) {
-  const map = { international: 'event-tag-intl', national: 'event-tag-year', local: 'event-tag-type', open: 'event-tag-type' };
+  const map = { international: 'event-tag-intl', national: 'event-tag-type', local: 'event-tag-type', open: 'event-tag-type' };
   return map[type] || 'event-tag-type';
 }
 
@@ -69,19 +69,10 @@ function renderEventHeader(ctfName, challenges) {
           <div class="event-tags">
             <span class="event-tag event-tag-year">${year}</span>
             <span class="event-tag ${typeTagClass(type)}">${typeLabel(type)}</span>
-            ${categories.map(cat => {
-              const key = cat.toLowerCase();
-              const colors = {
-                web:       { bg: 'rgba(0,217,255,0.15)',   color: '#00d9ff' },
-                crypto:    { bg: 'rgba(124,58,237,0.15)',  color: '#a78bfa' },
-                pwn:       { bg: 'rgba(255,71,87,0.2)',    color: '#ff6b7a' },
-                rev:       { bg: 'rgba(255,107,53,0.15)',  color: '#ff9a72' },
-                forensics: { bg: 'rgba(0,255,136,0.12)',   color: '#00ff88' },
-                misc:      { bg: 'rgba(255,211,42,0.15)',  color: '#ffd32a' },
-              };
-              const c = colors[key] || { bg: 'rgba(100,100,100,0.2)', color: '#aaa' };
-              return `<span class="event-tag" style="background:${c.bg};color:${c.color};border-color:${c.color}33;">${cat}</span>`;
-            }).join('')}
+            ${categories.map(cat =>
+              // Category tags are neutral — the challenge difficulty carries the colour
+              `<span class="event-tag" style="background:var(--bg-4);color:var(--text-2);border-color:var(--border);">${cat}</span>`
+            ).join('')}
           </div>
         </div>
       </div>
@@ -147,7 +138,7 @@ function renderChallenges() {
     <a href="writeup.html?id=${wu.id}" class="writeup-card fade-in-element">
       <div class="writeup-card-badge">
         <span class="writeup-category cat-${wu.category.toLowerCase()}">${wu.category}</span>
-        <span class="writeup-difficulty">${wu.difficulty}</span>
+        <span class="writeup-difficulty diff-${wu.difficulty.toLowerCase()}">${wu.difficulty}</span>
         ${wu.points ? `<span class="writeup-difficulty" style="color:var(--accent);">${wu.points} pts</span>` : ''}
       </div>
       <div class="writeup-card-body">

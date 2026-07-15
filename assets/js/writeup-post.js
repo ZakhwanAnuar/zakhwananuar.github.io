@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   header.innerHTML = `
     <div class="post-category-row">
       <span class="writeup-category cat-${writeup.category.toLowerCase()}">${writeup.category}</span>
-      <span style="font-size:0.78rem;color:var(--text-3);font-family:var(--font-mono);">${writeup.difficulty}</span>
+      <span class="writeup-difficulty diff-${writeup.difficulty.toLowerCase()}" style="font-size:0.78rem;">${writeup.difficulty}</span>
     </div>
     <h1 class="post-title">${writeup.title}</h1>
     <div class="post-meta">

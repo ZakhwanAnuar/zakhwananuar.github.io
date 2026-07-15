@@ -120,9 +120,10 @@
       border-radius: 4px;
       border: 1px solid;
     }
-    .ctf-tag-year { color:#ffd32a; background:rgba(255,211,42,0.1); border-color:rgba(255,211,42,0.2); }
-    .ctf-tag-type { color:#a78bfa; background:rgba(124,58,237,0.12); border-color:rgba(124,58,237,0.2); }
-    .ctf-tag-intl { color:#00ff88; background:rgba(0,255,136,0.1); border-color:rgba(0,255,136,0.2); }
+    /* Year and scope (Open/Local/National/International) are all neutral labels */
+    .ctf-tag-year,
+    .ctf-tag-type,
+    .ctf-tag-intl { color:var(--text-2); background:var(--bg-4); border-color:var(--border); }
     .ctf-event-categories { display: flex; flex-wrap: wrap; gap: 6px; }
     .ctf-event-cat-pill {
       font-family: var(--font-mono);

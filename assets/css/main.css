@@ -802,25 +802,38 @@ code {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  text-align: center;
+  /* Plain neutral label — no box; the boxed colour belongs to the difficulty tag */
+  color: var(--text-3);
+}
+
+/* Category classes kept for markup compatibility, but intentionally neutral */
+.cat-web,
+.cat-crypto,
+.cat-pwn,
+.cat-rev,
+.cat-forensics,
+.cat-misc {
+  color: var(--text-3);
+}
+
+/* Difficulty (rating) is the boxed, colour-coded tag */
+.writeup-difficulty {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   padding: 4px 10px;
   border-radius: 4px;
-  min-width: 70px;
-  text-align: center;
+  border: 1px solid var(--border);
+  color: var(--text-2);
 }
 
-/* Category colors */
-.cat-web       { background: rgba(0, 217, 255, 0.15); color: #00d9ff; }
-.cat-crypto    { background: rgba(124, 58, 237, 0.15); color: #a78bfa; }
-.cat-pwn       { background: rgba(255, 71, 87, 0.2);   color: #ff6b7a; }
-.cat-rev       { background: rgba(255, 107, 53, 0.15); color: #ff9a72; }
-.cat-forensics { background: rgba(0, 255, 136, 0.12); color: #00ff88; }
-.cat-misc      { background: rgba(255, 211, 42, 0.15); color: #ffd32a; }
-
-.writeup-difficulty {
-  font-size: 0.65rem;
-  color: var(--text-3);
-  font-family: var(--font-mono);
-}
+/* Difficulty (rating) colours */
+.diff-easy   { color: #00ff88; background: rgba(0, 255, 136, 0.12); border-color: rgba(0, 255, 136, 0.30); }
+.diff-medium { color: #ffd32a; background: rgba(255, 211, 42, 0.15); border-color: rgba(255, 211, 42, 0.30); }
+.diff-hard   { color: #ff6b7a; background: rgba(255, 71, 87, 0.20);  border-color: rgba(255, 71, 87, 0.35); }
 
 /* Desktop: body is the right column containing title, date, description */
 .writeup-card-body {
