@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CISB3112 — Ethics &amp; IT Professional Practices · Final Exam Dossier</title>
+<meta name="description" content="Complete study guide and past-year analytics for CISB3112 Ethics and IT Professional Practices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#12181F; --ink-2:#1C2530; --ink-3:#2A3644;
+  --paper:#FBFAF7; --paper-2:#F2EFE9; --rule:#DAD4C8;
+  --text:#22292F; --muted:#6B7280;
+  --seal:#0E5C55;            /* primary accent: deep verdigris */
+  --seal-lt:#E3EFEC;
+  --crit:#A62B1F; --high:#B4741A; --med:#7A7523;
+  --gold:#C9A227;
+  --shadow:0 1px 2px rgba(18,24,31,.05),0 8px 24px rgba(18,24,31,.06);
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:1rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--serif);font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+
+/* ---------- LAYOUT ---------- */
+.wrap{display:grid;grid-template-columns:290px minmax(0,1fr);gap:0;max-width:1500px;margin:0 auto;min-height:100vh}
+
+/* ---------- SIDEBAR ---------- */
+aside{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--ink);border-right:1px solid rgba(255,255,255,.08);padding:22px 16px 40px;scrollbar-width:thin;scrollbar-color:#39434F var(--ink)}
+aside::-webkit-scrollbar{width:8px}
+aside::-webkit-scrollbar-thumb{background:#39434F;border-radius:8px}
+.brand{padding:0 8px 16px;border-bottom:1px solid rgba(255,255,255,.10);margin-bottom:14px}
+.brand .code{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+.brand h1{font-family:var(--sans);font-weight:800;font-size:19px;line-height:1.15;letter-spacing:-.015em;color:#F5F3EE;margin:7px 0 5px}
+.brand .sub{font-family:var(--mono);font-size:10.5px;color:#8A94A1;letter-spacing:.04em}
+
+.srch{position:relative;margin:0 4px 16px}
+.srch input{width:100%;background:var(--ink-2);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 11px 9px 31px;color:#EDEAE3;font-family:var(--sans);font-size:13px;outline:none}
+.srch input:focus{border-color:var(--seal);box-shadow:0 0 0 3px rgba(14,92,85,.28)}
+.srch input::placeholder{color:#707C8A}
+.srch svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;stroke:#707C8A;fill:none;stroke-width:2}
+
+nav a{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:6px;text-decoration:none;color:#B3BCC7;font-family:var(--sans);font-size:12.5px;line-height:1.3;transition:background .13s,color .13s}
+nav a:hover{background:rgba(255,255,255,.06);color:#fff}
+nav a.on{background:var(--seal);color:#fff}
+nav a.on .nav-idx{color:#9BD9CF}
+.nav-part{font-weight:700;margin-top:11px;letter-spacing:-.005em}
+.nav-chap{padding-left:9px}
+.nav-idx{font-family:var(--mono);font-size:9.5px;color:#6E7A88;letter-spacing:.05em;flex:none;min-width:34px}
+.nav-txt{flex:1}
+.pdot{width:6px;height:6px;border-radius:50%;background:#3A444F;flex:none}
+.pdot.crit{background:#E05A47}.pdot.high{background:#E0A03F}.pdot.med{background:#C8C24A}
+.legend{margin:18px 8px 0;padding-top:13px;border-top:1px solid rgba(255,255,255,.10);font-family:var(--mono);font-size:9.5px;color:#77828F;line-height:2}
+.legend i{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px}
+
+/* ---------- MAIN ---------- */
+main{background:var(--paper);padding:0 0 90px;min-width:0}
+.hero{background:var(--ink);color:#F3F1EC;padding:52px 54px 46px;border-bottom:3px solid var(--gold);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-70px;top:-70px;width:300px;height:300px;border:1px solid rgba(201,162,39,.16);border-radius:50%}
+.hero::before{content:"";position:absolute;right:-20px;top:-20px;width:200px;height:200px;border:1px solid rgba(201,162,39,.10);border-radius:50%}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+.hero h2{font-family:var(--sans);font-weight:800;font-size:clamp(28px,4.2vw,46px);line-height:1.03;letter-spacing:-.03em;margin:0 0 16px;max-width:19ch}
+.hero p{font-size:16px;color:#AEB7C2;max-width:60ch;margin:0}
+.hero .stats{display:flex;flex-wrap:wrap;gap:30px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.13);position:relative;z-index:2}
+.stat b{display:block;font-family:var(--sans);font-weight:800;font-size:25px;color:#fff;letter-spacing:-.02em}
+.stat span{font-family:var(--mono);font-size:10px;color:#8E98A4;letter-spacing:.1em;text-transform:uppercase}
+
+.doc{padding:0 54px;max-width:960px}
+
+/* ---------- TYPE ---------- */
+h1,h2,h3,h4{font-family:var(--sans);letter-spacing:-.02em;color:var(--ink);scroll-margin-top:14px}
+main>.doc h1{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--seal);margin:64px 0 4px;padding-top:30px;border-top:2px solid var(--ink)}
+main>.doc h1:first-child{margin-top:38px}
+h2{font-size:26px;font-weight:800;margin:44px 0 14px;line-height:1.15}
+h3{font-size:18px;font-weight:700;margin:32px 0 10px}
+h4{font-size:15px;font-weight:700;margin:22px 0 8px}
+p{margin:0 0 14px}
+main a{color:var(--seal);text-underline-offset:2px}
+strong{font-weight:700;color:var(--ink)}
+em{color:var(--ink-3)}
+hr{border:0;border-top:1px solid var(--rule);margin:40px 0}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin-bottom:6px}
+li::marker{color:var(--seal)}
+code{font-family:var(--mono);font-size:.85em;background:var(--paper-2);border:1px solid var(--rule);border-radius:4px;padding:1px 5px}
+pre{background:var(--ink);color:#D7DDE5;padding:20px 22px;border-radius:10px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.65;box-shadow:var(--shadow)}
+pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+
+/* blockquote = callout */
+blockquote{margin:20px 0;padding:16px 20px;background:var(--seal-lt);border-left:3px solid var(--seal);border-radius:0 8px 8px 0}
+blockquote p:last-child{margin-bottom:0}
+blockquote em{color:var(--ink-3)}
+
+/* ---------- TABLES ---------- */
+.tbl{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:10px;background:#fff;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-family:var(--sans)}
+th{background:var(--ink);color:#F0EEE9;font-weight:700;text-align:left;padding:11px 14px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--rule);vertical-align:top;line-height:1.5}
+tbody tr:nth-child(even){background:#FAF8F4}
+tbody tr:hover{background:var(--seal-lt)}
+td strong{color:var(--ink)}
+
+/* ---------- PRIORITY BADGES ---------- */
+.tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:100px;vertical-align:middle;margin-left:9px;font-weight:500}
+.tag.crit{background:#F6E3E0;color:var(--crit);border:1px solid #E8C4BE}
+.tag.high{background:#F8EDDA;color:var(--high);border:1px solid #EDD9B4}
+.tag.med{background:#F2F1DC;color:var(--med);border:1px solid #E1DFBB}
+.tag.yield{background:var(--seal-lt);color:var(--seal);border:1px solid #BFDDD7}
+
+/* checklist */
+.cbx{display:inline-block;width:14px;height:14px;border:1.5px solid var(--seal);border-radius:3px;vertical-align:-2px;margin-right:7px;cursor:pointer;transition:background .12s}
+.cbx.done{background:var(--seal);box-shadow:inset 0 0 0 2px #fff}
+
+/* ---------- MCQ SELF-TEST ---------- */
+.mcqbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);padding:12px 0;margin:10px 0 4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--sans);font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:7px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:.14s;letter-spacing:.01em}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.pri{background:var(--seal);border-color:var(--seal);color:#fff}
+.btn.pri:hover{background:#0A4741;border-color:#0A4741}
+.btn:focus-visible,nav a:focus-visible,.srch input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.hint{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.ans{background:var(--seal-lt);border-radius:5px;padding:1px 7px;font-weight:700;color:var(--seal);cursor:pointer;transition:.15s}
+.quiz .ans{color:transparent;background:#E4E0D8;border-radius:5px;user-select:none;box-shadow:inset 0 0 0 1px var(--rule)}
+.quiz .ans:hover{background:#D8D3C8}
+.quiz .ans.show{color:var(--seal);background:var(--seal-lt);box-shadow:none}
+
+/* search filter */
+.hide{display:none!important}
+mark{background:#FBEFC0;color:inherit;border-radius:3px;padding:0 2px}
+
+/* toTop */
+#top{position:fixed;right:24px;bottom:24px;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;border:0;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.22s;font-size:17px;z-index:40}
+#top.on{opacity:1;pointer-events:auto}
+#top:hover{background:var(--seal)}
+
+/* mobile */
+.menubtn{display:none}
+@media(max-width:960px){
+  .wrap{grid-template-columns:1fr}
+  aside{position:fixed;left:0;top:0;width:280px;z-index:60;transform:translateX(-100%);transition:transform .25s}
+  aside.open{transform:none}
+  .menubtn{display:flex;align-items:center;gap:7px;position:fixed;left:12px;top:12px;z-index:70;background:var(--ink);color:#fff;border:0;border-radius:8px;padding:10px 13px;font-family:var(--sans);font-weight:700;font-size:12.5px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+  .hero{padding:74px 24px 34px}
+  .doc{padding:0 24px}
+  main>.doc h1{margin-top:46px}
+  body{font-size:16px}
+  .scrim{position:fixed;inset:0;background:rgba(10,14,19,.5);z-index:55;opacity:0;pointer-events:none;transition:.25s}
+  .scrim.on{opacity:1;pointer-events:auto}
+}
+
+/* print */
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  aside,#top,.menubtn,.mcqbar,.srch,.scrim{display:none!important}
+  .wrap{display:block;max-width:none}
+  main{padding:0}
+  .hero{background:#fff;color:#000;border-bottom:2px solid #000;padding:0 0 16pt;margin-bottom:16pt}
+  .hero h2{color:#000}.hero p,.stat span{color:#333}.stat b{color:#000}
+  .hero::after,.hero::before{display:none}
+  .doc{padding:0;max-width:none}
+  main>.doc h1{border-top:1.5pt solid #000;color:#000;page-break-after:avoid}
+  h2,h3,h4{page-break-after:avoid;color:#000}
+  .tbl{box-shadow:none;page-break-inside:avoid}
+  th{background:#222!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  tr,blockquote,pre{page-break-inside:avoid}
+  pre{background:#f4f4f4;color:#000;border:1px solid #999}
+  .quiz .ans{color:var(--seal)!important;background:none!important;box-shadow:none!important}
+}
+</style>
+</head>
+<body>
+<button class="menubtn" aria-label="Open contents">☰ Contents</button>
+<div class="scrim"></div>
+<div class="wrap">
+  <aside>
+    <div class="brand">
+      <div class="code">CISB3112 · Final</div>
+      <h1>Ethics &amp; IT Professional Practices</h1>
+      <div class="sub">Exam dossier · 6 chapters · 10 past papers</div>
+    </div>
+    <div class="srch">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Filter notes…" aria-label="Filter notes">
+    </div>
+    <nav><a class="nav-part" href="#part-1-exam-analytics"><span class="nav-idx">P.01</span><span class="nav-txt">Exam Analytics</span></a>
+<a class="nav-part" href="#part-2-topic-frequency-map"><span class="nav-idx">P.02</span><span class="nav-txt">Topic Frequency Map</span></a>
+<a class="nav-part" href="#part-3-predicted-high-yield-questions"><span class="nav-idx">P.03</span><span class="nav-txt">Predicted High-Yield Questions</span></a>
+<a class="nav-part" href="#part-4-complete-chapter-notes"><span class="nav-idx">P.04</span><span class="nav-txt">Complete Chapter Notes</span></a>
+<a class="nav-chap" href="#chapter-1-ethics-and-the-underlying-philosophies-high-yield"><span class="pdot crit"></span><span class="nav-idx">CH.01</span><span class="nav-txt">Ethics And The Underlying Philosophies</span></a>
+<a class="nav-chap" href="#chapter-2-issues-pertaining-to-network-communication"><span class="pdot med"></span><span class="nav-idx">CH.02</span><span class="nav-txt">Issues Pertaining To Network Communication</span></a>
+<a class="nav-chap" href="#chapter-3-legal-issues-on-ip-and-privacy-high-yield"><span class="pdot crit"></span><span class="nav-idx">CH.03</span><span class="nav-txt">Legal Issues On Ip And Privacy</span></a>
+<a class="nav-chap" href="#chapter-4-issues-on-computer-and-network-security"><span class="pdot high"></span><span class="nav-idx">CH.04</span><span class="nav-txt">Issues On Computer And Network Security</span></a>
+<a class="nav-chap" href="#chapter-5-professional-ethics-high-yield"><span class="pdot crit"></span><span class="nav-idx">CH.05</span><span class="nav-txt">Professional Ethics</span></a>
+<a class="nav-chap" href="#chapter-6-ethical-impact-of-it-on-work-and-society"><span class="pdot high"></span><span class="nav-idx">CH.06</span><span class="nav-txt">Ethical Impact Of It On Work And Society</span></a>
+<a class="nav-part" href="#part-5-answer-frameworks-mcq-bank"><span class="nav-idx">P.05</span><span class="nav-txt">Answer Frameworks + Mcq Bank</span></a>
+<a class="nav-part" href="#part-6-special-assignment-1-case-study-mastery"><span class="nav-idx">P.06</span><span class="nav-txt">⭐ Special: Assignment 1 → Case Study Mastery</span></a></nav>
+    <div class="legend">
+      <div><i style="background:#E05A47"></i>Critical &mdash; heaviest marks</div>
+      <div><i style="background:#E0A03F"></i>High priority</div>
+      <div><i style="background:#C8C24A"></i>Medium priority</div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <div class="eyebrow">Final Examination · 2 h 30 min · 100 marks</div>
+      <h2>Everything that has actually been asked — and what&nbsp;comes next.</h2>
+      <p>Built from six chapter decks and every past paper from Semester&nbsp;1 2022/23 through Semester&nbsp;2 2025/26, cross-referenced into one revision dossier.</p>
+      <div class="stats">
+        <div class="stat"><b>10</b><span>Past papers analysed</span></div>
+        <div class="stat"><b>20+50+20</b><span>MCQ · Short · Case</span></div>
+        <div class="stat"><b>76</b><span>Practice MCQs</span></div>
+        <div class="stat"><b>7</b><span>Ethical theories</span></div>
+      </div>
+    </header>
+    <div class="doc">
+<h1 id="cisb3112-ethics-it-professional-practices">CISB3112 — Ethics &amp; IT Professional Practices</h1>
+<h2 id="complete-final-exam-study-guide-past-year-analytics">Complete Final-Exam Study Guide + Past-Year Analytics</h2>
+<p><em>Built from your 6 chapter slide decks and all 10 past-year final papers (Sem 1 2022/23 → Sem 2 2025/26).</em></p>
+<hr />
+<h2 id="how-to-use-this-guide">HOW TO USE THIS GUIDE</h2>
+<p>This guide has 5 parts:</p>
+<ol>
+<li><strong>Exam Analytics</strong> — the format, mark distribution, and how the paper is trending.</li>
+<li><strong>Topic Frequency Map</strong> — what actually gets asked, ranked by how often it appears.</li>
+<li><strong>Predicted High-Yield Questions</strong> — what you should prepare answers for.</li>
+<li><strong>Complete Chapter Notes (Ch 1–6)</strong> — every definition, theory, and example you need.</li>
+<li><strong>Answer Frameworks + MCQ Bank</strong> — model structures for essays and a compiled MCQ practice set with answers.</li>
+</ol>
+<p>Study order if time is short: Part 3 → Part 5 frameworks → the "⭐ HIGH YIELD" sections in Part 4.</p>
+<hr />
+<h1 id="part-1-exam-analytics">PART 1 — EXAM ANALYTICS</h1>
+<h2 id="1-1-the-current-exam-format-locked-in-since-jan-2025">1.1 The current exam format (locked-in since Jan 2025)</h2>
+<p>Every paper from <strong>Semester 1 2024/2025 onward</strong> uses the exact same structure. This is almost certainly your format:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Type</th>
+<th>Questions</th>
+<th>Marks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>Multiple Choice</td>
+<td>20 questions</td>
+<td>30</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>Short/Subjective Answer</td>
+<td>6–7 questions</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>Case Study (1 scenario)</td>
+<td>1 question, 3–4 parts</td>
+<td>20</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>TOTAL</strong></td>
+<td><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Duration:</strong> 2 hours 30 minutes</li>
+<li><strong>Answer ALL questions</strong> (no choice).</li>
+<li>Answer in <strong>English</strong>.</li>
+</ul>
+<h2 id="1-2-how-the-format-evolved-why-the-above-is-reliable">1.2 How the format evolved (why the above is reliable)</h2>
+<table>
+<thead>
+<tr>
+<th>Semester</th>
+<th>Date</th>
+<th>Section A</th>
+<th>Section B</th>
+<th>Section C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sem 1 2022/23</td>
+<td>Dec 2022</td>
+<td>— (none)</td>
+<td>12 short (60)</td>
+<td>Essay case (40)</td>
+</tr>
+<tr>
+<td>Sem 2 2022/23</td>
+<td>May 2023</td>
+<td>20 MCQ (30)</td>
+<td>6 short (35)</td>
+<td>2 case studies (35)</td>
+</tr>
+<tr>
+<td>Sem 1 2023/24</td>
+<td>Jan 2024</td>
+<td>15 MCQ (30)</td>
+<td>6 short (50)</td>
+<td>Essay (20)</td>
+</tr>
+<tr>
+<td>Sem 2 2023/24</td>
+<td>Jun 2024</td>
+<td>— (none)</td>
+<td>12 short (60)</td>
+<td>Essay (40)</td>
+</tr>
+<tr>
+<td>Special 2023/24</td>
+<td>Sep 2024</td>
+<td>20 MCQ (30)</td>
+<td>5 short (30)</td>
+<td>2 case studies (40)</td>
+</tr>
+<tr>
+<td><strong>Sem 1 2024/25</strong></td>
+<td>Jan 2025</td>
+<td>20 MCQ (20)</td>
+<td>9 short (60)</td>
+<td>1 case (20)</td>
+</tr>
+<tr>
+<td><strong>Sem 2 2024/25</strong></td>
+<td>May 2025</td>
+<td>20 MCQ (30)</td>
+<td>6 short (50)</td>
+<td>1 case (20)</td>
+</tr>
+<tr>
+<td><strong>Special 2024/25</strong></td>
+<td>Aug 2025</td>
+<td>20 MCQ (30)</td>
+<td>6 short (50)</td>
+<td>1 case (20)</td>
+</tr>
+<tr>
+<td><strong>Sem 1 2025/26</strong></td>
+<td>Dec 2025</td>
+<td>20 MCQ (30)</td>
+<td>7 short (50)</td>
+<td>1 case (20)</td>
+</tr>
+<tr>
+<td><strong>Sem 2 2025/26</strong></td>
+<td>May 2026</td>
+<td>20 MCQ (30)</td>
+<td>6 short (50)</td>
+<td>1 case (20)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Takeaway:</strong> The older papers (2022–2024) sometimes dropped MCQs or used 2 case studies. But the <strong>last 5 papers are identical</strong>: 20 MCQ (30) + 6–7 short (50) + 1 case study (20). Prepare for that.</p>
+<h2 id="1-3-mark-weight-by-chapter-approximate-across-recent-papers">1.3 Mark-weight by chapter (approximate, across recent papers)</h2>
+<table>
+<thead>
+<tr>
+<th>Chapter</th>
+<th>Topic</th>
+<th>Share of marks</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ch 1</td>
+<td>Ethics theories (Kant, Util, relativism, egoism, social contract)</td>
+<td>~25–30%</td>
+<td>🔴 Critical</td>
+</tr>
+<tr>
+<td>Ch 5</td>
+<td>Professional ethics (ACM code, whistleblowing)</td>
+<td>~15–20%</td>
+<td>🔴 Critical</td>
+</tr>
+<tr>
+<td>Ch 3</td>
+<td>IP &amp; Privacy (copyright, patent, PDPA, Creative Commons)</td>
+<td>~20%</td>
+<td>🔴 Critical</td>
+</tr>
+<tr>
+<td>Ch 6</td>
+<td>IT impact (telework, automation, digital divide)</td>
+<td>~10–15%</td>
+<td>🟠 High</td>
+</tr>
+<tr>
+<td>Ch 4</td>
+<td>Security (malware, hackers, DoS)</td>
+<td>~10%</td>
+<td>🟠 High</td>
+</tr>
+<tr>
+<td>Ch 2</td>
+<td>Network communication (spam, censorship, cyberbullying)</td>
+<td>~8–10%</td>
+<td>🟡 Medium</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The case study (Section C, 20 marks) almost always combines Ch 1 + Ch 5 + Ch 3.</strong> Master those three and you own a fifth of the paper in one question.</p>
+<hr />
+<h1 id="part-2-topic-frequency-map">PART 2 — TOPIC FREQUENCY MAP</h1>
+<p>Ranked by how many of the 10 past papers each topic appeared in (as MCQ, short answer, or case study). ⭐ = very high yield.</p>
+<h2 id="2-1-section-c-case-study-the-pattern-is-extremely-predictable">2.1 Section C (Case Study) — the pattern is extremely predictable</h2>
+<p>The recent case studies (2025–2026) all follow the <strong>same template</strong>:</p>
+<blockquote>
+<p>A company deploys an AI / data-collecting system (recommendation algorithm, AI recruitment, health-tracking app). Something goes wrong (bias, harm to users, data breach, no consent, stolen code). You are asked to:
+- (a) Evaluate using <strong>Utilitarianism</strong>
+- (b) Evaluate using <strong>Kantian ethics</strong> (both formulations)
+- (c) Identify <strong>2 ACM Code of Ethics principles</strong> violated
+- (d) Give <strong>your opinion / recommendation</strong> (professional responsibility + fairness)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Case study scenario</th>
+<th>Theories tested</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sem 2 2025/26</td>
+<td>AI video recommendation algorithm harming teens</td>
+<td>Utilitarianism, Kant, ACM, social impact</td>
+</tr>
+<tr>
+<td>Sem 1 2025/26</td>
+<td>AI recruitment system with gender/minority bias</td>
+<td>Utilitarianism, Kant, ACM, opinion</td>
+</tr>
+<tr>
+<td>Special 2024/25</td>
+<td>HealthSecure app — data breach + stolen GitHub code</td>
+<td>Kant, PDPA rights, Creative Commons, prevention</td>
+</tr>
+<tr>
+<td>Sem 2 2024/25</td>
+<td>Health app transferring data to marketers w/o consent</td>
+<td>Kant 1st + 2nd formulation, ACM, opinion</td>
+</tr>
+<tr>
+<td>Sem 2 2022/23</td>
+<td>Bono steals client bandwidth / Stuxnet worm</td>
+<td>Kant, Rule Utilitarianism, ACM, Social Contract</td>
+</tr>
+</tbody>
+</table>
+<p><strong>➡ If you prepare ONE thing for Section C, prepare: how to apply Utilitarianism + Kant (both formulations) + name/explain 2 ACM principles, to an AI-or-data scenario.</strong></p>
+<h2 id="2-2-section-b-short-answer-recurring-question-families">2.2 Section B (Short answer) — recurring question families</h2>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Topic / question type</th>
+<th>Papers it appeared in</th>
+<th>Yield</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Whistleblowing</strong> (define + when ethical/unethical + DeGeorge factors)</td>
+<td>8 / 10</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Kantianism</strong> (esp. 2nd rule/formulation + example)</td>
+<td>8 / 10</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Utilitarianism vs Kantianism</strong> / Act vs Rule</td>
+<td>7 / 10</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Telework/telecommuting</strong> (define + risks/pros/cons + employer/employee ethics)</td>
+<td>7 / 10</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Copyright vs Patent</strong> (compare + IT examples)</td>
+<td>6 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Software piracy</strong> (define + types: softlifting, hard-disk loading + harm)</td>
+<td>6 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>White/Grey/Black hat hackers</strong> (differentiate + examples + motives)</td>
+<td>6 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>PDPA 2010</strong> (what it does + user rights)</td>
+<td>5 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Cultural / Subjective relativism</strong> (explain + why non-workable)</td>
+<td>5 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>ACM Code — "respect privacy of others"</strong> / general moral principles</td>
+<td>5 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Morality vs Ethics vs Society vs Etiquette</strong> (differentiate + example)</td>
+<td>5 / 10</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Social Contract Theory</strong> (positive/negative/limited/absolute rights)</td>
+<td>4 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Digital divide</strong> (global divide + example + how to close gap)</td>
+<td>4 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Employee/workplace monitoring</strong> (ethical? + advantages/disadvantages)</td>
+<td>4 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Creative Commons Attribution (CC BY)</strong> (responsibilities of users)</td>
+<td>3 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>CAN-SPAM Act / spam handling</strong></td>
+<td>3 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>Internet censorship</strong> (types of direct censorship / why challenging)</td>
+<td>3 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>Automation &amp; job displacement</strong> (ethical actions to protect workers)</td>
+<td>3 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>Public record vs public information</strong> / personal vs public info</td>
+<td>3 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>Fair use</strong> (4 factors)</td>
+<td>2 / 10</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>Solove's Taxonomy of Privacy</strong></td>
+<td>2 / 10</td>
+<td>⭐</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-3-section-a-mcq-the-concepts-that-repeat-most">2.3 Section A (MCQ) — the concepts that repeat most</h2>
+<p>These exact concepts appear as MCQs again and again. Know the one-line definition of each:</p>
+<ul>
+<li><strong>Morals / morality / ethics / society</strong> definitions</li>
+<li><strong>Subjective vs cultural relativism</strong></li>
+<li><strong>Kant's categorical imperative / first formulation</strong></li>
+<li><strong>Utilitarianism = greatest happiness for greatest number</strong> (Bentham &amp; Mill)</li>
+<li><strong>Ethical egoism = act in own self-interest</strong></li>
+<li><strong>Social contract theory</strong></li>
+<li><strong>CIPA</strong> (libraries/schools must filter obscene content for federal funds)</li>
+<li><strong>CAN-SPAM Act</strong> categories of email (transactional, commercial, unsolicited-commercial)</li>
+<li><strong>Direct censorship</strong> types (govt monopolization, pre-publication review, licensing) — <strong>self-censorship is NOT direct</strong></li>
+<li><strong>Identity theft</strong> definition</li>
+<li><strong>Cyberbullying</strong> definition (harm via internet/phone)</li>
+<li><strong>Sexting</strong> definition</li>
+<li><strong>Copyright</strong> = original creative works, no registration needed, protects expression not ideas</li>
+<li><strong>Patent</strong> = inventions</li>
+<li><strong>Trademark / service mark</strong> (Adidas 3-stripes = trademark; Telekom Malaysia = service mark)</li>
+<li><strong>Trade secret</strong> = secret formula/method (e.g., recipe)</li>
+<li><strong>Intellectual property = product of human intellect with commercial value</strong></li>
+<li><strong>Creative Commons Attribution (CC BY)</strong> = reuse/modify/distribute if credit given</li>
+<li><strong>Proprietary vs open-source software</strong></li>
+<li><strong>PDPA 2010</strong> = regulates processing of personal data in commercial transactions</li>
+<li><strong>Digital Signature Act 1997</strong> = legal recognition of digital signatures</li>
+<li><strong>E-Commerce Act 2006</strong> = electronic contracts</li>
+<li><strong>Malware types</strong>: virus (attaches, needs opening), worm (self-spreads, no user action), Trojan (disguised), spyware (secretly collects), ransomware (encrypts + demands payment), <strong>bot</strong> (responds to command-and-control)</li>
+<li><strong>White/grey/black hat hackers</strong></li>
+<li><strong>DoS attack</strong> = overwhelm/flood a system to shut it down (not to steal)</li>
+<li><strong>ACM Code of Ethics</strong> principles (respect privacy, be honest, honor property rights)</li>
+<li><strong>Whistleblower Protection Act 2010</strong> = protects identity + against retaliation</li>
+<li><strong>Digital divide</strong> = gap between those with/without ICT access</li>
+<li><strong>Automation → job displacement</strong></li>
+<li><strong>Globalization</strong> = integration of people/companies/govts via trade + IT</li>
+<li><strong>Fair information practices</strong></li>
+<li><strong>Solove's Taxonomy</strong> categories (collection, processing, dissemination, invasion — NOT "filtering")</li>
+</ul>
+<hr />
+<h1 id="part-3-predicted-high-yield-questions">PART 3 — PREDICTED HIGH-YIELD QUESTIONS</h1>
+<p>Based on the frequency map, here is what to prepare. Prepare a solid answer to each and you will cover the vast majority of achievable marks.</p>
+<h2 id="section-c-prepare-this-one-master-answer">🎯 Section C — prepare this ONE master answer</h2>
+<p><strong>Predicted scenario:</strong> A company deploys an AI system or data-collecting app; it causes harm / bias / a data breach / uses code without a licence.</p>
+<p>Be ready to write, for any such scenario:
+1. <strong>Utilitarianism analysis</strong> — list benefits vs harms; conclude whether total happiness is maximized. (Usually the harms to many users outweigh the profit → <em>not</em> justified.)
+2. <strong>Kantian analysis</strong> — First Formulation (can the maxim be universalized? deception/harm can't) + Second Formulation (are users treated merely as <em>means</em> to profit, not as <em>ends</em>? Yes → wrong).
+3. <strong>Two ACM Code principles</strong> — e.g., "Avoid harm," "Respect privacy," "Be honest and trustworthy," "Be fair and take action not to discriminate."
+4. <strong>Your recommendation</strong> — audit the system, get informed consent, fix bias, encrypt data, be transparent, take responsibility.</p>
+<h2 id="section-b-prepare-these-12-answers">🎯 Section B — prepare these 12 answers</h2>
+<ol>
+<li><strong>Whistleblowing:</strong> definition + one ethical &amp; one unethical situation (with examples) + DeGeorge's factors.</li>
+<li><strong>Kant's Second Formulation</strong> + IT example (e.g., secretly selling user data treats users as mere means).</li>
+<li><strong>Utilitarianism vs Kantianism:</strong> consequences vs duty; act vs rule utilitarianism; one example each.</li>
+<li><strong>Telework:</strong> definition + 2 benefits + 2 challenges + employer ethical duties + employee ethical duties.</li>
+<li><strong>Copyright vs Patent:</strong> 2 differences + IT example each (copyright → software code; patent → new algorithm/hardware).</li>
+<li><strong>Software piracy:</strong> definition + 2 types (softlifting, hard-disk loading) + 2 harms.</li>
+<li><strong>White vs Grey vs Black hat hackers:</strong> who they are + objective + example; hacker motives and how they differ ethically.</li>
+<li><strong>PDPA 2010:</strong> what it regulates + explain 2 user rights (right to access, right to correct, right to withdraw consent, right to prevent processing).</li>
+<li><strong>Subjective vs Cultural relativism:</strong> define both + why each is non-workable.</li>
+<li><strong>Morality vs Ethics</strong> (and vs etiquette/society): definitions + IT example each.</li>
+<li><strong>ACM "respect privacy of others":</strong> explain the principle + behaviors that comply.</li>
+<li><strong>Digital divide / Automation:</strong> define + example + how to close the gap / ethical actions to protect displaced workers.</li>
+</ol>
+<h2 id="section-a-memorize-the-definition-table-in-part-5-4">🎯 Section A — memorize the definition table in Part 5.4</h2>
+<hr />
+<h1 id="part-4-complete-chapter-notes">PART 4 — COMPLETE CHAPTER NOTES</h1>
+<hr />
+<h2 id="chapter-1-ethics-and-the-underlying-philosophies-high-yield">CHAPTER 1 — ETHICS AND THE UNDERLYING PHILOSOPHIES 🔴⭐ HIGH YIELD</h2>
+<h3 id="1-1-core-definitions-know-these-cold-frequent-mcqs-short-answers">1.1 Core definitions (know these cold — frequent MCQs + short answers)</h3>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Society</strong></td>
+<td>An association of people organized under a system of rules, designed to advance the good of its members over time.</td>
+</tr>
+<tr>
+<td><strong>Morality</strong></td>
+<td>A society's rules of conduct — principles describing what people <em>ought / ought not</em> to do in various situations (right/wrong, good/bad, fair/unfair).</td>
+</tr>
+<tr>
+<td><strong>Ethics</strong></td>
+<td>The <strong>rational examination</strong> of morality; a branch of philosophy that evaluates whether people's behavior is morally right or wrong, using reason and logic (not gut feeling).</td>
+</tr>
+<tr>
+<td><strong>Etiquette</strong></td>
+<td>Conventional social rules of polite behavior (manners) — <em>not</em> about right vs wrong morally. E.g., saying "please," CC-ing your boss on emails.</td>
+</tr>
+<tr>
+<td><strong>Moral values</strong></td>
+<td>Fundamental beliefs about right and wrong (honesty, justice, respect, integrity, compassion).</td>
+</tr>
+<tr>
+<td><strong>Norms/practices</strong></td>
+<td>Informal rules/expected behaviors (punctuality, greetings, queuing).</td>
+</tr>
+<tr>
+<td><strong>Ethical point of view</strong></td>
+<td>Recognizing that other people and their core values are also worthy of respect.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key distinctions to memorize:</strong>
+- <em>Society</em> = the group of people + rules. <em>Morality</em> = the rules of conduct. <em>Ethics</em> = the study/examination of that morality.
+- <strong>Moral but not ethical:</strong> a person can act on good intent yet break formal ethical rules (e.g., a doctor treating a non-paying patient in an emergency — morally good, may violate policy).
+- <strong>Illegal vs unethical</strong> (common MCQ/short question):
+  - <em>Illegal but not unethical:</em> downloading pirated software to study because you genuinely can't afford it; jaywalking to help someone.
+  - <em>Unethical but not illegal:</em> lying to a friend; a company using misleading (but technically legal) ads; cheating on a partner.</p>
+<h3 id="1-2-the-6-ethical-theories">1.2 The 6 ethical theories</h3>
+<p>Slides group them as <strong>workable</strong> vs <strong>non-workable</strong> — examiners love asking "explain why X is a non-workable theory."</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Theory</th>
+<th>Core idea</th>
+<th>Workable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1a</td>
+<td><strong>Subjective Relativism</strong></td>
+<td>Each <em>individual</em> decides what's right/wrong for themselves</td>
+<td>❌ Non-workable</td>
+</tr>
+<tr>
+<td>1b</td>
+<td><strong>Cultural Relativism</strong></td>
+<td>Right/wrong is defined by a <em>society's/culture's</em> customs</td>
+<td>❌ Non-workable</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Ethical Egoism</strong></td>
+<td>An action is right if it serves the <em>individual actor's</em> self-interest</td>
+<td>❌ Non-workable</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Divine Command Theory</strong></td>
+<td>Right/wrong is whatever <em>God/religion</em> commands</td>
+<td>❌ Non-workable</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Kantianism</strong></td>
+<td>An action is right if done from <em>duty</em> and its rule can be <em>universalized</em>; people must be treated as <em>ends</em></td>
+<td>✅ Workable</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Utilitarianism</strong></td>
+<td>An action is right if it produces the <em>greatest happiness for the greatest number</em></td>
+<td>✅ Workable</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Social Contract Theory</strong></td>
+<td>Morality = the set of rules rational people agree to live by for mutual benefit</td>
+<td>✅ Workable</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-relativism">1️⃣ Relativism</h4>
+<p><strong>Subjective Relativism</strong> — "what is morally right is determined by the individual." No one can tell anyone else they're wrong.
+- <em>Why non-workable:</em> leads to contradictions (two people can both be "right" while contradicting each other); allows any behavior to be justified; can't resolve disputes; confuses tolerance with morality (tolerance ≠ allowing harm).</p>
+<p><strong>Cultural Relativism</strong> — "what is morally right is determined by a society's/culture's customs." Morality varies by culture; outsiders can't judge.
+- <em>Why non-workable:</em> no universal moral standard → we couldn't condemn clearly evil practices (slavery, genocide) in other cultures; doesn't explain how guidelines evolve; the fact that cultures <em>disagree</em> doesn't prove there's no right answer; societies are not morally infallible.</p>
+<h4 id="2-ethical-egoism">2️⃣ Ethical Egoism</h4>
+<p>Each person should act in their <strong>own long-term self-interest</strong>.
+- <em>Argument for:</em> the community can benefit when individuals pursue their own well-being; people know their own interests best.
+- <em>Why non-workable:</em> can justify harming others for personal gain (e.g., spreading rumors about a rival to get promoted); it's not a genuine moral theory because it ignores others' interests; leads to conflict; incoherent when made universal.</p>
+<h4 id="3-divine-command-theory">3️⃣ Divine Command Theory</h4>
+<p>An action is right if and only if <strong>God commands it</strong>; wrong if God forbids it.
+- <em>Why non-workable / criticism:</em> different religions command different things (no universal agreement); relies on the existence of God, so it can't persuade non-believers; the <strong>arbitrariness problem</strong> — is something good <em>because</em> God commands it, or does God command it because it's good? If the former, morality is arbitrary.</p>
+<h4 id="4-kantianism-appears-in-almost-every-case-study">4️⃣ Kantianism 🔴⭐ (appears in almost every case study)</h4>
+<ul>
+<li>Focuses on the <strong>action / duty</strong>, NOT the consequences.</li>
+<li>You must do what is right <em>because it is your duty</em> (good will).</li>
+<li>Kant says the only thing good without qualification is a <strong>good will</strong>.</li>
+<li>Moral rules are derived through <strong>reason</strong>, expressed as the <strong>Categorical Imperative (CI)</strong> — an <em>unconditional</em> rule that always applies.</li>
+</ul>
+<p><strong>First Formulation — Universalizability:</strong></p>
+<blockquote>
+<p>"Act only on that maxim (rule) which you would want to become a <em>universal law</em>."
+- Test: imagine everyone did it. If that leads to contradiction or a world you couldn't rationally want, the action is wrong.
+- <em>Example:</em> Lying to get a loan — if <em>everyone</em> lied, promises would be meaningless, so the maxim self-destructs → lying is wrong.</p>
+</blockquote>
+<p><strong>Second Formulation — Humanity as an End (Respect Persons):</strong></p>
+<blockquote>
+<p>"Act so that you treat humanity, whether in yourself or others, always as an <strong>end</strong> and never <em>merely as a means</em>."
+- Test: are you using people merely as tools, without respecting their rational autonomy/consent?
+- <em>IT example:</em> Secretly collecting and selling users' data to advertisers treats users <strong>merely as a means</strong> to profit → violates the 2nd formulation → unethical.</p>
+</blockquote>
+<p><em>Why workable:</em> it explains <em>why</em> an action is right/wrong, applies to everyone equally, and rests on reason.</p>
+<h4 id="5-utilitarianism-principle-of-utility">5️⃣ Utilitarianism 🔴⭐ (Principle of Utility)</h4>
+<ul>
+<li>Developed by <strong>Jeremy Bentham</strong> and <strong>John Stuart Mill</strong>.</li>
+<li>A <strong>consequentialist</strong> theory: judge an action by its <strong>outcomes</strong>.</li>
+<li><strong>Principle of Utility:</strong> an action is right to the extent it increases total happiness / benefit and reduces suffering — the <strong>greatest good for the greatest number</strong>.</li>
+</ul>
+<p><strong>Act Utilitarianism</strong> — apply the Principle of Utility to each <strong>individual action</strong>. Weigh benefits vs harms of <em>that specific act</em>.
+- <em>Method:</em> list all who are affected, total the happiness (benefits) minus harms; if net positive → morally right.
+- <em>Weaknesses:</em> time-consuming; can justify troubling acts (e.g., sacrificing one to save many); ignores our natural sense of duty/justice.</p>
+<p><strong>Rule Utilitarianism</strong> — apply the Principle of Utility to <strong>moral rules</strong>. Follow the rule that, if generally adopted, produces the most overall happiness.
+- <em>Example:</em> "Don't pirate software" — as a general rule this maximizes benefit even if one specific act of piracy seems harmless.</p>
+<p><em>Utilitarianism vs Kantianism (classic compare question):</em>
+| | Utilitarianism | Kantianism |
+|---|---|---|
+| Judges by | Consequences/outcomes | The action itself / duty |
+| Key question | Does it maximize happiness? | Can the rule be universalized? Are persons respected? |
+| Type | Consequentialist | Deontological (duty-based) |
+| Weakness | Can justify sacrificing a minority | Rigid; ignores outcomes |</p>
+<h4 id="6-social-contract-theory">6️⃣ Social Contract Theory</h4>
+<p>Morality consists of the <strong>rules rational people agree to follow</strong> for mutual benefit, provided others follow them too. Associated with Hobbes, Locke, Rawls.
+- <strong>Rights</strong> under social contract:
+  - <strong>Positive right</strong> — an obligation on others to <em>provide</em> you something (e.g., right to education, healthcare).
+  - <strong>Negative right</strong> — an obligation on others to <em>leave you alone / not interfere</em> (e.g., right to free speech, privacy).
+  - <strong>Absolute right</strong> — guaranteed <em>without exception</em>.
+  - <strong>Limited right</strong> — can be restricted in some situations (e.g., free speech limited by defamation laws).</p>
+<hr />
+<h2 id="chapter-2-issues-pertaining-to-network-communication">CHAPTER 2 — ISSUES PERTAINING TO NETWORK COMMUNICATION 🟡</h2>
+<p>Covers: Email &amp; Spam, Censorship, Identity theft, Cyberbullying, Sexting.</p>
+<h3 id="2-1-spam">2.1 Spam</h3>
+<ul>
+<li><strong>Spam</strong> = the mass distribution of <strong>unsolicited</strong> messages (email is ~49% of spam; also phone calls, SMS).</li>
+<li><strong>Key attributes:</strong> bulk/mass distribution, unsolicited, often commercial, hidden or false sender information.</li>
+<li><strong>How spammers get addresses:</strong> opt-in lists, data breaches (stolen emails), harvesting from websites.</li>
+<li><strong>Methods to bypass filters:</strong> hijacking other computers (botnets) to send spam; <strong>embedding text inside images</strong> so text filters can't read it; manipulating formatting/symbols.</li>
+<li><strong>Why fighting spam is hard:</strong> spammers constantly change tactics; forge sender info; cross international borders (hard to enforce laws); cheap to send millions.</li>
+</ul>
+<p><strong>CAN-SPAM Act of 2003 (US):</strong> divides business emails into 3 categories:
+1. <strong>Transactional emails</strong> (e.g., receipts, order confirmations) — legal.
+2. <strong>Commercial emails</strong> (marketing) — legal <em>if</em> rules followed (honest subject lines, valid sender, opt-out link).
+3. <strong>Unsolicited commercial email</strong> — the illegal/spam category.
+- Requires: no false/misleading headers or subject lines, clear opt-out mechanism, identify the message as an ad.
+- <em>Applied example:</em> "You've Won a Prize!" misleading subject → violates CAN-SPAM (deceptive subject line, no consent).</p>
+<p><strong>Malaysia + spam:</strong> handled mainly under the <strong>Communications and Multimedia Act (CMA) 1998</strong>; senders can be punished for sending unsolicited commercial messages / providing false sender info / no opt-out.</p>
+<h3 id="2-2-internet-censorship">2.2 Internet Censorship</h3>
+<ul>
+<li><strong>Censorship</strong> = controlling or suppressing what can be accessed/published.</li>
+<li><strong>Direct censorship</strong> types:</li>
+<li><strong>Government monopolization</strong> (state controls all media)</li>
+<li><strong>Pre-publication review</strong> (content checked before release)</li>
+<li><strong>Licensing and registration</strong> (must be approved/registered to publish)</li>
+<li><strong>Self-censorship</strong> = when people restrict <em>themselves</em> — this is <strong>NOT</strong> a form of <em>direct</em> censorship (frequent MCQ trap).</li>
+<li><strong>Why censorship is challenging/controversial:</strong>
+  1. It can <strong>suppress free speech / legitimate opinions</strong> authorities dislike.
+  2. It's <strong>applied unevenly</strong> across groups; hard to define "harmful"; global internet makes enforcement difficult; may reduce access to opposing viewpoints.</li>
+</ul>
+<p><strong>CIPA (Children's Internet Protection Act, US):</strong> schools and libraries receiving <strong>federal networking funds must filter</strong> pages containing obscenity / child pornography / harmful content.</p>
+<h3 id="2-3-identity-theft">2.3 Identity Theft</h3>
+<ul>
+<li><strong>Identity theft</strong> = illegally accessing and using another person's <strong>personal information</strong> (to impersonate them, commit fraud).</li>
+<li><em>Example:</em> a hacker using stolen credit-card details to shop online; using a colleague's electronic identity to break into a company system.</li>
+</ul>
+<h3 id="2-4-cyberbullying">2.4 Cyberbullying</h3>
+<ul>
+<li><strong>Cyberbullying</strong> = inflicting psychological harm on another person using the internet, phone system, social media, or broadcast media (i.e., "all of the above").</li>
+<li>Distinguishing feature: <strong>repeated, intentional harm</strong> through digital platforms (vs. a one-off disagreement or a strong review — those aren't cyberbullying).</li>
+<li><em>Example:</em> repeatedly mocking + spreading rumors about a classmate in group chats.</li>
+</ul>
+<h3 id="2-5-sexting">2.5 Sexting</h3>
+<ul>
+<li><strong>Sexting</strong> = sending sexually suggestive text messages or emails with nude / nearly-nude photographs. Raises legal issues especially with minors.</li>
+</ul>
+<hr />
+<h2 id="chapter-3-legal-issues-on-ip-and-privacy-high-yield">CHAPTER 3 — LEGAL ISSUES ON IP AND PRIVACY 🔴⭐ HIGH YIELD</h2>
+<h3 id="3-1-intellectual-property-ip">3.1 Intellectual Property (IP)</h3>
+<p><strong>Intellectual property</strong> = a unique product of the human intellect that has <strong>commercial value</strong> (e.g., software, music, inventions, brand names).
+- 4 forms of protection: <strong>Copyright, Patent, Trademark, Trade Secret</strong>.
+- <em>Not IP:</em> a traditional dance passed down for generations (no identifiable owner / not a novel creation).</p>
+<h3 id="3-2-the-four-ip-protections">3.2 The four IP protections</h3>
+<table>
+<thead>
+<tr>
+<th>Protection</th>
+<th>Protects</th>
+<th>Registration?</th>
+<th>Duration</th>
+<th>IT example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Copyright</strong></td>
+<td>Original <strong>creative works</strong> (expression, not ideas/facts) — books, music, films, <strong>software code</strong>, art</td>
+<td><strong>Automatic</strong>, no registration needed</td>
+<td>Author's life + years (varies by country)</td>
+<td>Source code of an app, a game's artwork</td>
+</tr>
+<tr>
+<td><strong>Patent</strong></td>
+<td><strong>Inventions</strong> — machines, processes, new &amp; useful ideas</td>
+<td>Must apply (MyIPO in Malaysia)</td>
+<td>~20 years, then public domain</td>
+<td>A new compression algorithm, novel hardware</td>
+</tr>
+<tr>
+<td><strong>Trademark</strong></td>
+<td>Any sign representing a brand — <strong>word, logo, image</strong> (® registered, ™ unregistered)</td>
+<td>Register to get ®</td>
+<td>Indefinite <em>if</em> used &amp; renewed</td>
+<td>A company logo, app name/icon</td>
+</tr>
+<tr>
+<td><strong>Trade Secret</strong></td>
+<td><strong>Confidential</strong> business info/method kept secret</td>
+<td>Not registered (kept secret)</td>
+<td>As long as it stays secret</td>
+<td>A secret ranking algorithm, a recipe formula</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key laws (Malaysia):</strong> Copyright Act <strong>1987</strong>; Patents Act <strong>1983</strong>; managed by <strong>MyIPO</strong>.</p>
+<p><strong>Copyright key facts (frequent MCQ):</strong>
+- Protects <strong>original creative works automatically</strong> — <strong>no registration required</strong>.
+- Protects the <strong>expression</strong>, NOT ideas, facts, or mathematical formulas.
+- Copyright holder's rights: to reproduce, distribute, perform/display in public, make derivative works. (A holder does <strong>NOT</strong> have a blanket right to "prevent all competitive works.")
+- <strong>FYP ownership:</strong> usually the <strong>student/creator</strong> owns it, but if created as an employee "in the course of employment," the <strong>employer</strong> typically owns it — so a university/company policy may claim ownership. Discuss both sides.</p>
+<p><strong>Trademark going generic:</strong> a trademark can be <em>lost</em> if the brand name becomes a common generic word (e.g., "escalator," "aspirin").</p>
+<p><strong>Service mark:</strong> like a trademark but for <strong>services</strong> (e.g., Telekom Malaysia). Product brands (Nike, Adidas 3-stripes) = trademarks.</p>
+<h3 id="3-3-fair-use">3.3 Fair Use</h3>
+<p>Using copyrighted material without permission can be legal if it qualifies as <strong>fair use</strong>. <strong>Four factors:</strong>
+1. <strong>Purpose/character</strong> of use (educational, non-profit, transformative = more likely fair; commercial = less).
+2. <strong>Nature</strong> of the copyrighted work (factual vs highly creative).
+3. <strong>Amount/substantiality</strong> used (a small portion vs the whole).
+4. <strong>Effect on the market/value</strong> of the original (does it harm the owner's sales?).</p>
+<h3 id="3-4-public-domain-creative-commons">3.4 Public Domain &amp; Creative Commons</h3>
+<ul>
+<li><strong>Public domain</strong> = works free for anyone to use (copyright expired, or owner released it) — no restrictions.</li>
+<li><strong>Creative Commons (CC)</strong> licenses let creators grant permissions in advance:</li>
+<li><strong>CC BY (Attribution):</strong> may use, distribute, and modify (even commercially) <strong>as long as credit is given</strong> to the creator.</li>
+<li>Other variants add: NC (non-commercial), ND (no derivatives), SA (share-alike).</li>
+<li><strong>User responsibilities under CC BY:</strong> give proper <strong>attribution/credit</strong> to the original creator, indicate any changes made, don't claim it as your own, follow the specific licence terms.</li>
+<li><em>Example (exam):</em> "Alex used a CC BY image but didn't credit the creator and claimed it as his own." → <strong>Not appropriate</strong> — he violated the attribution requirement; must credit the creator.</li>
+</ul>
+<h3 id="3-5-proprietary-vs-open-source-software">3.5 Proprietary vs Open-Source Software</h3>
+<ul>
+<li><strong>Proprietary software:</strong> source code is <strong>closed/restricted</strong>; you buy a licence to use, not modify (e.g., Microsoft Windows).</li>
+<li><strong>Open-source software:</strong> source code is <strong>openly available</strong> to view, modify, and redistribute (e.g., Linux).</li>
+<li><strong>Freeware:</strong> free to use but <em>not</em> necessarily open source.</li>
+</ul>
+<h3 id="3-6-software-piracy">3.6 Software Piracy 🔴⭐</h3>
+<ul>
+<li><strong>Software piracy</strong> = the <strong>unauthorized copying, distribution, or use</strong> of software (violating the licence).</li>
+<li><strong>Types of piracy:</strong></li>
+<li><strong>Softlifting</strong> — buying one licensed copy and installing it on many machines / sharing with friends.</li>
+<li><strong>Hard-disk loading</strong> — a seller installs unauthorized copies on computers being sold.</li>
+<li><strong>Counterfeiting</strong> — illegally duplicating and selling copyrighted software as if genuine.</li>
+<li><strong>Online piracy / internet piracy</strong> — downloading/distributing software over the internet illegally.</li>
+<li><strong>Renting</strong> — renting out software illegally.</li>
+<li><strong>Why unethical + harms:</strong></li>
+<li>Steals revenue → hurts developers' profits, discourages innovation, can cost jobs.</li>
+<li>Users get no support/updates and risk malware from pirated copies.</li>
+<li>It's a form of theft — violates the creator's property rights (ties to ACM "honor property rights").</li>
+</ul>
+<h3 id="3-7-privacy">3.7 Privacy</h3>
+<ul>
+<li><strong>Personal information</strong> = data about an identifiable individual (name, IC number, health records, location). <strong>Public information</strong> = data openly available/meant for the public (published phone directory, company address).</li>
+<li><strong>Public record</strong> vs <strong>public information:</strong> a <em>public record</em> is info the government is required to maintain and make available (birth/marriage/court records); <em>public information</em> is any info freely available/not secret. Overlap but not identical.</li>
+</ul>
+<p><strong>Solove's Taxonomy of Privacy</strong> — 4 groups of harmful activities:
+1. <strong>Information Collection</strong> (surveillance, interrogation)
+2. <strong>Information Processing</strong> (aggregation, identification, insecurity, secondary use, exclusion)
+3. <strong>Information Dissemination</strong> (disclosure, exposure, breach of confidentiality, blackmail, <strong>publishing someone's private emails without consent</strong>)
+4. <strong>Invasion</strong> (intrusion, decisional interference)
+- ⚠ MCQ trap: <strong>"Information filtering" is NOT a Solove category.</strong>
+- <em>Usefulness for social media:</em> it gives a structured vocabulary to identify exactly which privacy harm a platform commits (e.g., selling profile data = secondary use/processing; leaking DMs = dissemination), helping design targeted protections.</p>
+<h3 id="3-8-malaysian-data-digital-laws-mcq-favorites">3.8 Malaysian Data &amp; Digital Laws (MCQ favorites)</h3>
+<table>
+<thead>
+<tr>
+<th>Law</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Personal Data Protection Act (PDPA) 2010</strong></td>
+<td>Regulates the <strong>processing of personal data in commercial transactions</strong>; requires consent.</td>
+</tr>
+<tr>
+<td><strong>Digital Signature Act 1997</strong></td>
+<td>Legal recognition of <strong>digital signatures</strong>.</td>
+</tr>
+<tr>
+<td><strong>Electronic Commerce Act 2006</strong></td>
+<td>Legal recognition of <strong>electronic contracts/messages</strong>.</td>
+</tr>
+<tr>
+<td><strong>Communications and Multimedia Act (CMA) 1998</strong></td>
+<td>Regulates communications &amp; multimedia (incl. spam, content).</td>
+</tr>
+<tr>
+<td><strong>Copyright Act 1987 / Patents Act 1983</strong></td>
+<td>IP protection.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PDPA 2010 — user/data-subject rights (know at least 2–3):</strong>
+1. <strong>Right of access</strong> — to request a copy of the personal data an organization holds about you.
+2. <strong>Right to correct</strong> — to correct inaccurate/incomplete data.
+3. <strong>Right to withdraw consent</strong> to the processing of your data.
+4. <strong>Right to prevent processing</strong> likely to cause damage or distress.
+5. <strong>Right to prevent processing for direct marketing.</strong>
+- <em>Violation examples:</em> selling customer data to third parties <strong>without consent</strong>; storing unencrypted data leading to a breach; using data for a purpose users never agreed to.</p>
+<h3 id="3-9-deep-dive-copyright-vs-patent-vs-trademark-vs-trade-secret">3.9 ⭐ DEEP DIVE — Copyright vs Patent vs Trademark vs Trade Secret</h3>
+<p>The single most-tested comparison. Learn this grid by row <em>and</em> column.</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Copyright</th>
+<th>Patent</th>
+<th>Trademark</th>
+<th>Trade Secret</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Protects</strong></td>
+<td>Original creative <strong>expression</strong></td>
+<td><strong>Inventions</strong> (process, machine, method)</td>
+<td>Brand <strong>identifiers</strong> (name, logo, sign)</td>
+<td>Confidential <strong>business information</strong></td>
+</tr>
+<tr>
+<td><strong>Must register?</strong></td>
+<td>❌ No — automatic on creation</td>
+<td>✅ Yes — apply to MyIPO</td>
+<td>✅ Yes, to get ®</td>
+<td>❌ No — you just keep it secret</td>
+</tr>
+<tr>
+<td><strong>Duration</strong></td>
+<td>Life of author + 50 yrs (Malaysia)</td>
+<td>~20 years, then public domain</td>
+<td>Indefinite while used + renewed</td>
+<td>Indefinite while it stays secret</td>
+</tr>
+<tr>
+<td><strong>Public disclosure?</strong></td>
+<td>Work is published</td>
+<td>✅ Patent is a <strong>public document</strong> explaining the invention</td>
+<td>Public</td>
+<td>❌ Secrecy is the whole protection</td>
+</tr>
+<tr>
+<td><strong>Malaysian law</strong></td>
+<td>Copyright Act 1987</td>
+<td>Patents Act 1983</td>
+<td>Trade Marks Act</td>
+<td>Contract/confidence law</td>
+</tr>
+<tr>
+<td><strong>IT example</strong></td>
+<td>App source code, UI artwork, documentation</td>
+<td>A novel data-compression algorithm, new chip design</td>
+<td>The app's name and logo</td>
+<td>Google's search ranking algorithm</td>
+</tr>
+<tr>
+<td><strong>Lost when…</strong></td>
+<td>Term expires</td>
+<td>Term expires (20 yrs)</td>
+<td>Becomes generic (e.g. "escalator") or unused</td>
+<td>Someone leaks it / reverse-engineers it</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exam trap:</strong> a patent <em>requires public disclosure</em>; a trade secret <em>requires secrecy</em>. They are opposite strategies for the same invention. If asked "why choose a trade secret over a patent?" → because a patent expires in 20 years and reveals how it works, whereas a secret can last forever (Coca-Cola formula).</p>
+<h3 id="3-10-deep-dive-fair-use-worked">3.10 ⭐ DEEP DIVE — Fair Use, worked</h3>
+<p>Fair use lets you use copyrighted material <strong>without permission</strong> in limited circumstances. Four factors, all weighed together:</p>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Favors fair use</th>
+<th>Weighs against</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Purpose &amp; character</strong></td>
+<td>Education, research, criticism, parody, transformative</td>
+<td>Commercial, profit-making</td>
+</tr>
+<tr>
+<td><strong>2. Nature of the work</strong></td>
+<td>Factual, published</td>
+<td>Highly creative, unpublished</td>
+</tr>
+<tr>
+<td><strong>3. Amount used</strong></td>
+<td>Small portion, not the "heart" of the work</td>
+<td>The whole work, or its core</td>
+</tr>
+<tr>
+<td><strong>4. Effect on market</strong></td>
+<td>No harm to sales of the original</td>
+<td>Substitutes for buying the original</td>
+</tr>
+</tbody>
+</table>
+<p><em>Applied (past-paper question):</em> A lecturer photocopies a journal article for class. → (1) <strong>educational, non-profit</strong> ✔ (2) <strong>factual/scholarly</strong> work ✔ (3) <strong>one article</strong>, not the whole journal ✔ (4) students wouldn't have bought the journal anyway, minimal market harm ✔ → <strong>fair use</strong>.</p>
+<h3 id="3-11-deep-dive-creative-commons-licence-family">3.11 ⭐ DEEP DIVE — Creative Commons licence family</h3>
+<p>All CC licences require <strong>attribution</strong>. The suffixes stack.</p>
+<table>
+<thead>
+<tr>
+<th>Licence</th>
+<th>Can you modify?</th>
+<th>Commercial use?</th>
+<th>Extra condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CC BY</strong> (Attribution)</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>Just credit the creator</td>
+</tr>
+<tr>
+<td><strong>CC BY-SA</strong> (ShareAlike)</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>Derivative must carry the <em>same</em> licence</td>
+</tr>
+<tr>
+<td><strong>CC BY-NC</strong> (NonCommercial)</td>
+<td>✅ Yes</td>
+<td>❌ No</td>
+<td>Non-commercial only</td>
+</tr>
+<tr>
+<td><strong>CC BY-ND</strong> (NoDerivatives)</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+<td>Share unchanged only</td>
+</tr>
+<tr>
+<td><strong>CC0 / Public Domain</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>No conditions at all</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Your responsibilities under CC BY:</strong> (1) credit the original creator by name, (2) link to the licence, (3) indicate if you changed the work, (4) don't imply the creator endorses you, (5) never claim it as your own.</p>
+<p><em>Applied:</em> Alex used a CC BY image, removed credit, claimed it as his own → <strong>breach of licence terms</strong>. Because the licence was conditional, stripping attribution means he loses the permission entirely, making it <strong>copyright infringement</strong>, not merely rudeness.</p>
+<h3 id="3-12-deep-dive-software-piracy-types-with-examples">3.12 ⭐ DEEP DIVE — Software Piracy types (with examples)</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What happens</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Softlifting</strong></td>
+<td>One legal licence installed on many machines</td>
+<td>Buying 1 copy of Photoshop, installing it on 10 office PCs</td>
+</tr>
+<tr>
+<td><strong>Hard-disk loading</strong></td>
+<td>A seller pre-installs unlicensed software on machines being sold</td>
+<td>A computer shop ships laptops with cracked Windows</td>
+</tr>
+<tr>
+<td><strong>Counterfeiting</strong></td>
+<td>Illegally duplicating and selling copies as genuine</td>
+<td>Fake boxed software sold in a market</td>
+</tr>
+<tr>
+<td><strong>Internet/online piracy</strong></td>
+<td>Uploading/downloading via torrents, warez sites</td>
+<td>Downloading cracked software from a torrent site</td>
+</tr>
+<tr>
+<td><strong>Renting</strong></td>
+<td>Renting out software in breach of licence</td>
+<td>A cybercafé renting licensed software per hour</td>
+</tr>
+<tr>
+<td><strong>Client-server overuse</strong></td>
+<td>More concurrent users than the licence permits</td>
+<td>A 10-seat licence used by 50 employees</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Harms — split them into two audiences (this earns the second mark):</strong>
+- <em>To the industry:</em> lost revenue → less R&amp;D investment → fewer jobs → slower innovation; smaller developers can be killed outright.
+- <em>To users:</em> no updates or technical support, no warranty, high <strong>malware risk</strong> from cracked installers, legal liability for the user's own organization.</p>
+<h3 id="3-13-deep-dive-pdpa-2010-the-7-principles">3.13 ⭐ DEEP DIVE — PDPA 2010, the 7 principles</h3>
+<p>Malaysia's PDPA regulates the <strong>processing of personal data in commercial transactions</strong>. Its 7 principles are a rich source of case-study marks:</p>
+<ol>
+<li><strong>General Principle</strong> — must obtain <strong>consent</strong>; process only for a lawful purpose directly related to the activity.</li>
+<li><strong>Notice and Choice Principle</strong> — must <strong>inform</strong> the data subject what data is collected, why, and who it may be disclosed to.</li>
+<li><strong>Disclosure Principle</strong> — must <strong>not disclose</strong> data to third parties without consent, or for a purpose other than the one notified.</li>
+<li><strong>Security Principle</strong> — must take <strong>practical steps to protect</strong> data from loss, misuse, unauthorized access (encryption, access control).</li>
+<li><strong>Retention Principle</strong> — must <strong>not keep</strong> data longer than necessary; destroy it after.</li>
+<li><strong>Data Integrity Principle</strong> — must keep data <strong>accurate, complete, and up to date</strong>.</li>
+<li><strong>Access Principle</strong> — the data subject must be able to <strong>access and correct</strong> their own data.</li>
+</ol>
+<p><strong>Data-subject rights (name 2 for exam answers):</strong> right of access · right to correct · right to withdraw consent · right to prevent processing likely to cause damage/distress · right to prevent processing for direct marketing.</p>
+<p><em>Applied to the HealthSecure past-paper case:</em> sharing data with advertisers without consent breaches the <strong>Disclosure Principle</strong> and the <strong>General Principle (consent)</strong>; storing unencrypted data with no access control breaches the <strong>Security Principle</strong>.</p>
+<hr />
+<h2 id="chapter-4-issues-on-computer-and-network-security">CHAPTER 4 — ISSUES ON COMPUTER AND NETWORK SECURITY 🟠</h2>
+<h3 id="4-1-malware-know-each-type-very-common-mcqs">4.1 Malware (know each type — very common MCQs)</h3>
+<p><strong>Malware</strong> = malicious software designed to harm or exploit systems.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>How it behaves</th>
+<th>Key distinguishing trait</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virus</strong></td>
+<td>Attaches to files/programs; spreads <strong>when the infected file is opened/run</strong></td>
+<td>Needs <strong>user action</strong> to spread</td>
+</tr>
+<tr>
+<td><strong>Worm</strong></td>
+<td>Spreads <strong>on its own</strong> through security holes in networked computers</td>
+<td><strong>Self-replicating, no user action</strong></td>
+</tr>
+<tr>
+<td><strong>Trojan Horse</strong></td>
+<td>Looks like a harmless/useful program but secretly installs malware</td>
+<td><strong>Disguised / deceptive</strong></td>
+</tr>
+<tr>
+<td><strong>Spyware</strong></td>
+<td>Secretly collects information (keystrokes, browsing, activity)</td>
+<td><strong>Secret data collection</strong></td>
+</tr>
+<tr>
+<td><strong>Adware</strong></td>
+<td>Displays unwanted ads; sometimes bundled with spyware</td>
+<td>Unwanted advertising</td>
+</tr>
+<tr>
+<td><strong>Ransomware</strong></td>
+<td><strong>Encrypts/locks your files and demands payment</strong> to unlock</td>
+<td>Encryption + ransom</td>
+</tr>
+<tr>
+<td><strong>Bot</strong></td>
+<td>A program that responds to commands from an external <strong>command-and-control</strong> server (many bots = <strong>botnet</strong>)</td>
+<td>Remote-controlled</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Ransomware-as-a-Service (RaaS):</strong> criminals sell ready-made ransomware kits on the dark web, making attacks easier and more common.</li>
+</ul>
+<h3 id="4-2-hackers-white-grey-black-hat">4.2 Hackers (white / grey / black hat) 🔴⭐</h3>
+<table>
+<thead>
+<tr>
+<th>Hacker</th>
+<th>Who they are</th>
+<th>Permission?</th>
+<th>Intent</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>White hat</strong></td>
+<td>Ethical security professionals</td>
+<td>✅ <strong>With permission</strong></td>
+<td>Improve/protect security</td>
+<td>Penetration testing a company's system under a signed contract</td>
+</tr>
+<tr>
+<td><strong>Grey hat</strong></td>
+<td>In-between</td>
+<td>❌ <strong>Without permission</strong></td>
+<td><strong>No malicious intent</strong>, but breaks rules — may expose vulnerabilities and then report them</td>
+<td>Hacking a site illegally, then telling the owner about the flaw</td>
+</tr>
+<tr>
+<td><strong>Black hat</strong></td>
+<td>Criminal attackers</td>
+<td>❌ No permission</td>
+<td><strong>Malicious</strong> — theft, damage, profit</td>
+<td>Identity thieves, ransomware attackers</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Hacker motives (differ ethically):</strong> to <em>improve security</em> (white hat — ethical), <em>curiosity / expose flaws without permission</em> (grey hat — ethically questionable because it's still unauthorized access), <em>personal/financial gain or to cause harm</em> (black hat — clearly unethical &amp; illegal). The ethical difference hinges on <strong>authorization/permission</strong> and <strong>intent/harm</strong>.</li>
+</ul>
+<h3 id="4-3-denial-of-service-dos-attacks">4.3 Denial-of-Service (DoS) attacks</h3>
+<ul>
+<li><strong>DoS attack</strong> = a cyberattack that floods/overwhelms a system, server, or network with traffic so it can't serve legitimate users — the goal is to <strong>disrupt availability, not steal data</strong>.</li>
+<li><strong>DDoS (Distributed DoS):</strong> launched from many machines at once (a <strong>botnet</strong>). <em>Example: 2016 Dyn DDoS via the Mirai botnet.</em></li>
+</ul>
+<h3 id="4-4-security-concepts">4.4 Security concepts</h3>
+<ul>
+<li><strong>Authentication</strong> = verifying <em>who</em> a user is.</li>
+<li><strong>Authorization</strong> = determining whether a user has <strong>permission</strong> to perform a particular action.</li>
+<li>Defense: firewalls, encryption, access control, antivirus, patching, backups, staff awareness training.</li>
+</ul>
+<h3 id="4-5-deep-dive-malware-full-comparison">4.5 ⭐ DEEP DIVE — Malware, full comparison</h3>
+<p>Examiners test malware three ways: (1) MCQ identification, (2) "differentiate X and Y", (3) the case-study question <em>"analyze the impact of a malware attack and recommend prevention strategies."</em></p>
+<table>
+<thead>
+<tr>
+<th>Malware</th>
+<th>How it spreads</th>
+<th>Needs user action?</th>
+<th>Self-replicates?</th>
+<th>Payload / goal</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virus</strong></td>
+<td>Attaches to a file or program; travels when that file is shared</td>
+<td>✅ <strong>Yes</strong> — user must open/run it</td>
+<td>✅ Yes (within host files)</td>
+<td>Corrupt/delete data, damage software</td>
+<td>Infected email attachment</td>
+</tr>
+<tr>
+<td><strong>Worm</strong></td>
+<td>Travels <strong>by itself</strong> through network security holes</td>
+<td>❌ <strong>No</strong></td>
+<td>✅ Yes (independently)</td>
+<td>Consume bandwidth, spread payload fast</td>
+<td>Morris/Internet Worm; Stuxnet</td>
+</tr>
+<tr>
+<td><strong>Trojan Horse</strong></td>
+<td>Disguised as a useful program (game, utility, "free" app)</td>
+<td>✅ Yes — user installs it willingly</td>
+<td>❌ No</td>
+<td>Opens a backdoor, installs other malware</td>
+<td>Fake antivirus download</td>
+</tr>
+<tr>
+<td><strong>Spyware</strong></td>
+<td>Bundled with downloads, drive-by installs</td>
+<td>Usually yes (unknowingly)</td>
+<td>❌ No</td>
+<td>Secretly records keystrokes, browsing, credentials</td>
+<td>Keylogger</td>
+</tr>
+<tr>
+<td><strong>Adware</strong></td>
+<td>Bundled with free software</td>
+<td>Yes</td>
+<td>❌ No</td>
+<td>Forced advertising; often bundled with spyware</td>
+<td>Browser pop-up injector</td>
+</tr>
+<tr>
+<td><strong>Ransomware</strong></td>
+<td>Phishing email, exploit kit, RDP breach</td>
+<td>Usually yes</td>
+<td>❌ No</td>
+<td><strong>Encrypts files, demands payment</strong> for the key</td>
+<td>WannaCry-style attack</td>
+</tr>
+<tr>
+<td><strong>Bot / Botnet</strong></td>
+<td>Silent infection, joins a network of infected machines</td>
+<td>No</td>
+<td>❌ No</td>
+<td>Obeys a <strong>command-and-control</strong> server; used for DDoS/spam</td>
+<td>Mirai botnet (2016 Dyn attack)</td>
+</tr>
+<tr>
+<td><strong>Rootkit</strong></td>
+<td>Deep install, hides itself</td>
+<td>Yes</td>
+<td>❌ No</td>
+<td>Conceals other malware, maintains privileged access</td>
+<td>Hidden admin backdoor</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The three distinctions that decide MCQs:</strong>
+- <strong>Virus vs Worm</strong> → does it need a <em>user to open something</em>? Virus <strong>yes</strong>, worm <strong>no</strong>. A worm spreads automatically; a virus hitches a ride.
+- <strong>Trojan vs Virus</strong> → Trojan is about <strong>deception</strong> (looks harmless, doesn't replicate); virus is about <strong>replication</strong>.
+- <strong>Bot vs everything</strong> → a bot <strong>takes orders remotely</strong> from a command-and-control server. If the question mentions "external computer sending commands," the answer is <em>bot</em>.</p>
+<p><strong>Ransomware-as-a-Service (RaaS):</strong> criminals sell ready-made ransomware kits on the dark web, so attackers no longer need technical skill. Result: attacks are cheaper, more frequent, and harder to attribute.</p>
+<h3 id="4-6-deep-dive-impact-of-a-malware-attack-case-study-answer-material">4.6 ⭐ DEEP DIVE — Impact of a malware attack (case-study answer material)</h3>
+<p>When asked to <em>"analyze the impact,"</em> organize the damage into four layers — this structure alone earns structure marks:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Technical</strong></td>
+<td>Data encrypted/corrupted/deleted; systems down; backups compromised; network spread to connected systems</td>
+</tr>
+<tr>
+<td><strong>Operational</strong></td>
+<td>Business interrupted, services unavailable, staff unable to work, recovery downtime</td>
+</tr>
+<tr>
+<td><strong>Financial</strong></td>
+<td>Ransom payment, recovery/forensics costs, lost revenue during downtime, regulatory fines (PDPA), legal claims</td>
+</tr>
+<tr>
+<td><strong>Reputational &amp; legal</strong></td>
+<td>Loss of customer trust, breach-notification obligations, PDPA <strong>Security Principle</strong> violation, possible lawsuits</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-7-deep-dive-prevention-strategies-the-recommend-measures-marks">4.7 ⭐ DEEP DIVE — Prevention strategies (the "recommend measures" marks)</h3>
+<p>Always split into <strong>technical</strong> and <strong>organizational</strong> — past papers explicitly ask for "technical <em>or</em> organizational measures."</p>
+<p><strong>Technical measures</strong>
+1. <strong>Encryption</strong> of data at rest and in transit (directly answers PDPA Security Principle questions).
+2. <strong>Access control</strong> — least privilege, role-based access, multi-factor authentication.
+3. <strong>Regular patching</strong> and updates to close the security holes worms exploit.
+4. <strong>Firewalls, IDS/IPS, and endpoint antivirus</strong> with automatic updates.
+5. <strong>Regular offline/immutable backups</strong>, tested by restoring them — the single best ransomware defence.
+6. <strong>Network segmentation</strong> so an infection can't spread laterally.
+7. <strong>Email filtering</strong> to block phishing attachments and malicious links.</p>
+<p><strong>Organizational measures</strong>
+1. <strong>Security awareness training</strong> — most malware needs a human to click something.
+2. An <strong>incident response plan</strong> with defined roles, rehearsed regularly.
+3. <strong>Security policies</strong> — acceptable use, BYOD, password standards, no unlicensed software (pirated software is a major malware vector).
+4. <strong>Regular security audits and penetration testing</strong> by authorized (white hat) testers.
+5. <strong>Vendor/third-party risk management</strong> for anyone touching your data.</p>
+<h3 id="4-8-deep-dive-hacker-motives-and-the-ethics-of-each">4.8 ⭐ DEEP DIVE — Hacker motives and the ethics of each</h3>
+<p>Past papers ask: <em>"Describe TWO motives that may drive a person to hack and explain how these motives differ ethically."</em></p>
+<table>
+<thead>
+<tr>
+<th>Motive</th>
+<th>Typical hacker</th>
+<th>Ethical assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Improve security / protect users</strong></td>
+<td>White hat</td>
+<td><strong>Ethical</strong> — authorized, consented, serves the public interest (aligns with ACM "avoid harm")</td>
+</tr>
+<tr>
+<td><strong>Curiosity / challenge / proving skill</strong></td>
+<td>Grey hat</td>
+<td><strong>Ethically questionable</strong> — no malicious intent, but <em>unauthorized access is still a violation of consent and property rights</em>, and testing without permission can cause accidental damage</td>
+</tr>
+<tr>
+<td><strong>Exposing wrongdoing / hacktivism</strong></td>
+<td>Grey hat</td>
+<td><strong>Contested</strong> — motive may be public interest, but the method is illegal; compare with whistleblowing criteria</td>
+</tr>
+<tr>
+<td><strong>Financial gain / theft / extortion</strong></td>
+<td>Black hat</td>
+<td><strong>Clearly unethical and illegal</strong> — deliberate harm for self-interest</td>
+</tr>
+<tr>
+<td><strong>Revenge / causing damage</strong></td>
+<td>Black hat</td>
+<td><strong>Clearly unethical</strong> — intent to harm</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The pivot for full marks:</strong> the ethical difference turns on <strong>authorization</strong> (was consent given?) and <strong>intent/harm</strong> (who benefits, who is harmed?). A white hat and a grey hat may perform the <em>same technical act</em>; only one had permission. Under <strong>Kantianism</strong>, unauthorized access can't be universalized and treats the system owner merely as a means; under <strong>act utilitarianism</strong>, a grey hat <em>might</em> be defended if the disclosed flaw prevented greater harm — a great point to raise in a comparison question.</p>
+<hr />
+<h2 id="chapter-5-professional-ethics-high-yield">CHAPTER 5 — PROFESSIONAL ETHICS 🔴⭐ HIGH YIELD</h2>
+<h3 id="5-1-profession-vs-professional">5.1 Profession vs Professional</h3>
+<ul>
+<li><strong>Profession</strong> = a type of job requiring <strong>specialized higher education, training, and certification</strong>, governed by professional bodies, held to a code of conduct.</li>
+<li><strong>Professional</strong> = a member of a profession, trusted by society and expected to act responsibly.</li>
+<li><strong>Profession vs trade (MCQ):</strong> professions are <strong>governed by strict codes of conduct</strong> guiding moral decisions; trades generally are not.</li>
+<li><strong>Where does IT stand?</strong> Many IT roles need degrees but not all require certification/licensing — so whether IT is a "profession" in the <em>narrow</em> sense is debated.</li>
+</ul>
+<p><strong>Mature profession features:</strong> (1) education &amp; entry standards, (2) certification &amp; licensing, (3) ongoing professional development, (4) ethical standards / code of ethics.</p>
+<h3 id="5-2-professional-bodies">5.2 Professional bodies</h3>
+<ul>
+<li><strong>ACM</strong> (Association for Computing Machinery) — international; publishes the <strong>ACM Code of Ethics</strong>.</li>
+<li><strong>IEEE</strong> — international engineering/computing body.</li>
+<li><strong>MBOT</strong> (Malaysia Board of Technologists) — <strong>national</strong> body; may have <strong>regulatory authority within Malaysia's legal framework</strong> (this is what distinguishes national bodies like MBOT from international ones like ACM/IEEE — MCQ).</li>
+</ul>
+<h3 id="5-3-acm-code-of-ethics-name-explain-2-principles-for-the-case-study">5.3 ACM Code of Ethics 🔴⭐ (name + explain 2 principles for the case study)</h3>
+<p><strong>General Moral Principles</strong> — a computing professional should:
+1. <strong>Contribute to society and human well-being</strong> (acknowledge all people are stakeholders).
+2. <strong>Avoid harm.</strong>
+3. <strong>Be honest and trustworthy.</strong>
+4. <strong>Be fair and take action not to discriminate.</strong>
+5. <strong>Respect the work required to produce new ideas / honor property rights</strong> (incl. copyrights, patents) — <em>don't pirate/plagiarize</em>.
+6. <strong>Respect privacy.</strong>
+7. <strong>Honor confidentiality.</strong></p>
+<ul>
+<li><strong>"Respect the privacy of others"</strong> — collect only necessary data, use it only for its stated purpose, get consent, secure it, and be transparent. Behaviors that comply: not reading others' files/emails, anonymizing data, informing users what's collected, allowing users to access/correct their data.</li>
+<li><strong>Harmful actions a professional must avoid:</strong> injury/loss to users, destroying data, releasing untested/unsafe software, breaching privacy, discrimination.</li>
+</ul>
+<p><strong>Software Engineering Code of Ethics (ACM/IEEE)</strong> — key principle: <em>"Software engineers shall act consistently with the public interest"</em> and shall <strong>test products thoroughly</strong>. <em>Failure-to-test example:</em> releasing a medical device or banking app with untested code that then harms people → violates public-interest + avoid-harm duties.</p>
+<h3 id="5-4-whistleblowing-appears-in-8-10-papers">5.4 Whistleblowing 🔴⭐ (appears in 8/10 papers)</h3>
+<ul>
+<li><strong>Whistleblowing</strong> = when an employee reveals to the public or higher authority that their organization is engaged in <strong>illegal, unethical, or harmful</strong> activity.</li>
+<li><strong>Hero or traitor?</strong> Depends on <strong>motive</strong> — is it to protect the public (ethical) or for revenge/personal gain (questionable)?</li>
+<li><strong>When ethical / morally required:</strong> the wrongdoing threatens serious harm to the public and internal channels have failed (e.g., reporting a bank app released with no security that endangers customers' money).</li>
+<li><strong>When unethical / questionable:</strong> done for revenge, personal gain, or on flimsy/unverified evidence; leaking to media prematurely; motive is to avoid one's own punishment.</li>
+<li><strong>Harms whistleblowing can cause:</strong> damage to the organization's reputation, loss of coworkers' trust, the whistleblower may face retaliation/job loss, may breach confidentiality if done improperly.</li>
+</ul>
+<p><strong>De George's criteria for ethical/morally-permissible whistleblowing</strong> (adapt these as "reasons"):
+1. The harm is <strong>serious and considerable</strong> to the public.
+2. The employee has <strong>reported the concern to superiors</strong> first (exhausted internal channels).
+3. Internal channels were exhausted without result.
+<em>(For whistleblowing to be morally</em> <strong>obligatory</strong><em>, De George adds:)</em>
+4. The whistleblower has <strong>documented, convincing evidence</strong>.
+5. There is <strong>good reason to believe</strong> going public will <strong>prevent the harm</strong>.</p>
+<p><strong>Whistleblower Protection Act 2010 (Malaysia, Act 711):</strong> provides <strong>protection of the whistleblower's identity/confidentiality</strong> and <strong>safeguards against retaliation</strong>. It does <strong>NOT</strong> give complete immunity for all disclosures, does not reward all reports, and does not permit releasing trade secrets to the media.</p>
+<h3 id="5-5-deep-dive-the-acm-code-of-ethics-structured">5.5 ⭐ DEEP DIVE — The ACM Code of Ethics, structured</h3>
+<p>The Code has four sections. For the exam you mainly need Section 1, but knowing the structure lets you answer <em>"organizational imperative"</em> MCQs.</p>
+<p><strong>Section 1 — General Ethical Principles.</strong> A computing professional should:
+| # | Principle | What it means in practice |
+|---|---|---|
+| 1.1 | <strong>Contribute to society and human well-being</strong> | Consider all stakeholders; promote human rights; protect the environment |
+| 1.2 | <strong>Avoid harm</strong> | Don't cause injury, data loss, property damage, or reputational harm; report risk |
+| 1.3 | <strong>Be honest and trustworthy</strong> | No deception about systems, qualifications, or data use |
+| 1.4 | <strong>Be fair and take action not to discriminate</strong> | No bias by race, gender, age, disability; <strong>this is the AI-bias principle</strong> |
+| 1.5 | <strong>Respect the work required to produce new ideas</strong> | Honour copyrights, patents, trade secrets, licences — <strong>credit others' work</strong> |
+| 1.6 | <strong>Respect privacy</strong> | Collect only what's needed, use only as stated, secure it, be transparent |
+| 1.7 | <strong>Honour confidentiality</strong> | Protect information disclosed in confidence |</p>
+<p><strong>Section 2 — Professional Responsibilities:</strong> strive for high quality; maintain competence; know and respect existing rules; accept and provide professional review; give comprehensive evaluations of systems and risks; <strong>only work within your competence</strong>; foster public awareness; access resources only when authorized; design with security in mind.</p>
+<p><strong>Section 3 — Professional Leadership Principles (the "organizational imperatives"):</strong> ensure the public good is the central concern; <strong>manage personnel and resources to enhance quality of working life</strong>; support proper use of computing resources; articulate and enforce organizational policies; provide opportunities for professional development; use care when modifying or retiring systems; recognize special care for systems integrated into society's infrastructure.</p>
+<p><strong>Section 4 — Compliance:</strong> uphold and promote the Code; <strong>treat violations as inconsistent with membership in ACM</strong>.</p>
+<p><strong>Which principles to cite for common exam scenarios:</strong>
+| Scenario | Cite these |
+|---|---|
+| AI system discriminates against women/minorities | 1.4 Be fair / don't discriminate + 1.2 Avoid harm |
+| App sells user data without consent | 1.6 Respect privacy + 1.3 Be honest |
+| Developer reuses licensed code without attribution | 1.5 Respect others' work / property rights + 1.3 Be honest |
+| Untested banking app released | 1.2 Avoid harm + 2.1 Strive for high quality |
+| Data breach from unencrypted storage | 1.6 Respect privacy + 2.9 Design robust and secure systems |
+| Employee monitored constantly | 1.6 Respect privacy + 3.2 Enhance quality of working life |</p>
+<h3 id="5-6-deep-dive-software-engineering-code-of-ethics-acm-ieee-8-principles">5.6 ⭐ DEEP DIVE — Software Engineering Code of Ethics (ACM/IEEE), 8 principles</h3>
+<p>Software engineers shall act consistently with these, in this order of priority:
+1. <strong>PUBLIC</strong> — act consistently with the <strong>public interest</strong> (the overriding principle).
+2. <strong>CLIENT AND EMPLOYER</strong> — act in their best interests, <em>consistent with the public interest</em>.
+3. <strong>PRODUCT</strong> — ensure products meet the <strong>highest professional standards</strong> (this is the "test thoroughly" principle).
+4. <strong>JUDGMENT</strong> — maintain <strong>integrity and independence</strong> in professional judgment.
+5. <strong>MANAGEMENT</strong> — promote an ethical approach to managing development.
+6. <strong>PROFESSION</strong> — advance the integrity and reputation of the profession.
+7. <strong>COLLEAGUES</strong> — be fair to and supportive of colleagues.
+8. <strong>SELF</strong> — lifelong learning and ethical practice.</p>
+<p><em>Failure-to-test example for the exam:</em> releasing safety-critical software without adequate testing (medical devices, aviation, banking) has caused death and financial ruin. <strong>Ethical implications:</strong> violates PUBLIC (public interest sacrificed for schedule), PRODUCT (below professional standard), and ACM 1.2 (avoid harm) — the engineer's duty to the public <strong>outranks</strong> the employer's deadline.</p>
+<h3 id="5-7-deep-dive-whistleblowing-complete">5.7 ⭐ DEEP DIVE — Whistleblowing, complete</h3>
+<p><strong>Definition:</strong> an employee (or former employee) discloses to the public or to a higher authority that their organization is engaged in <strong>illegal, unethical, immoral, or harmful</strong> activity.</p>
+<p><strong>Types:</strong> <em>Internal</em> (report up the chain of command) vs <em>External</em> (to regulators, press, public). <em>Open</em> (named) vs <em>Anonymous</em>.</p>
+<p><strong>De George's criteria — memorize as 3 + 2:</strong></p>
+<p><em>Whistleblowing is morally PERMISSIBLE when:</em>
+1. The organization's action will cause <strong>serious and considerable harm</strong> to the public.
+2. The employee has <strong>reported the concern to their immediate superior</strong> and made their moral concern known.
+3. The employee has <strong>exhausted internal channels</strong> (gone up the chain) without result.</p>
+<p><em>Whistleblowing becomes morally OBLIGATORY when, in addition:</em>
+4. The whistleblower has <strong>documented, convincing evidence</strong> a reasonable observer would accept.
+5. There is <strong>good reason to believe going public will prevent the harm</strong> (a realistic chance of success).</p>
+<p><strong>Motives — the "hero or traitor" question:</strong>
+| Good motives (→ ethical) | Questionable motives (→ unethical) |
+|---|---|
+| Protecting public safety | Revenge against a manager |
+| Preventing serious harm | Personal financial gain / reward-seeking |
+| Acting from ethical duty | Avoiding one's own punishment |
+| Exposing corruption | Seeking attention or publicity |</p>
+<p><strong>Harms whistleblowing can cause:</strong> damage to the organization's reputation (possibly unfairly, if the claim is wrong); job losses for innocent colleagues; loss of trust within the team; the whistleblower risks retaliation, career damage, legal action and personal stress; may breach legitimate confidentiality obligations.</p>
+<p><strong>Whistleblower Protection Act 2010 (Act 711, Malaysia)</strong> provides:
+- ✅ <strong>Protection of the whistleblower's identity</strong> (confidentiality)
+- ✅ <strong>Immunity from civil/criminal action</strong> for the disclosure itself
+- ✅ <strong>Protection against detrimental action / retaliation</strong> (dismissal, demotion, harassment)
+- ❌ <strong>NOT</strong> complete immunity for all disclosures; ❌ <strong>NOT</strong> rewards for all reports; ❌ <strong>NOT</strong> permission to release trade secrets to the media; ❌ protection can be <strong>revoked</strong> if the disclosure is made knowing it's false, or if the whistleblower participated in the wrongdoing.</p>
+<p><strong>Model answer skeleton (worth memorizing):</strong></p>
+<blockquote>
+<p><em>"Whistleblowing is when an employee reveals illegal or unethical organizational conduct to a higher authority or the public. It is </em><em>ethical</em><em> when serious public harm is at stake and internal channels have been exhausted — for example, an engineer reporting that a banking app was released without security testing, exposing customers' funds. It is </em><em>unethical/questionable</em><em> when driven by revenge or personal gain, or based on unverified claims — for example, leaking confidential documents to the press to damage a manager after being denied promotion. De George requires serious harm, prior internal reporting, and exhausted internal channels; for it to be obligatory, documented evidence and a realistic chance of preventing the harm are also needed."</em></p>
+</blockquote>
+<hr />
+<h2 id="chapter-6-ethical-impact-of-it-on-work-and-society">CHAPTER 6 — ETHICAL IMPACT OF IT ON WORK AND SOCIETY 🟠</h2>
+<p>Four themes: <strong>Automation, Telework, Globalization, Digital Divide.</strong></p>
+<h3 id="6-1-automation">6.1 Automation</h3>
+<ul>
+<li><strong>Automation</strong> = using technology/software to perform tasks with little or no human involvement.</li>
+<li><strong>Ethical issue:</strong> <strong>job displacement</strong> — automation can replace human workers (esp. repetitive jobs), raising fairness concerns. Also bias in automated decisions, and over-surveillance of the remaining workers.</li>
+<li><em>Case:</em> Amazon warehouses use robots + monitor workers for speed (some fired by algorithm).</li>
+<li><strong>Ethical actions a company should take when automating</strong> (e.g., replacing cashiers):
+  1. <strong>Reskill / retrain</strong> affected workers and redeploy them to new roles.
+  2. Give <strong>advance notice</strong>, fair severance, and transition support.
+  3. Phase in gradually; involve workers in the change; be transparent.</li>
+</ul>
+<h3 id="6-2-telework-telecommuting-remote-wfh-appears-in-7-10">6.2 Telework (Telecommuting / Remote / WFH) 🔴⭐ (appears in 7/10)</h3>
+<ul>
+<li><strong>Telework</strong> = working outside the traditional office using digital tools (often from home). Also: remote work, telecommuting; <strong>hybrid</strong> = mix of office + remote.</li>
+<li><strong>Benefits (employees):</strong> flexible schedule + better work-life balance; no commute; personalized productivity; can work from anywhere; saves cost.</li>
+<li><strong>Challenges/risks:</strong> blurred work/personal boundaries → <strong>overwork/burnout</strong>; isolation / lack of teamwork; <strong>data &amp; communication security</strong> risks; longer hours for same pay; hard to monitor performance fairly.</li>
+<li><strong>Employer ethical responsibilities:</strong> respect employee <strong>privacy</strong> (don't over-monitor); ensure <strong>fair workload &amp; evaluation</strong>; provide proper tools/security; avoid an "always-online" culture; trust employees.</li>
+<li><strong>Employee ethical responsibilities:</strong> be honest about hours/productivity; protect company data &amp; confidentiality; stay reachable/accountable during work hours; avoid misusing company resources.</li>
+</ul>
+<h3 id="6-3-globalization">6.3 Globalization</h3>
+<ul>
+<li><strong>Globalization</strong> = the process of interaction and integration among people, companies, and governments of different nations, driven by international trade &amp; investment and <strong>aided by information technology</strong>.</li>
+<li><strong>Ethical issues:</strong> exploiting <strong>weaker labor laws</strong> in developing nations; avoiding health/safety or environmental regulations by relocating to countries with weaker laws; unequal pay; outsourcing that removes local jobs; unfair conditions for poorer countries.</li>
+</ul>
+<h3 id="6-4-digital-divide">6.4 Digital Divide</h3>
+<ul>
+<li><strong>Digital divide</strong> = the gap between those who <strong>have access</strong> to ICT (computers, internet, skills) and those who <strong>do not</strong>.</li>
+<li><strong>Global digital divide</strong> = the same gap <strong>between countries</strong> (developed vs developing nations).</li>
+<li><strong>Social divide</strong> appears between: urban vs rural, younger vs older, educated vs less-educated, rich vs poor (i.e., "all of the above").</li>
+<li><em>Example:</em> a rural student can't attend online class due to no internet access.</li>
+<li><strong>How to close the gap:</strong> provide <strong>affordable internet access + infrastructure</strong>; <strong>basic IT/digital-literacy training</strong>; low-cost devices; <strong>low-bandwidth, multilingual</strong> content for inclusivity; government/NGO subsidies.</li>
+</ul>
+<h3 id="6-5-employee-workplace-monitoring">6.5 Employee / Workplace Monitoring</h3>
+<ul>
+<li>Employers monitor internet use, emails, keystrokes, location, productivity.</li>
+<li><strong>Advantages:</strong> security, productivity, prevents misuse, legal compliance.</li>
+<li><strong>Disadvantages/ethical concerns:</strong> invades <strong>privacy</strong>, erodes <strong>trust</strong>, causes stress, may be excessive/constant surveillance.</li>
+<li><strong>Kantian objection:</strong> secret/constant surveillance treats employees <strong>merely as a means</strong> (to productivity), not as ends deserving respect → unethical (a favorite exam application).</li>
+</ul>
+<h3 id="6-6-workplace-well-being-recent-addition">6.6 Workplace well-being (recent addition)</h3>
+<ul>
+<li>IT professionals can promote well-being by designing tools that allow <strong>screen breaks, mental-health monitoring</strong>, reasonable notifications, and healthy work patterns — rather than an always-on, high-pressure culture.</li>
+</ul>
+<h3 id="6-7-deep-dive-automation-full-treatment">6.7 ⭐ DEEP DIVE — Automation, full treatment</h3>
+<p><strong>Definition:</strong> using technology/software to perform tasks with little or no human involvement.</p>
+<table>
+<thead>
+<tr>
+<th>Benefits</th>
+<th>Ethical concerns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Efficiency, speed, lower cost</td>
+<td><strong>Job displacement</strong> — especially repetitive/low-skill roles</td>
+</tr>
+<tr>
+<td>Consistency, fewer human errors</td>
+<td><strong>Deskilling</strong> of the remaining workforce</td>
+</tr>
+<tr>
+<td>Removes humans from dangerous work</td>
+<td><strong>Algorithmic bias</strong> in automated decisions</td>
+</tr>
+<tr>
+<td>24/7 operation</td>
+<td><strong>Over-surveillance</strong> of remaining workers (productivity tracking)</td>
+</tr>
+<tr>
+<td>Frees people for higher-value work</td>
+<td><strong>Accountability gap</strong> — who is responsible when an automated system errs?</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Case: Amazon warehouse automation</strong> — robots sort/move/pack; human workers are monitored for speed and some are terminated based on productivity metrics. Illustrates job displacement <em>and</em> surveillance <em>and</em> the accountability gap simultaneously — a useful example to cite.</p>
+<p><strong>Ethical actions a company must take when automating (past-paper answer):</strong>
+1. <strong>Reskill and retrain</strong> affected workers for new roles created by the technology.
+2. Give <strong>advance notice</strong> and a fair transition period, with severance/redeployment support.
+3. <strong>Phase in gradually</strong> rather than mass-terminating, and consult employees/unions.
+4. <strong>Redeploy internally</strong> where possible before making anyone redundant.
+5. Be <strong>transparent</strong> about which roles are affected and why.</p>
+<p><strong>Theory application:</strong> <em>Utilitarianism</em> may support automation if total societal benefit (cheaper goods, safer work) exceeds the harm to displaced workers — but only if that harm is genuinely counted. <em>Kantianism</em> objects when workers are treated <strong>merely as means</strong> to efficiency, discarded without regard for their dignity or livelihood. <em>Social contract</em> asks whether the implicit employment bargain and workers' rights were honoured.</p>
+<h3 id="6-8-deep-dive-telework-full-treatment">6.8 ⭐ DEEP DIVE — Telework, full treatment</h3>
+<p><strong>Definition:</strong> working outside the traditional office using digital tools — also called remote work, telecommuting, work-from-home. <strong>Hybrid</strong> = a mix of office and remote.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Employee</strong></th>
+<th><strong>Employer / Organization</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Benefits</strong></td>
+<td>Flexible schedule; better work–life balance; no commute (time + cost saved); can work from anywhere; personalized productivity</td>
+<td>Saves office rental cost; retains talent; reduces absenteeism; wider hiring pool; higher morale</td>
+</tr>
+<tr>
+<td><strong>Risks / drawbacks</strong></td>
+<td>Isolation; blurred work/personal boundaries; <strong>overwork and burnout</strong>; longer hours for the same pay; poor home working environment; career visibility loss</td>
+<td><strong>Data and communication security</strong> risks; hard to measure performance fairly; weaker teamwork and culture; supervision difficulty; equipment/support costs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ethical issues in telework:</strong>
+- How do you <strong>track performance</strong> without invasive surveillance?
+- <strong>Fairness of workload</strong> and evaluation between remote and in-office staff.
+- Employees' <strong>privacy</strong> in their own home vs the employer's need for accountability.
+- Providing an adequate <strong>working environment</strong> (equipment, connectivity) — or offloading that cost onto employees.</p>
+<p><strong>Employer ethical responsibilities:</strong> respect privacy (no covert monitoring, no webcam surveillance in the home); ensure fair workload and evaluation criteria; provide proper tools and secure systems; respect <strong>off-hours</strong> and avoid an always-online culture; maintain equal opportunity for remote staff.</p>
+<p><strong>Employee ethical responsibilities:</strong> be honest about hours worked and productivity; <strong>protect company data and confidentiality</strong> on home networks/devices; remain contactable and accountable during agreed hours; don't misuse company resources; maintain professionalism in virtual meetings.</p>
+<p><strong>Challenge of monitoring remotely (past-paper 2-marker):</strong> monitoring at home inevitably captures <strong>personal life and family</strong>, so the same tool that ensures accountability also <strong>violates privacy</strong> — the difficulty is that there is no clean boundary between the workplace and the home.</p>
+<h3 id="6-9-deep-dive-employee-workplace-monitoring">6.9 ⭐ DEEP DIVE — Employee &amp; Workplace Monitoring</h3>
+<table>
+<thead>
+<tr>
+<th>Advantages</th>
+<th>Disadvantages / ethical concerns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protects security and confidential data</td>
+<td><strong>Invasion of privacy</strong></td>
+</tr>
+<tr>
+<td>Prevents misuse of company resources</td>
+<td>Erodes <strong>trust</strong> between employer and staff</td>
+</tr>
+<tr>
+<td>Ensures productivity and accountability</td>
+<td>Causes stress, anxiety, lower morale</td>
+</tr>
+<tr>
+<td>Evidence in harassment/misconduct cases</td>
+<td>May capture personal/private data incidentally</td>
+</tr>
+<tr>
+<td>Legal and regulatory compliance</td>
+<td>Can become excessive/constant surveillance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How to apply theories (this is a recurring exam question):</strong>
+- <strong>Kantianism</strong> → constant covert surveillance treats employees <strong>merely as a means</strong> to productivity, denying their autonomy and dignity → <strong>unethical</strong>. (This is the standard expected answer for "select a workable theory to argue monitoring is unethical.")
+- <strong>Act Utilitarianism</strong> → weigh security gains against the harm of stress and lost trust; excessive monitoring usually produces net harm.
+- <strong>Social Contract</strong> → employees have a <strong>negative right</strong> to privacy; monitoring is acceptable only if disclosed and consented to in the employment agreement.</p>
+<p><strong>Making monitoring ethical:</strong> notify employees in advance, define the scope and purpose, monitor only work systems during work hours, collect the minimum necessary, apply it consistently, and allow employees to see their own data.</p>
+<h3 id="6-10-deep-dive-globalization">6.10 ⭐ DEEP DIVE — Globalization</h3>
+<p><strong>Definition:</strong> the process of interaction and integration among people, companies, and governments of different nations, driven by international trade and investment and <strong>aided by information technology</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Benefits</th>
+<th>Ethical issues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access to global talent and markets</td>
+<td><strong>Exploiting weaker labour laws</strong> in developing nations</td>
+</tr>
+<tr>
+<td>Lower costs; cheaper products</td>
+<td>Avoiding health, safety and environmental regulation by relocating</td>
+</tr>
+<tr>
+<td>Knowledge and technology transfer</td>
+<td><strong>Unequal pay</strong> for equal work across borders</td>
+</tr>
+<tr>
+<td>Cross-border collaboration (open source)</td>
+<td>Job losses in the home country through outsourcing</td>
+</tr>
+<tr>
+<td>Economic development opportunities</td>
+<td>Unfair terms and dependency for poorer countries; cultural erosion</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exam pointer:</strong> outsourcing <em>by itself</em> isn't the ethical problem — the MCQ answer is usually the option about <strong>avoiding regulations or exploiting weaker laws</strong>, because that's deliberate harm, whereas plain outsourcing or cost-of-living-adjusted salaries are defensible.</p>
+<h3 id="6-11-deep-dive-digital-divide">6.11 ⭐ DEEP DIVE — Digital Divide</h3>
+<p><strong>Definition:</strong> the gap between those who have access to information and communication technology (devices, internet, skills) and those who do not.</p>
+<p><strong>Levels:</strong>
+- <strong>Global digital divide</strong> — between <strong>countries</strong> (developed vs developing nations).
+- <strong>Social/domestic divide</strong> — <em>within</em> a country, between groups.</p>
+<p><strong>Where the divide appears:</strong> urban vs rural · rich vs poor · younger vs older · educated vs less educated · abled vs disabled · men vs women (in some regions).</p>
+<p><strong>Causes:</strong> cost of devices and data; lack of infrastructure in rural areas; low digital literacy; language barriers (content mostly in English); disability-inaccessible design; unreliable electricity.</p>
+<p><strong>How to close the gap:</strong>
+1. <strong>Affordable internet access</strong> and infrastructure investment in rural/underserved areas.
+2. <strong>Digital literacy and basic IT training</strong> programmes.
+3. <strong>Low-cost devices</strong>, subsidies, community access centres and public Wi-Fi.
+4. Design for <strong>low bandwidth</strong> and <strong>multilingual/local-language</strong> content.
+5. <strong>Accessible design</strong> for users with disabilities.
+6. Government/NGO/private partnerships and universal-service policies.</p>
+<p><em>Exam application:</em> "Designing an inclusive learning app for rural students" → prioritize <strong>low-bandwidth operation and multilingual support</strong> (not 5G features or English-only content).</p>
+<h3 id="6-12-deep-dive-digital-well-being-at-work">6.12 ⭐ DEEP DIVE — Digital well-being at work</h3>
+<p>A newer theme appearing in recent papers. IT professionals can promote well-being by:
+- Designing tools that encourage <strong>screen breaks</strong> and reasonable notification loads.
+- Building <strong>mental-health monitoring</strong> that is opt-in and privacy-respecting, not coercive.
+- Avoiding dark patterns and engagement-maximizing designs that harm users (directly relevant to the AI-recommendation-algorithm case study).
+- Supporting the <strong>right to disconnect</strong> outside working hours.</p>
+<p><strong>Link to the case studies:</strong> the Sem 2 2025/26 paper's recommendation-algorithm case is fundamentally a <em>digital well-being</em> problem — the algorithm maximized engagement at the cost of teenagers' mental health. Cite ACM <strong>1.1 (contribute to human well-being)</strong> and <strong>1.2 (avoid harm)</strong> there.</p>
+<hr />
+<h1 id="part-5-answer-frameworks-mcq-bank">PART 5 — ANSWER FRAMEWORKS + MCQ BANK</h1>
+<h2 id="5-1-master-framework-for-the-case-study-section-c">5.1 Master framework for the CASE STUDY (Section C)</h2>
+<p>When you see any AI/data scenario, structure each part like this:</p>
+<p><strong>(a) Utilitarianism:</strong></p>
+<blockquote>
+<p><em>"Utilitarianism judges an action by whether it maximizes total happiness for the greatest number.</em>
+<strong>Benefits:</strong> [company profit, efficiency, some users helped].
+<strong>Harms:</strong> [harm to many users — privacy loss, psychological harm, discrimination, breach affecting thousands].
+<em>Because the harms fall on a large number of people and outweigh the benefits that accrue mainly to the company, the action does NOT maximize overall happiness → under (act) utilitarianism it is ethically unjustified."</em></p>
+</blockquote>
+<p><strong>(b) Kantian ethics:</strong></p>
+<blockquote>
+<p><em>First Formulation (universalizability): if every company [deceived users / sold data without consent / deployed biased AI] as a universal rule, trust would collapse and the practice self-defeats → the maxim can't be universalized → wrong.</em>
+<em>Second Formulation (humanity as an end): the company uses users/applicants</em> <strong>merely as a means</strong> <em>to profit — collecting/using their data or judging them without informed consent or respect for their autonomy → it fails to treat them as ends → wrong.</em>
+<em>Kant judges the action itself, not the profit; therefore the company acted immorally."</em></p>
+</blockquote>
+<p><strong>(c) Two ACM Code principles violated:</strong> pick 2 and explain:
+- <strong>Avoid harm</strong> — the system caused psychological/financial/discriminatory harm.
+- <strong>Respect privacy</strong> — data collected/shared without proper consent.
+- <strong>Be fair and not discriminate</strong> — biased outcomes against women/minorities.
+- <strong>Be honest and trustworthy</strong> — company misled users about data use / safety.
+- <strong>Honor property rights</strong> — if code was reused without a licence.</p>
+<p><strong>(d) Your opinion / recommendation:</strong> take a clear stance + justify with professional responsibility + fairness:</p>
+<blockquote>
+<p>audit &amp; fix the algorithm; obtain <strong>explicit informed consent</strong>; <strong>encrypt</strong> data + add access control; be <strong>transparent</strong>; retrain the model on unbiased data; add human oversight &amp; accountability; comply with <strong>PDPA 2010</strong>. Conclude that professional duty and fairness require correcting the harm even at a cost to short-term profit.</p>
+</blockquote>
+<h2 id="5-2-framework-for-whistleblowing-questions">5.2 Framework for WHISTLEBLOWING questions</h2>
+<ol>
+<li><strong>Define:</strong> an employee revealing illegal/unethical/harmful organizational activity to authority or the public.</li>
+<li><strong>Ethical situation + example:</strong> serious public harm, internal channels failed (e.g., reporting an unsecured banking app).</li>
+<li><strong>Unethical/questionable situation + example:</strong> done for revenge/personal gain or on weak evidence.</li>
+<li><strong>Apply De George's factors:</strong> serious harm + reported to superiors first + exhausted internal channels (+ evidence + likelihood of success for it to be obligatory).</li>
+</ol>
+<h2 id="5-3-framework-for-apply-a-theory-to-a-scenario-section-b">5.3 Framework for "apply a theory to a scenario" (Section B)</h2>
+<ul>
+<li><strong>State</strong> the theory's core rule in one line.</li>
+<li><strong>Apply</strong> it to the specific facts (name who's affected / what the maxim is).</li>
+<li><strong>Conclude</strong> clearly: ethical or unethical, and why.</li>
+<li>Always give the requested <strong>example</strong>.</li>
+</ul>
+<h2 id="5-4-mcq-quick-definition-sheet-memorize-before-section-a">5.4 MCQ QUICK-DEFINITION SHEET (memorize before Section A)</h2>
+<ul>
+<li>Morals = personal beliefs about right/wrong. Ethics = rational study of morality. Society = people under a system of rules. Etiquette = manners.</li>
+<li>Subjective relativism = individual decides right/wrong. Cultural relativism = society/culture decides.</li>
+<li>Divine Command = right = what God commands (criticism: makes morality arbitrary).</li>
+<li>Kant 1st formulation = act only on rules you'd make a universal law. Kant = duty, not consequences. Kant's basic good = a good will.</li>
+<li>Utilitarianism = greatest happiness for greatest number (Bentham &amp; Mill). Act = per action; Rule = per rule.</li>
+<li>Ethical egoism = act in your own self-interest.</li>
+<li>Social contract = rules rational people agree to. Positive right = others must provide; Negative right = others must not interfere; Absolute = no exceptions; Limited = can be restricted.</li>
+<li>Spam = bulk unsolicited messages. CAN-SPAM categories = transactional, commercial, unsolicited-commercial. Spammers embed text in images to beat filters.</li>
+<li>Direct censorship = govt monopolization / pre-publication review / licensing. Self-censorship is NOT direct.</li>
+<li>CIPA = libraries/schools on federal funds must filter obscene content.</li>
+<li>Identity theft = illegally using another's personal info. Cyberbullying = repeated digital harm. Sexting = sexual texts/nude images.</li>
+<li>IP = product of human intellect with commercial value.</li>
+<li>Copyright = original creative works, automatic, no registration, protects expression not ideas/facts/formulas.</li>
+<li>Patent = inventions (apply via MyIPO, ~20 yrs). Trademark = brand sign/logo (® / ™; indefinite if renewed). Trade secret = confidential method/formula.</li>
+<li>Service mark = Telekom Malaysia; trademark = Adidas 3-stripes / Nike.</li>
+<li>CC BY = reuse/modify/distribute if credit given. Public domain = free, no restrictions.</li>
+<li>Proprietary = closed source; Open-source = source available to modify/redistribute.</li>
+<li>Software piracy = unauthorized copying/use. Softlifting = 1 licence on many machines; hard-disk loading = seller pre-installs illegal copies.</li>
+<li>Solove's taxonomy = collection, processing, dissemination, invasion. "Filtering" is NOT a category.</li>
+<li>PDPA 2010 = regulates processing of personal data in commercial transactions (needs consent). Digital Signature Act 1997 = digital signatures. E-Commerce Act 2006 = electronic contracts. CMA 1998 = communications/spam.</li>
+<li>Virus = attaches, spreads on open. Worm = self-spreads, no user action. Trojan = disguised. Spyware = secret data collection. Ransomware = encrypts + demands payment. Bot = responds to command-and-control (botnet).</li>
+<li>White hat = permission, ethical. Grey hat = no permission, no malicious intent. Black hat = malicious/illegal.</li>
+<li>DoS = flood/overwhelm to shut down (not to steal). DDoS = many machines/botnet.</li>
+<li>Authentication = who you are. Authorization = what you may do.</li>
+<li>ACM principles = contribute to society, avoid harm, be honest, be fair/don't discriminate, honor property rights, respect privacy, honor confidentiality.</li>
+<li>MBOT = national body, may have regulatory authority; ACM/IEEE = international.</li>
+<li>Whistleblower Protection Act 2010 = protects identity + against retaliation (not full immunity).</li>
+<li>Digital divide = gap in ICT access. Globalization = integration of nations via trade + IT. Automation → job displacement.</li>
+</ul>
+<div class="mcqbar"><button class="btn pri" id="qbtn">Hide answers &middot; self-test</button><span class="hint">Click any hidden answer to reveal it individually.</span></div><div id="mcq-zone"><h2 id="5-5-mcq-practice-bank-compiled-from-past-papers-with-answer-keys">5.5 MCQ PRACTICE BANK (compiled from past papers, with answer keys)</h2>
+<p><em>Cover the answers, test yourself, then check. Answers with brief reasoning below each block.</em></p>
+<h3 id="block-1-ethics-theories-ch-1">Block 1 — Ethics theories (Ch 1)</h3>
+<ol>
+<li>What are morals? → <strong>B. Personal beliefs about right and wrong.</strong></li>
+<li>Subjective relativism states that… → <strong>A. what is morally right is determined by the individual.</strong></li>
+<li>Cultural relativism states that… → <strong>C. Morality is determined by society's customs and norms.</strong></li>
+<li>A common criticism of Divine Command Theory is that it… → <strong>C. makes morality arbitrary depending on divine commands.</strong></li>
+<li>Kant's First Formulation says you should… → <strong>B. act only on moral rules you'd want to become universal laws.</strong></li>
+<li>Main focus of Kantian ethics? → <strong>D. Following moral rules and duties.</strong></li>
+<li>What does Kant claim is the most basic good? → <strong>D. A good will.</strong></li>
+<li>Which theory is based on agreements among individuals for social cooperation? → <strong>C. Social Contract Theory.</strong></li>
+<li>Two philosophers associated with utilitarianism? → <strong>A. Jeremy Bentham and John Stuart Mill.</strong></li>
+<li>Which theory focuses on maximizing happiness for the greatest number? → <strong>A. Utilitarianism.</strong></li>
+<li>BEST describes Act Utilitarianism? → <strong>A. Evaluates each action by its immediate consequences / whether it maximizes overall happiness.</strong></li>
+<li>Best describes ethical egoism? → <strong>C. An action is right if it benefits the individual actor.</strong></li>
+<li>Which philosopher emphasized questioning &amp; dialogue? → <strong>B. Socrates.</strong> / "Golden Mean" philosopher → <strong>Aristotle.</strong></li>
+<li>A right guaranteed WITHOUT exception is a… → <strong>C. absolute right.</strong></li>
+<li>Which ethical theory opposes secret surveillance because it treats employees as means only? → <strong>A. Kantianism.</strong></li>
+<li>Example of something illegal but NOT necessarily unethical? → <strong>A. Downloading pirated software to study because you can't afford the original.</strong></li>
+</ol>
+<h3 id="block-2-network-communication-ch-2">Block 2 — Network communication (Ch 2)</h3>
+<ol start="17">
+<li>Example of unethical use of email? → <strong>B. Mass unsolicited advertising emails.</strong></li>
+<li>Most likely spam under ethical guidelines? → <strong>B. A promotional email with no clear way to unsubscribe.</strong></li>
+<li>NOT a typical feature of spam? → <strong>D. Government-approved email marketing.</strong></li>
+<li>Method spammers use to bypass filters? → <strong>C. Embedding text into images.</strong></li>
+<li>Which is NOT an example of direct censorship? → <strong>B. Self-censorship.</strong></li>
+<li>CIPA focuses on… → <strong>B. Requiring schools &amp; libraries to block harmful online content.</strong></li>
+<li>Under CAN-SPAM, which email category is NOT legal? → <strong>Unsolicited commercial email</strong> (transactional &amp; commercial are legal).</li>
+<li>Identity theft is… → <strong>C. Illegally accessing and using another person's personal information.</strong></li>
+<li>BEST defines cyberbullying? → <strong>B. Repeated, intentional harm inflicted through digital platforms.</strong></li>
+<li>Cyberbullying is inflicted using… → <strong>D. All of the above (internet, phone, social media).</strong></li>
+<li>Sexting is… → <strong>Sexually suggestive texts/emails with nude or nearly-nude photos.</strong></li>
+</ol>
+<h3 id="block-3-ip-privacy-ch-3">Block 3 — IP &amp; Privacy (Ch 3)</h3>
+<ol start="28">
+<li>TRUE about copyright under Malaysian law? → <strong>C. Copyright protects original creative works without the need for registration.</strong></li>
+<li>NOT covered by copyright? → <strong>C. A mathematical formula.</strong></li>
+<li>NOT considered Intellectual Property? → <strong>C. A traditional dance passed down for generations.</strong></li>
+<li>Secret ingredient-blending method known only to a few employees → protect with? → <strong>D. Trade Secret.</strong></li>
+<li>Property MOST likely protected by a trademark? → <strong>A. A company's unique logo.</strong></li>
+<li>Three-stripes registered for Adidas is a → <strong>trademark.</strong> Telekom Malaysia = <strong>service mark.</strong></li>
+<li>PRIMARY function of CC BY licence? → <strong>B. Allow use, distribution, and modification as long as credit is given.</strong></li>
+<li>Licence allowing modification/redistribution but requiring credit? → <strong>B. Creative Commons Attribution.</strong></li>
+<li>Difference between proprietary &amp; open-source? → <strong>B. Proprietary restricts source code; open-source allows access &amp; modification.</strong></li>
+<li>Licence allowing users to modify &amp; redistribute software freely? → <strong>C. Open-source license.</strong></li>
+<li>Which act requires consent before processing personal data (Malaysia)? → <strong>B. PDPA 2010.</strong></li>
+<li>Which situation most likely violates PDPA 2010? → <strong>C. A company sells customer data to third parties without permission.</strong></li>
+<li>Practice most likely to violate right to privacy? → <strong>B. Collecting user data and sharing with partners without informing users.</strong></li>
+<li>Which law gives legal recognition to digital signatures (Malaysia)? → <strong>D. Digital Signature Act 1997.</strong></li>
+<li>Which law regulates electronic contracts/digital signatures? → <strong>E-Commerce Act 2006</strong> (contracts) / <strong>Digital Signature Act 1997</strong> (signatures).</li>
+<li>NOT a category in Solove's taxonomy? → <strong>Information filtering.</strong></li>
+<li>Information dissemination violation example? → <strong>C. Publishing personal emails of someone without their consent.</strong></li>
+</ol>
+<h3 id="block-4-security-ch-4">Block 4 — Security (Ch 4)</h3>
+<ol start="45">
+<li>Malware that encrypts files and demands payment? → <strong>C. Ransomware.</strong></li>
+<li>Malware that spreads automatically without user action? → <strong>C. Worm.</strong></li>
+<li>A malicious program that copies itself computer-to-computer? → <strong>worm.</strong></li>
+<li>Program that responds to a command-and-control program on an external computer? → <strong>bot.</strong></li>
+<li>Example of grey hat hacking? → <strong>B. Accessing a system illegally to report vulnerabilities.</strong></li>
+<li>Ethically acceptable action for a white hat hacker? → <strong>B. Penetration testing with written permission to improve security.</strong></li>
+<li>Grey hat hackers are described as… → <strong>B. Breaking rules without malicious intent.</strong></li>
+<li>Hacker who exposes vulnerabilities without malicious intent but without permission? → <strong>C. Grey hat.</strong></li>
+<li>BEST represents a DoS attack? → <strong>C. Overloading a website with traffic to shut it down.</strong></li>
+<li>Cyberattack most likely to flood a system with traffic? → <strong>B. DoS attack.</strong></li>
+<li>Primary concern of AI-generated deepfake scams? → <strong>C. Realistic impersonation that can mislead people.</strong></li>
+</ol>
+<h3 id="block-5-professional-ethics-ch-5">Block 5 — Professional ethics (Ch 5)</h3>
+<ol start="56">
+<li>BEST differentiates a profession from a trade? → <strong>C. Professions are governed by strict codes of conduct guiding moral decisions.</strong></li>
+<li>Distinguishes national bodies (MBOT) from international (ACM/IEEE)? → <strong>C. National bodies may have regulatory authority in legal frameworks.</strong></li>
+<li>Main purpose of ACM/IEEE/MBOT? → <strong>C. To set standards and promote ethical behavior in the profession.</strong></li>
+<li>BEST describes a code of ethics? → <strong>B. A set of principles that guide ethical and professional behavior.</strong></li>
+<li>Software engineer using anonymous online code without attribution is… → <strong>B. Unethical — it violates respect for intellectual work in the ACM Code.</strong></li>
+<li>A principle in the ACM Code of Ethics? → <strong>B. Respect privacy.</strong></li>
+<li>An organizational imperative in ACM's Code? → <strong>A. Manage personnel/resources to build systems that improve quality of life.</strong></li>
+<li>Whistleblower Protection Act 2010 provides… → <strong>D. Protection of identity and safeguard against retaliation.</strong></li>
+<li>A questionable motive for whistleblowing? → <strong>A. Avoiding punishment.</strong></li>
+<li>Rocky exposing his firm's bribery on social media is a… → <strong>whistle blower.</strong></li>
+</ol>
+<h3 id="block-6-it-impact-on-work-society-ch-6">Block 6 — IT impact on work &amp; society (Ch 6)</h3>
+<ol start="66">
+<li>Scenario best illustrating an ethical issue from automation? → <strong>B. Robots replacing human workers without retraining options.</strong></li>
+<li>Ethical issue MOST associated with automation? → <strong>A. Job displacement.</strong></li>
+<li>BEST describes the digital divide? → <strong>B. A rural person has no internet access to attend online classes.</strong></li>
+<li>BEST helps reduce the digital divide? → <strong>B. Providing basic IT training and affordable internet access.</strong></li>
+<li>Social divide in tech access is seen between… → <strong>D. All of the above (urban/rural, young/old, educated/less-educated).</strong></li>
+<li>Globalization ethical issue? → <strong>B/A. Unfair conditions for poorer countries / exploiting weaker labor laws.</strong></li>
+<li>Globalization is… → <strong>B. A process of interaction/integration among people, companies, governments, driven by trade &amp; IT.</strong></li>
+<li>Teleworking creates ethical challenges mainly in… → <strong>C. Accountability and employee monitoring.</strong></li>
+<li>Promote workplace well-being by… → <strong>C. Developing tools that allow screen breaks and mental-health monitoring.</strong></li>
+<li>Designing an inclusive learning app for rural students, prioritize… → <strong>C. Low-bandwidth use and multilingual support.</strong></li>
+<li>BEST summarizes the role of IT professionals in society? → <strong>B. To ensure technology benefits people fairly and ethically.</strong></li>
+</ol>
+<hr />
+<hr />
+<h1 id="part-6-special-assignment-1-case-study-mastery">PART 6 — ⭐ SPECIAL: ASSIGNMENT 1 → CASE STUDY MASTERY</h1>
+<blockquote>
+<p><strong>Why this section exists:</strong> Assignment 1 asks you to run ONE real IT incident through SEVEN ethical theories. Section C of your final exam asks you to run ONE scenario through TWO or THREE theories plus the ACM Code. <strong>The assignment is a harder version of the exam question.</strong> If you can do the assignment properly, Section C becomes almost mechanical.</p>
+</blockquote>
+<h2 id="6-1-a-quick-honest-note-on-the-rubric">6.1 A quick, honest note on the rubric</h2>
+<p>Criterion 5 grades <strong>"% of AI Reliance"</strong> — full marks require the slide design, mind map layout, and visuals to be <strong>hand-built</strong>. Criterion 4 requires the mind map to be <strong>handwritten and scanned</strong> (it becomes slide 13). And the news link must be from the <strong>last 6 months</strong>, from <strong>your home country</strong>, which you must source and verify yourself.</p>
+<p>So use this section to <em>understand the reasoning</em>, then build the deliverables yourself. What I can safely help with: checking whether your reasoning for a theory is logically sound, or whether you've mixed up act vs rule utilitarianism. That maps to rubric criteria 1–3 (Logic, Correctness, Clarity), which is where the reasoning marks actually live.</p>
+<h2 id="6-2-the-seven-theory-engine">6.2 The Seven-Theory Engine</h2>
+<p>This is the transferable skill. For <strong>any</strong> case, each theory asks one question. Memorize the question, and the verdict follows.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Theory</th>
+<th>The ONE question it asks</th>
+<th>Typical verdict on corporate misconduct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Ethical Egoism</strong></td>
+<td>Did the actor benefit <em>themselves</em>?</td>
+<td>✅ Usually says <strong>RIGHT</strong> (company profited) — this is the theory that <em>defends</em> the wrongdoer</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Act Utilitarianism</strong></td>
+<td>Did <em>this specific act</em> produce more total happiness than harm?</td>
+<td>❌ Usually <strong>WRONG</strong> (harm to thousands &gt; profit to one firm)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Rule Utilitarianism</strong></td>
+<td>If <em>everyone followed this as a rule</em>, would society be better off?</td>
+<td>❌ <strong>WRONG</strong> ("companies may sell data without consent" as a universal rule destroys trust)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Kantianism</strong></td>
+<td>Can the maxim be universalized? Are people treated as <strong>ends</strong>, not merely <strong>means</strong>?</td>
+<td>❌ <strong>WRONG</strong> (deception can't universalize; users used as means to profit)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Social Contract</strong></td>
+<td>Were the <strong>rights</strong> people agreed to (privacy, consent, fair treatment) honored?</td>
+<td>❌ <strong>WRONG</strong> (violated the implicit agreement + negative right to privacy)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Relativism</strong></td>
+<td>Does the individual/culture involved consider it acceptable?</td>
+<td>🤷 <strong>NO CLEAR ANSWER</strong> — this is the point; it's non-workable</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Divine Command</strong></td>
+<td>Does a religious/higher law forbid it (theft, deceit, harming others)?</td>
+<td>❌ <strong>WRONG</strong>, but only persuasive to believers</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-two-theories-students-always-get-wrong">The two theories students always get wrong</h3>
+<p><strong>Ethical Egoism is not "being selfish is bad."</strong> Under egoism the action is <strong>morally RIGHT</strong> if it served the actor's self-interest. Your job is to state that verdict honestly, <em>then</em> show its weakness (it ignores everyone else and collapses when universalized). Examiners give marks for applying the theory correctly, not for agreeing with it.</p>
+<p><strong>Act vs Rule Utilitarianism must give you two <em>different</em> analyses.</strong> If you write the same paragraph twice, you lose marks.
+- <em>Act:</em> tally benefits and harms of <strong>this one incident</strong>. → "The breach harmed 200,000 users; profit went to one firm. Net harm. Wrong."
+- <em>Rule:</em> evaluate the <strong>general rule</strong> behind it. → "If the rule 'firms may store data unencrypted to save cost' were universally adopted, breaches would be routine and digital commerce would collapse. Wrong."</p>
+<h2 id="6-3-the-verdict-fan-the-structure-to-memorize">6.3 The Verdict Fan — the structure to memorize</h2>
+<pre><code>                      THE INCIDENT
+                    (one documented act)
+                            │
+        ┌──────────┬────────┼────────┬──────────┐
+        │          │        │        │          │
+   [DEFENDS]   [CONDEMNS ON OUTCOME] [CONDEMNS ON PRINCIPLE]
+        │          │        │        │          │
+   Ethical      Act      Rule     Kant    Social Contract
+   Egoism      Util.    Util.              + Divine Command
+        │          │        │        │          │
+        └──────────┴────────┼────────┴──────────┘
+                            │
+                     RELATIVISM
+              (refuses to give an answer —
+               which is itself the finding)
+                            │
+                    YOUR VERDICT
+        (pick one theory + justify as an IT professional)
+</code></pre>
+<p><strong>Three families:</strong> theories that <em>defend</em> (egoism), theories that judge by <em>outcome</em> (act/rule utilitarianism), theories that judge by <em>principle</em> (Kant, social contract, divine command). Relativism sits outside and abstains. If you can place any theory into its family, you can generate its verdict under exam pressure.</p>
+<h2 id="6-4-mapping-the-assignment-onto-section-c">6.4 Mapping the assignment onto Section C</h2>
+<p>Look at what the actual past papers asked, next to the assignment slide it corresponds to:</p>
+<table>
+<thead>
+<tr>
+<th>Assignment slide</th>
+<th>Past-paper exam question it prepares you for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slide 2 — Stakeholder analysis</td>
+<td><em>"Analyze the impact of a malware attack on a company's data security infrastructure"</em> (Special 2024/25)</td>
+</tr>
+<tr>
+<td>Slide 3–9 — One slide per theory</td>
+<td><em>"Using Utilitarianism, evaluate whether the company's decision is ethically justified"</em> [5 marks] + <em>"Apply Kantian ethics to assess moral responsibility"</em> [5 marks] (Sem 1 &amp; 2 2025/26)</td>
+</tr>
+<tr>
+<td>Slide 10 — Theoretical comparison</td>
+<td><em>"Compare and contrast Utilitarianism and Kantianism"</em> [5 marks] (multiple papers)</td>
+</tr>
+<tr>
+<td>Slide 11 — Personal verdict</td>
+<td><em>"In your opinion, what should Sofia do? Explain, considering professional responsibility and consequences"</em> [5 marks] (Sem 2 2024/25)</td>
+</tr>
+<tr>
+<td>Slide 12 — References + professional codes</td>
+<td><em>"Explain TWO (2) principles from the ACM Code of Ethics the company should apply"</em> [5 marks]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The overlap is nearly total.</strong> Slides 3–9, 10 and 11 <em>are</em> Section C parts (a), (b), (c) and (d).</p>
+<h2 id="6-5-the-6-step-drill-do-this-on-your-assignment-case-then-you-can-do-it-on-any-exam-scenario">6.5 The 6-step drill (do this on your assignment case, then you can do it on any exam scenario)</h2>
+<ol>
+<li><strong>State the act in one neutral sentence.</strong> "Company X stored 200,000 users' health records unencrypted and shared them with advertisers without consent." No adjectives — examiners deduct for emotive framing instead of analysis.</li>
+<li><strong>List stakeholders in two columns:</strong> who is <em>harmed</em> / who <em>benefits</em>. This single table feeds every subsequent theory.</li>
+<li><strong>Run the seven questions</strong> from 6.2. Write the verdict <em>before</em> the justification, so your logic can't wander.</li>
+<li><strong>Note where theories clash.</strong> Egoism vs Kant is the sharpest clash and the easiest 5 marks in a comparison question.</li>
+<li><strong>Name the ACM principle(s) breached</strong> — avoid harm, respect privacy, be honest, be fair/don't discriminate, honor property rights.</li>
+<li><strong>Deliver a verdict as an IT professional</strong>, not as a private opinion. The magic phrase: <em>"As a computing professional bound by the ACM Code, my duty to avoid harm and respect privacy outweighs the employer's commercial interest; therefore…"</em></li>
+</ol>
+<h2 id="6-6-exam-condition-timing-for-section-c-20-marks-30-min">6.6 Exam-condition timing for Section C (20 marks / ~30 min)</h2>
+<ul>
+<li>~3 min: read the scenario twice, underline the harm, the consent failure, and any stolen/copied asset.</li>
+<li>~6 min per 5-mark theory part: <strong>1 line stating the theory's rule → 3–4 lines applying it to named facts → 1 line verdict.</strong> Marks come from naming <em>specific facts from the scenario</em>, not from restating the theory.</li>
+<li>~6 min: ACM principles — name it, quote the gist, tie to a fact.</li>
+<li>~5 min: recommendation — 3 concrete, actionable measures + a professional-duty justification.</li>
+</ul>
+<h2 id="6-7-assignment-to-exam-bridging-tips">6.7 Assignment-to-exam bridging tips</h2>
+<ul>
+<li><strong>Your case study is your revision material.</strong> Whatever incident you pick, you'll have rehearsed all seven theories on real facts. In the exam, substitute the exam scenario's facts into the same sentences.</li>
+<li><strong>Do the mind map by hand early.</strong> It's required to be handwritten, and drawing the branches is genuinely how the seven verdicts get into long-term memory. This is the rare case where the "annoying" requirement is the actual study technique.</li>
+<li><strong>Rehearse the two hardest applications</strong>: Ethical Egoism (must produce a <em>defence</em>) and Rule Utilitarianism (must differ from Act). These are the two that separate a 3/5 from a 5/5.</li>
+<li><strong>Slide 11 is your Section C part (d) practice.</strong> Write your personal professional verdict as a paragraph you could reproduce under exam conditions.</li>
+</ul>
+<hr />
+</div><h2 id="final-exam-day-checklist">FINAL EXAM-DAY CHECKLIST</h2>
+<ul>
+<li><span class="cbx"></span> Can define: morality, ethics, society, etiquette (+ illegal vs unethical examples).</li>
+<li><span class="cbx"></span> Can explain all 6 theories + which are workable/non-workable + why.</li>
+<li><span class="cbx"></span> Can apply <strong>Kant (both formulations)</strong> and <strong>Utilitarianism (act/rule)</strong> to any scenario.</li>
+<li><span class="cbx"></span> Can name &amp; explain <strong>3+ ACM Code principles</strong>.</li>
+<li><span class="cbx"></span> Can define + apply <strong>whistleblowing</strong> + De George's factors.</li>
+<li><span class="cbx"></span> Know <strong>copyright vs patent vs trademark vs trade secret</strong> + IT examples.</li>
+<li><span class="cbx"></span> Know <strong>software piracy</strong> types + harms.</li>
+<li><span class="cbx"></span> Know <strong>PDPA 2010</strong> + 2–3 user rights.</li>
+<li><span class="cbx"></span> Know <strong>CC BY</strong> responsibilities.</li>
+<li><span class="cbx"></span> Know <strong>malware types</strong> + <strong>white/grey/black hat</strong> + <strong>DoS</strong>.</li>
+<li><span class="cbx"></span> Know <strong>telework</strong> pros/cons + employer/employee ethics.</li>
+<li><span class="cbx"></span> Know <strong>digital divide, automation, globalization</strong> + how to address each.</li>
+<li><span class="cbx"></span> Rehearsed the <strong>Section C master framework</strong> on one practice scenario.</li>
+</ul>
+<p><em>Good luck — you've got this. 💪</em></p>
+    </div>
+  </main>
+</div>
+<button id="top" aria-label="Back to top">↑</button>
+<script>
+// ---- priority tag injection on headings ----
+document.querySelectorAll('main h1,main h2,main h3').forEach(h=>{
+  let t=h.textContent;
+  const add=(c,l)=>{const s=document.createElement('span');s.className='tag '+c;s.textContent=l;h.appendChild(s);};
+  if(t.includes('🔴')) add('crit','Critical');
+  else if(t.includes('🟠')) add('high','High');
+  else if(t.includes('🟡')) add('med','Medium');
+  if(t.includes('⭐') && !t.includes('🔴')) add('yield','High yield');
+  h.innerHTML = h.innerHTML.replace(/[🔴🟠🟡⭐🎯]/g,'').replace(/HIGH YIELD/g,'').replace(/\s{2,}/g,' ');
+});
+
+// ---- wrap tables for horizontal scroll ----
+document.querySelectorAll('main table').forEach(t=>{
+  const d=document.createElement('div'); d.className='tbl';
+  t.parentNode.insertBefore(d,t); d.appendChild(t);
+});
+
+// ---- MCQ answers: wrap the bolded answer after → ----
+const mcq = document.getElementById('mcq-zone');
+if(mcq){
+  mcq.querySelectorAll('li').forEach(li=>{
+    li.querySelectorAll('strong').forEach(st=>{
+      if(li.textContent.includes('→')){ st.classList.add('ans'); st.title='Click to reveal'; }
+    });
+  });
+  mcq.querySelectorAll('.ans').forEach(a=>a.addEventListener('click',()=>a.classList.toggle('show')));
+}
+function quizMode(on){
+  if(!mcq) return;
+  mcq.classList.toggle('quiz',on);
+  mcq.querySelectorAll('.ans').forEach(a=>a.classList.remove('show'));
+  document.getElementById('qbtn').textContent = on?'Show all answers':'Hide answers · self-test';
+  document.getElementById('qbtn').dataset.on = on?'1':'';
+}
+const qb=document.getElementById('qbtn');
+if(qb) qb.addEventListener('click',()=>quizMode(!qb.dataset.on));
+
+// ---- checklist ----
+document.querySelectorAll('.cbx').forEach(c=>{
+  c.setAttribute('role','checkbox'); c.setAttribute('tabindex','0');
+  const tog=()=>c.classList.toggle('done');
+  c.addEventListener('click',tog);
+  c.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tog();}});
+});
+
+// ---- scrollspy ----
+const links=[...document.querySelectorAll('nav a')];
+const targets=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const spy=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('on'));
+      const m=links.find(l=>l.getAttribute('href')==='#'+e.target.id);
+      if(m){m.classList.add('on');}
+    }
+  });
+},{rootMargin:'0px 0px -78% 0px',threshold:0});
+targets.forEach(t=>spy.observe(t));
+
+// ---- search filter ----
+const si=document.getElementById('q');
+const blocks=[...document.querySelectorAll('main .doc > *')];
+si.addEventListener('input',()=>{
+  const v=si.value.trim().toLowerCase();
+  document.querySelectorAll('main mark').forEach(m=>m.replaceWith(...m.childNodes));
+  if(!v){blocks.forEach(b=>b.classList.remove('hide'));links.forEach(l=>l.classList.remove('hide'));return;}
+  blocks.forEach(b=>b.classList.toggle('hide', !b.textContent.toLowerCase().includes(v)));
+  links.forEach(l=>l.classList.toggle('hide', !l.textContent.toLowerCase().includes(v)));
+});
+
+// ---- mobile menu ----
+const aside=document.querySelector('aside'), scrim=document.querySelector('.scrim');
+document.querySelector('.menubtn').addEventListener('click',()=>{aside.classList.toggle('open');scrim.classList.toggle('on');});
+scrim.addEventListener('click',()=>{aside.classList.remove('open');scrim.classList.remove('on');});
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<960){aside.classList.remove('open');scrim.classList.remove('on');}}));
+
+// ---- to top ----
+const tt=document.getElementById('top');
+addEventListener('scroll',()=>tt.classList.toggle('on',scrollY>700));
+tt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

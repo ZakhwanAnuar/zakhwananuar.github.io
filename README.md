@@ -2,9 +2,9 @@
 
 My personal portfolio and blog, live at **[zakhwananuar.my](https://zakhwananuar.my)** 🌐
 
-If you found this repository, come say hi on the site — it's where I keep my projects, CTF writeups, and the occasional blog post.
+> Cybersecurity student · CTF player · builder of things I can break and learn from.
 
-[![Website preview](assets/images/blog.png)](https://zakhwananuar.my)
+If you found this repository, come say hi on the site — it's where I keep my projects, CTF writeups, and the occasional blog post.
 
 ## 🔗 Visit the site
 
