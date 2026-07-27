@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy &amp; Computing (CGEB4112) — Final Exam Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1E1C; --ink2:#17302C; --paper:#F4F7F5; --card:#FFFFFF;
+  --amber:#F2A900; --amber-deep:#B87600; --green:#178F62; --green-soft:#E4F3EC;
+  --coral:#E4572E; --coral-soft:#FBE7E0; --slate:#586A66; --slate-lt:#849692; --slate-light:#849692;
+  --line:#E1E8E4; --line-strong:#CBD6D1;
+  --amber-soft:#FDF1D6;
+  --shadow:0 1px 2px rgba(15,30,28,.04),0 8px 24px rgba(15,30,28,.06);
+  --shadow-lg:0 4px 12px rgba(15,30,28,.08),0 24px 48px rgba(15,30,28,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,.dsp{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.12;letter-spacing:-.01em}
+.mono{font-family:"JetBrains Mono",monospace}
+a{color:var(--green);text-decoration:none}
+::selection{background:var(--amber);color:var(--ink)}
+
+/* ---------- top nav ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(15,30,28,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:0 22px;height:56px;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none}
+.topbar-inner::-webkit-scrollbar{display:none}
+.brand{font-family:"Space Grotesk";font-weight:700;color:#fff;font-size:15px;letter-spacing:-.02em;white-space:nowrap;margin-right:14px}
+.brand b{color:var(--amber)}
+.navlink{font-family:"Space Grotesk";font-size:13px;font-weight:500;color:#B9C7C2;padding:7px 11px;border-radius:7px;white-space:nowrap;transition:.15s}
+.navlink:hover{color:#fff;background:rgba(255,255,255,.08)}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+section{padding:64px 0;scroll-margin-top:64px}
+.eyebrow{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--amber);display:inline-block}
+h2.sec{font-size:clamp(29px,4.2vw,42px);font-weight:600;letter-spacing:-.025em;margin-bottom:10px}
+.sec-lede{font-size:19px;color:var(--slate);max-width:660px;margin-bottom:8px}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(160deg,#0F1E1C 0%,#123029 55%,#0C1917 100%);color:#EAF0ED;padding:70px 0 60px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(242,169,0,.14) 1px,transparent 0);background-size:26px 26px;opacity:.5;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero .kicker{font-family:"JetBrains Mono";font-size:13px;color:var(--amber);letter-spacing:.04em;margin-bottom:18px}
+.hero h1{font-size:clamp(38px,7vw,74px);font-weight:700;letter-spacing:-.03em;line-height:1.02;margin-bottom:20px}
+.hero h1 .thin{font-weight:400;color:#9FB3AC;display:block;font-size:.5em;letter-spacing:-.01em;margin-top:8px}
+.hero .amber{color:var(--amber)}
+.hero-sub{font-size:20px;color:#B7C7C0;max-width:640px;margin-bottom:36px}
+.stat-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.stat{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:16px 20px;min-width:132px}
+.stat .n{font-family:"Space Grotesk";font-weight:700;font-size:30px;color:#fff;letter-spacing:-.02em}
+.stat .n b{color:var(--amber)}
+.stat .l{font-family:"Space Grotesk";font-size:12px;color:#9FB3AC;text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.hero-note{margin-top:30px;font-family:"Space Grotesk";font-size:13.5px;color:#8EA49C;display:flex;align-items:flex-start;gap:9px;max-width:620px;line-height:1.5}
+.hero-note .dot{color:var(--amber);font-size:18px;line-height:1}
+
+/* ---------- cards / generic ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:26px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* ---------- pills / tags ---------- */
+.tag{display:inline-flex;align-items:center;gap:5px;font-family:"Space Grotesk";font-weight:600;font-size:11.5px;letter-spacing:.03em;padding:3px 9px;border-radius:20px;text-transform:uppercase}
+.t-hot{background:var(--coral-soft);color:var(--coral)}
+.t-amber{background:var(--amber-soft);color:var(--amber-deep)}
+.t-green{background:var(--green-soft);color:var(--green)}
+.t-slate{background:#EDF1EF;color:var(--slate)}
+
+/* ---------- section intro block ---------- */
+.sec-head{margin-bottom:34px}
+/* ---------- analytics: paper timeline table ---------- */
+.ptable{width:100%;border-collapse:collapse;font-family:"Space Grotesk";font-size:13.5px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+.ptable th{background:var(--ink);color:#CFDBD6;font-weight:600;text-align:left;padding:13px 14px;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;position:sticky;top:56px}
+.ptable td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top}
+.ptable tr:nth-child(even) td{background:#FAFCFB}
+.ptable tr.newest td{background:var(--amber-soft)}
+.ptable tr.newest td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
+.ptable .pcode{font-family:"JetBrains Mono";font-size:12px;color:var(--slate)}
+.ptable b{color:var(--ink)}
+.tbl-scroll{overflow-x:auto;border-radius:14px}
+@media(max-width:820px){.ptable{font-size:12.5px}.ptable th,.ptable td{padding:9px 10px}}
+
+/* ---------- heatmap ---------- */
+.heat{width:100%;border-collapse:collapse;font-family:"Space Grotesk";font-size:13px}
+.heat th{font-weight:600;font-size:11px;color:var(--slate);padding:7px 4px;text-align:center;letter-spacing:.02em}
+.heat th.rowlab,.heat td.rowlab{text-align:left;font-size:13px;color:var(--ink);font-weight:600;padding-left:0;width:210px;white-space:nowrap}
+.heat td{text-align:center;padding:4px}
+.heat .cell{display:flex;align-items:center;justify-content:center;height:38px;border-radius:8px;font-weight:700;font-size:13px;color:#fff}
+.heat .h0{background:#EDF1EF;color:#B4C1BC}
+.heat .h1{background:#BFE3D3;color:#0F5A3E}
+.heat .h2{background:#5EBF93;color:#063A26}
+.heat .h3{background:#178F62;color:#fff}
+.heat .h4{background:#C97F00;color:#fff}
+.heat .h5{background:var(--coral);color:#fff}
+.heat-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-family:"Space Grotesk";font-size:12px;color:var(--slate);align-items:center}
+.heat-legend span{display:inline-flex;align-items:center;gap:6px}
+.heat-legend i{width:15px;height:15px;border-radius:4px;display:inline-block}
+
+/* ---------- ranked recurring list ---------- */
+.rank{display:flex;flex-direction:column;gap:12px}
+.ritem{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.ritem .rnum{font-family:"Space Grotesk";font-weight:700;font-size:26px;color:var(--coral);min-width:36px;line-height:1}
+.ritem.a{border-left-color:var(--amber)}.ritem.a .rnum{color:var(--amber-deep)}
+.ritem.g{border-left-color:var(--green)}.ritem.g .rnum{color:var(--green)}
+.ritem .rbody{flex:1}
+.ritem .rq{font-family:"Newsreader";font-size:17px;color:var(--ink);margin-bottom:6px;line-height:1.4}
+.ritem .rq b{font-weight:600}
+.ritem .rmeta{font-family:"Space Grotesk";font-size:12px;color:var(--slate);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.freq{font-family:"JetBrains Mono";font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;background:var(--coral-soft);color:var(--coral)}
+.freq.a{background:var(--amber-soft);color:var(--amber-deep)}
+.freq.g{background:var(--green-soft);color:var(--green)}
+
+/* ---------- prediction callout ---------- */
+.predict{background:linear-gradient(150deg,#17302C,#0F1E1C);color:#EAF0ED;border-radius:16px;padding:30px 30px 26px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.predict h3{color:#fff;font-size:22px;margin-bottom:6px}
+.predict .pl{font-family:"Space Grotesk";font-size:13px;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.predict ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.predict li{display:flex;gap:12px;font-family:"Newsreader";font-size:16.5px;color:#D3DFDA;line-height:1.45}
+.predict li .pk{font-family:"Space Grotesk";font-weight:700;color:var(--amber);font-size:13px;min-width:56px;padding-top:2px;letter-spacing:.02em}
+
+/* ---------- notes accordion ---------- */
+.chapter{background:var(--card);border:1px solid var(--line);border-radius:15px;margin-bottom:16px;box-shadow:var(--shadow);overflow:hidden}
+.ch-head{display:flex;align-items:center;gap:16px;padding:20px 24px;cursor:pointer;user-select:none;transition:.15s}
+.ch-head:hover{background:#FAFCFB}
+.ch-num{font-family:"Space Grotesk";font-weight:700;font-size:14px;color:#fff;background:var(--ink);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chapter.open .ch-num{background:var(--amber);color:var(--ink)}
+.ch-title{flex:1}
+.ch-title .t{font-family:"Space Grotesk";font-weight:600;font-size:19px;letter-spacing:-.01em}
+.ch-title .s{font-family:"Space Grotesk";font-size:12.5px;color:var(--slate);margin-top:2px}
+.ch-toggle{font-family:"Space Grotesk";font-size:22px;color:var(--slate);transition:.25s;flex-shrink:0}
+.chapter.open .ch-toggle{transform:rotate(45deg);color:var(--amber-deep)}
+.ch-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.ch-inner{padding:4px 26px 30px;border-top:1px solid var(--line)}
+.ch-inner h4{font-family:"Space Grotesk";font-weight:600;font-size:16px;margin:24px 0 8px;color:var(--ink2);display:flex;align-items:center;gap:9px}
+.ch-inner h4::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0}
+.ch-inner h4.grn::before{background:var(--green)}
+.ch-inner p{margin:8px 0;color:#26332F}
+.ch-inner ul,.ch-inner ol{margin:8px 0 8px 4px;padding-left:20px}
+.ch-inner li{margin:5px 0;color:#26332F}
+.ch-inner li::marker{color:var(--amber-deep)}
+.kdef{background:#FAFCFB;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+.kdef .term{font-family:"Space Grotesk";font-weight:700;font-size:14px;color:var(--green);letter-spacing:.01em}
+.kdef .term.am{color:var(--amber-deep)}
+.exam-tie{background:var(--amber-soft);border-radius:10px;padding:11px 15px;margin:14px 0;font-family:"Space Grotesk";font-size:13.5px;color:#5A4200;display:flex;gap:10px;line-height:1.5}
+.exam-tie b{color:var(--amber-deep)}
+.exam-tie .ic{font-size:15px;flex-shrink:0}
+.mini-tbl{width:100%;border-collapse:collapse;font-family:"Space Grotesk";font-size:13.5px;margin:14px 0}
+.mini-tbl th{background:var(--ink2);color:#D6E1DC;text-align:left;padding:9px 12px;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.mini-tbl td{padding:9px 12px;border-top:1px solid var(--line);color:#26332F;vertical-align:top}
+.mini-tbl tr:nth-child(even) td{background:#FAFCFB}
+
+/* ---------- MCQ quiz ---------- */
+.quiz-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 18px;box-shadow:var(--shadow)}
+.quiz-bar .qb-label{font-family:"Space Grotesk";font-weight:600;font-size:13px;color:var(--slate)}
+.btn{font-family:"Space Grotesk";font-weight:600;font-size:13px;padding:8px 15px;border-radius:9px;border:1px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--amber);color:var(--amber-deep)}
+.btn.primary{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.btn.primary:hover{background:var(--amber-deep);border-color:var(--amber-deep);color:#fff}
+.qcount{font-family:"JetBrains Mono";font-size:12px;color:var(--slate);margin-left:auto}
+.mcq{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.mcq .qtop{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.mcq .qn{font-family:"Space Grotesk";font-weight:700;font-size:14px;color:var(--amber-deep);background:var(--amber-soft);border-radius:7px;padding:3px 9px;flex-shrink:0}
+.mcq .qtext{font-family:"Newsreader";font-size:17px;color:var(--ink);line-height:1.45;flex:1}
+.mcq .qtags{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{font-family:"Space Grotesk";font-size:14.5px;padding:10px 14px;border:1px solid var(--line);border-radius:9px;cursor:pointer;transition:.13s;display:flex;gap:10px;align-items:flex-start;color:#33403C}
+.opt:hover{border-color:var(--slate-light);background:#FAFCFB}
+.opt .ol{font-weight:700;color:var(--slate)}
+.opt.correct{background:var(--green-soft);border-color:var(--green);color:#0C5C3D}
+.opt.correct .ol{color:var(--green)}
+.opt.wrong{background:var(--coral-soft);border-color:var(--coral);color:#9A2E11}
+.opt.wrong .ol{color:var(--coral)}
+.mcq .why{margin-top:12px;padding:11px 14px;background:#FAFCFB;border-radius:9px;font-family:"Space Grotesk";font-size:13px;color:var(--slate);border-left:3px solid var(--green);display:none;line-height:1.5}
+.mcq.revealed .why{display:block}
+.mcq .why b{color:var(--green)}
+
+/* ---------- model answers ---------- */
+.model{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;box-shadow:var(--shadow);overflow:hidden}
+.model-head{padding:18px 22px;border-bottom:1px solid var(--line);background:#FAFCFB}
+.model-head .mq{font-family:"Newsreader";font-size:18px;color:var(--ink);font-weight:500;line-height:1.4}
+.model-head .mmeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.model-body{padding:18px 22px}
+.model-body h5{font-family:"Space Grotesk";font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--amber-deep);margin:2px 0 10px}
+.model-body p{font-size:16px;margin:6px 0;color:#26332F}
+.model-body ul{margin:8px 0 8px 4px;padding-left:20px}
+.model-body li{margin:6px 0;color:#26332F;font-size:16px}
+.model-body li::marker{color:var(--green)}
+.model-body .points{font-family:"Space Grotesk";font-size:12.5px;color:var(--slate);background:#EDF1EF;border-radius:7px;padding:3px 9px;display:inline-block;margin-top:4px}
+
+/* ---------- checklist ---------- */
+.check{display:flex;flex-direction:column;gap:9px}
+.citem{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 16px;cursor:pointer;transition:.13s;box-shadow:var(--shadow)}
+.citem:hover{border-color:var(--green)}
+.cbox{width:22px;height:22px;border:2px solid var(--line-strong);border-radius:6px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.13s;font-family:"Space Grotesk";font-weight:700;color:#fff;font-size:14px}
+.citem.done .cbox{background:var(--green);border-color:var(--green)}
+.citem.done .ctext{color:var(--slate);text-decoration:line-through}
+.ctext{font-family:"Newsreader";font-size:16.5px;color:var(--ink);line-height:1.4}
+.ctext .ck{font-family:"Space Grotesk";font-weight:600;font-size:12px;color:var(--amber-deep);text-transform:uppercase;letter-spacing:.04em;margin-right:8px}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#8EA49C;padding:44px 0;font-family:"Space Grotesk";font-size:13.5px;text-align:center;line-height:1.7}
+footer b{color:#CFDBD6}
+footer .amber{color:var(--amber)}
+
+/* progress bar */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--green));width:0;z-index:60;transition:width .1s}
+
+.callout{background:var(--green-soft);border-radius:12px;padding:16px 20px;font-family:"Space Grotesk";font-size:14.5px;color:#0C5C3D;line-height:1.55;display:flex;gap:12px}
+.callout.am{background:var(--amber-soft);color:#5A4200}
+.callout .cic{font-size:20px;flex-shrink:0}
+.spacer{height:4px}
+@media(max-width:600px){body{font-size:17px}section{padding:48px 0}.card{padding:20px}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<!-- ===================== TOP NAV ===================== -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">CGEB4112 · <b>Energy&amp;Computing</b></span>
+    <a class="navlink" href="#decoder">Exam format</a>
+    <a class="navlink" href="#analytics">Analytics</a>
+    <a class="navlink" href="#predict">Predictions</a>
+    <a class="navlink" href="#notes">Full notes</a>
+    <a class="navlink" href="#mcq">MCQ bank</a>
+    <a class="navlink" href="#models">Model answers</a>
+    <a class="navlink" href="#checklist">Checklist</a>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">FINAL EXAM REVISION · 8 past papers analysed · Dec 2022 → Dec 2025</div>
+    <h1>Energy &amp; <span class="amber">Computing</span>
+      <span class="thin">Your complete, analysed study guide for CGEB4112 / CGNB422</span>
+    </h1>
+    <p class="hero-sub">Every chapter distilled, every past paper decoded, and the recurring questions ranked by how often they actually show up — so you revise what the examiner keeps asking, not everything at once.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="n"><b>8</b></div><div class="l">Past papers</div></div>
+      <div class="stat"><div class="n"><b>4</b></div><div class="l">Chapters</div></div>
+      <div class="stat"><div class="n">100+</div><div class="l">MCQs mapped</div></div>
+      <div class="stat"><div class="n"><b>3</b></div><div class="l">Sections / paper</div></div>
+      <div class="stat"><div class="n">2h30</div><div class="l">Duration</div></div>
+    </div>
+    <div class="hero-note">
+      <span class="dot">●</span>
+      <span>Newest paper analysed is <b style="color:#EAF0ED">Semester 1, 2025/2026 (Dec 2025)</b> — treat its shape (15 MCQ + 7 discussion + 1 big case study) as the template most likely to face you. Everything here is built from your own uploaded chapter slides and past exams.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== EXAM DECODER ===================== -->
+<section id="decoder">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Know the shape first</div>
+      <h2 class="sec">The exam, decoded</h2>
+      <p class="sec-lede">The paper is always <b>100 marks over 2h30m</b> in three sections. The mark split moves around a little each semester — here's exactly how, so nothing surprises you on the day.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:26px">
+      <div class="card">
+        <span class="tag t-amber">Section A</span>
+        <h3 style="font-size:20px;margin:12px 0 6px">Multiple Choice</h3>
+        <p style="font-size:15.5px;color:var(--slate);font-family:'Space Grotesk'">10–20 questions, <b>15–30 marks</b>. Fast, factual, definition-heavy. Draws evenly from all four chapters. This is where you bank easy marks — the same ~20 facts recur across papers.</p>
+      </div>
+      <div class="card">
+        <span class="tag t-green">Section B</span>
+        <h3 style="font-size:20px;margin:12px 0 6px">Discussion / Terms</h3>
+        <p style="font-size:15.5px;color:var(--slate);font-family:'Space Grotesk'">4–10 questions, <b>30–60 marks</b> — the biggest section. "Explain / describe / compare + give TWO examples." Structured, points-based marking. Master the recurring templates and you own this section.</p>
+      </div>
+      <div class="card">
+        <span class="tag t-slate">Section C</span>
+        <h3 style="font-size:20px;margin:12px 0 6px">Case Study / Essay</h3>
+        <p style="font-size:15.5px;color:var(--slate);font-family:'Space Grotesk'">1 long scenario, <b>20–30 marks</b>, with 3–4 sub-questions. Almost always <b>Malaysia + sustainability/digital transformation</b>. You apply the notes to a passage you read on the spot.</p>
+      </div>
+    </div>
+
+    <h4 style="font-family:'Space Grotesk';font-size:15px;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;margin:8px 0 14px">How every paper was built &nbsp;·&nbsp; oldest → newest</h4>
+    <div class="tbl-scroll">
+    <table class="ptable">
+      <thead><tr>
+        <th>Semester</th><th>Sat</th><th>Section A (MCQ)</th><th>Section B</th><th>Section C</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><b>Sem 1, 2022/23</b><div class="pcode">CGEB4112/CGNB422</div></td><td>Dec 2022</td><td>15 MCQ · 30m</td><td>5 discussion · 50m</td><td>Case: "Computer &amp; Environmental Hazard" (e-waste) · 20m</td></tr>
+        <tr><td><b>Sem 1, 2023/24</b><div class="pcode">CGEB4112/CGNB422</div></td><td>Jan 2024</td><td>10 MCQ · 20m</td><td>7 discussion · 60m</td><td>Case: UN sustainable development / CO₂ · 20m</td></tr>
+        <tr><td><b>Sem 2, 2023/24</b><div class="pcode">CGEB4112/CGNB422</div></td><td>Jun 2024</td><td>20 MCQ · 30m</td><td>10 terms &amp; definitions · 30m</td><td>4 short-answer (trends, value chain, tech, carbon) · 40m</td></tr>
+        <tr><td><b>Special Sem, 2023/24</b><div class="pcode">CGEB4112/CGNB422</div></td><td>Sep 2024</td><td>10 MCQ · 20m</td><td>5 short-answer · 50m</td><td>Essay: Porter's Value Chain + ICT — choose 1 of 2 · 30m</td></tr>
+        <tr><td><b>Sem 1, 2024/25</b><div class="pcode">CGEB4112</div></td><td>Jan 2025</td><td>15 MCQ · 30m</td><td>4 discussion · 50m</td><td>Essay: "EcoEnergy" carbon reduction · 20m</td></tr>
+        <tr><td><b>Sem 2, 2024/25</b><div class="pcode">CGEB4112 (set A)</div></td><td>May 2025</td><td>15 MCQ · 30m</td><td>4 discussion · 50m</td><td>Case: "Sustainable energy beyond 2030" · 20m</td></tr>
+        <tr><td><b>Special Sem, 2024/25</b><div class="pcode">CGEB4112/CGNB422</div></td><td>Aug 2025</td><td>20 MCQ · 30m</td><td>4 terms &amp; definitions · 40m</td><td>Case: "Digitalising Net-Zero" (MICPA-KPMG) · 30m</td></tr>
+        <tr class="newest"><td><b>Sem 1, 2025/26</b> &nbsp;<span class="tag t-hot">Newest</span><div class="pcode">CGEB4112</div></td><td>Dec 2025</td><td>15 MCQ · 15m</td><td>7 discussion · 55m</td><td>Case: "Digitalisation &amp; deregulation" · 30m</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout am" style="margin-top:20px"><span class="cic">◎</span><div><b>Read this pattern:</b> the two most recent papers (Aug &amp; Dec 2025) both put a <b>30-mark case study</b> in Section C and lean on Malaysia's energy transition. Section B is the heaviest scoring block every time. If you're short on revision time, weight it Section&nbsp;B&nbsp;&gt;&nbsp;Section&nbsp;C&nbsp;&gt;&nbsp;Section&nbsp;A by effort — but Section A by speed.</div></div>
+  </div>
+</section>
+<!-- ===================== ANALYTICS ===================== -->
+<section id="analytics" style="background:linear-gradient(180deg,#EDF2EF,#F4F7F5)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The part that saves you time</div>
+      <h2 class="sec">Past-paper analytics</h2>
+      <p class="sec-lede">Eight papers, mapped topic-by-topic. The examiner recycles a surprising amount — some questions appear almost word-for-word across four different semesters. Here's where the marks actually live.</p>
+    </div>
+
+    <!-- HEATMAP -->
+    <div class="card" style="margin-bottom:34px">
+      <h3 style="font-size:19px;margin-bottom:4px">Topic coverage heatmap</h3>
+      <p style="font-size:14.5px;color:var(--slate);font-family:'Space Grotesk';margin-bottom:20px">How heavily each theme was tested across the 8 papers (MCQ + discussion + case study combined). Hotter = asked more often = revise first.</p>
+      <div class="tbl-scroll">
+      <table class="heat">
+        <thead><tr>
+          <th class="rowlab">Theme</th>
+          <th>22/23<br>S1</th><th>23/24<br>S1</th><th>23/24<br>S2</th><th>23/24<br>Sp</th><th>24/25<br>S1</th><th>24/25<br>S2</th><th>24/25<br>Sp</th><th>25/26<br>S1</th>
+          <th style="color:var(--coral)">Weight</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="rowlab">Value chain (Porter, up/mid/down)</td>
+            <td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h5">●●●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h1">·</div></td>
+            <td><div class="cell h5">Very high</div></td></tr>
+          <tr><td class="rowlab">Renewable vs non-renewable</td>
+            <td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h5">Very high</div></td></tr>
+          <tr><td class="rowlab">Smart grid &amp; smart meters</td>
+            <td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h5">Very high</div></td></tr>
+          <tr><td class="rowlab">Tech-in-industry (AR/AI/ML/blockchain)</td>
+            <td><div class="cell h5">●●●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h4">●●</div></td>
+            <td><div class="cell h5">Very high</div></td></tr>
+          <tr><td class="rowlab">Carbon footprint &amp; green computing</td>
+            <td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h4">●●</div></td><td><div class="cell h4">●●</div></td>
+            <td><div class="cell h5">Very high</div></td></tr>
+          <tr><td class="rowlab">Blockchain in energy</td>
+            <td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h1">·</div></td><td><div class="cell h1">·</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h4">High</div></td></tr>
+          <tr><td class="rowlab">Nuclear industry &amp; computing</td>
+            <td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h0">–</div></td><td><div class="cell h2">●</div></td><td><div class="cell h0">–</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h4">High</div></td></tr>
+          <tr><td class="rowlab">IoT &amp; big data / analytics</td>
+            <td><div class="cell h3">●●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h2">●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h4">High</div></td></tr>
+          <tr><td class="rowlab">Digital Twin</td>
+            <td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h0">–</div></td><td><div class="cell h0">–</div></td><td><div class="cell h0">–</div></td><td><div class="cell h0">–</div></td><td><div class="cell h1">·</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h3">Medium</div></td></tr>
+          <tr><td class="rowlab">Energy forms &amp; thermodynamics</td>
+            <td><div class="cell h0">–</div></td><td><div class="cell h0">–</div></td><td><div class="cell h2">●</div></td><td><div class="cell h0">–</div></td><td><div class="cell h1">·</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h3">Medium</div></td></tr>
+          <tr><td class="rowlab">Malaysia policy / regulators (ST, SEDA, EC)</td>
+            <td><div class="cell h1">·</div></td><td><div class="cell h1">·</div></td><td><div class="cell h2">●</div></td><td><div class="cell h1">·</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h2">●</div></td><td><div class="cell h3">●●</div></td>
+            <td><div class="cell h3">Medium</div></td></tr>
+          <tr><td class="rowlab">Deregulation / digitalisation / 6 D's</td>
+            <td><div class="cell h0">–</div></td><td><div class="cell h0">–</div></td><td><div class="cell h2">●</div></td><td><div class="cell h0">–</div></td><td><div class="cell h1">·</div></td><td><div class="cell h1">·</div></td><td><div class="cell h3">●●</div></td><td><div class="cell h5">●●●</div></td>
+            <td><div class="cell h4">Rising</div></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="heat-legend">
+        <span><i style="background:#EDF1EF"></i> Not tested</span>
+        <span><i style="background:#BFE3D3"></i> Light</span>
+        <span><i style="background:#5EBF93"></i> Moderate</span>
+        <span><i style="background:#178F62"></i> Heavy</span>
+        <span><i style="background:#C97F00"></i> Very heavy</span>
+        <span><i style="background:#E4572E"></i> Core / repeated</span>
+      </div>
+    </div>
+
+    <!-- RECURRING QUESTIONS -->
+    <h3 style="font-size:22px;margin-bottom:6px">The questions that keep coming back</h3>
+    <p style="font-size:15.5px;color:var(--slate);font-family:'Space Grotesk';margin-bottom:22px">Ranked by frequency across the 8 papers. If you prepare nothing else for Section B, prepare these.</p>
+    <div class="rank">
+
+      <div class="ritem"><div class="rnum">1</div><div class="rbody">
+        <div class="rq"><b>"Explain the technology in the related industry and give TWO (2) examples of its application."</b> — pick two from: AR in nuclear, AI/ML in digital oilfield, blockchain in electricity, mobile computing in oilfield, drones in O&amp;G.</div>
+        <div class="rmeta"><span class="freq">5 / 8 papers</span> <span class="tag t-hot">Near-guaranteed</span> Sec B · ~10 marks · Ch 3</div>
+      </div></div>
+
+      <div class="ritem"><div class="rnum">2</div><div class="rbody">
+        <div class="rq"><b>Renewable vs non-renewable</b> — "provide TWO (2) differences" (often + Malaysia examples, or + challenges of switching).</div>
+        <div class="rmeta"><span class="freq">4 / 8 papers</span> <span class="tag t-hot">Prepare fully</span> Sec A + B · Ch 1 &amp; 2</div>
+      </div></div>
+
+      <div class="ritem a"><div class="rnum">3</div><div class="rbody">
+        <div class="rq"><b>Upstream / Midstream / Downstream functions</b> — "describe the functions... choose one and give TWO examples of how it can be digitised" (the Petronas system-analyst scenario).</div>
+        <div class="rmeta"><span class="freq a">3 / 8 papers</span> <span class="tag t-amber">Likely</span> Sec B · ~10 marks · Ch 2</div>
+      </div></div>
+
+      <div class="ritem a"><div class="rnum">4</div><div class="rbody">
+        <div class="rq"><b>Nuclear power debate</b> (WNA proponents vs Greenpeace opponents) — challenges of nuclear, + TNB advantages/disadvantages OR measures for public acceptance.</div>
+        <div class="rmeta"><span class="freq a">3 / 8 papers</span> <span class="tag t-amber">Likely</span> Sec B · Ch 3 (nuclear notes)</div>
+      </div></div>
+
+      <div class="ritem a"><div class="rnum">5</div><div class="rbody">
+        <div class="rq"><b>Digital Twin</b> — "describe the term" + "explain how it works, with an example."</div>
+        <div class="rmeta"><span class="freq a">3 / 8 papers</span> <span class="tag t-amber">Likely</span> Sec A + B · Ch 3</div>
+      </div></div>
+
+      <div class="ritem a"><div class="rnum">6</div><div class="rbody">
+        <div class="rq"><b>Smart grid</b> — "explain what a smart grid is / how it improves efficiency &amp; reliability" and the roles of smart meters, IoT edge devices &amp; analytics engines.</div>
+        <div class="rmeta"><span class="freq a">4 / 8 papers</span> <span class="tag t-amber">Likely</span> Sec A + B · Ch 3</div>
+      </div></div>
+
+      <div class="ritem g"><div class="rnum">7</div><div class="rbody">
+        <div class="rq"><b>Carbon footprint impacts + ways to reduce</b>, and <b>Green Computing</b> — "describe the term + FOUR ways to adopt it." (Computing footprint definition appears too.)</div>
+        <div class="rmeta"><span class="freq g">4 / 8 papers</span> <span class="tag t-green">Solid bet</span> Sec B · Ch 4</div>
+      </div></div>
+
+      <div class="ritem g"><div class="rnum">8</div><div class="rbody">
+        <div class="rq"><b>Electricity value chain in Malaysia</b> — "describe the primary activities from generation to distribution" (sometimes "with one labelled illustration").</div>
+        <div class="rmeta"><span class="freq g">3 / 8 papers</span> <span class="tag t-green">Solid bet</span> Sec B · Ch 2</div>
+      </div></div>
+
+    </div>
+
+    <div class="callout" style="margin-top:24px"><span class="cic">✚</span><div><b>Recycled MCQ facts</b> that appeared in 3–4 papers each — memorise the answer, not the wording: <b>Self-healing grid</b> · <b>Blockchain components = I, III, IV</b> (apps, sensors, smart meters) · <b>GIS locates distribution components</b> · <b>Big Data = Variety, Volume, Velocity</b> · <b>Smart grid = bidirectional flow</b> · <b>Fossil fuel = non-renewable</b> · <b>INVALID value-chain statements = I and IV</b>. All are in the MCQ bank below.</div></div>
+  </div>
+</section>
+<!-- ===================== PREDICTIONS ===================== -->
+<section id="predict">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">If I had to bet</div>
+      <h2 class="sec">Most-likely exam shape</h2>
+      <p class="sec-lede">Built from the two newest papers (Aug &amp; Dec 2025) plus the recurring patterns. Not a leak — a probability map. Prepare these and you've covered the high-frequency mass of the paper.</p>
+    </div>
+    <div class="grid g2">
+      <div class="predict">
+        <div class="pl">Section A &amp; B — expect these</div>
+        <h3>High-probability questions</h3>
+        <ul style="margin-top:16px">
+          <li><span class="pk">SEC A</span><span>~15 MCQs spread across all chapters. Guaranteed recyclers: self-healing grid, blockchain components (I,III,IV), GIS in distribution, Big Data 3 V's, bidirectional smart grid, carbon-footprint definition, a value-chain "INVALID statement" item.</span></li>
+          <li><span class="pk">SEC B</span><span>The "explain a technology in an industry + 2 examples" question — <b>almost certain</b>. Have AR-in-nuclear, AI-in-oilfield, and blockchain-in-electricity ready.</span></li>
+          <li><span class="pk">SEC B</span><span>One of: renewable vs non-renewable differences · Digital Twin (define + how it works) · Green Computing (define + 4 practices) · smart-grid component roles.</span></li>
+          <li><span class="pk">SEC B</span><span>A nuclear question (debate / challenges / TNB going nuclear) OR an IoT question (data types collected + energy examples).</span></li>
+          <li><span class="pk">SEC B</span><span>First Law of Thermodynamics / conservation of energy — explain with an example (appeared newest paper).</span></li>
+        </ul>
+      </div>
+      <div class="predict" style="background:linear-gradient(150deg,#1a2b18,#0f1e14)">
+        <div class="pl" style="color:#7BD6A6">Section C — the case study</div>
+        <h3>What the scenario will look like</h3>
+        <ul style="margin-top:16px">
+          <li><span class="pk" style="color:#7BD6A6">THEME</span><span>A <b>Malaysia energy-transition</b> passage: net-zero 2050, digitalisation, deregulation, renewables beyond 2030, or ESG. You read it cold and apply your notes.</span></li>
+          <li><span class="pk" style="color:#7BD6A6">Q1</span><span>Define 2 terms from the passage (e.g. deregulation, digitalisation) — pure recall.</span></li>
+          <li><span class="pk" style="color:#7BD6A6">Q2</span><span>Describe ONE benefit / key renewable source / barrier — short application.</span></li>
+          <li><span class="pk" style="color:#7BD6A6">Q3</span><span>Give TWO examples of how digitalisation/IoT/AI helps a named company (usually TNB or Petronas).</span></li>
+          <li><span class="pk" style="color:#7BD6A6">Q4</span><span>The big one (10 marks): "explain how X and Y together create a smarter/greener market" — needs 3+ points with examples. Structure &gt; length.</span></li>
+        </ul>
+        <div style="margin-top:18px;font-family:'Space Grotesk';font-size:13px;color:#9FB3AC;border-top:1px solid rgba(255,255,255,.1);padding-top:14px">Tip: for the case study you're graded on <b style="color:#7BD6A6">applying course concepts to the passage</b> — always name a real Malaysian example (TNB smart meters, Petronas Kasawari CCS, LSS, NEM, MyRER) to lift your marks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===================== FULL NOTES ===================== -->
+<section id="notes" style="background:linear-gradient(180deg,#F4F7F5,#EDF2EF)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The complete syllabus, distilled</div>
+      <h2 class="sec">Full chapter notes</h2>
+      <p class="sec-lede">Everything from your four chapter decks, rewritten for revision: key definitions boxed, Malaysia-specific facts pulled out, and an <span style="color:var(--amber-deep);font-weight:600">exam tie-in</span> on each topic showing how it's actually been asked. Tap a chapter to open.</p>
+    </div>
+
+    <!-- ============ CHAPTER 1 ============ -->
+    <div class="chapter open">
+      <div class="ch-head" onclick="toggleCh(this)">
+        <div class="ch-num">1</div>
+        <div class="ch-title"><div class="t">Introduction to Energy &amp; Computing</div><div class="s">Forms of energy · measurement · sources · Malaysia's landscape · digitalisation</div></div>
+        <div class="ch-toggle">+</div>
+      </div>
+      <div class="ch-body"><div class="ch-inner">
+
+        <h4>What energy is</h4>
+        <div class="kdef"><span class="term">Energy</span> — the capacity to do work or produce heat. It exists in many forms and can be transformed between them but <b>cannot be created or destroyed</b> (First Law of Thermodynamics).</div>
+        <ul>
+          <li><b>Power</b> = rate of energy transfer (watts). <b>Capacity</b> = maximum power output. <b>Efficiency</b> = useful output ÷ input energy × 100%.</li>
+          <li>All conversions lose some energy as heat — the <b>Second Law of Thermodynamics</b>.</li>
+        </ul>
+
+        <h4>Forms of energy</h4>
+        <table class="mini-tbl">
+          <thead><tr><th>Form</th><th>What it is / example</th></tr></thead>
+          <tbody>
+            <tr><td><b>Kinetic</b></td><td>Energy of motion — wind, flowing water, a moving car (powers turbines &amp; dams).</td></tr>
+            <tr><td><b>Potential</b></td><td>Stored energy from position/state — water behind a dam, chemical bonds in fuel. Gravitational PE depends on <b>height, mass &amp; gravitational strength</b>.</td></tr>
+            <tr><td><b>Thermal (heat)</b></td><td>Energy from molecular motion / temperature difference — drives steam turbines.</td></tr>
+            <tr><td><b>Chemical</b></td><td>Stored in molecular bonds — batteries, food, fossil fuels.</td></tr>
+            <tr><td><b>Nuclear</b></td><td>From fission/fusion of atoms — splitting uranium releases heat to make steam.</td></tr>
+            <tr><td><b>Others</b></td><td>Mechanical (kinetic + potential), electrical, light (photons), magnetic.</td></tr>
+          </tbody>
+        </table>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Asked as:</b> MCQ "energy due to motion = kinetic", "mechanical energy example = a car moving up a hill", "movement of particles due to temperature = thermal". And Section B: <b>"Explain the Law of Conservation of Energy with an example"</b> (newest paper, 5 marks).</div></div>
+
+        <h4>Measuring energy</h4>
+        <ul>
+          <li><b>Joule (J)</b> — SI unit. <b>Kilowatt-hour (kWh)</b> — electricity billing (1 kWh = 3.6 million J). <b>BTU</b> — heating/fuel. <b>Calorie</b> — food energy.</li>
+        </ul>
+
+        <h4 class="grn">Global energy sources (share of consumption)</h4>
+        <ul>
+          <li>Oil <b>31%</b> · Coal <b>27%</b> · Natural gas <b>24%</b> · Renewables <b>12%</b> (fastest growing) · Nuclear <b>6%</b> (zero-carbon but waste challenges).</li>
+          <li><b>Fossil fuels</b> (oil, gas, coal) = non-renewable, formed over millions of years from plant/animal remains. Reliable, not weather-dependent, but finite &amp; polluting.</li>
+        </ul>
+
+        <h4 class="grn">Renewable &amp; emerging sources</h4>
+        <ul>
+          <li><b>Solar</b> (PV cells / thermal), <b>Wind</b> (turbines), <b>Hydropower</b> (largest renewable electricity source).</li>
+          <li>Emerging: <b>Hydrogen</b> (green H₂ via electrolysis), <b>Geothermal</b>, <b>Bioenergy</b>, <b>Ocean/tidal</b>.</li>
+          <li>Disadvantage of most renewables = <b>unreliable / intermittent supply</b> → needs storage &amp; smart grids.</li>
+        </ul>
+
+        <h4>Energy storage &amp; grid integration</h4>
+        <p>Critical for managing renewable intermittency: <b>battery storage</b> (lithium-ion, flow), <b>pumped hydro</b>, <b>thermal storage</b>, and <b>smart grid</b> technologies for monitoring &amp; control.</p>
+
+        <h4 class="grn">Malaysia's energy landscape — the facts examiners love</h4>
+        <ul>
+          <li>~90% energy self-sufficiency; energy sector ≈ <b>15% of GDP</b> (some slides cite up to 28% incl. supply chain); 80,000+ jobs.</li>
+          <li><b>PETRONAS</b> — state oil &amp; gas company, both operator &amp; regulator, operates in 30+ countries.</li>
+          <li>~3.6 billion barrels oil, 42 trillion cubic feet gas. ~45% of electricity from <b>coal</b> (mostly imported).</li>
+          <li>Responsible for ~<b>80% of national greenhouse-gas emissions</b> → central to sustainability plans.</li>
+          <li>Target: <b>31% renewable capacity by 2025, 40% by 2035</b>.</li>
+        </ul>
+        <div class="kdef"><span class="term am">Key Malaysian policies</span> National Energy Transition Roadmap (<b>NETR</b>, 2023) · Net Energy Metering (<b>NEM</b>) · Large Scale Solar (<b>LSS</b>) · Corporate Green Power Programme (<b>CGPP</b>) · Renewable Energy Act 2011 (Feed-in Tariff) · Malaysia Renewable Energy Roadmap (<b>MyRER</b>) · Low Carbon Nation Aspiration 2040.</div>
+
+        <h4>The four "grid generations" (digitalisation)</h4>
+        <ol>
+          <li><b>Traditional grid</b> — one-way flow, manual control.</li>
+          <li><b>Automated grid</b> — digital monitoring, SCADA, automated switching.</li>
+          <li><b>Interactive grid</b> — two-way flow, distributed generation, smart meters, demand response.</li>
+          <li><b>Intelligent grid</b> — AI-optimised, self-healing, predictive, seamless renewable integration.</li>
+        </ol>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Asked as:</b> "smart grid allows a ___ flow of energy and data" → <b>bidirectional</b>. And the definition of a <b>self-healing grid</b> (self-recovers after natural disaster/human error) — this MCQ appears in <b>4 papers</b>.</div></div>
+
+        <h4>Computing in energy — the big picture</h4>
+        <p>Computing = hardware + software + networks + data. In industry it extends to <b>Operational Technology (OT)</b>, converging with IT via <b>IoT</b>. Fundamental elements of digital tech: <b>Data · Analytics · Connectivity</b>. Digitalisation functions: <b>Monitor → Analyse → Predict → Operate</b>. Top digital technologies transforming energy: <b>AI/ML, blockchain, IoT, cloud, 5G</b>.</p>
+
+      </div></div>
+    </div>
+
+    <!-- ============ CHAPTER 2 ============ -->
+    <div class="chapter">
+      <div class="ch-head" onclick="toggleCh(this)">
+        <div class="ch-num">2</div>
+        <div class="ch-title"><div class="t">Energy Industry Value Chain in Malaysia</div><div class="s">Porter's value chain · electricity vs oil &amp; gas · renewable energy types</div></div>
+        <div class="ch-toggle">+</div>
+      </div>
+      <div class="ch-body"><div class="ch-inner">
+
+        <h4>Porter's Value Chain (1985)</h4>
+        <div class="kdef"><span class="term">Value chain</span> — the full range of activities an organisation performs to create value for customers, from raw materials to final delivery. Every step adds value; analysing them reveals where to cut cost, differentiate, and build competitive advantage.</div>
+        <table class="mini-tbl">
+          <thead><tr><th>Primary activities</th><th>Support activities</th></tr></thead>
+          <tbody>
+            <tr><td>Inbound logistics</td><td>Firm infrastructure (planning, finance, quality)</td></tr>
+            <tr><td>Operations / production</td><td>Human Resource management</td></tr>
+            <tr><td>Outbound logistics</td><td>Technology / ICT development</td></tr>
+            <tr><td>Marketing &amp; sales</td><td>Procurement (purchasing inputs)</td></tr>
+            <tr><td>Service</td><td></td></tr>
+          </tbody>
+        </table>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Classic MCQ trap</b> — "Identify the INVALID statements": statement I ("primary activities <i>are</i> support activities") and statement IV ("value chain shouldn't interact with up/downstream") are both false → answer is <b>I and IV</b>. Also: Procurement = the support activity that acquires inputs; ICT reduces IT cost &amp; keeps systems reliable.</div></div>
+
+        <h4 class="grn">Energy value chain — three stages</h4>
+        <p><b>Upstream</b> = exploration &amp; extraction · <b>Midstream</b> = processing &amp; transport · <b>Downstream</b> = distribution, retail &amp; consumption.</p>
+
+        <h4>Electricity value chain (Malaysia)</h4>
+        <table class="mini-tbl">
+          <thead><tr><th>Stage</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td><b>Generation</b></td><td>Thermal (coal + gas) ≈78%, hydro ≈17%, solar/renewables ≈5%. Key players: TNB GenCo, IPPs.</td></tr>
+            <tr><td><b>Transmission</b></td><td>Bulk transfer over the <b>National Grid</b> at 132kV–500kV; run by TNB's Grid System Operator. (Overhead lines cheapest; underground cable where space is tight / submarine.)</td></tr>
+            <tr><td><b>Distribution</b></td><td>The "middle mile" — steps voltage down (11–33kV then 240–415V) via 500+ substations &amp; transformers to consumers.</td></tr>
+            <tr><td><b>Retail &amp; end-use</b></td><td>Tariffs: Domestic (TD), Commercial (TC), Industrial (TI), Agriculture (TF), Street lighting (TL). Smart-meter rollout (9M+ meters), myTNB app.</td></tr>
+          </tbody>
+        </table>
+        <p>Key players: <b>TNB</b> (Peninsular), <b>Sarawak Energy (SEB)</b>, <b>Sabah Electricity (SESB)</b>, and <b>IPPs</b> (Independent Power Producers = private companies that generate electricity for sale).</p>
+
+        <h4>Oil &amp; Gas value chain (Malaysia)</h4>
+        <table class="mini-tbl">
+          <thead><tr><th>Stage</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td><b>Upstream</b> (E&amp;P)</td><td>Explore → drill → produce. High risk, high capital, long lead times, tech-intensive. Fields: Tapis, Kikeh, Gumusut-Kakap. Tech: EOR, 3D/4D seismic, deepwater drilling, PSCs.</td></tr>
+            <tr><td><b>Midstream</b></td><td>Shipping, pipelines, storage. PETRONAS LNG Complex Bintulu (30 MTPA); Peninsular Gas Utilisation (PGU) pipeline &gt;2,500km.</td></tr>
+            <tr><td><b>Downstream</b></td><td>Refining, petrochemicals, retail. Refineries: Melaka, Terengganu, RAPID Pengerang; 1,000+ PETRONAS stations.</td></tr>
+          </tbody>
+        </table>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Repeat question (3 papers):</b> "As a system analyst for Petronas, describe the functions of Upstream / Midstream / Downstream, then choose one and give TWO examples of how it can be digitised." Model answer is in the <a href="#models">Model answers</a> section.</div></div>
+
+        <h4 class="grn">Renewable energy — five types (know the sub-types)</h4>
+        <table class="mini-tbl">
+          <thead><tr><th>Source</th><th>Sub-types / notes</th></tr></thead>
+          <tbody>
+            <tr><td><b>Bioenergy</b></td><td>Biomass (wood, crop waste) · Biogas (methane from rotting waste/POME/landfill) · Biofuel (bioethanol, biodiesel).</td></tr>
+            <tr><td><b>Wind</b></td><td>Utility-scale · Offshore (stronger, steadier wind) · Distributed (small/residential).</td></tr>
+            <tr><td><b>Hydropower</b></td><td>Run-of-river · Storage (dam + reservoir) · Pumped storage (peak load) · Offshore (tidal/wave).</td></tr>
+            <tr><td><b>Solar</b></td><td><b>Passive</b> (no devices, building design) vs <b>Active</b> (uses air/liquid + panels to collect/store/convert).</td></tr>
+            <tr><td><b>Geothermal</b></td><td>Heat from beneath the Earth boils water → steam → turbine. Low emissions if water re-injected.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>RE integration policies &amp; the future</h4>
+        <ul>
+          <li><b>Feed-in Tariff (FiT)</b> — sell RE to utility at a guaranteed premium (Renewable Energy Act 2011).</li>
+          <li><b>Net Energy Metering (NEM)</b> — install solar for self-use, export excess to the grid (NEM 1.0→3.0).</li>
+          <li><b>Large Scale Solar (LSS)</b> — competitive bidding; prices fell from RM0.41 → below RM0.24/kWh.</li>
+          <li>Future: smart grids, energy storage, RE expansion (31%/40%), ASEAN Power Grid interconnection.</li>
+          <li>O&amp;G future: digital oilfields, renewables diversification, hydrogen, <b>Carbon Capture &amp; Storage (Kasawari CCS)</b>, Net Zero 2050.</li>
+        </ul>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Asked as:</b> "RE incentive that lets individuals sell electricity back to the grid" → <b>NEM</b>. "Solar PV panel function" → convert sunlight to electricity. "Active solar system" → uses air/liquid to collect &amp; store. "Temenggor Dam" → hydro power station.</div></div>
+
+      </div></div>
+    </div>
+    <!-- ============ CHAPTER 3 ============ -->
+    <div class="chapter">
+      <div class="ch-head" onclick="toggleCh(this)">
+        <div class="ch-num">3</div>
+        <div class="ch-title"><div class="t">Roles of Computing in the Energy Industry</div><div class="s">Blockchain · smart grid &amp; IoT · big data &amp; AI · + the nuclear supplement</div></div>
+        <div class="ch-toggle">+</div>
+      </div>
+      <div class="ch-body"><div class="ch-inner">
+
+        <p style="font-family:'Space Grotesk';font-size:13px;color:var(--slate);background:#EDF1EF;border-radius:8px;padding:8px 12px;display:inline-block">This is the highest-yield chapter for Section B. Three parts + a nuclear add-on.</p>
+
+        <h4>Part 1 — Blockchain &amp; security</h4>
+        <div class="kdef"><span class="term">Blockchain</span> — a distributed ledger that records transactions across many computers. Transparent, immutable, uses consensus mechanisms (no central authority) and cryptographic encryption. Enables direct <b>peer-to-peer</b> energy transactions without intermediaries.</div>
+        <p><b>How it works:</b> transaction initiation → block creation → distributed verification (encrypted, copied to many nodes) → consensus confirmation.</p>
+        <ul>
+          <li><b>Components of a blockchain-based energy system:</b> smartphone apps, sensor technology, smart meters (traders &amp; banks are <i>not</i> core) → the recurring MCQ answer is <b>I, III, IV</b>.</li>
+          <li><b>Electricity uses:</b> peer-to-peer trading (prosumers), billing/micropayments, Renewable Energy Certificates, grid management, EV charging, customer switching.</li>
+          <li><b>Oil &amp; gas uses:</b> supply-chain tracking, smart contracts (joint ventures, royalties), trading &amp; settlement, compliance/certification.</li>
+          <li><b>Security benefits:</b> no single point of failure, identity management, data integrity (immutable), transparency/auditability.</li>
+          <li><b>Challenges:</b> scalability, energy use of consensus, legacy integration, interoperability, unclear regulation.</li>
+        </ul>
+        <div class="callout am"><span class="cic">▣</span><div><b>Case studies to name:</b> <b>Brooklyn Microgrid</b> (Ethereum-based P2P solar trading between neighbours) and the <b>OOC Oil &amp; Gas Blockchain Consortium</b> (Chevron, ExxonMobil, Shell — cut admin costs 30–50%).</div></div>
+
+        <h4 class="grn">Part 2 — Smart grid &amp; IoT</h4>
+        <div class="kdef"><span class="term">Smart grid</span> — an electricity network that intelligently integrates all users (generators, consumers, prosumers) to deliver sustainable, economic, secure supply. Automated, two-way flow of energy <i>and</i> data, with digital meters, sensors, control systems and analytics.</div>
+        <div class="kdef"><span class="term">Internet of Things (IoT)</span> — a network connecting uniquely identifiable "things" (sensors, meters, valves, transformers) to the internet so their state can be monitored and changed anytime, anywhere.</div>
+        <p><b>IoT architecture:</b> Edge devices (sensors) → IoT hub (auth, encryption, comms) → Storage → Analytics engines → Actions &amp; presentation (dashboards, alerts, control).</p>
+        <div class="kdef"><span class="term am">Smart meter</span> — an advanced meter that records consumption in short intervals (15–60 min), communicates automatically to the utility, and supports two-way communication + remote disconnect. TNB plans <b>9.1 million</b> smart meters. Benefits: accurate billing, outage detection, theft prevention, demand response, renewable integration.</div>
+        <ul>
+          <li><b>IoT in electricity:</b> asset performance management, renewable integration, customer efficiency, demand response, automatic meter reading, outage management.</li>
+          <li><b>IoT in oil &amp; gas:</b> upstream well/reservoir monitoring, midstream pipeline leak detection, refinery process control, logistics tracking.</li>
+          <li><b>Smart grid challenges:</b> cybersecurity, legacy integration, regulation lag, privacy of consumption data, high upfront cost/ROI.</li>
+        </ul>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Asked as:</b> "compare the roles of smart meters, IoT edge devices &amp; analytics engines" and "how do smart grids improve energy efficiency &amp; reliability?" — plus MCQs on demand response (adjusts demand to match supply) and AI predictive maintenance (detects faults before failure).</div></div>
+
+        <h4>Part 3 — Big data &amp; AI</h4>
+        <div class="kdef"><span class="term">Big Data — the 5 V's</span> <b>Volume</b> (huge amounts) · <b>Velocity</b> (real-time streaming) · <b>Variety</b> (structured + unstructured) · <b>Veracity</b> (quality/accuracy) · <b>Value</b> (turning data into insight). <span style="color:var(--coral)">MCQ recurring answer = Variety, Volume, Velocity.</span></div>
+        <table class="mini-tbl">
+          <thead><tr><th>Analytics type</th><th>Question it answers</th></tr></thead>
+          <tbody>
+            <tr><td><b>Descriptive</b></td><td>What happened? (dashboards, reports)</td></tr>
+            <tr><td><b>Diagnostic</b></td><td>Why did it happen? (root cause)</td></tr>
+            <tr><td><b>Predictive</b></td><td>What might happen? (ML forecasting, failure prediction)</td></tr>
+            <tr><td><b>Prescriptive</b></td><td>What should we do? (optimisation, AI recommendations)</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li><b>Machine learning types:</b> supervised (labelled → forecasting), unsupervised (patterns → anomaly detection), reinforcement (trial &amp; error → trading, control), deep learning (neural nets → seismic, imagery).</li>
+          <li><b>AI in electricity:</b> load forecasting, grid stability, renewable forecasting, predictive maintenance.</li>
+          <li><b>AI in oil &amp; gas:</b> exploration (seismic), production optimisation, refinery control, trading &amp; risk.</li>
+        </ul>
+        <div class="callout"><span class="cic">▣</span><div><b>AI case studies:</b> <b>BP Plant Operations Advisor</b> (200,000+ sensors, −30% unplanned downtime) &amp; <b>Google DeepMind × UK National Grid</b> (+20% wind-forecast accuracy).</div></div>
+        <div class="kdef"><span class="term am">Digital Twin</span> — a virtual, physics- and data-based replica of a physical asset/system that models its properties &amp; interactions, enabling simulation, predictive maintenance and optimisation without touching the real system. <i>Example:</i> a digital twin of a wind turbine predicts gearbox failure from live sensor data.</div>
+
+        <h4 class="grn">Chapter 3 supplement — the Nuclear industry &amp; computing</h4>
+        <p>Nuclear = controlled <b>fission</b> of uranium → heat → steam → turbine → electricity. Reliable low-carbon <b>baseload</b> power (also medical, research, defence uses).</p>
+        <table class="mini-tbl">
+          <thead><tr><th>Nuclear challenge</th><th>How computing helps</th></tr></thead>
+          <tbody>
+            <tr><td>Economic viability</td><td>Optimisation &amp; predictive maintenance cut costs</td></tr>
+            <tr><td>Safety assurance</td><td>Real-time monitoring, automated alerts, incident (post-trip) analysis</td></tr>
+            <tr><td>Waste management</td><td>Tracking, modelling of disposal &amp; fuel cycle</td></tr>
+            <tr><td>Proliferation concerns</td><td>Safeguards, access control, secure systems</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li><b>Key computing applications:</b> reactor-core monitoring (neutron flux, temperature, 3D core visualisation), radiation-monitoring networks (dosimetry, environmental surveillance), <b>Digital Twin</b> technology, full-scope control-room <b>simulators</b> for operator training.</li>
+        </ul>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Asked as (3 papers):</b> the WNA-vs-Greenpeace debate — "discuss TWO challenges for the nuclear sector", "if TNB used nuclear, TWO advantages + TWO disadvantages + biggest challenge", and "measures to maximise public acceptance." Model answer below.</div></div>
+
+      </div></div>
+    </div>
+
+    <!-- ============ CHAPTER 4 ============ -->
+    <div class="chapter">
+      <div class="ch-head" onclick="toggleCh(this)">
+        <div class="ch-num">4</div>
+        <div class="ch-title"><div class="t">Carbon Footprint</div><div class="s">Carbon / computing / digital footprints · impacts · green computing</div></div>
+        <div class="ch-toggle">+</div>
+      </div>
+      <div class="ch-body"><div class="ch-inner">
+
+        <h4>Carbon footprint</h4>
+        <div class="kdef"><span class="term">Carbon footprint</span> — the total amount of greenhouse gases (expressed as CO₂) produced directly and indirectly to support human activities. (A <b>greenhouse gas</b> absorbs &amp; emits thermal infrared radiation — CO₂, methane, water vapour, nitrous oxide, ozone. Without them Earth would average about −18°C.)</div>
+        <p><b>Main sources</b> for consumers: household energy use, transportation, food &amp; agriculture, and industry (the goods we buy). A footprint maps where energy is used and lost, and the GHGs emitted — revealing efficiency opportunities.</p>
+        <h4>Impacts of carbon footprint</h4>
+        <ul>
+          <li><b>Global warming</b> — rising temperatures.</li>
+          <li><b>Sea-level rise</b> — from melting polar ice caps.</li>
+          <li><b>Extreme weather events</b> — heavy floods, storms. (Also: loss of biodiversity, ocean acidification.)</li>
+        </ul>
+        <h4 class="grn">Ways to reduce carbon footprint</h4>
+        <ul>
+          <li><b>Energy efficiency</b> — efficient appliances, LED bulbs, Energy Star products.</li>
+          <li><b>Renewable energy</b> — solar, wind, hydro instead of fossil fuels.</li>
+          <li><b>Sustainable transport</b> — carpooling, public transport, EVs.</li>
+          <li><b>Waste reduction</b> — recycling, repurposing.</li>
+        </ul>
+
+        <h4>The footprint family — don't confuse these</h4>
+        <table class="mini-tbl">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><b>Computing footprint</b></td><td>Environmental impact of producing, using &amp; disposing of computers/IT — energy use, CO₂, e-waste. (Software also has a "memory footprint".)</td></tr>
+            <tr><td><b>Digital footprint</b></td><td>The trail of data you leave online (social media, searches, purchases).</td></tr>
+            <tr><td><b>Energy footprint</b></td><td>The GHG/climate impact tied to energy consumed.</td></tr>
+          </tbody>
+        </table>
+        <p><b>Where the computing footprint comes from:</b> device energy consumption (data centres, personal devices), manufacturing impact, e-waste disposal, and network/internet infrastructure. ICT ≈ <b>2% of world CO₂ emissions</b>; energy can be ~30% of data-centre cost.</p>
+
+        <h4 class="grn">Green Computing</h4>
+        <div class="kdef"><span class="term">Green Computing</span> — the environmentally responsible and eco-friendly use of computers &amp; IT resources: designing, engineering, manufacturing, using and disposing of computing devices to reduce environmental impact.</div>
+        <p><b>Goals:</b> reduce energy consumption · minimise e-waste · sustainable manufacturing · optimise resource use.</p>
+        <p><b>Practices to adopt (great for a "FOUR ways" question):</b></p>
+        <ul>
+          <li>Enable <b>power-saving / sleep modes</b> and buy energy-efficient (high Energy-Star-rated) hardware.</li>
+          <li><b>Server virtualisation</b> &amp; cloud consolidation to cut data-centre energy.</li>
+          <li>Responsible <b>e-waste recycling</b> at certified centres; repair/reuse/repurpose devices.</li>
+          <li>Reduce printing, use efficient software, and power down idle equipment.</li>
+        </ul>
+        <div class="exam-tie"><span class="ic">◎</span><div><b>Asked as (newest paper):</b> "Describe the term Green Computing (2m)" + "Describe FOUR ways to adopt green-computing practices to reduce carbon footprint (8m)." Also the e-waste case study (Chapter opener "Computer &amp; Environmental Hazard").</div></div>
+
+        <h4>Energy Star &amp; e-waste</h4>
+        <ul>
+          <li><b>Energy Star</b> — helps consumers/business save money, protects the environment via energy-efficient products, and identifies top-performing cost-effective products (MCQ answer: <b>all of the above</b>). In Malaysia the rating runs 2★ (minimal) to 5★ (max efficiency).</li>
+          <li><b>E-waste</b> — old computers contain 1,000+ materials, many toxic (lead, brominated flame retardants/PBDEs). Improper disposal harms health &amp; environment; recovery of gold/copper is valuable.</li>
+        </ul>
+
+      </div></div>
+    </div>
+
+  </div>
+</section>
+<!-- ===================== MCQ BANK ===================== -->
+<section id="mcq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Bank the easy marks</div>
+      <h2 class="sec">MCQ master bank</h2>
+      <p class="sec-lede">The highest-value multiple-choice questions pulled from all 8 papers, de-duplicated, with the answer and a one-line reason. Recurring questions are tagged with how many papers they appeared in. Test yourself first, then reveal.</p>
+    </div>
+    <div class="quiz-bar">
+      <span class="qb-label">Filter:</span>
+      <button class="btn primary" onclick="filterMCQ('all',this)">All</button>
+      <button class="btn" onclick="filterMCQ('hot',this)">🔥 Recurring only</button>
+      <button class="btn" onclick="filterMCQ('ch1',this)">Ch 1</button>
+      <button class="btn" onclick="filterMCQ('ch2',this)">Ch 2</button>
+      <button class="btn" onclick="filterMCQ('ch3',this)">Ch 3</button>
+      <button class="btn" onclick="filterMCQ('ch4',this)">Ch 4</button>
+      <button class="btn" onclick="revealAll()">Reveal all answers</button>
+      <span class="qcount" id="qcount"></span>
+    </div>
+    <div id="mcqList"></div>
+  </div>
+</section>
+
+<!-- ===================== MODEL ANSWERS ===================== -->
+<section id="models" style="background:linear-gradient(180deg,#EDF2EF,#F4F7F5)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Section B &amp; C — how to actually write it</div>
+      <h2 class="sec">Model answer frameworks</h2>
+      <p class="sec-lede">The recurring long-form questions, with point-by-point skeletons you can adapt. Marks come from <b>structure + named examples</b>, so each frame gives you exactly the points to hit.</p>
+    </div>
+
+    <div class="model">
+      <div class="model-head">
+        <div class="mq">"Explain the technology in the related industry and give TWO (2) examples of its application."</div>
+        <div class="mmeta"><span class="tag t-hot">Appears in 5/8 papers</span><span class="tag t-slate">~10 marks · Ch 3</span></div>
+      </div>
+      <div class="model-body">
+        <h5>Structure for each sub-part (define → explain → 2 examples)</h5>
+        <p><b>(a) Augmented Reality in the nuclear industry.</b> AR overlays digital information onto a technician's real-world view. Examples: (1) guiding maintenance/repair by overlaying step-by-step instructions on reactor equipment; (2) hands-free radiation-zone inspection where dose data appears in the technician's headset. <span class="points">Also usable: operator training simulations</span></p>
+        <p><b>(b) AI / Machine Learning in the digital oilfield.</b> AI analyses sensor &amp; seismic data to predict and optimise. Examples: (1) predictive maintenance of pumps/wells to prevent downtime; (2) reservoir/production optimisation and seismic interpretation to locate reserves.</p>
+        <p><b>(c) Blockchain in the electricity industry.</b> A distributed ledger enabling trusted peer-to-peer transactions. Examples: (1) P2P solar trading between neighbours (Brooklyn Microgrid); (2) automated billing/micropayments via smart contracts + smart meters, or Renewable Energy Certificate tracking.</p>
+        <div class="callout am" style="margin-top:12px"><span class="cic">✎</span><div>Whatever pairing they give (mobile computing in oilfield, drones in O&amp;G, ML in nuclear…), use the same frame: <b>1 sentence defining the tech → 1 sentence on its role in that industry → 2 concrete examples.</b> That's the full 5 marks.</div></div>
+      </div>
+    </div>
+
+    <div class="model">
+      <div class="model-head">
+        <div class="mq">Nuclear power: challenges, TNB going nuclear (advantages/disadvantages), and public acceptance.</div>
+        <div class="mmeta"><span class="tag t-amber">Appears in 3/8 papers</span><span class="tag t-slate">Ch 3 nuclear</span></div>
+      </div>
+      <div class="model-body">
+        <h5>Two challenges for the nuclear sector</h5>
+        <ul><li><b>Safety &amp; accident risk</b> — radiation leaks (Chernobyl/Fukushima memory) demand heavy regulation and skilled staff.</li><li><b>Radioactive waste management</b> — long-lived waste needs secure long-term disposal facilities.</li></ul>
+        <h5>If TNB used nuclear — two advantages / two disadvantages</h5>
+        <p><b>Advantages:</b> reliable low-carbon baseload power; diversifies supply &amp; reduces fossil-fuel dependence. <b>Disadvantages:</b> very high build cost &amp; long lead time; waste storage + public-safety concerns.</p>
+        <h5>Biggest challenge for TNB — justify</h5>
+        <p><b>Public acceptance / safety perception</b> (or the huge upfront cost). Justify: without public trust and regulatory approval, no site can be built regardless of the engineering case.</p>
+        <h5>Measures to raise public acceptance</h5>
+        <ul><li>Transparent public education on safety &amp; modern reactor design.</li><li>Independent regulation, community engagement, and clear emergency/waste plans.</li></ul>
+      </div>
+    </div>
+
+    <div class="model">
+      <div class="model-head">
+        <div class="mq">Upstream / Midstream / Downstream — functions + how to digitise (Petronas system-analyst).</div>
+        <div class="mmeta"><span class="tag t-amber">Appears in 3/8 papers</span><span class="tag t-slate">Ch 2</span></div>
+      </div>
+      <div class="model-body">
+        <h5>Functions</h5>
+        <ul>
+          <li><b>Upstream (E&amp;P):</b> explore for and extract crude oil &amp; gas — seismic surveys, drilling, production. High risk/high capital.</li>
+          <li><b>Midstream:</b> move &amp; store the raw hydrocarbons — pipelines, shipping/LNG tankers, storage terminals, trading.</li>
+          <li><b>Downstream:</b> refine into products &amp; sell — refining, petrochemicals, distribution, retail stations.</li>
+        </ul>
+        <h5>Two ways to digitise (pick one segment)</h5>
+        <p><b>Upstream example:</b> (1) IoT sensors + AI for real-time well/reservoir monitoring and predictive maintenance; (2) digital twin of the drilling platform for simulation &amp; optimisation. <span class="points">Midstream: pipeline leak-detection sensors + GIS. Downstream: AI process control in refineries; app-based retail/payment.</span></p>
+      </div>
+    </div>
+
+    <div class="model">
+      <div class="model-head">
+        <div class="mq">Case study (Section C): "How do digitalisation + deregulation create a smarter, more competitive Malaysian energy market?"</div>
+        <div class="mmeta"><span class="tag t-hot">Newest paper · 30 marks</span><span class="tag t-slate">Ch 1–4 applied</span></div>
+      </div>
+      <div class="model-body">
+        <h5>Define the two terms</h5>
+        <p><b>Deregulation</b> = opening the monopolistic electricity market to competition so multiple retailers can offer better prices/services. <b>Digitalisation</b> = integrating digital technologies (IoT, AI, blockchain, big data) throughout the value chain to transform operations (not just converting analogue to digital = "digitisation").</p>
+        <h5>How digitalisation helps TNB (give 2 examples)</h5>
+        <ul><li><b>Smart meters</b> → real-time usage insight, demand monitoring, better resource allocation.</li><li><b>AI predictive maintenance</b> on the grid/solar farms → fewer outages, lower repair cost.</li></ul>
+        <h5>The 10-mark part — how they reinforce each other (need 3+ points)</h5>
+        <ul>
+          <li>Digital platforms/apps let consumers compare prices &amp; switch providers → makes a deregulated market work.</li>
+          <li>New entrants (RE start-ups) use blockchain P2P trading &amp; AI storage optimisation to compete → deregulation accelerates digital adoption.</li>
+          <li>Together: efficiency + transparency + consumer empowerment (digitalisation) meets competition + innovation + sustainability (deregulation).</li>
+        </ul>
+        <div class="callout am" style="margin-top:12px"><span class="cic">✎</span><div>Note the balance too: deregulation risks unstable prices &amp; small firms being squeezed; digitalisation raises cybersecurity risk. Mentioning a trade-off shows analysis and earns top-band marks. Always anchor to Malaysia: TNB, the 6 D's (decarbonisation, decentralisation, digitalisation, deregulation, democratisation, diversification).</div></div>
+      </div>
+    </div>
+
+    <div class="model">
+      <div class="model-head">
+        <div class="mq">Carbon footprint / Green computing / IoT — the shorter Section B staples.</div>
+        <div class="mmeta"><span class="tag t-green">Appears across 4+ papers</span><span class="tag t-slate">Ch 3 &amp; 4</span></div>
+      </div>
+      <div class="model-body">
+        <h5>Carbon footprint — impacts + reduction</h5>
+        <p>Impacts: global warming, sea-level rise, extreme weather. Reduce via energy efficiency, renewables, sustainable transport, waste reduction. (For a sector like healthcare: switch to renewable-powered facilities + digitise records to cut paper/energy.)</p>
+        <h5>Green Computing — define + FOUR practices</h5>
+        <p>Define: eco-friendly design, use &amp; disposal of IT. Four practices: sleep/power modes + efficient hardware · server virtualisation/cloud · certified e-waste recycling &amp; reuse · reduce printing / power down idle devices.</p>
+        <h5>IoT — data types collected + energy examples</h5>
+        <p>IoT devices collect operational data — temperature, vibration, pressure, humidity, electrical parameters, consumption. Used for predictive maintenance, demand response, real-time control. Energy examples: (1) smart meters reporting household consumption; (2) pipeline/wellhead sensors monitoring flow &amp; leaks.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ===================== CHECKLIST ===================== -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Night-before sweep</div>
+      <h2 class="sec">Final revision checklist</h2>
+      <p class="sec-lede">Tick these off. If you can do all of them, you've covered the high-frequency mass of the paper. (Ticks are just for this session.)</p>
+    </div>
+    <div class="check" id="checkList">
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Sec B</span>Can explain any tech-in-industry pairing (AR-nuclear, AI-oilfield, blockchain-electricity) + 2 examples each.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Sec A</span>Memorised the recyclers: self-healing grid · blockchain = I,III,IV · GIS in distribution · Big Data = V,V,V · bidirectional · fossil fuel = non-renewable · INVALID statements = I &amp; IV.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Ch 1</span>Can state the First Law of Thermodynamics with an example, and list the forms of energy.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Ch 2</span>Can describe the electricity value chain (Gen→Trans→Dist→Retail) AND upstream/midstream/downstream for O&amp;G, with digitisation examples.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Ch 2</span>Know Porter's primary vs support activities and the 5 renewable types + sub-types.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Ch 3</span>Can define &amp; explain: blockchain, smart grid, smart meter, IoT, Digital Twin, the 5 V's, and the analytics types.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Ch 3</span>Ready for the nuclear debate: 2 challenges, TNB advantages/disadvantages, public-acceptance measures.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Ch 4</span>Can define carbon vs computing vs digital footprint, list impacts, and give 4 green-computing practices.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Sec C</span>Have 5+ named Malaysian examples ready: TNB smart meters, Petronas Kasawari CCS, LSS, NEM, FiT, MyRER, NETR, the 6 D's, Net Zero 2050.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Sec C</span>Practised the case-study frame: define terms → describe benefit → 2 company examples → the 10-mark "how they work together" with a trade-off.</div></div>
+      <div class="citem" onclick="this.classList.toggle('done')"><div class="cbox">✓</div><div class="ctext"><span class="ck">Time</span>Rehearsed pacing: MCQ fast (~1 min each), Section B is the biggest block, leave ~30 min for the case study.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:'Space Grotesk';font-weight:700;color:#CFDBD6;font-size:16px;margin-bottom:8px">CGEB4112 / CGNB422 · Energy &amp; Computing</p>
+    <p>Study guide built from your uploaded chapter decks (Ch 1–4) and <b>8 past final papers</b> spanning Dec 2022 → Dec 2025.<br>
+    Analytics reflect observed frequency in those papers — a <span class="amber">probability guide</span>, not a leak. Verify facts against your lecturer's latest slides.</p>
+    <p style="margin-top:14px;font-size:12px;color:#5E7871">Good luck — revise the recurring questions first. You've got this.</p>
+  </div>
+</footer>
+<script>
+/* ---------- accordion ---------- */
+function toggleCh(head){
+  const ch=head.parentElement, body=ch.querySelector('.ch-body');
+  if(ch.classList.contains('open')){ch.classList.remove('open');body.style.maxHeight=null;}
+  else{ch.classList.add('open');body.style.maxHeight=body.scrollHeight+80+'px';}
+}
+document.querySelectorAll('.chapter.open .ch-body').forEach(b=>{b.style.maxHeight=b.scrollHeight+80+'px';});
+window.addEventListener('resize',()=>{document.querySelectorAll('.chapter.open .ch-body').forEach(b=>{b.style.maxHeight='none';const h=b.scrollHeight;b.style.maxHeight=h+80+'px';});});
+
+/* ---------- scroll progress ---------- */
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;document.getElementById('prog').style.width=p+'%';});
+
+/* ---------- MCQ DATA (curated from all 8 papers; correct = 0-indexed) ---------- */
+const MCQ=[
+ {ch:'ch1',hot:4,q:`A non-renewable natural resource formed millions of years ago from plant or animal remains, used as an energy source, is:`,o:['Hydrocarbon','Peat','Fossil Fuel','None of the above'],a:2,why:`Fossil fuels (coal, oil, gas) form over millions of years from organic remains. Appears in ~4 papers.`},
+ {ch:'ch1',hot:3,q:`A non-renewable natural resource / which of the following is NOT a renewable energy source?`,o:['Bio alcohols','Fossil Fuel','Geothermal','Wind'],a:1,why:`Fossil fuel is non-renewable; the rest are renewable.`},
+ {ch:'ch1',q:`Energy due to motion is ____ energy.`,o:['potential','energy','kinetic','friction'],a:2,why:`Kinetic energy = energy of motion.`},
+ {ch:'ch1',q:`Which is an example of mechanical energy?`,o:['A battery powering a flashlight','A cup of hot coffee','A car moving up a hill','A song on the radio'],a:2,why:`Mechanical energy = kinetic + potential; a car moving uphill has both.`},
+ {ch:'ch1',q:`Gravitational potential energy depends on the ____ of the object.`,o:['height, mass and gravitational strength','height, friction and movement','friction, mass and movement','height, friction and gravitational strength'],a:0,why:`PE = mgh → height, mass, gravitational field strength.`},
+ {ch:'ch1',q:`Which energy form is associated with movement of particles due to temperature differences?`,o:['Thermal','Nuclear','Chemical','Electromagnetic'],a:0,why:`Thermal (heat) energy comes from molecular motion driven by temperature.`},
+ {ch:'ch1',q:`Which of the following is a non-renewable fossil fuel?`,o:['Solar power','Wind power','Natural gas','Biomass'],a:2,why:`Natural gas is a fossil fuel; the others are renewable.`},
+ {ch:'ch1',q:`Which energy source is derived from plant material and animal waste?`,o:['Geothermal','Biomass','Solar','Nuclear'],a:1,why:`Biomass is biological material from living/recently living organisms.`},
+ {ch:'ch1',q:`What is the primary disadvantage of using fossil fuels?`,o:['They cause environmental pollution','They are abundant','They produce no waste','They are renewable'],a:0,why:`Burning fossil fuels emits CO2 and pollutants.`},
+ {ch:'ch1',q:`Which of the following is a disadvantage of most renewable energy sources?`,o:['Highly polluting','Unreliable supply','High waste disposal cost','High running cost'],a:1,why:`Solar/wind are intermittent → unreliable without storage.`},
+ {ch:'ch1',q:`Which renewable source is most dependent on geographical location for efficient use?`,o:['Wind','Solar','Biomass','Geothermal'],a:3,why:`Geothermal needs geologically active regions (hot rock near surface).`},
+ {ch:'ch1',q:`Which best describes active solar energy systems?`,o:['Heat buildings using sunlight without mechanical devices','Use air or liquid to collect and store solar energy','Rely entirely on wind currents','Use geothermal heat directly'],a:1,why:`Active systems use external devices (air/liquid + panels); passive uses building design only.`},
+ {ch:'ch1',q:`What type of power station is at Temenggor Dam, Perak?`,o:['Steam','Coal','Hydro power','Solar Farm'],a:2,why:`A dam = hydroelectric power station.`},
+ {ch:'ch1',hot:2,q:`The smart grid allows a ____ flow of energy and data.`,o:['Bidirectional','Centralized','Single-directional','Uni-directional'],a:0,why:`Smart grids enable two-way (bidirectional) flow of both energy and information. Appears in 2 papers.`},
+ {ch:'ch1',hot:4,q:`____ is an advanced electrical system that stays stable under normal conditions and self-recovers after natural disasters or human error.`,o:['Demand Response grid','Self-healing grid','Predictive grid','Topological grid'],a:1,why:`Definition of a self-healing grid. One of the most repeated MCQs (~4 papers).`},
+ {ch:'ch1',hot:2,q:`Energy Star Program ____`,o:['helps consumers, businesses and industry save money','protects the environment via energy-efficient products','identifies top-performing, cost-effective products','all of the above'],a:3,why:`Energy Star does all three. Appears in 2 papers.`},
+ {ch:'ch1',q:`Decentralization in the energy industry means:`,o:['Centralizing production in large plants','Reducing renewable investment','Shifting production to small, localized sources','Increasing nuclear power use'],a:2,why:`Decentralisation = distributed, localised generation (rooftop solar, microgrids).`},
+ {ch:'ch1',q:`What role do renewable sources play in decarbonization?`,o:['Increase fossil-fuel dependency','Less efficient than coal','Help reduce greenhouse-gas emissions','No impact on energy costs'],a:2,why:`Renewables displace fossil fuels, cutting GHG emissions.`},
+ {ch:'ch2',hot:3,q:`Identify the INVALID statement(s): (I) Primary activities are support activities. (II) Support includes HR & Procurement. (III) A value chain delivers products/services to the customer. (IV) A value chain should NOT interact with up/downstream chains. (V) Computing at leverage points enhances competitiveness.`,o:['II, III and IV','I and V','I and IV','III, IV and V'],a:2,why:`I is false (primary ≠ support) and IV is false (chains DO interact). So INVALID = I and IV. A common trap — don't pick "I and V". Appears in ~3 papers.`},
+ {ch:'ch2',q:`Which correctly represents the electricity value chain in Malaysia?`,o:['Exploration → Drilling → Refining → Distribution','Generation → Transmission → Distribution → Retail','Generation → Processing → Transportation → Retail','Extraction → Transmission → Marketing → Sales'],a:1,why:`Electricity: Generation → Transmission → Distribution → Retail.`},
+ {ch:'ch2',q:`In the oil & gas value chain, the critical role of the midstream sector is:`,o:['Setting consumer prices','Conducting exploration and drilling','Processing and transporting raw hydrocarbons','Installing solar panels'],a:2,why:`Midstream = processing, storage and transport (pipelines, LNG).`},
+ {ch:'ch2',q:`What is the primary focus of the downstream segment?`,o:['Exploration','Refining and sales','Transportation','Research & development'],a:1,why:`Downstream = refining, petrochemicals, retail/sales.`},
+ {ch:'ch2',q:`One key risk that differentiates upstream O&G from electricity generation:`,o:['Fluctuating tariffs','High investment and long project lead times','Smart meter delays','Energy theft at substations'],a:1,why:`Upstream E&P is high-capital, high-risk with long lead times.`},
+ {ch:'ch2',q:`Bulk transfer of electrical energy from generating stations to substations near demand centres is handled by:`,o:['Distribution','Operation','Generation','Transmission'],a:3,why:`Transmission = bulk, high-voltage transfer over the National Grid.`},
+ {ch:'ch2',q:`What is the primary role of Inbound Logistics in the energy value chain?`,o:['Managing sales strategies','Transporting energy resources to power plants','Enhancing customer service','Developing digital systems'],a:1,why:`Inbound logistics = receiving/storing/moving inputs into operations.`},
+ {ch:'ch2',q:`Which Porter support activity focuses on acquiring inputs (raw materials, machinery, services)?`,o:['Firm infrastructure','Human resources management','Procurement','Technology development'],a:2,why:`Procurement = purchasing inputs the organisation needs.`},
+ {ch:'ch2',q:`Which activity does NOT fall under Primary Activities in an oil & gas organisation?`,o:['Hiring oil & gas engineers for exploration','Exploring deep ocean for oil & gas','Sales of petrol to end users','Analysing seismic data'],a:0,why:`Hiring = Human Resource, a support activity, not primary.`},
+ {ch:'ch2',q:`Which is an example of a service activity in the energy value chain?`,o:['Selling solar panels','Maintaining wind turbines after installation','Refining oil into diesel','Transporting electricity'],a:1,why:`After-sales maintenance = the "service" primary activity.`},
+ {ch:'ch2',q:`What are Independent Power Producers (IPPs)?`,o:['A regulatory agency for electricity & gas','GLCs formerly known as LLN','An agency for sustainable energy & green tech','Private companies that generate electric power for sale to utilities/end users'],a:3,why:`IPPs are private power generators selling to the grid.`},
+ {ch:'ch2',q:`The primary function of the Energy Commission (Suruhanjaya Tenaga) in Malaysia is to:`,o:['Generate and distribute electricity','Regulate the energy sector for safe, reliable supply','Invest in renewable projects','Reduce transport emissions'],a:1,why:`The EC/ST is the regulator of the electricity & gas supply industries.`},
+ {ch:'ch2',q:`Which Malaysian RE incentive lets individuals sell renewable electricity back to the grid?`,o:['Net Energy Metering (NEM)','Green Energy Trading','Power Purchase Agreement (PPA)','Feed-in Tariff (FiT)'],a:0,why:`NEM = install solar for self-use and export the excess to the grid. (FiT historically sold all output at a premium.)`},
+ {ch:'ch2',q:`In the solar value chain, what is the function of solar PV panels?`,o:['Store energy','Convert sunlight into electricity','Refine solar resources','Distribute energy'],a:1,why:`Photovoltaic panels convert sunlight directly into electricity.`},
+ {ch:'ch2',q:`Which use(s) tidal currents or waves to generate electricity from seawater?`,o:['Storage hydropower','Wind Turbine Generator','Offshore hydropower','Underwater Geothermal station'],a:2,why:`Offshore (tidal/wave) hydropower harnesses ocean energy.`},
+ {ch:'ch3',hot:4,q:`In electricity's distribution phase, the location of smart meters, sensors and fault indicators can be determined using the ____.`,o:['Customer information system','Protection Relay system','Geographical Information System','Energy management system'],a:2,why:`GIS maps the spatial position of grid components. Repeated in ~4 papers.`},
+ {ch:'ch3',hot:4,q:`Which components make up a blockchain-based energy system? (I) Smartphone apps (II) Traders (III) Sensor technology (IV) Smart meters (V) Banks`,o:['I, II, III','I, II, IV','I, III, IV','II, IV, V'],a:2,why:`Apps + sensors + smart meters = I, III, IV. Traders/banks aren't core components. Repeated ~4 papers.`},
+ {ch:'ch3',hot:2,q:`IoT is an emerging technology that uses the ____ to connect physical devices or "things".`,o:['Database','Machine Learning','Internet','SQL'],a:2,why:`IoT connects things via the Internet.`},
+ {ch:'ch3',hot:3,q:`Which are characteristics of Big Data? (I) Vigorous (II) Variety (III) Volume (IV) Visible (V) Velocity`,o:['I, II, III','II, IV, V','I, III, IV','II, III, V'],a:3,why:`The V's are Variety, Volume, Velocity (also Veracity, Value). Repeated ~3 papers.`},
+ {ch:'ch3',q:`A virtual, physics- and data-based digital simulated model of an asset that helps executives make decisions is a:`,o:['Sequence of Event Recorder','Digital Fault Recorder','Digital Twin (DT)','Phasor Measurement Unit'],a:2,why:`Definition of a Digital Twin.`},
+ {ch:'ch3',q:`A device that records electricity consumption and communicates it to the utility for monitoring & billing is a:`,o:['Transformer','Smart meter','Phasor measurement unit','Voltage regulator'],a:1,why:`That is the definition of a smart meter.`},
+ {ch:'ch3',q:`Which component enables two-way communication and helps automate control in a smart grid?`,o:['Smart meters','IoT hub','Edge devices','Analytics engine'],a:0,why:`Smart meters provide the two-way communication link between consumer and utility.`},
+ {ch:'ch3',q:`What is the primary role of AI-based predictive maintenance in energy?`,o:['Automating billing','Detecting equipment faults before failure','Optimising employee shifts','Analysing consumer marketing'],a:1,why:`Predictive maintenance flags faults before equipment fails.`},
+ {ch:'ch3',q:`What does demand response do in a smart grid?`,o:['Generates electricity from fossil fuels','Adjusts consumer demand to match supply','Stores excess energy','Replaces power plants'],a:1,why:`Demand response shifts/curbs consumption to match available supply.`},
+ {ch:'ch3',q:`A benefit of implementing smart grid technologies is:`,o:['Reduced real-time data collection','Limited renewable integration','Enhanced outage detection and faster restoration','Elimination of consumer monitoring'],a:2,why:`Smart grids detect outages faster and restore supply quicker.`},
+ {ch:'ch3',q:`In upstream oil & gas, IoT devices are mainly used to:`,o:['Manage tariffs & billing','Track consumer usage','Monitor well performance & reservoir conditions in real-time','Control home appliances'],a:2,why:`Upstream IoT = real-time monitoring of wells/reservoirs.`},
+ {ch:'ch3',q:`Which is NOT a benefit of blockchain in the energy industry?`,o:['Enhanced transparency & data integrity','Automated settlements via smart contracts','Improved physical energy storage capacity','Decentralized transaction verification'],a:2,why:`Blockchain is a ledger — it doesn't add physical storage capacity.`},
+ {ch:'ch3',q:`Main challenge in adopting blockchain in energy:`,o:['Lack of renewable sources','Overregulation','Scalability & interoperability issues','Decreased interest in conservation'],a:2,why:`Scalability and interoperability are the key technical hurdles.`},
+ {ch:'ch3',q:`Nuclear energy is created from splitting uranium atoms — this process is called:`,o:['fission','fusion','friction','fraction'],a:0,why:`Splitting heavy atoms = nuclear fission.`},
+ {ch:'ch3',q:`Which technology is crucial for grid stability with intermittent solar & wind?`,o:['Energy storage such as batteries','Carbon capture & storage','Advanced nuclear reactors','Traditional fossil-fuel plants'],a:0,why:`Storage smooths the intermittency of renewables.`},
+ {ch:'ch3',q:`Which Information System best supports knowledge sharing among energy players?`,o:['Enterprise Resource Systems','Customer Relationship Management','Database Management Systems','Knowledge Management Systems'],a:3,why:`KMS are designed for capturing and sharing organisational knowledge.`},
+ {ch:'ch3',q:`Why is the ICT support activity crucial in Malaysia's electricity transmission?`,o:['It manages human resources','It reduces grid operating cost & improves efficiency','It finances plant expansion','It replaces smart meters'],a:1,why:`ICT lowers operating cost and boosts efficiency across the grid. Appears in 2 papers.`,},
+ {ch:'ch4',hot:2,q:`A carbon footprint refers to:`,o:['Total energy used by a household','The total greenhouse gases produced to support human activities','Total electricity consumed by industry','Air pollution from vehicles only'],a:1,why:`Carbon footprint = total GHGs (as CO2) from human activities, direct & indirect.`},
+ {ch:'ch4',q:`Which does NOT define carbon footprint?`,o:['A comprehensive measure of emissions from machines','Total GHGs produced to support human activities','A metric quantifying environmental impact','Total CO2 emissions from human activities'],a:0,why:`It is not merely "emissions from machines" — it covers all human activity.`},
+ {ch:'ch4',q:`Which is NOT an environmental impact of carbon footprints?`,o:['Sea-level rise','Global warming','Extreme weather events','More animal habitat'],a:3,why:`Carbon footprints harm habitats — they don't create more.`},
+ {ch:'ch4',q:`Which computing practice helps reduce energy consumption in data centres?`,o:['Overclocking CPUs','Increasing server cooling temperatures','Running servers 24/7','Implementing server virtualization'],a:3,why:`Virtualisation consolidates workloads, cutting energy use.`},
+ {ch:'ch4',q:`Which reflect strategies for reducing computing footprint? (I) sleep modes (II) replace whole device due to age (III) certified e-waste recycling (IV) use any cloud service for all storage`,o:['I and II','II and III','I and III','I, III and IV'],a:2,why:`Sleep modes (I) + certified e-waste recycling (III) reduce footprint. Replacing whole devices (II) increases it.`},
+ {ch:'ch4',q:`What does Green Computing mean?`,o:['Economically responsible use of computers','Environmentally responsible and eco-friendly use of computers and resources','Environmentally responsible and user-friendly use','Business-responsible use of computers'],a:1,why:`Green computing = environmentally responsible, eco-friendly IT use.`},
+ {ch:'ch4',q:`Reducing which of the following has the greatest impact on lowering your carbon footprint?`,o:['Water usage','Electricity from fossil fuels','Reusable shopping bags','Plant-based diet'],a:1,why:`Fossil-fuel electricity is typically the largest personal emissions source.`},
+ {ch:'ch4',q:`Industries contribute to carbon footprints mainly through:`,o:['Product design','Manufacturing and consumption of goods','Importing renewable energy','Customer loyalty programs'],a:1,why:`Manufacturing + consumption of goods is the dominant industrial contributor.`},
+ {ch:'ch1',hot:2,q:`Malaysia aims for 50% renewable energy by 2035. How might this affect the oil & gas downstream segment?`,o:['Increased reliance on fossil fuels','Reduced need for refining and petrochemicals','Higher investment in CCS','A drop in demand for solar systems'],a:1,why:`More renewables → less fuel demand → reduced refining/petrochemical need.`},
+ {ch:'ch1',q:`The shift from non-renewable to renewable energy represents:`,o:['A historical setback','A necessary transition to a low-carbon future','A short-term trend','A reduction in innovation'],a:1,why:`It is framed as a necessary low-carbon transition.`}
+];
+
+/* ---------- render ---------- */
+const list=document.getElementById('mcqList');
+function letter(i){return ['A','B','C','D','E'][i];}
+function render(items){
+  list.innerHTML='';
+  items.forEach((m,idx)=>{
+    const el=document.createElement('div');el.className='mcq';el.dataset.ch=m.ch;el.dataset.hot=m.hot?'1':'0';
+    let tags=`<span class="tag t-slate">${chName(m.ch)}</span>`;
+    if(m.hot) tags+=` <span class="tag t-hot">🔥 ${m.hot} papers</span>`;
+    let opts='';
+    m.o.forEach((op,i)=>{opts+=`<div class="opt" onclick="pick(this,${i},${m.a})"><span class="ol">${letter(i)}</span><span>${op}</span></div>`;});
+    el.innerHTML=`<div class="qtop"><span class="qn">Q${idx+1}</span><div><div class="qtext">${m.q}</div><div class="qtags">${tags}</div></div></div>
+      <div class="opts">${opts}</div>
+      <div class="why"><b>Answer ${letter(m.a)}.</b> ${m.why}</div>`;
+    list.appendChild(el);
+  });
+  document.getElementById('qcount').textContent=items.length+' questions';
+}
+function chName(c){return {ch1:'Ch 1',ch2:'Ch 2',ch3:'Ch 3',ch4:'Ch 4'}[c];}
+function pick(elem,i,correct){
+  const mcq=elem.closest('.mcq');
+  if(mcq.classList.contains('answered'))return;
+  mcq.classList.add('answered','revealed');
+  const opts=mcq.querySelectorAll('.opt');
+  opts[correct].classList.add('correct');
+  if(i!==correct)opts[i].classList.add('wrong');
+}
+function revealAll(){
+  currentItems.forEach((m,idx)=>{
+    const mcq=list.children[idx];
+    if(!mcq)return;
+    mcq.classList.add('answered','revealed');
+    mcq.querySelectorAll('.opt')[m.a].classList.add('correct');
+  });
+}
+let currentItems=MCQ.slice();
+function filterMCQ(f,btn){
+  document.querySelectorAll('.quiz-bar .btn').forEach(b=>b.classList.remove('primary'));
+  if(btn)btn.classList.add('primary');
+  if(f==='all')currentItems=MCQ.slice();
+  else if(f==='hot')currentItems=MCQ.filter(m=>m.hot);
+  else currentItems=MCQ.filter(m=>m.ch===f);
+  render(currentItems);
+}
+render(currentItems);
+</script>
+</body>
+</html>
