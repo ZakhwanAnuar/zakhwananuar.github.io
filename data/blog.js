@@ -25,6 +25,106 @@
 const BLOG_DATA = [
 
   {
+    id:      'chameleon-wifi-esp32',
+    title:   'ChameleonFW — Building an ESP32-S3 WiFi Research Rig',
+    date:    'July 2026',
+    tags:    ['security', 'hardware', 'project'],
+    summary: 'A captive-portal / rogue-AP research tool that runs entirely on a $10 ESP32-S3 and is driven from your phone. Here is how the firmware actually works — the DNS hijack, the soft-AP, credential capture, and flash-persisted config.',
+    ogImage: null,   // optional per-post share image; null → site default
+
+    content: `
+
+Most WiFi attack tooling assumes a laptop, a monitor-mode adapter, and a pile of Python. I wanted to understand the captive-portal / evil-twin class of attacks by building the whole thing onto a **single $10 microcontroller** that you drive from your phone — no app, no laptop. That's **ChameleonFW**: firmware for the **ESP32-S3** that turns the chip into a self-contained wireless research rig.
+
+> Legal note up front: this is for **authorized testing only** — your own lab, or an engagement with written permission. In Malaysia unauthorized use falls under the Computer Crimes Act 1997. Understanding the attack is how you defend against it.
+
+## The hardware
+
+- **ESP32-S3-WROOM-1** (N16R8) — 16 MB flash, 8 MB OPI PSRAM, dual-core with a WiFi radio on-die
+- **USB-C** (CH340) for flashing and serial
+- Built in the **Arduino IDE** with the Espressif ESP32 board package
+
+The whole point of the ESP32 is that the WiFi radio, the HTTP server, and the attack logic all live on one chip. No external NIC.
+
+## Firmware layout
+
+I kept it to four files so the logic is easy to follow:
+
+\`\`\`
+ChameleonFW.ino   // init + main loop
+config.h          // single source of truth: version, creds, admin path
+wifimode.h        // scanning + rogue AP + captive portal
+webui.h           // HTML pages + endpoint handlers
+\`\`\`
+
+\`config.h\` centralises everything you'd want to rebrand: firmware version (\`1.3\`), the operator hotspot (\`ChameleonFW-WiFi\` / \`research1234\`), the default spoof SSID (\`Free_WiFi\`), and a secret admin path (\`/chameleon123\`). Changing the build is a one-file edit.
+
+## Two radios in one: operator AP + target AP
+
+The device always hosts its **own** control hotspot so you can drive it from a phone browser at \`192.168.4.1\` — that's the operator console. Meanwhile the same radio also runs the **rogue AP** for the actual test. During a scan the firmware flips to \`WIFI_AP_STA\` (so it can both host and scan), then reverts to \`WIFI_AP\`.
+
+## Step 1 — reconnaissance
+
+Scanning is a thin wrapper over the Arduino WiFi API:
+
+\`\`\`cpp
+int n = WiFi.scanNetworks();
+// for each i: WiFi.SSID(i), WiFi.BSSID(i),
+//             WiFi.channel(i), WiFi.RSSI(i), WiFi.encryptionType(i)
+\`\`\`
+
+The \`/wifi/scan\` endpoint serialises SSID, BSSID, channel, signal strength, and encryption type to JSON, and the web UI renders it as a live network list.
+
+## Step 2 — the rogue AP + DNS hijack
+
+This is the core of a captive portal. \`WiFi.softAP()\` brings up a fake network using the operator-supplied \`portalSSID\`. Then a \`DNSServer\` is told to answer **every** lookup with the device's own IP:
+
+\`\`\`cpp
+dnsServer.start(53, "*", IPAddress(192,168,4,1));
+\`\`\`
+
+The \`"*"\` wildcard is the trick: whatever domain a connected phone asks for — \`connectivitycheck.gstatic.com\`, \`captive.apple.com\`, anything — resolves to \`192.168.4.1\`. Every OS's "is there internet here?" probe gets hijacked, which is exactly what makes the phone pop the *"Sign in to WiFi"* sheet automatically.
+
+An \`onNotFound()\` handler catches any other request and redirects it to \`/p\`, which serves the spoofed login page (\`portalHTML\`). So there's no way to *not* land on the portal.
+
+## Step 3 — capturing credentials
+
+The portal form submits to a deliberately tiny endpoint:
+
+\`\`\`
+GET /capture?u=<username>&p=<password>
+\`\`\`
+
+The handler timestamps each submission and appends it to \`captureLog\` as \`"[timestamp] USER: X | PASS: Y"\`, retrievable from the admin panel via \`/portal/captures\`. In a real engagement this is the evidence that users will hand credentials to any network that asks nicely.
+
+## Step 4 — knowing who's connected
+
+Two mechanisms track victims:
+
+- **Events:** \`onStationConnected()\` / \`onStationDisconnected()\` callbacks push a \`DeviceEvent\` (MAC, event type, \`millis()\` timestamp) into a \`deviceHistory\` vector, capped at 50 entries so RAM never runs away.
+- **Live list:** \`/portal/stations\` calls the ESP-IDF primitive \`esp_wifi_ap_get_sta_list()\` to enumerate currently associated clients.
+
+So the operator sees both a live count and a rolling connection history.
+
+## Config that survives reboots
+
+Rebuilding firmware just to change an SSID is painful, so settings persist to flash using the ESP32 **\`Preferences\`** (NVS) API — \`loadSettings()\` on boot, \`persistSettings()\` on change. The whole thing is runtime-configurable from the web UI: spoof SSID, portal page, admin controls, all without a reflash. The operator console is organised into three tabs — **WiFi** (scan), **Portal** (deploy + captures), and **System** (stats) — served by ~14 REST endpoints.
+
+## What it taught me
+
+- **Captive portals are a UX exploit, not a crypto one.** The DNS wildcard + the OS connectivity check do all the social-engineering work; there's no packet cracking involved.
+- **The defense is boring and effective:** treat any "Sign in to WiFi" page as hostile, never reuse real credentials on them, and prefer networks that use 802.1X / certificate validation so a look-alike SSID can't transparently proxy you.
+- **Constrained hardware forces clean design.** Capping history at 50, persisting to NVS, flipping radio modes deliberately — the ESP32's limits made me write tighter firmware than I would have on a laptop.
+
+## Responsible use
+
+ChameleonFW is for **controlled labs and authorized penetration tests only** — networks and devices you own or have written permission to assess. Building it was about understanding evil-twin attacks well enough to defend against them.
+
+Full firmware and setup notes are on [GitHub](https://github.com/ZakhwanAnuar/ChameleonWifi).
+    `,
+  },
+
+  {
     id:      'discord-c2-dump',
     title:   'DiscordC2Dump — Turning a Recovered Bot Token into Threat Intel',
     date:    'July 2026',

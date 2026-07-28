@@ -25,6 +25,18 @@
 const PROJECTS_DATA = [
 
   {
+    id:          'ChameleonWifi',
+    title:       'ChameleonFW — ESP32-S3 WiFi Research Firmware',
+    description: 'ESP32-S3 firmware for authorized wireless security assessments. A mobile-friendly web console at 192.168.4.1 drives WiFi scanning, rogue AP / captive-portal simulation, and credential-capture workflows, with settings persisted to flash (NVS). Built for red-team labs and authorized pentests only.',
+    tech:        ['ESP32-S3', 'C++ / Arduino', 'WiFi', 'Captive Portal'],
+    tags:        ['security', 'tool', 'system'],
+    icon:        'fas fa-wifi',
+    github:      'https://github.com/ZakhwanAnuar/ChameleonWifi',
+    demo:        null,
+    featured:    true,
+  },
+
+  {
     id:          'DiscordC2Dump',
     title:       'DiscordC2Dump — Discord C2 Threat-Intel Dumper',
     description: 'A Python threat-intelligence tool for authorized malware analysis. Given a bot token and guild ID recovered from a sample abusing Discord as C2, it walks the Discord REST API to dump channels, messages, and attachments, then scans everything for IOCs.',
