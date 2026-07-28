@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PKIB113 Creative Thinking — Final Exam Master Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F2EC;
+  --panel:#FBFAF6;
+  --ink:#16181D;
+  --ink-soft:#3C4048;
+  --line:#D9D5C8;
+  --line-soft:#E7E3D7;
+  --eureka:#E8A311;      /* high-yield amber */
+  --eureka-deep:#C4820A;
+  --indigo:#2E2A6E;      /* structure */
+  --indigo-soft:#4B47A0;
+  /* six thinking hats — functional coding */
+  --hat-blue:#2563EB;
+  --hat-white:#8A8577;
+  --hat-red:#D6402E;
+  --hat-yellow:#E0A008;
+  --hat-green:#1E9E5A;
+  --hat-black:#22252C;
+  --good:#1E9E5A;
+  --bad:#D6402E;
+  --shadow:0 1px 0 rgba(0,0,0,.03), 0 8px 30px -18px rgba(20,20,40,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.12;margin:0}
+a{color:var(--indigo-soft);text-underline-offset:3px}
+::selection{background:var(--eureka);color:#fff}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.layout{display:grid;grid-template-columns:248px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding:0 22px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:0;padding:0 18px}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--ink);color:#F4F2EC;padding:70px 0 62px;border-bottom:3px solid var(--eureka)}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{position:absolute;inset:0;z-index:1;opacity:.5}
+.hero-grid svg{width:100%;height:100%}
+.eyebrow{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--eureka);margin-bottom:20px}
+.hero h1{font-size:clamp(38px,7vw,74px);font-weight:900;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--eureka);font-weight:600}
+.hero p.lead{max-width:620px;margin:20px 0 0;font-size:18px;color:#D8D4C6}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:30px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:#B9B5A6}
+.hero .meta b{color:#F4F2EC;font-weight:700}
+
+/* ---------- Sidebar nav ---------- */
+.sidebar{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:34px 0 40px}
+.sidebar .navtitle{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);padding:0 8px 10px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.sidebar nav a{display:block;text-decoration:none;color:var(--ink-soft);font-size:14px;font-weight:500;padding:6px 10px;border-radius:7px;border-left:2px solid transparent}
+.sidebar nav a:hover{background:var(--panel);color:var(--ink)}
+.sidebar nav a.num{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--indigo-soft);margin-right:7px}
+.sidebar nav .grp{margin-top:16px;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#A7A392;padding:0 10px 4px}
+@media(max-width:900px){.sidebar{position:static;height:auto;overflow:visible;padding:18px 0}.sidebar nav{columns:2;column-gap:14px}}
+
+/* ---------- Content ---------- */
+main{padding:52px 0 90px}
+section{scroll-margin-top:20px;margin-bottom:64px}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.sec-num{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--eureka-deep);letter-spacing:.02em}
+.sec-head h2{font-size:clamp(28px,4.4vw,40px);font-weight:700;letter-spacing:-.015em}
+.sec-intro{color:var(--ink-soft);font-size:16px;margin:14px 0 26px;max-width:760px}
+h3.blk{font-size:23px;font-weight:600;margin:36px 0 4px;letter-spacing:-.01em}
+h4.blk{font-size:18px;font-weight:600;margin:24px 0 2px;font-family:'Inter',sans-serif;letter-spacing:0}
+p{margin:12px 0}
+
+/* ---------- Cards & panels ---------- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow);margin:18px 0}
+.card.tight{padding:16px 18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+
+/* high-yield frequency chip */
+.hy{display:inline-flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:20px;vertical-align:middle}
+.hy .dots{letter-spacing:1px}
+.hy.h5{background:#FBE5C4;color:#7A5205;border:1px solid #EBC469}
+.hy.h4{background:#FDEFD2;color:#8A5E08;border:1px solid #F0D08A}
+.hy.h3{background:#EEEBF6;color:#413B7A;border:1px solid #CFC9EC}
+.hy.h2{background:#EDEAE0;color:#5C584A;border:1px solid #D9D5C8}
+
+.tagrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.03em;padding:4px 10px;border-radius:6px;background:#EDEAE0;color:var(--ink-soft);border:1px solid var(--line)}
+.tag.key{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+
+/* callouts */
+.call{border-left:4px solid var(--eureka);background:#FCF4E1;padding:14px 18px;border-radius:0 10px 10px 0;margin:16px 0}
+.call.tip{border-color:var(--indigo);background:#EEEDF7}
+.call.trap{border-color:var(--bad);background:#FBEAE7}
+.call .lbl{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:4px}
+.call.tip .lbl{color:var(--indigo)}
+.call.trap .lbl{color:var(--bad)}
+.call.eur .lbl{color:var(--eureka-deep)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{background:#EFEBDF;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+tr:last-child td{border-bottom:none}
+td b{color:var(--ink)}
+.tbl-scroll{overflow-x:auto;border-radius:12px}
+.freq-cell{font-family:'Space Mono',monospace;font-weight:700;white-space:nowrap}
+
+/* bars */
+.bar{position:relative;height:22px;background:#E7E3D7;border-radius:6px;overflow:hidden;min-width:120px}
+.bar span{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--eureka),var(--eureka-deep));border-radius:6px;display:flex;align-items:center;padding-left:8px;color:#fff;font-family:'Space Mono',monospace;font-size:11px;font-weight:700}
+
+/* lists */
+ul.clean,ol.clean{margin:12px 0;padding-left:22px}
+ul.clean li,ol.clean li{margin:7px 0}
+ul.check{list-style:none;padding-left:2px;margin:12px 0}
+ul.check li{position:relative;padding-left:28px;margin:9px 0}
+ul.check li::before{content:"→";position:absolute;left:0;top:0;color:var(--eureka-deep);font-weight:700}
+dl.def{margin:14px 0}
+dl.def dt{font-weight:700;color:var(--indigo);margin-top:14px}
+dl.def dd{margin:2px 0 0;color:var(--ink-soft)}
+
+/* six hats strip */
+.hats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:18px 0}
+@media(max-width:720px){.hats{grid-template-columns:repeat(2,1fr)}}
+.hat{border-radius:12px;padding:14px;color:#fff;min-height:132px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.hat h4{font-family:'Inter';font-size:15px;font-weight:700;margin-bottom:3px}
+.hat .sym{font-size:12px;opacity:.85;font-family:'Space Mono',monospace;letter-spacing:.05em}
+.hat p{font-size:12.5px;line-height:1.4;margin:8px 0 0;opacity:.96}
+.hat.blue{background:var(--hat-blue)}
+.hat.white{background:#fff;color:#33302A;border:1px solid var(--line)}
+.hat.white .sym{color:#8A8577}
+.hat.red{background:var(--hat-red)}
+.hat.yellow{background:var(--hat-yellow)}
+.hat.green{background:var(--hat-green)}
+.hat.black{background:var(--hat-black)}
+
+/* scamper letters */
+.scamper{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.scamper .s{flex:1 1 130px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.scamper .s .l{font-family:'Fraunces';font-weight:900;font-size:26px;color:var(--indigo);line-height:1}
+.scamper .s .w{font-weight:700;font-size:13.5px;margin:2px 0 4px}
+.scamper .s .d{font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+
+/* answer key rows */
+.qa{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0;background:var(--panel)}
+.qa .q{padding:13px 16px;font-weight:600;border-bottom:1px solid var(--line-soft);background:#F1EEE4}
+.qa .a{padding:12px 16px;font-size:14.5px}
+.qa .a .ans{display:inline-block;font-family:'Space Mono',monospace;font-weight:700;color:#fff;background:var(--good);padding:2px 9px;border-radius:5px;font-size:12.5px;margin-right:8px}
+.qa .a .ans.f{background:var(--bad)}
+
+/* mini stat */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--ink);color:#F4F2EC;border-radius:14px;padding:18px 16px}
+.stat .n{font-family:'Fraunces';font-weight:900;font-size:40px;color:var(--eureka);line-height:1}
+.stat .l{font-size:12.5px;color:#C9C5B6;margin-top:6px;letter-spacing:.02em}
+
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0}
+
+/* footer */
+footer{background:var(--ink);color:#B9B5A6;padding:40px 0;font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer b{color:#F4F2EC}
+
+/* print */
+@media print{
+  .sidebar,.hero-grid{display:none}
+  body{background:#fff;font-size:11pt}
+  .layout{display:block;padding:0}
+  main{padding:0}
+  .card,table,.call,.hat,.qa{break-inside:avoid;box-shadow:none}
+  section{margin-bottom:26px}
+  .hero{background:#fff;color:#000;border-bottom:2px solid #000;padding:20px 0}
+  .hero h1 em,.eyebrow{color:#8A5E08}
+  .hero p.lead,.hero .meta{color:#333}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-grid" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#E8A311" opacity="0.5"/></pattern><pattern id="net" width="180" height="180" patternUnits="userSpaceOnUse"><path d="M20 20 L160 60 M160 60 L60 150 M60 150 L20 20 M160 60 L170 160" stroke="#4B47A0" stroke-width="1" fill="none" opacity="0.35"/></pattern></defs><rect width="100%" height="100%" fill="url(#dots)"/><rect width="100%" height="100%" fill="url(#net)"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">PKIB113 · Creative Thinking · Final Examination Prep</div>
+    <h1>The Complete<br><em>Creative Thinking</em><br>Exam Master Guide</h1>
+    <p class="lead">Full course notes for all 8 units, fused with an analysis of 6 past final papers — so you study exactly what gets tested, and know how to answer it.</p>
+    <div class="meta">
+      <span>DURATION <b>2h 30min</b></span>
+      <span>SECTIONS <b>A · B · C</b></span>
+      <span>WEIGHTING <b>30% of course</b></span>
+      <span>PAST PAPERS ANALYSED <b>6 (2019–2025)</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="navtitle">Study Map</div>
+    <nav>
+      <a href="#format"><span class="num">00</span>Exam format &amp; strategy</a>
+      <a href="#analytics"><span class="num">01</span>Past-paper analytics ★</a>
+      <a href="#predictions"><span class="num">02</span>What to expect this year</a>
+
+      <div class="grp">Content Notes</div>
+      <a href="#u1"><span class="num">U1</span>Defining creativity</a>
+      <a href="#u2"><span class="num">U2</span>Elements: the 4 Ps + 8 qualities</a>
+      <a href="#u3"><span class="num">U3</span>Creative process &amp; thinking</a>
+      <a href="#u4"><span class="num">U4</span>Brainstorming &amp; mind maps</a>
+      <a href="#u5"><span class="num">U5</span>Forced Connection · SCAMPER</a>
+      <a href="#u6"><span class="num">U6</span>DATT: PMI &amp; OPV</a>
+      <a href="#u7"><span class="num">U7</span>DATT: C&amp;S &amp; CAF</a>
+      <a href="#u8"><span class="num">U8</span>Six Thinking Hats</a>
+
+      <div class="grp">Exam Drills</div>
+      <a href="#secA"><span class="num">A</span>MCQ answer bank</a>
+      <a href="#secB"><span class="num">B</span>True/False traps</a>
+      <a href="#secC"><span class="num">C</span>Section C templates</a>
+      <a href="#cheat"><span class="num">✦</span>One-page cheat sheet</a>
+    </nav>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+
+  <!-- ===== 00 FORMAT ===== -->
+  <section id="format">
+    <div class="sec-head"><span class="sec-num">00</span><h2>Exam Format &amp; Strategy</h2></div>
+    <p class="sec-intro">Across every past paper from 2019 to 2025 the structure is almost identical. Knowing the shape of the paper is half the battle — you can budget your time before you even read a question.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">A</div><div class="l">20 MCQ · 20 marks · one best answer</div></div>
+      <div class="stat"><div class="n">B</div><div class="l">10–20 True/False · 10–20 marks</div></div>
+      <div class="stat"><div class="n">C</div><div class="l">3 structured questions · 60–70 marks</div></div>
+      <div class="stat"><div class="n">33</div><div class="l">typical total questions (43 in older papers)</div></div>
+    </div>
+
+    <div class="card">
+      <h4 class="blk">The three sections, decoded</h4>
+      <div class="tbl-scroll"><table>
+        <tr><th>Section</th><th>What it is</th><th>Marks</th><th>Where you answer</th></tr>
+        <tr><td><b>A — MCQ</b></td><td>20 multiple-choice, "choose the BEST answer". Heavy on definitions, theorists, and matching tools to problem types.</td><td class="freq-cell">20</td><td>OMR form <i>or</i> answer booklet (newer papers)</td></tr>
+        <tr><td><b>B — True / False</b></td><td>Statements you mark T or F. Almost every one is a deliberate "swap-a-word" trap (e.g. divergent ↔ convergent).</td><td class="freq-cell">10–20</td><td>OMR form / answer booklet</td></tr>
+        <tr><td><b>C — Short / structured</b></td><td>3 questions built around <b>tables you copy out</b>. Always: one Forced-Connection or Creative-Press task, one SCAMPER task, one DATT problem-solving task.</td><td class="freq-cell">60–70</td><td>Answer booklet</td></tr>
+      </table></div>
+    </div>
+
+    <div class="call eur"><span class="lbl">Time budget that works</span>
+      Section C is worth ~70% of marks but rewards structure over prose. Spend <b>~25 min on A+B combined</b> (≈45 sec/question — don't overthink; your first instinct on a definition is usually right), then <b>~40 min per Section C question</b>. Draw the table first, fill the easy rows, then justify. Leave 10 min to write every <b>Final Recommendation</b> — students routinely run out of time and drop those 5–6 easy marks.</div>
+
+    <div class="call tip"><span class="lbl">Golden rule for Section C</span>
+      Every Section C answer is graded on the same three moves: <b>(1)</b> a correct idea/innovation, <b>(2)</b> a <b>justification</b> tied to a named concept from the syllabus (value creation / N.A.S.A., a Dacey quality, a creative-person trait), and <b>(3)</b> a closing <b>Final Recommendation</b>. Never give an idea without naming the concept it demonstrates.</div>
+  </section>
+
+  <!-- ===== 01 ANALYTICS ===== -->
+  <section id="analytics">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Past-Paper Analytics</h2></div>
+    <p class="sec-intro">This is the payoff of reading six papers side by side (Sem 1 2019/20, Sem 1 &amp; 2 2022/23, Sem 1 &amp; 2 2023/24, Sem 1 2024/25). The same ideas recur almost every sitting — sometimes word for word, sometimes with one detail swapped. The <span class="hy h5"><span class="dots">●●●●●</span></span> meter below shows how many of the 6 papers tested each topic.</p>
+
+    <div class="call eur"><span class="lbl">How to read the meter</span>
+      <span class="hy h5"><span class="dots">●●●●●</span> 5–6/6 lock it in</span> &nbsp;
+      <span class="hy h4"><span class="dots">●●●●</span> 4/6 very likely</span> &nbsp;
+      <span class="hy h3"><span class="dots">●●●</span> 3/6 probable</span> &nbsp;
+      <span class="hy h2"><span class="dots">●●</span> 1–2/6 know it</span>
+    </div>
+
+    <h3 class="blk">Section A — the recurring MCQ topics</h3>
+    <div class="tbl-scroll"><table>
+      <tr><th>Topic (Section A)</th><th style="width:150px">Appears in</th><th>The point they test</th></tr>
+      <tr><td><b>Maslow — Self-Actualisation</b></td><td><span class="hy h5"><span class="dots">●●●●●●</span> 6/6</span></td><td>"maximise his potentials to be what he is able to be" — the single most reliable question in the paper.</td></tr>
+      <tr><td><b>Definition of creativity</b> (Yew 2007 / Torrance 1974 / "small c")</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>Simple = "making connections". Complex = Torrance's 4-part process. Small c = everyday creativity.</td></tr>
+      <tr><td><b>Value creation — the "EXCEPT" trap</b></td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>Value creation does NOT require being <i>cheap</i> or <i>accepted by everyone</i>. Think N.A.S.A.</td></tr>
+      <tr><td><b>Incubation / DMN / dopamine</b></td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>Subconscious takes over, new connections form, you take a break / do habitual tasks.</td></tr>
+      <tr><td><b>Matching DATT tool → problem type</b></td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>PMI=pros/cons · C&amp;S=time frames · CAF=list of considerations · OPV=different groups.</td></tr>
+      <tr><td><b>Creative process scenario</b> (Sarah/Ahmad/Maryam)</td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Map a story to Knowledge / Incubation / Illumination / Development. Usually 2 linked questions.</td></tr>
+      <tr><td><b>SCAMPER — name the stage</b> from an example</td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Rocking horse = Put to other use · Digital clock = Substitute · Stretch jacket no zips = Eliminate.</td></tr>
+      <tr><td><b>In-class activity = divergent thinking</b></td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Five-Circles / The Island / many-uses-of-a-mirror all test <b>divergent thinking</b> (via TTCT).</td></tr>
+      <tr><td><b>Higher creativity achieved by…</b></td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Creating activities + diverse friends + travel. NOT routine/being organised/discipline.</td></tr>
+      <tr><td><b>4 Ps — Creative Product / Creative Press</b></td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Press = environment, friends, parents, teachers, surroundings, pastimes.</td></tr>
+      <tr><td><b>George Land / Ken Robinson</b> — what hampers creativity</td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Judgement, criticism, censoring, stress; too much content subjects, too little art.</td></tr>
+      <tr><td><b>PMI "Interesting" column</b></td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Points worth considering / exploring further / neither plus nor minus — future potential.</td></tr>
+      <tr><td><b>Six Thinking Hats — correct pairing</b></td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Blue=overview, Yellow=positive are the usual correct pair; watch swapped colours.</td></tr>
+      <tr><td><b>Taxonomy of Creative Designs (Nilsson 2011)</b></td><td><span class="hy h3"><span class="dots">●●●</span> 3/6</span></td><td>Highest = "completely new and original". Variation/Transformation/Combination multi-answer.</td></tr>
+      <tr><td><b>Brainstorm / mind map = quantity, no criticism</b></td><td><span class="hy h3"><span class="dots">●●●</span> 3/6</span></td><td>"During mind mapping there should be ___ of ideas" → <b>emphasis on quantity</b>.</td></tr>
+      <tr><td><b>Barron-Welsh figure preference</b></td><td><span class="hy h3"><span class="dots">●●●</span> 3/6</span></td><td>Creative people prefer complex/asymmetrical figures → risk-takers, like the unpredictable.</td></tr>
+      <tr><td><b>Forced Connection — definition</b></td><td><span class="hy h2"><span class="dots">●●</span> 2/6</span></td><td>Designing a new product using characteristics of an <b>unrelated</b> item.</td></tr>
+      <tr><td><b>Lateral thinking characteristics</b></td><td><span class="hy h2"><span class="dots">●●</span> 2/6</span></td><td>Generate many ideas; drop/change/revise; NOT aiming for one best answer.</td></tr>
+      <tr><td><b>Conscious vs sub/unconscious mind</b></td><td><span class="hy h2"><span class="dots">●●</span> 2/6</span></td><td>Conscious = reasoning, defending decisions, judging good/bad.</td></tr>
+    </table></div>
+
+    <h3 class="blk">Section B — the True/False patterns that repeat</h3>
+    <p>Section B is not random. The examiner keeps a bank of statements and toggles one word to flip the truth value. Master these ~10 pairs and you own the whole section.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Statement theme</th><th style="width:130px">Appears in</th><th>The switch that flips it</th></tr>
+      <tr><td>Choosing the best final design</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>= <b>convergent</b> thinking (TRUE). If it says "divergent" or "lateral" → FALSE.</td></tr>
+      <tr><td>Brain is more creative when…</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td><b>relaxed / less alert</b> = TRUE. "on alert" = FALSE.</td></tr>
+      <tr><td>Big Five "agreeableness"</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>Every version is a <b>TRAP → FALSE</b>. Agreeable ≠ outgoing (extraversion), ≠ emotional (neuroticism), ≠ disciplined (conscientiousness).</td></tr>
+      <tr><td>Negative people reduce creativity</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>TRUE. But "surrounded by people who think like them increases creativity" = FALSE (need diversity).</td></tr>
+      <tr><td>Androgyny definition</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>"use both male &amp; female characteristics in appropriate situations" = TRUE. "equal male/female hormones" = FALSE.</td></tr>
+      <tr><td>OPV vs C&amp;S vs CAF confusion</td><td><span class="hy h5"><span class="dots">●●●●●</span> 5/6</span></td><td>OPV = viewpoints of different groups (TRUE). OPV "uses time frames" = FALSE (that's C&amp;S). "factors affecting a decision" = FALSE (that's CAF).</td></tr>
+      <tr><td>Six Thinking Hats — best used for…</td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>"various modes of thinking" = TRUE. "various groups of people's perspectives" = FALSE (that's OPV).</td></tr>
+      <tr><td>Stimulus freedom / functional fixity</td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Not tied to existing designs = stimulus freedom (TRUE). Tied down = functional fixity (TRUE).</td></tr>
+      <tr><td>Knowledge = raw material for ideas</td><td><span class="hy h4"><span class="dots">●●●●</span> 4/6</span></td><td>Knowledge/experience as starting point = TRUE. "understanding of do's &amp; don'ts" = FALSE (rules restrict).</td></tr>
+      <tr><td>Intelligence type mix-ups</td><td><span class="hy h3"><span class="dots">●●●</span> 3/6</span></td><td>Intrapersonal ≠ communicating with others (that's interpersonal). Logical-Math = works with computers.</td></tr>
+      <tr><td>Illumination / incubation vs patents</td><td><span class="hy h3"><span class="dots">●●●</span> 3/6</span></td><td>Illumination = eureka moment, NOT obtaining a patent (= development). FALSE if it mentions patents.</td></tr>
+      <tr><td>de Bono's thinking style</td><td><span class="hy h2"><span class="dots">●●</span> 2/6</span></td><td>Proponent of <b>lateral / parallel</b> thinking (TRUE). "vertical thinking" = FALSE.</td></tr>
+    </table></div>
+
+    <h3 class="blk">Section C — the question that never changes shape</h3>
+    <p>Every single paper has the same three-question skeleton. Only the pictures and the social topic change. If you drill these three templates you can walk in knowing exactly what to build.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Slot</th><th style="width:130px">Appears in</th><th>The task (only the prop changes)</th><th>Marks</th></tr>
+      <tr><td><b>Q1</b></td><td><span class="hy h5"><span class="dots">●●●●●</span> 6/6</span></td><td><b>Forced Connection</b> — adapt 5 characteristics of a random item (backpack, car…) to solve a problem (queue, airport). <i>OR</i> transform a space into a <b>Creative Press</b> justified by Dacey's qualities.</td><td class="freq-cell">20</td></tr>
+      <tr><td><b>Q2</b></td><td><span class="hy h5"><span class="dots">●●●●●●</span> 6/6</span></td><td><b>SCAMPER</b> — improve an everyday object (mug, bottle, belt, bus stop, lake) through all 7 stages, then justify with <b>value creation / N.A.S.A.</b></td><td class="freq-cell">20</td></tr>
+      <tr><td><b>Q3</b></td><td><span class="hy h5"><span class="dots">●●●●●●</span> 6/6</span></td><td><b>DATT combined analysis</b> on a social issue (creativity gap in schools, sugar campaign, road safety, AI &amp; leadership). Usually <b>C&amp;S + CAF</b>, <b>OPV + PMI</b>, or <b>OPV + C&amp;S</b>, justified with Dacey's 8 qualities / creative-person traits, ending in a <b>Final Recommendation</b>.</td><td class="freq-cell">20–30</td></tr>
+    </table></div>
+
+    <div class="call trap"><span class="lbl">The examiner's favourite curveball</span>
+      Section C tables often say <b>"An example is given. DO NOT use this example."</b> Marks are lost every year by students who paraphrase the given example. Always invent something genuinely new.</div>
+  </section>
+
+  <!-- ===== 02 PREDICTIONS ===== -->
+  <section id="predictions">
+    <div class="sec-head"><span class="sec-num">02</span><h2>What to Expect This Year</h2></div>
+    <p class="sec-intro">These are not guarantees — but based on six papers, here is where to point your revision. Treat the "bank on it" list as non-negotiable.</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h4 class="blk" style="color:var(--good)">Bank on it — study to perfection</h4>
+        <ul class="check">
+          <li>Maslow's Self-Actualisation wording</li>
+          <li>Matching PMI / OPV / C&amp;S / CAF to a problem type (and their T/F traps)</li>
+          <li>A creative-process story → Knowledge / Incubation / Illumination / Development</li>
+          <li>Value-creation "EXCEPT" question</li>
+          <li>SCAMPER Section C (all 7 letters + N.A.S.A. justification)</li>
+          <li>Forced Connection Section C (5 characteristics → 5 solutions)</li>
+          <li>A DATT combined Section C with a Final Recommendation</li>
+          <li>Six Hats colour-to-mode pairing</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="blk" style="color:var(--indigo)">Likely — don't skip</h4>
+        <ul class="check">
+          <li>Nilsson's Taxonomy degrees (imitation → original)</li>
+          <li>Divergent vs convergent / lateral vs vertical thinking</li>
+          <li>Dacey's 8 qualities of the creative mind (needed for Section C justifications)</li>
+          <li>George Land / Ken Robinson on schooling &amp; creativity</li>
+          <li>Barron-Welsh &amp; Torrance (TTCT) tests</li>
+          <li>Multiple Intelligences &amp; Big Five (OCEAN)</li>
+          <li>Brainstorming rules &amp; Tony Buzan mind-map features</li>
+          <li>Biomimicry / creative adaptation examples</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="call eur"><span class="lbl">The topical hook</span>
+      Recent papers pull the Section C social issue from current debates — the 2022/23 papers used the <b>AI-vs-jobs</b> HBR quote and the <b>creativity gap in schools</b>; the 2023/24 papers used the <b>Reduce-Sugar campaign</b>. Unit 8 (2024/25) leans hard on <b>humanoid robots &amp; AI</b>. Expect the Section C context to be an <b>AI / technology / sustainability / public-health</b> issue — prepare a flexible "education + technology + policy across time frames" answer you can bend to any prompt.</div>
+  </section>
+
+  <!-- ===== UNIT 1 ===== -->
+  <section id="u1">
+    <div class="sec-head"><span class="sec-num">U1</span><h2>Defining Creativity</h2></div>
+    <p class="sec-intro">Creativity is treated as an <b>open, infinite, limitless</b> concept — but the course insists you can still define, measure, and above all <b>create value</b> with it. This unit supplies the definitions that Section A returns to again and again.</p>
+
+    <h3 class="blk">1.1 Creativity as a limitless concept</h3>
+    <p>Because creativity is <b>subjective</b> and depends on perspective and standards of expectation, the course gives you <b>4 models to measure</b> it. Each model answers a different purpose, and each maps onto one element of <b>value creation (N.A.S.A.)</b>.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Model</th><th>Who</th><th>Measures how creative a…</th><th>N.A.S.A. element</th></tr>
+      <tr><td><b>Csikszentmihalyi Systems Model</b></td><td>Mihalyi Csikszentmihalyi</td><td>…piece of work is within its <b>social setting</b> (artist ↔ domain ↔ field)</td><td><b>A</b>ttractive</td></tr>
+      <tr><td><b>Taxonomy of Creative Designs</b></td><td>Nilsson (2011)</td><td>…work is by <b>degree of originality</b></td><td><b>N</b>ovel</td></tr>
+      <tr><td><b>Guilford Measures</b></td><td>Guilford &amp; Torrance</td><td>…<b>person</b> is, via <b>divergent thinking</b></td><td><b>A</b>ppropriate</td></tr>
+      <tr><td><b>Requirements Model</b></td><td>—</td><td>…work is against a <b>field/programme</b> using strict expert criteria</td><td><b>S</b>ocial impact</td></tr>
+    </table></div>
+
+    <div class="call"><span class="lbl eur">Value creation = N.A.S.A.</span>
+      <b>N</b>ovel (original, new, unexpected) · <b>A</b>ppropriate (useful, fitting, better way of doing things) · <b>S</b>ocial impact (accepted by community, solves problems, improves economy) · <b>A</b>ttractive (aesthetic sensibility — pleasing, evokes emotion). An innovation must serve a good purpose for its target audience. It does <b>NOT</b> have to be cheap, technologically advanced, or accepted by everyone.</div>
+
+    <h4 class="blk">Nilsson's Taxonomy — the degrees of originality (low → high)</h4>
+    <div class="tbl-scroll"><table>
+      <tr><th>Degree</th><th>What it does</th></tr>
+      <tr><td><b>Imitation</b></td><td>Copies a product to add to the market.</td></tr>
+      <tr><td><b>Variation</b></td><td>Re-designs a product by changing it slightly (e.g. new colour).</td></tr>
+      <tr><td><b>Combination</b></td><td>Combines two products to produce a new one.</td></tr>
+      <tr><td><b>Transformation</b></td><td>Reconstructs a product to work differently for the same purpose.</td></tr>
+      <tr><td><b>Original / Innovation</b> ← highest</td><td>Produces something <b>completely new and original</b>.</td></tr>
+    </table></div>
+
+    <h3 class="blk">1.3 Simple &amp; complex definitions</h3>
+    <div class="grid2">
+      <div class="card tight"><h4 class="blk">Simple (Yew, 2007)</h4><p>Creativity is fundamentally about <b>making connections</b>. Classic examples: the wine press + coin punch → Gutenberg's <b>printing press</b>; a car's petrol engine + boat → Ole Evinrude's <b>outboard motor</b>. Connections can be <b>extended</b> (touch-'n-go, drive-thru, Grab).</p></div>
+      <div class="card tight"><h4 class="blk">Complex (Torrance, 1974)</h4><p>A <b>4-part process</b>: (1) become sensitive to <b>problems/gaps</b> — identify the problem; (2) <b>search for solutions</b>, form &amp; test hypotheses; (3) <b>modify &amp; retest</b>; (4) <b>communicate the results</b>. Boil it down to: <b>Identify → Solve → Share</b>.</p></div>
+    </div>
+    <div class="call tip"><span class="lbl">Definition cross-check</span> Sternberg: "new and useful products." · Lubart: "novel and appropriate." · Ken Robinson: "the process of having <b>original ideas that have value</b>." · de Bono: "finding <b>better ways of doing things</b>." A creative idea is always <b>logical in hindsight</b> — otherwise it's just "crazy."</div>
+
+    <h3 class="blk">1.4 The Four-C Model (Kaufman &amp; Beghetto, 2009)</h3>
+    <dl class="def">
+      <dt>Big-C (genius C)</dt><dd>Eminent, history-making creativity (Einstein, Hawking).</dd>
+      <dt>Pro-C (expert C)</dt><dd>Professional-level expertise.</dd>
+      <dt>little-c (personal c)</dt><dd>Everyday creative expression.</dd>
+      <dt>mini-c (everyday c)</dt><dd>Solving small everyday problems — creativity you do without realising it.</dd>
+    </dl>
+    <div class="call"><span class="lbl eur">Take-away</span> Everyone has creative potential; it can be <b>learned and trained</b>. Value creation is <b>dynamic</b>: industrial-era mass production → today's innovation of materials/processes → future economies of creativity (mass customisation).</div>
+  </section>
+
+  <!-- ===== UNIT 2 ===== -->
+  <section id="u2">
+    <div class="sec-head"><span class="sec-num">U2</span><h2>Elements of Creative Thinking</h2></div>
+    <p class="sec-intro">Rhodes' (1961) framework — the <b>4 Ps</b> — plus Dacey's <b>8 qualities of the creative mind</b>. The 8 qualities are doubly important: they turn up in Section A/B <i>and</i> you must name them to justify Section C answers.</p>
+
+    <h3 class="blk">2.1 The 4 Ps of creativity (Rhodes, 1961)</h3>
+    <div class="grid2">
+      <div class="card tight"><h4 class="blk">① Creative Person</h4><p>Traits: imaginative, flexible, curious, willing to try new ideas. Studied via <b>Multiple Intelligences</b> (Gardner) and the <b>Big Five / OCEAN</b>.</p></div>
+      <div class="card tight"><h4 class="blk">② Creative Press / Place</h4><p>The <b>environment</b>: classroom, office, study space, and the <b>people &amp; life experiences</b> (teachers, peers, parents, society, hobbies, travel) that nurture creativity.</p></div>
+      <div class="card tight"><h4 class="blk">③ Creative Product</h4><p>What makes an idea creative — <b>making connections</b> between concepts, fields of knowledge, and life experiences (e.g. aerogel, hydrophobic &amp; self-healing materials → new uses).</p></div>
+      <div class="card tight"><h4 class="blk">④ Creative Process</h4><p>The 5 stages that generate ideas: Knowledge → Thinking → Incubation → Illumination → Development (covered in Unit 3).</p></div>
+    </div>
+
+    <h4 class="blk">Gardner's Multiple Intelligences — know the odd-ones-out for T/F</h4>
+    <div class="tbl-scroll"><table>
+      <tr><th>Intelligence</th><th>Typical people</th></tr>
+      <tr><td><b>Linguistic</b></td><td>authors, journalists, poets</td></tr>
+      <tr><td><b>Logical / Mathematical</b></td><td>engineers, scientists, economists, detectives (people who work with computers)</td></tr>
+      <tr><td><b>Musical</b></td><td>composers, singers, pianists</td></tr>
+      <tr><td><b>Visual / Spatial</b></td><td>interior decorators, designers, architects</td></tr>
+      <tr><td><b>Bodily-Kinesthetic</b></td><td>sportspeople, dancers</td></tr>
+      <tr><td><b>Intrapersonal</b></td><td>philosophers, counsellors — understanding <b>one's own</b> feelings (NOT communicating with others)</td></tr>
+      <tr><td><b>Interpersonal</b></td><td>teachers, facilitators, politicians, salespeople — communicating with <b>others</b></td></tr>
+      <tr><td><b>Naturalistic</b></td><td>farmers, botanists, environmentalists</td></tr>
+      <tr><td><b>Existential</b> (added 2020)</td><td>religious leaders, philosophers, bloggers</td></tr>
+    </table></div>
+    <div class="call trap"><span class="lbl">Big Five (OCEAN) trap</span>
+      <b>O</b>penness · <b>C</b>onscientiousness · <b>E</b>xtraversion · <b>A</b>greeableness · <b>N</b>euroticism. Section B loves misdefining <b>agreeableness</b> (which means compassionate/cooperative/kind) as "outgoing" (extraversion), "emotional" (neuroticism), or "disciplined/hardworking" (conscientiousness). All such statements are <b>FALSE</b>.</div>
+
+    <h3 class="blk">2.2 Is creativity born or made?</h3>
+    <div class="call"><span class="lbl eur">de Bono's answer</span> "Creative thinking is <b>NOT a talent; it is a skill</b> that can be learned." It strengthens natural abilities and improves teamwork, productivity and profits.</div>
+
+    <h3 class="blk">2.3 The 8 Qualities of the Creative Mind (Dacey, 1989)</h3>
+    <p>Memorise these — they are your Section C justification vocabulary.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Quality</th><th>Meaning</th></tr>
+      <tr><td><b>1. Tolerance for ambiguity</b></td><td>Needs a <b>greater</b> degree of uncertainty before feeling fear; ambiguity raises curiosity and drives them out of the comfort zone.</td></tr>
+      <tr><td><b>2. Stimulus freedom</b></td><td>Bends the rules to their needs; doesn't assume rules exist when a situation is ambiguous (vs "stimulus bound" = follows rules rigidly).</td></tr>
+      <tr><td><b>3. Functional freedom</b></td><td>Sees unconventional uses for things (vs "functional fixity" = accepting things as unchangeable, which blocks ideas).</td></tr>
+      <tr><td><b>4. Flexibility</b></td><td>Generates ideas across many <b>different categories</b>.</td></tr>
+      <tr><td><b>5. Risk-taking</b></td><td>Willing to take risks; people who aim low are less creative.</td></tr>
+      <tr><td><b>6. Preference for disorder</b></td><td>Prefers complex/asymmetrical figures — the <b>Barron-Welsh Figure Preference Test</b>.</td></tr>
+      <tr><td><b>7. Delayed gratification</b></td><td>Endures prolonged effort for higher rewards (Edison's 2,004 filament experiments).</td></tr>
+      <tr><td><b>8. Androgyny</b></td><td>Uses <b>both</b> male &amp; female characteristics as appropriate — NOT equal hormone levels. "Creativity requires both sensitivity and independence" (Torrance).</td></tr>
+    </table></div>
+    <div class="call tip"><span class="lbl">Two flexibility tests to remember</span>
+      <b>TTCT</b> (Torrance Test of Creative Thinking) scores 4 scales: <b>Fluency</b> (many ideas), <b>Flexibility</b> (different categories), <b>Originality</b> (rare ideas), <b>Elaboration</b> (well-described). The <b>Five-Circles</b> class activity is a TTCT-style test of <b>divergent thinking</b>.</div>
+  </section>
+
+  <!-- ===== UNIT 3 ===== -->
+  <section id="u3">
+    <div class="sec-head"><span class="sec-num">U3</span><h2>Creative Process &amp; Thinking</h2></div>
+    <p class="sec-intro">The 5-stage creative process is the source of the "Sarah / Ahmad / Maryam" scenario questions. Get the boundary between <b>Knowledge</b> and <b>Incubation</b> right and you'll ace them.</p>
+
+    <h3 class="blk">3.1 Creative potentials — Maslow</h3>
+    <div class="call eur"><span class="lbl">The 6/6 question</span>
+      <b>Self-Actualisation</b> (Maslow, 1943): "What a man <b>can</b> be, he <b>must</b> be." It is the idea that a person should <b>maximise his potentials / natural talents to be what he is able to be</b> — the top of Maslow's hierarchy. Not about shelter, belonging, or earning a living. This exact phrasing is the safest mark on the paper.</div>
+
+    <h3 class="blk">3.2 Creativity &amp; adulthood — George Land's NASA test</h3>
+    <p>Land (1968) gave NASA's divergent-thinking test to 1,600 children and re-tested them over time. The share scoring at <b>"genius" level</b> collapses with age:</p>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:90px 1fr;gap:10px 14px;align-items:center;font-size:14px">
+        <div><b>5 yrs</b></div><div class="bar"><span style="width:98%">98%</span></div>
+        <div><b>10 yrs</b></div><div class="bar"><span style="width:30%">30%</span></div>
+        <div><b>15 yrs</b></div><div class="bar"><span style="width:12%">12%</span></div>
+        <div><b>Adults</b></div><div class="bar"><span style="width:2%">2%</span></div>
+      </div>
+    </div>
+    <p>Creativity <b>diminishes with age</b> because of judgement, criticism, censoring and stress ("the greatest obstacles"). School over-emphasises <b>content subjects</b> and under-emphasises <b>creative subjects</b>. Ken Robinson agrees: "people are <b>educated out of</b> their creativity" because mistakes are condemned.</p>
+
+    <h3 class="blk">3.3 The Creative Process — 5 stages (Yew, 2007)</h3>
+    <div class="tbl-scroll"><table>
+      <tr><th>#</th><th>Stage</th><th>What happens</th><th>Scenario cue</th></tr>
+      <tr><td>0</td><td><b>Identify the problem</b></td><td>Become sensitive to the gap/need (Torrance).</td><td>"given a task to increase sales"</td></tr>
+      <tr><td>1</td><td><b>Knowledge</b></td><td>Actively gather info — formal &amp; experiential learning; research, read, talk to people, explore what you're curious about.</td><td>"reads about consumer behaviour / talks to people to research"</td></tr>
+      <tr><td>2</td><td><b>Thinking</b></td><td>Work the problem using lateral &amp; vertical thinking.</td><td>"thinks hard at her workstation"</td></tr>
+      <tr><td>3</td><td><b>Incubation</b></td><td><b>Take a break / do something else.</b> Mind enters <b>Default Mode Network (DMN)</b>; subconscious makes new connections; happy hormones (dopamine) released.</td><td>"leaves workstation, coffee break, chats &amp; laughs"</td></tr>
+      <tr><td>4</td><td><b>Illumination (Eureka!)</b></td><td>The "a-ha!" lightbulb moment — the idea strikes.</td><td>"sees a boy with a lollipop — an idea strikes"</td></tr>
+      <tr><td>5</td><td><b>Development</b></td><td>Hardest stage: act on the idea to make it useful, functional, profitable — proposals, approvals, appointing agencies, months of work.</td><td>"prepared a proposal, worked with Procurement, took months"</td></tr>
+    </table></div>
+    <div class="call trap"><span class="lbl">Knowledge vs Incubation — the exam's trap</span>
+      If the character is <b>actively researching</b> (reading about consumer behaviour, browsing for information) → <b>Knowledge</b>. If they've <b>stopped working and are relaxing</b> (coffee, chatting, laughing, doing something unrelated) → <b>Incubation</b>. Both look like "left the workstation," so read what they're actually <i>doing</i>.</div>
+
+    <h4 class="blk">Lateral vs Vertical thinking</h4>
+    <div class="tbl-scroll"><table>
+      <tr><th>Lateral (de Bono)</th><th>Vertical</th></tr>
+      <tr><td>Generative · concerned with <b>richness</b></td><td>Selective · concerned with <b>rightness</b></td></tr>
+      <tr><td>Opens up pathways · tries many directions</td><td>Selects the best pathway · one clear direction</td></tr>
+      <tr><td>Provocative · random · can jump &amp; fill gaps later</td><td>Analytical · sequential · one step at a time</td></tr>
+      <tr><td>Pathways needn't lead somewhere (can be dropped/revised)</td><td>Pathway must lead to a solution</td></tr>
+      <tr><td>= <b>Divergent</b> · asks "what's possible?" · right brain · linked to <b>creativity</b> · assessed by TTCT</td><td>= <b>Convergent</b> · asks "what's right?" · left brain · linked to <b>intelligence</b> · assessed by IQ</td></tr>
+    </table></div>
+    <div class="call tip"><span class="lbl">Breaking patterns (Unit 3b, de Bono)</span>
+      The mind is a <b>pattern-making system</b>; lateral thinking restructures patterns. Three techniques: <b>(1) Stepping stone</b> — question/challenge ("what if… why… how…?"); <b>(2) Reverse</b> — reverse the normal; <b>(3) Random word</b> — innovate by connecting to a random item (design a skateboard via a "shark"). "<b>Po</b>" is de Bono's idea-generation / provocation tool.</div>
+  </section>
+
+  <!-- ===== UNIT 4 ===== -->
+  <section id="u4">
+    <div class="sec-head"><span class="sec-num">U4</span><h2>Idea Generation: Brainstorming &amp; Mind Mapping</h2></div>
+    <p class="sec-intro">Two idea-generation techniques whose <b>rules</b> are the exam target — especially "emphasis on quantity" and "no criticism."</p>
+
+    <h3 class="blk">4.1 Brainstorming</h3>
+    <p>A "storm in the brain" — letting ideas free-flow without worrying about errors, logic, or rules.</p>
+    <div class="grid2">
+      <div class="card tight"><h4 class="blk">5 basic guidelines</h4><ol class="clean">
+        <li><b>No criticising</b> ideas</li>
+        <li><b>No evaluation</b> of ideas</li>
+        <li>Focus on <b>quantity</b> of ideas</li>
+        <li>Encourage <b>wild</b> ideas</li>
+        <li><b>Cross-fertilise</b> ideas</li>
+      </ol></div>
+      <div class="card tight"><h4 class="blk">Steps</h4><ol class="clean">
+        <li>Define the problem</li>
+        <li>Members branch ideas from the central idea</li>
+        <li>Share on a screen for all</li>
+        <li>Make time for <b>incubation</b></li>
+        <li>Revisit &amp; then organise / cluster / cross-fertilise</li>
+        <li>Select workable ideas</li>
+      </ol></div>
+    </div>
+    <div class="call trap"><span class="lbl">The one-word MCQ</span> "During brainstorming/mind mapping there should be ___ of ideas" → <b>emphasis on quantity</b> and <b>no criticism</b>. NOT quality, NOT sorting, NOT "no writing down."</div>
+
+    <h3 class="blk">4.2 Mind Mapping (Tony Buzan)</h3>
+    <p>Used to start or to organise brainstorming — clustering ideas into groups/subgroups. Our brain looks for patterns &amp; completion (<b>Gestalt</b> theory); a mind map satisfies this and builds a conceptual framework. More branching = more advanced thinking.</p>
+    <div class="card">
+      <h4 class="blk">Buzan's 7 mind-map characteristics</h4>
+      <ol class="clean">
+        <li>Start branching from the <b>centre</b> of the page</li>
+        <li>Use an <b>image/symbol</b> for the central idea</li>
+        <li>Use <b>vibrant colours</b></li>
+        <li>Connect central image → main branches → 2nd, 3rd levels</li>
+        <li>Use <b>curved</b> lines, not straight</li>
+        <li><b>One keyword</b> per heading, not sentences</li>
+        <li>Use more <b>illustrations</b> than lengthy words</li>
+      </ol>
+    </div>
+    <div class="call tip"><span class="lbl">Brainstorm vs Mind map</span> Brainstorming = free flow, focus on <b>number</b> of ideas, no judgement. Mind mapping = <b>organising</b> ideas into directions/branches, where you select what to develop.</div>
+  </section>
+
+  <!-- ===== UNIT 5 ===== -->
+  <section id="u5">
+    <div class="sec-head"><span class="sec-num">U5</span><h2>Forced Connection &amp; SCAMPER</h2></div>
+    <p class="sec-intro">The two engines behind Section C Questions 1 &amp; 2. Master the <i>mechanics</i>: how you turn a random item or an object into concrete, justified innovations.</p>
+
+    <h3 class="blk">5.1 Forced Connection</h3>
+    <p>An idea-generation tool that <b>puts two seemingly unrelated concepts together</b> — the essence is <b>randomness</b>: A + B = C. Take an idea and force it against an unrelated one to see what emerges (pet turtle + pager; wine press + coin punch → printing press).</p>
+    <div class="card">
+      <h4 class="blk">The 5-step method (this is exactly the Section C table)</h4>
+      <ol class="clean">
+        <li><b>Identify the problem</b> of an existing design (e.g. long supermarket queue).</li>
+        <li><b>Pick a random item</b> to draw from (e.g. a backpack).</li>
+        <li><b>List the characteristics</b> of the random item.</li>
+        <li><b>Transfer / adopt</b> each characteristic into the existing design.</li>
+        <li><b>Innovate</b> a new idea for each.</li>
+      </ol>
+    </div>
+    <div class="call tip"><span class="lbl">Worked micro-example (backpack → supermarket queue)</span>
+      <b>Characteristic:</b> a backpack has <i>shoulder straps for comfort</i> → <b>Solution:</b> provide benches so customers queue comfortably seated. <b>Characteristic:</b> a backpack has <i>many compartments</i> → <b>Solution:</b> multiple express lanes sorted by basket size. Notice the pattern: <b>1 mark for the characteristic, 2 marks for the solution</b>.</div>
+
+    <h3 class="blk">5.2 SCAMPER (Osborn 1953 · Eberle 1971)</h3>
+    <p>A mnemonic of "idea-spurring questions" that forces you to think about an object in 7 distinct ways. This is the Section C Q2 backbone every year.</p>
+    <div class="scamper">
+      <div class="s"><div class="l">S</div><div class="w">Substitute</div><div class="d">What can I replace/swap? (digital clock replaces analog)</div></div>
+      <div class="s"><div class="l">C</div><div class="w">Combine</div><div class="d">What can I merge/integrate? (library + café; salon + café)</div></div>
+      <div class="s"><div class="l">A</div><div class="w">Adapt</div><div class="d">What can I borrow from another idea? (taxi → Grab; airport carousel → sushi carousel)</div></div>
+      <div class="s"><div class="l">M</div><div class="w">Modify / Magnify / Minify</div><div class="d">What can I stretch, exaggerate or distort? (small → large aquarium)</div></div>
+      <div class="s"><div class="l">P</div><div class="w">Put to other use</div><div class="d">What else could this be used for? (fridge → a door)</div></div>
+      <div class="s"><div class="l">E</div><div class="w">Eliminate</div><div class="d">What part can I remove? (cordless kettle, bladeless fan, zipper-less jacket)</div></div>
+      <div class="s"><div class="l">R</div><div class="w">Reverse / Rearrange</div><div class="d">What if I turn it inside out / transform the way it's done? (zoo → wildlife safari)</div></div>
+    </div>
+    <div class="call trap"><span class="lbl">Name-the-stage examples (memorise these)</span>
+      Rocking horse ride = <b>Put to other use</b> · Digital vs analog clock = <b>Substitute</b> · Stretchable jacket with no zippers/buttons (through a neck hole) = <b>Eliminate</b> · House styled like a holiday resort = <b>Adapt</b> · Floor fan mounted on a poster/flower stand = <b>Combine</b>.</div>
+
+    <h3 class="blk">5.3 Innovation &amp; Creative Adaptations</h3>
+    <p>Adaptations are the most common way to innovate — ideas are <b>borrowed and changed</b> to suit new functions. Two types:</p>
+    <dl class="def">
+      <dt>Technological adaptation</dt><dd>Transfer an existing technology to new uses (the "intelligent parking chair" → Pro-Pilot chair).</dd>
+      <dt>Nature-inspired adaptation — Biomimicry</dt><dd>Copy nature: Japan's <b>Shinkansen</b> (kingfisher birds), the <b>UltraCane</b> (bats' echolocation), the <b>Eastgate Centre</b> (termite mounds' self-cooling).</dd>
+    </dl>
+    <div class="call"><span class="lbl eur">Summary</span> Forced Connection forces you to apply <b>one item's characteristics to another</b>. SCAMPER forces you to innovate <b>one item in 7 different ways</b>. Impactful innovation rests on careful research and sound knowledge.</div>
+  </section>
+
+  <!-- ===== UNIT 6 ===== -->
+  <section id="u6">
+    <div class="sec-head"><span class="sec-num">U6</span><h2>de Bono's Thinking Tools: PMI &amp; OPV</h2></div>
+    <p class="sec-intro">Edward de Bono coined "lateral thinking" and created the <b>Direct Attention Thinking Tools (DATT)</b>. The whole exam hinges on knowing <b>which tool fits which problem</b> — the single most tested distinction in Section A and B.</p>
+
+    <div class="call tip"><span class="lbl">The DATT matching table — learn this cold</span>
+      <b>PMI</b> → problems with <b>advantages &amp; disadvantages</b> of an action.
+      <b>OPV</b> → problems involving <b>different groups of people's</b> views.
+      <b>C&amp;S</b> → problems needing <b>time frames / forecasting</b>.
+      <b>CAF</b> → decisions needing a <b>complete list of considerations</b>.</div>
+
+    <h3 class="blk">6.1 PMI — Plus · Minus · Interesting</h3>
+    <p>Forces <b>objectivity</b>: instead of defending an opinion you already hold (bias), you weigh <b>both</b> sides plus the neutral-but-notable points. It is <b>not</b> a yes/no decision tool — it's for accepting an idea <i>after</i> considering both sides.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Plus</th><th>Minus</th><th>Interesting</th></tr>
+      <tr><td>The positive/good points.</td><td>The negative/bad points.</td><td>Points that are <b>neither</b> plus nor minus — worth exploring, potential for future progress, "it would be interesting if…".</td></tr>
+    </table></div>
+    <p><b>Suitable for:</b> "Should we ban handphones for under-5s?", "Should final exams be abolished?" — issues with clear pros and cons. <b>Method:</b> pick issue → brainstorm solutions → select → analyse each through P, M, I → Final Recommendation.</p>
+
+    <h3 class="blk">6.2 OPV — Other People's Views</h3>
+    <p>Looking at an issue from <b>other people's standpoints</b>. Identify everyone involved, put yourself in their shoes, and consider how each group thinks, feels and responds — giving a wider perspective.</p>
+    <p><b>Suitable for:</b> "How can we control sugar use in F&amp;B?", "Consequences of higher electricity tariffs?", "What if we had a 4-day work week?" — issues affecting <b>distinct groups</b> (schools, parents, businesses, government). Often <b>combined with PMI</b>: run each group's view through Plus/Minus/Interesting.</p>
+    <div class="call trap"><span class="lbl">The recurring True/False trap</span>
+      "OPV allows us to think through problems using <b>time frames</b>" = <b>FALSE</b> (that's C&amp;S). "OPV allows us to think using <b>factors that affect a decision</b>" = <b>FALSE</b> (that's CAF). OPV is only about <b>viewpoints of different people</b>.</div>
+  </section>
+
+  <!-- ===== UNIT 7 ===== -->
+  <section id="u7">
+    <div class="sec-head"><span class="sec-num">U7</span><h2>de Bono's Thinking Tools: C&amp;S &amp; CAF</h2></div>
+    <p class="sec-intro">The two DATT tools you'll most likely <b>build a Section C table with</b>: C&amp;S structures answers by <b>time</b>, CAF structures them by <b>options</b>.</p>
+
+    <h3 class="blk">7.1 C&amp;S — Consequences &amp; Sequel</h3>
+    <p>Purpose: to <b>assess a situation before acting</b> and to <b>forecast consequences</b>. It requires thinking in <b>time frames</b> — so it's speculative ("may be", "could be") and helps you make calculated plans.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Time frame</th><th>Range (as taught)</th></tr>
+      <tr><td><b>Immediate</b></td><td>Now → end of this year</td></tr>
+      <tr><td><b>Short term</b></td><td>1–5 years</td></tr>
+      <tr><td><b>Medium term</b></td><td>6–10 years</td></tr>
+      <tr><td><b>Long term</b></td><td>Beyond 10 years</td></tr>
+    </table></div>
+    <p><b>Suitable for:</b> "How do we develop a sustainable student-entrepreneurship programme?", "How do we increase autism awareness?" — anything needing <b>planning from now into the future</b>. The solution you propose <b>must suit each time frame</b>.</p>
+
+    <h3 class="blk">7.2 CAF — Consider All Factors</h3>
+    <p>Purpose: to <b>avoid pitfalls before making a decision</b> by asking "What factor has been left out? What else must we consider?" More complete information → better thinking → a calculated decision. Always consult a <b>good source of information</b>.</p>
+    <p><b>Suitable for:</b> choosing among options — "Which job offer?", "Which tablet to buy?", "Which university abroad?" — where you list factors (fees, course, accommodation, food, transport, academic standing…) and weigh options against them.</p>
+    <div class="call tip"><span class="lbl">Combining tools (very common in Section C Q3)</span>
+      Real papers ask you to <b>combine</b>: <b>C&amp;S + CAF</b> (a long-term programme, listing factors at each stage), <b>C&amp;S + PMI</b> (forecast each time frame, then weigh P/M/I), or <b>OPV + PMI / OPV + C&amp;S</b>. Build the table with the <b>time frames or groups down the side</b> and the second tool's columns across the top.</div>
+  </section>
+
+  <!-- ===== UNIT 8 ===== -->
+  <section id="u8">
+    <div class="sec-head"><span class="sec-num">U8</span><h2>Six Thinking Hats</h2></div>
+    <p class="sec-intro">de Bono's tool for thinking through a problem <b>one mode at a time</b> — so a group's thinking runs in <b>parallel</b> instead of mixing logic and feelings all at once. You must know each colour, its symbol, and its mode.</p>
+
+    <div class="hats">
+      <div class="hat blue"><h4>Blue</h4><div class="sym">= Sky · conductor</div><p>Big picture, overview, main goal &amp; objectives. Usually where discussion <b>starts</b>.</p></div>
+      <div class="hat white"><h4>White</h4><div class="sym">= Blank paper</div><p>Pure <b>facts</b> — data, reports, figures, research, case studies.</p></div>
+      <div class="hat green"><h4>Green</h4><div class="sym">= New leaves</div><p><b>New ideas</b>, fresh approaches, alternative solutions, creativity.</p></div>
+      <div class="hat yellow"><h4>Yellow</h4><div class="sym">= Sun</div><p><b>Positive</b> thinking — benefits, upside, how it may work.</p></div>
+      <div class="hat red"><h4>Red</h4><div class="sym">= Fire / blood</div><p><b>Emotions</b> — feelings, intuition, reactions, opinions.</p></div>
+      <div class="hat black"><h4>Black</h4><div class="sym">= Judge's robe</div><p><b>Critical</b> evaluation — caution, judging, negatives, analytical arguments.</p></div>
+    </div>
+
+    <div class="call trap"><span class="lbl">Pairing traps in Section A</span>
+      The correct pairs are strict: <b>Blue = overview</b>, <b>White = facts</b>, <b>Green = new ideas</b>, <b>Yellow = positive</b>, <b>Red = emotions/reactions</b>, <b>Black = critical evaluation</b>. Wrong-answer options swap them — e.g. "white = positive side" (✗, white is facts), "green = the facts" (✗, green is new ideas), "black = research real facts" (✗, black is critical), "red = overview" (✗, red is emotion).</div>
+
+    <div class="call tip"><span class="lbl">Best-use True/False</span>
+      Six Thinking Hats is BEST used to look at a solution from <b>various modes of thinking</b> (TRUE). If a statement says "from various <b>groups of people's</b> perspectives," that describes <b>OPV</b>, so it's <b>FALSE</b>. Focused single-mode thinking makes the discussion organised and efficient — it is <b>not</b> primarily for "generating new ideas" (that's just the green hat).</div>
+
+    <div class="card">
+      <h4 class="blk">Applying the hats (the Unit 8 robot/AI walkthrough)</h4>
+      <p>A typical run on "should we adopt humanoid robots?": <b>Blue</b> — what's the main impact &amp; which sector benefits? → <b>White</b> — latest developments, costs, what it can/can't do → <b>Yellow</b> — benefits &amp; problems it solves → <b>Green</b> — fresh applications, combining with other AI → <b>Red</b> — people's reactions (employers, employees, end-users) → <b>Black</b> — how practical/suitable in our local context, expert cautions → <b>Final Recommendation</b>.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION A DRILL ===== -->
+  <section id="secA">
+    <div class="sec-head"><span class="sec-num">A</span><h2>MCQ Answer Bank</h2></div>
+    <p class="sec-intro">The exact recurring Section A questions, reworded, with the correct answer and the reasoning. If you can answer these on sight, Section A is 18+/20.</p>
+
+    <div class="qa"><div class="q">Maslow's "Self-Actualisation" essentially means a person should…</div><div class="a"><span class="ans">✓ maximise potentials to be what he is able to be</span> Not belonging, shelter, or earning a living — it's the top of the hierarchy.</div></div>
+
+    <div class="qa"><div class="q">The simplest definition of creative thinking (Yew, 2007) is to…</div><div class="a"><span class="ans">✓ make connections</span> Creativity = making new connections between existing things.</div></div>
+
+    <div class="qa"><div class="q">For an innovation to be "value creation" it must do all of the following EXCEPT…</div><div class="a"><span class="ans">✓ be cheap / be accepted by everyone</span> Value creation (N.A.S.A.) requires novelty, appropriateness, social impact, attractiveness — not low price or universal acceptance.</div></div>
+
+    <div class="qa"><div class="q">Nilsson's Taxonomy — the HIGHEST degree of creativity is to…</div><div class="a"><span class="ans">✓ produce something completely new and original</span> Order low→high: imitation, variation, combination, transformation, original.</div></div>
+
+    <div class="qa"><div class="q">The Five-Circles / The Island / many-uses-of-a-mirror activity is mainly a test of…</div><div class="a"><span class="ans">✓ divergent thinking</span> Assessed via the TTCT; flexibility of ideas.</div></div>
+
+    <div class="qa"><div class="q">She leaves her workstation, goes for a coffee break, chats and laughs → which stage?</div><div class="a"><span class="ans">✓ Incubation</span> Taking a break, DMN active, subconscious making connections. (If she were reading/researching → Knowledge.)</div></div>
+
+    <div class="qa"><div class="q">Watching a passer-by, an idea suddenly strikes → which stage?</div><div class="a"><span class="ans">✓ Illumination</span> The eureka / a-ha! moment.</div></div>
+
+    <div class="qa"><div class="q">She prepares a proposal, gets approvals, appoints an agency over months → which stage?</div><div class="a"><span class="ans">✓ Development</span> Acting on the idea to make it useful, functional, profitable — the hardest stage.</div></div>
+
+    <div class="qa"><div class="q">During brainstorming / mind mapping there should be ___ of ideas.</div><div class="a"><span class="ans">✓ emphasis on quantity (and no criticism)</span> Never quality, sorting, or "no writing down."</div></div>
+
+    <div class="qa"><div class="q">A digital clock replacing an analog clock is an example of ___ in SCAMPER.</div><div class="a"><span class="ans">✓ Substitute</span> A rocking horse ride = Put to other use; a stretch jacket with no zips = Eliminate.</div></div>
+
+    <div class="qa"><div class="q">de Bono's ___ can BEST analyse problems that have advantages &amp; disadvantages of an action.</div><div class="a"><span class="ans">✓ PMI</span> C&amp;S = time frames · CAF = considerations when planning · OPV = views of different groups.</div></div>
+
+    <div class="qa"><div class="q">The problem best solved by PMI is…</div><div class="a"><span class="ans">✓ "Should we allow X?" &amp; "advantages/disadvantages of X"</span> Yes/no &amp; pros/cons questions. "What stages over 20 years?" → C&amp;S. "How do we educate different groups?" → OPV.</div></div>
+
+    <div class="qa"><div class="q">Higher creativity is BEST achieved by…</div><div class="a"><span class="ans">✓ creating activities + diverse friends + travel</span> NOT being organised, disciplined, or following a routine.</div></div>
+
+    <div class="qa"><div class="q">The brain enters Default Mode Network (DMN) when…</div><div class="a"><span class="ans">✓ doing habitual actions / mind wandering</span> Washing dishes, dressing, mind drifting to the future. NOT when brainstorming a new design or doing maths.</div></div>
+
+    <div class="qa"><div class="q">Forced Connection involves…</div><div class="a"><span class="ans">✓ designing a new product using characteristics of an unrelated item</span> Essence = randomness (A + B = C).</div></div>
+
+    <div class="qa"><div class="q">Correct Six Thinking Hats pairing…</div><div class="a"><span class="ans">✓ Blue = overview · Yellow = positive</span> White = facts, Green = new ideas, Red = emotions, Black = critical.</div></div>
+
+    <div class="qa"><div class="q">The Barron-Welsh test shows creative people prefer complex/asymmetrical figures, suggesting they…</div><div class="a"><span class="ans">✓ are risk-takers &amp; like the unpredictable/interesting</span> Preference for disorder (a Dacey quality).</div></div>
+
+    <div class="qa"><div class="q">George Land's "greatest obstacles" to creative potential are…</div><div class="a"><span class="ans">✓ judgement, criticism, censoring, stress (all)</span> Schooling over-emphasises content, under-emphasises creative subjects.</div></div>
+  </section>
+
+  <!-- ===== SECTION B DRILL ===== -->
+  <section id="secB">
+    <div class="sec-head"><span class="sec-num">B</span><h2>True/False Traps</h2></div>
+    <p class="sec-intro">Every statement below is a real recurring pattern. The answer is given as <span class="ans" style="background:var(--good)">T</span> or <span class="ans f">F</span> with the reason. Watch for the swapped word — that's the whole game.</p>
+
+    <div class="qa"><div class="q">Choosing the most appropriate final design from many ideas is "convergent thinking."</div><div class="a"><span class="ans">T</span> Choosing the best = convergent. If it says "divergent" or "lateral" → <b>F</b>.</div></div>
+    <div class="qa"><div class="q">The brain is more creative when one is relaxed / less alert.</div><div class="a"><span class="ans">T</span> DMN &amp; incubation. If it says "on alert" → <b>F</b>.</div></div>
+    <div class="qa"><div class="q">Not being tied down by existing designs = stimulus freedom.</div><div class="a"><span class="ans">T</span> And being tied down = functional fixity (also <b>T</b> when stated that way).</div></div>
+    <div class="qa"><div class="q">A high "agreeableness" score means you are outgoing / emotional / disciplined.</div><div class="a"><span class="ans f">F</span> Trap. Agreeableness = compassionate &amp; cooperative. Outgoing = extraversion, emotional = neuroticism, disciplined = conscientiousness.</div></div>
+    <div class="qa"><div class="q">Creative potential is reduced when surrounded by negative people.</div><div class="a"><span class="ans">T</span> But "increased when surrounded by people who think like you" → <b>F</b> (need diversity).</div></div>
+    <div class="qa"><div class="q">Androgyny = using either/both male &amp; female characteristics in appropriate situations.</div><div class="a"><span class="ans">T</span> "Equal amount of male/female hormones" → <b>F</b>.</div></div>
+    <div class="qa"><div class="q">OPV lets us think through problems using time frames.</div><div class="a"><span class="ans f">F</span> That's C&amp;S. OPV = different people's viewpoints. "Using factors that affect a decision" is also <b>F</b> (that's CAF).</div></div>
+    <div class="qa"><div class="q">Six Thinking Hats is best for looking at a solution from various groups of people's perspectives.</div><div class="a"><span class="ans f">F</span> That's OPV. Six Hats = various <b>modes of thinking</b> (that version is <b>T</b>).</div></div>
+    <div class="qa"><div class="q">Intrapersonal intelligence is the ability to communicate effectively with others.</div><div class="a"><span class="ans f">F</span> That's interpersonal. Intrapersonal = understanding your own feelings.</div></div>
+    <div class="qa"><div class="q">Illumination / incubation is the process of obtaining a patent for your innovation.</div><div class="a"><span class="ans f">F</span> Illumination = eureka moment; patents belong to Development.</div></div>
+    <div class="qa"><div class="q">Dopamine is released when you take a break and solve a nagging problem.</div><div class="a"><span class="ans">T</span> But "released when you think non-stop for days" → <b>F</b>.</div></div>
+    <div class="qa"><div class="q">de Bono is a proponent of vertical thinking.</div><div class="a"><span class="ans f">F</span> He champions <b>lateral / parallel</b> thinking. "Po" is his idea-generation tool (<b>T</b>).</div></div>
+    <div class="qa"><div class="q">Knowledge is the raw material of idea generation; consulting experts is part of the Knowledge stage.</div><div class="a"><span class="ans">T</span> But "understanding of do's &amp; don'ts is the starting point of creative ideas" → <b>F</b> (rules restrict).</div></div>
+    <div class="qa"><div class="q">The Wright Brothers (told men can't fly, but flew) demonstrated stimulus freedom.</div><div class="a"><span class="ans">T</span> They didn't accept the "rule."</div></div>
+    <div class="qa"><div class="q">Creating an appropriate, useful, practical innovation needs both lateral &amp; vertical (intuition &amp; analytic) thinking.</div><div class="a"><span class="ans">T</span> Divergent to generate, convergent to select.</div></div>
+  </section>
+
+  <!-- ===== SECTION C TEMPLATES ===== -->
+  <section id="secC">
+    <div class="sec-head"><span class="sec-num">C</span><h2>Section C — Answer Templates</h2></div>
+    <p class="sec-intro">Section C is where the marks are. Each question is a fill-in-the-table exercise. Here are the exact structures with a worked row, so you walk in with the skeleton ready.</p>
+
+    <h3 class="blk">Template 1 · Forced Connection (20 marks)</h3>
+    <p>Problem + random item → 5 characteristics → 5 solutions, then a conclusion on <b>social impact</b> or <b>value creation</b>.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Characteristics of [random item]<br><span style="font-weight:400;text-transform:none">1 mark each</span></th><th>Solution for [the problem]<br><span style="font-weight:400;text-transform:none">2 marks each</span></th></tr>
+      <tr><td><i>e.g.</i> A backpack has padded shoulder straps for comfort.</td><td>Install padded benches so people can queue seated in comfort.</td></tr>
+      <tr><td>1. …</td><td>1. …</td></tr>
+      <tr><td>2. …</td><td>2. …</td></tr>
+      <tr><td>3–5. …</td><td>3–5. …</td></tr>
+    </table></div>
+    <ul class="check"><li><b>Conclusion (5 marks):</b> justify the overall solution's <b>social impact</b> — who it helps, how it improves life/economy, why the community would accept it.</li></ul>
+
+    <h3 class="blk">Template 2 · SCAMPER (20 marks)</h3>
+    <p>Improve an everyday object through all 7 stages; justify each with <b>value creation / N.A.S.A.</b></p>
+    <div class="tbl-scroll"><table>
+      <tr><th>SCAMPER stage</th><th>Innovation (2 marks)</th><th>Value creation / justification</th></tr>
+      <tr><td><b>S</b>ubstitute</td><td>e.g. replace the mug's ceramic with vacuum-insulated steel</td><td>keeps coffee hot for hours (appropriate/useful)</td></tr>
+      <tr><td><b>C</b>ombine</td><td>build a wireless phone-charging coaster into the base</td><td>novel + solves a real desk problem</td></tr>
+      <tr><td><b>A</b>dapt</td><td>add a spill-proof travel-lid mechanism from flasks</td><td>borrows a proven idea</td></tr>
+      <tr><td><b>M</b>odify</td><td>widen the base so it can't tip over</td><td>safer at a busy desk</td></tr>
+      <tr><td><b>P</b>ut to other use</td><td>doubles as a pen/stationery holder when empty</td><td>multi-function value</td></tr>
+      <tr><td><b>E</b>liminate</td><td>remove the handle for a compact sleeve grip</td><td>space-saving</td></tr>
+      <tr><td><b>R</b>everse/rearrange</td><td>self-stirring mechanism at the bottom</td><td>fresh, attractive novelty</td></tr>
+    </table></div>
+    <ul class="check"><li><b>Conclusion (5–6 marks):</b> justify the overall design's <b>value creation</b> — tie it explicitly to <b>N.A.S.A.</b> (Novel, Appropriate, Social impact, Attractive).</li></ul>
+
+    <h3 class="blk">Template 3 · Combined DATT analysis (20–30 marks)</h3>
+    <p>A social issue solved with two combined tools. Most common: <b>C&amp;S (down the side) + CAF or PMI (across the top)</b>, or <b>OPV (groups) + PMI</b>.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Time frame (C&amp;S)</th><th>Programme / solution</th><th>Quality developed<br>(Dacey / creative person)</th><th>Factors to consider (CAF)</th></tr>
+      <tr><td><b>Short</b> (primary, 6–12)</td><td>e.g. a school recycling-invention club</td><td>risk-taking — pupils build &amp; pitch real products</td><td>materials allowed? supervision? cost?</td></tr>
+      <tr><td><b>Medium</b> (secondary, 13–18)</td><td>a design-thinking &amp; entrepreneurship module</td><td>tolerance for ambiguity — open-ended briefs</td><td>curriculum time? teacher training? assessment?</td></tr>
+      <tr><td><b>Long</b> (higher ed, 19–24)</td><td>an industry innovation incubator</td><td>delayed gratification — long-term projects</td><td>funding? industry partners? IP ownership?</td></tr>
+    </table></div>
+    <div class="call eur"><span class="lbl">Always finish with a FINAL RECOMMENDATION (5–6 marks)</span>
+      Use this 3-part skeleton every time: <b>(1) Background</b> of the problem in one line → <b>(2) The proposed main solutions are…</b> (list your 2–3 best) → <b>(3) However, considerations to take are…</b> (list the key CAF/Minus points). This structure alone scores the recommendation marks even when you're short on time.</div>
+    <div class="call tip"><span class="lbl">The OPV + PMI variant</span>
+      When the prompt names groups (schools, parents, hospitals, social media, manufacturers), put <b>groups across the top</b> and run each through <b>Plus / Minus / Interesting</b> down the side — or list a solution per group per <b>time frame</b>. Same finish: Final Recommendation.</div>
+  </section>
+
+  <!-- ===== CHEAT SHEET ===== -->
+  <section id="cheat">
+    <div class="sec-head"><span class="sec-num">✦</span><h2>One-Page Cheat Sheet</h2></div>
+    <p class="sec-intro">The night-before, walking-in-the-door summary. If you only reread one section, make it this one.</p>
+
+    <div class="grid2">
+      <div class="card"><h4 class="blk">Names &amp; what they're for</h4>
+        <dl class="def">
+          <dt>Maslow</dt><dd>Self-actualisation — maximise your potential.</dd>
+          <dt>Torrance</dt><dd>Complex definition (identify→solve→share); TTCT test.</dd>
+          <dt>Yew (2007)</dt><dd>Simple definition — "making connections."</dd>
+          <dt>Nilsson (2011)</dt><dd>Taxonomy of Creative Designs (degrees of originality).</dd>
+          <dt>Rhodes (1961)</dt><dd>The 4 Ps — Person, Press, Product, Process.</dd>
+          <dt>Dacey (1989)</dt><dd>8 qualities of the creative mind.</dd>
+          <dt>Gardner</dt><dd>Multiple Intelligences (8–9 types).</dd>
+          <dt>George Land</dt><dd>NASA test — creativity crashes with age.</dd>
+          <dt>Ken Robinson</dt><dd>"Educated out of" creativity.</dd>
+          <dt>Guilford &amp; Torrance</dt><dd>Divergent-thinking measures.</dd>
+          <dt>Barron-Welsh</dt><dd>Figure preference — preference for disorder.</dd>
+          <dt>Osborn / Eberle</dt><dd>SCAMPER.</dd>
+          <dt>Tony Buzan</dt><dd>Mind mapping (7 features).</dd>
+          <dt>Edward de Bono</dt><dd>Lateral thinking, DATT, Six Hats, "Po".</dd>
+        </dl>
+      </div>
+      <div class="card"><h4 class="blk">The must-know acronyms</h4>
+        <dl class="def">
+          <dt>N.A.S.A.</dt><dd>Value creation = Novel · Appropriate · Social impact · Attractive.</dd>
+          <dt>4 Ps</dt><dd>Person · Press · Product · Process.</dd>
+          <dt>OCEAN</dt><dd>Big Five: Openness · Conscientiousness · Extraversion · Agreeableness · Neuroticism.</dd>
+          <dt>SCAMPER</dt><dd>Substitute · Combine · Adapt · Modify · Put to other use · Eliminate · Reverse.</dd>
+          <dt>TTCT scales</dt><dd>Fluency · Flexibility · Originality · Elaboration.</dd>
+          <dt>Creative process</dt><dd>Knowledge · Thinking · Incubation · Illumination · Development.</dd>
+          <dt>DMN</dt><dd>Default Mode Network — the "auto-pilot" of incubation.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="card"><h4 class="blk">DATT — the whole toolkit in one line each</h4>
+      <div class="tbl-scroll"><table>
+        <tr><th>Tool</th><th>Use it when the problem is about…</th><th>Structure your answer by…</th></tr>
+        <tr><td><b>PMI</b></td><td>advantages &amp; disadvantages of an action</td><td>Plus / Minus / Interesting columns</td></tr>
+        <tr><td><b>OPV</b></td><td>views of different groups of people</td><td>one column per stakeholder group</td></tr>
+        <tr><td><b>C&amp;S</b></td><td>forecasting / planning over time</td><td>Immediate / Short / Medium / Long time frames</td></tr>
+        <tr><td><b>CAF</b></td><td>choosing among options / avoiding pitfalls</td><td>a checklist of all factors, options across the top</td></tr>
+        <tr><td><b>Six Hats</b></td><td>examining one problem from every angle</td><td>Blue→White→Green→Yellow→Red→Black</td></tr>
+      </table></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card tight"><h4 class="blk">Thinking pairs — don't mix them up</h4>
+        <ul class="clean">
+          <li><b>Lateral = Divergent</b> = many ideas = creativity = right brain = "what's possible?"</li>
+          <li><b>Vertical = Convergent</b> = one best answer = intelligence = left brain = "what's right?"</li>
+        </ul>
+      </div>
+      <div class="card tight"><h4 class="blk">Free your thinking (Dacey freedoms)</h4>
+        <ul class="clean">
+          <li><b>Stimulus freedom</b> ↔ stimulus bound (rules)</li>
+          <li><b>Functional freedom</b> ↔ functional fixity</li>
+          <li>Both let you escape the "box" of your mind.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="call eur"><span class="lbl">Final exam-morning checklist</span>
+      ☐ Maslow wording &nbsp; ☐ N.A.S.A. &nbsp; ☐ 5 process stages + the Knowledge/Incubation split &nbsp; ☐ SCAMPER letters &nbsp; ☐ Forced-Connection 5 steps &nbsp; ☐ DATT matching table &nbsp; ☐ 6 hat colours &nbsp; ☐ Dacey's 8 qualities &nbsp; ☐ the "swap-a-word" T/F traps &nbsp; ☐ the 3-part Final Recommendation skeleton.</div>
+  </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><b>PKIB113 — Creative Thinking · Final Exam Master Study Guide</b><br>Built from all 8 course units + 6 past final papers (2019/20 – 2024/25).</div>
+    <div>Study smart: the exam repeats itself.<br><b>Identify → Solve → Share.</b> Good luck.</div>
+  </div>
+</footer>
+
+</body>
+</html>
