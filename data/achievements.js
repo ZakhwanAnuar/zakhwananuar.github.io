@@ -32,6 +32,22 @@
 const ACHIEVEMENTS_DATA = [
 
   {
+    id:        'bahtera-siber-3108-ctf-2026',
+    title:     'Bahtera Siber 3108 CTF: Warisan Takhta',
+    placement: '8th Place · 3× First Blood',
+    date:      'August 2026',
+    issuer:    'Bahtera Digital Technology',
+    summary:   'Top-10 finish (8th, 3,200 pts) with a few First Bloods',
+    images:    [
+      'assets/images/Achievements/bahterasiber2026/bahterasiber1.jpeg',
+      'assets/images/Achievements/bahterasiber2026/2.jpeg',
+      'assets/images/Achievements/bahterasiber2026/3.jpeg',
+      'assets/images/Achievements/bahterasiber2026/4.jpeg',
+      'assets/images/Achievements/bahterasiber2026/5.jpeg',
+    ],
+  },
+
+  {
     id:        'cybershield-summit-2026',
     title:     'Speaker — CyberShield Summit 2026',
     placement: 'Speaker',
@@ -45,8 +61,8 @@ const ACHIEVEMENTS_DATA = [
 
   {
     id:        'umcs-ctf-2026-2nd',
-    title:     '2nd Place — UM Cybersecurity Summit CTF',
-    placement: '2nd Place',
+    title:     '1st Runner Up — UM Cybersecurity Summit CTF 2026',
+    placement: '1st Runner Up',
     date:      'June 2026',
     issuer:    'Universiti Malaya (PEKOM) × RE:HACK',
     summary:   'Attack & Defence final round with team "hehe i play ctf".',
@@ -93,7 +109,7 @@ const ACHIEVEMENTS_DATA = [
   {
     id:        'iboh-2025',
     title:     'International Battle of Hackers (IBOH) 2025',
-    placement: 'Top Scorer',
+    placement: '',
     date:      '2025',
     issuer:    'Asia Pacific University',
     summary:   'Representing UNITEN at the national-level competition.',
@@ -105,7 +121,7 @@ const ACHIEVEMENTS_DATA = [
   {
     id:        'mcmc-netbytesec-2025',
     title:     'Intervarsity Cyber Forensics Challenge — MCMC × NetByteSEC',
-    placement: 'Top Contributor',
+    placement: 'Top 10 Finalist',
     date:      '2025',
     issuer:    'Cybersecurity Center of Excellence, Malaysia',
     summary:   'Finalist in the national-level intervarsity cyber forensics challenge.',
@@ -134,7 +150,7 @@ const ACHIEVEMENTS_DATA = [
   {
     id:        'seasel-2025',
     title:     "Selected Malaysian Delegate — SEASEL'25",
-    placement: 'Delegate',
+    placement: 'Malaysian Delegate',
     date:      '2025',
     issuer:    'Universiti Sains Malaysia',
     summary:   "One of five student leaders representing UNITEN's CCI at Southeast Asia Sustainable Environmental Leadership Program 2025.",

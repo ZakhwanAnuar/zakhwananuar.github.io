@@ -228,12 +228,50 @@ function renderLatestBlog() {
 }
 
 // ================================================================
+// RENDER LATEST ACHIEVEMENT
+// Shows the newest entry from data/achievements.js (top of array)
+// ================================================================
+function renderLatestAchievement() {
+  const container = document.getElementById('latestAchievementContainer');
+  if (!container || typeof ACHIEVEMENTS_DATA === 'undefined' || !ACHIEVEMENTS_DATA.length) return;
+
+  const a = ACHIEVEMENTS_DATA[0];
+  const cover = (a.images && a.images.length) ? a.images[0] : '';
+
+  // Badge colour — mirrors placementClass() in assets/js/achievements.js
+  // so the same achievement always shows the same colour on both pages.
+  const p = (a.placement || '').toLowerCase();
+  let badgeClass = 'lab-accent';
+  if (p.includes('1st') || p.includes('winner') || p.includes('champion')) badgeClass = 'lab-gold';
+  else if (p.includes('2nd') || p.includes('silver')) badgeClass = 'lab-silver';
+  else if (p.includes('3rd') || p.includes('bronze')) badgeClass = 'lab-bronze';
+
+  container.innerHTML =
+    '<a href="achievements.html" class="latest-ach-card fade-in-element">' +
+      (cover
+        ? '<div class="latest-ach-media"><img src="' + cover + '" alt="' + a.title + '" loading="lazy"></div>'
+        : '') +
+      '<div class="latest-ach-body">' +
+        '<div class="latest-ach-meta">' +
+          (a.placement ? '<span class="latest-ach-badge ' + badgeClass + '">' + a.placement + '</span>' : '') +
+          '<span class="latest-ach-date">' + a.date + '</span>' +
+        '</div>' +
+        '<h3 class="latest-ach-title">' + a.title + '</h3>' +
+        (a.issuer ? '<p class="latest-ach-issuer">' + a.issuer + '</p>' : '') +
+        (a.summary ? '<p class="latest-ach-summary">' + a.summary + '</p>' : '') +
+        '<span class="latest-ach-read">View achievements <i class="fas fa-arrow-right"></i></span>' +
+      '</div>' +
+    '</a>';
+}
+
+// ================================================================
 // INIT
 // ================================================================
 document.addEventListener('DOMContentLoaded', () => {
   initMatrix();
   initTyping();
   initTerminal();
+  renderLatestAchievement();
   renderRecentWriteups();
   renderFeaturedProjects();
   renderLatestBlog();
