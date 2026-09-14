@@ -26,7 +26,7 @@ const BLOG_DATA = [
 
   {
     id:      'chameleon-wifi-esp32',
-    title:   'ChameleonFW — Building an ESP32-S3 WiFi Research Rig',
+    title:   'ChameleonFW: Building an ESP32-S3 WiFi Research Rig',
     date:    'July 2026',
     tags:    ['security', 'hardware', 'project'],
     summary: 'A captive-portal / rogue-AP research tool that runs entirely on a $10 ESP32-S3 and is driven from your phone. Here is how the firmware actually works — the DNS hijack, the soft-AP, credential capture, and flash-persisted config.',
@@ -126,7 +126,7 @@ Full firmware and setup notes are on [GitHub](https://github.com/ZakhwanAnuar/Ch
 
   {
     id:      'discord-c2-dump',
-    title:   'DiscordC2Dump — Turning a Recovered Bot Token into Threat Intel',
+    title:   'DiscordC2Dump: Turning a Recovered Bot Token into Threat Intel',
     date:    'July 2026',
     tags:    ['security', 'malware-analysis', 'project'],
     summary: 'Malware increasingly uses Discord as a command-and-control channel. When you pull a bot token and guild ID out of a sample in the lab, this Python tool walks the Discord REST API to dump everything the bot can see and scan it for IOCs.',
@@ -219,7 +219,7 @@ Code and full usage are on [GitHub](https://github.com/ZakhwanAnuar/DiscordC2Dum
 
   {
     id:      'building-bad-usb',
-    title:   'Building a Bad USB — What a $5 Pico Taught Me About HID Attacks',
+    title:   'Building a Bad USB: What a $5 Pico Taught Me About HID Attacks',
     date:    'July 2026',
     tags:    ['security', 'hardware', 'project'],
     summary: 'A Raspberry Pi Pico running CircuitPython that enumerates as a USB HID keyboard and runs a DuckyScript payload — a full breakdown of the boot-time USB toggle, the payload parser, the key map, and the GP0 arming logic.',
@@ -331,7 +331,7 @@ Full source, the complete \`KEYS\` map, and setup steps are on [GitHub](https://
 
   {
     id:      'csm-cyberjaya-visit',
-    title:   'A Visit to CyberSecurity Malaysia — My Last Event Leading MBOT',
+    title:   'A Visit to CyberSecurity Malaysia: My Last Event Leading MBOT',
     date:    'July 2026',
     tags:    ['personal', 'leadership', 'cybersecurity'],
     summary: 'My final event leading the MBOT UNITEN Student Chapter — a visit to CyberSecurity Malaysia in Cyberjaya, and a reflection on growth, leadership, and becoming someone new.',
@@ -415,7 +415,7 @@ One conversation can open different opportunities.
 
   {
     id:      'mbot-coderush-2026',
-    title:   'MBOT CodeRush 2026 — An Experiment in Letting Go',
+    title:   'MBOT CodeRush 2026: An Experiment in Letting Go',
     date:    'April 2026',
     tags:    ['personal', 'leadership', 'life'],
     summary: 'No code, no competition results. Just a reflection on stepping back, trusting others, and discovering that the best leadership sometimes means giving others the space to lead.',
@@ -479,7 +479,7 @@ Alhamdulillah.
 
   {
     id:      'scholarship-journey',
-    title:   'Scholarship Journey — From Rejections to Peace',
+    title:   'Scholarship Journey: From Rejections to Peace',
     date:    'April 2026',
     tags:    ['personal', 'scholarship', 'life'],
     summary: 'No CTF, no cybersecurity. Just an email that brought me back to one of the hardest chapters of my life — rejections, pressure, guilt, and eventually, peace.',
@@ -615,7 +615,7 @@ As I continue growing in my leadership journey, this is something I'll carry for
 
   {
     id:      'my-first-ctf-experience',
-    title:   'My First CTF — What I Expected vs Reality',
+    title:   'My First CTF: What I Expected vs Reality',
     date:    'March 2026',
     tags:    ['ctf', 'experience', 'beginner'],
     summary: 'I thought my first CTF would be like in the movies. It was not. But I learned more in 48 hours than in weeks of studying.',

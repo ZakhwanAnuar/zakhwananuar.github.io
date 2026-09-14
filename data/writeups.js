@@ -1462,8 +1462,4 @@ An image there reveals the second part of the flag:
     `,
   },
 
-  // ================================================================
-  // EXAMPLE WRITEUPS (replace or remove as needed)
-  // ================================================================
-
 ];

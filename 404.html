@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404: Page Not Found — Zakhwan Anuar</title>
+  <meta name="description" content="That page could not be found." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+  <style>
+    .nf-wrap {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 80px;
+    }
+    .nf-inner { width: 100%; max-width: 640px; }
+    .nf-code {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 18vw, 9rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin: 0 0 8px;
+    }
+    .nf-code span { color: var(--accent); }
+    .nf-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 10px;
+    }
+    .nf-sub {
+      color: var(--text-2);
+      font-size: 0.95rem;
+      margin: 0 0 28px;
+      max-width: 46ch;
+    }
+    /* Terminal panel */
+    .nf-term {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    .nf-term-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 14px;
+      background: var(--bg-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .nf-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .nf-dot.r { background: #ff5f56; }
+    .nf-dot.y { background: #ffbd2e; }
+    .nf-dot.g { background: #27c93f; }
+    .nf-term-name {
+      margin-left: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+    .nf-term-body {
+      padding: 18px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--text-2);
+      overflow-x: auto;
+    }
+    .nf-term-body .prompt { color: var(--accent); }
+    .nf-term-body .err    { color: var(--red); }
+    .nf-term-body .path   { color: var(--text); word-break: break-all; }
+    .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 480px) {
+      .nf-actions .btn { flex: 1; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/projects.html" class="nav-link">Projects</a></li>
+        <li><a href="/writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="/resume.html" class="nav-link">Resume</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="nf-wrap">
+    <div class="nf-inner container">
+      <span class="section-tag">// error</span>
+      <h1 class="nf-code">4<span>0</span>4</h1>
+      <h2 class="nf-title">Page not found</h2>
+      <p class="nf-sub">The page you're looking for doesn't exist, moved, or never did. Let's get you back on track.</p>
+
+      <div class="nf-term" aria-hidden="true">
+        <div class="nf-term-bar">
+          <span class="nf-dot r"></span><span class="nf-dot y"></span><span class="nf-dot g"></span>
+          <span class="nf-term-name">bash</span>
+        </div>
+        <div class="nf-term-body">
+          <div><span class="prompt">$</span> locate <span class="path" id="nfPath">requested/page</span></div>
+          <div><span class="err">locate: 0 results</span> (HTTP 404)</div>
+          <div><span class="prompt">$</span> cd /home &amp;&amp; ls</div>
+          <div>projects/  writeups/  blog/  about/  contact/</div>
+        </div>
+      </div>
+
+      <div class="nf-actions">
+        <a href="/index.html" class="btn btn-primary"><i class="fas fa-home"></i> Return home</a>
+        <a href="/writeups.html" class="btn btn-secondary">Browse writeups</a>
+        <a href="/blog.html" class="btn btn-ghost">Read the blog</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    // Show the path the visitor actually tried to reach
+    (function () {
+      var el = document.getElementById('nfPath');
+      if (el) {
+        var p = (location.pathname + location.search).replace(/^\//, '');
+        el.textContent = p || 'requested/page';
+      }
+    })();
+  </script>
+</body>
+</html>

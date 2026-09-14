@@ -1,0 +1,21 @@
+# Agent / editor working directories
+.claude/
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor backups
+*~
+*.swp
+*.bak
+*.orig
+
+# Large archives — keep them out of git history.
+# (Notes.zip and Assignment.zip are already tracked from earlier commits,
+#  so this rule does not affect them; it only stops NEW archives from
+#  being committed by accident.)
+*.zip

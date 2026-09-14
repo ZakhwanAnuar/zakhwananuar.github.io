@@ -145,6 +145,7 @@ function renderChallenges() {
         <h3 class="writeup-card-title">${wu.title}</h3>
         <div class="writeup-card-meta">
           <span class="writeup-card-meta-item"><i class="far fa-calendar"></i> ${wu.date}</span>
+          <span class="writeup-card-meta-item"><i class="far fa-clock"></i> ${readingTime(wu.content)}</span>
         </div>
         <p class="writeup-card-summary desktop-only">${wu.summary}</p>
       </div>

@@ -6,6 +6,22 @@
    - Scroll fade-in animations
 ================================================================ */
 
+// ---- Reading-time estimate ----
+// Rough words-per-minute read time from a Markdown string. Code blocks are
+// stripped so the estimate reflects prose you actually read, not code you skim.
+function readingTime(markdown) {
+  if (!markdown) return '';
+  const text = String(markdown)
+    .replace(/```[\s\S]*?```/g, ' ')          // fenced code
+    .replace(/`[^`]*`/g, ' ')                  // inline code
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')     // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')   // links -> link text
+    .replace(/[#>*_~|`-]/g, ' ');              // stray markdown symbols
+  const words = text.split(/\s+/).filter(Boolean).length;
+  const mins = Math.max(1, Math.round(words / 200));
+  return mins + ' min read';
+}
+
 // ---- Navbar scroll effect ----
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {

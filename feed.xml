@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zakhwan Anuar Blog</title>
+    <link>https://zakhwananuar.my/blog.html</link>
+    <description>Notes and thoughts on cybersecurity, CTF, and building security tools.</description>
+    <language>en</language>
+    <lastBuildDate>Mon, 14 Sep 2026 18:06:59 +0000</lastBuildDate>
+    <atom:link href="https://zakhwananuar.my/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChameleonFW: Building an ESP32-S3 WiFi Research Rig</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=chameleon-wifi-esp32</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=chameleon-wifi-esp32</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>A captive-portal / rogue-AP research tool that runs entirely on a $10 ESP32-S3 and is driven from your phone. Here is how the firmware actually works — the DNS hijack, the soft-AP, credential capture, and flash-persisted config.</description>
+    </item>
+    <item>
+      <title>DiscordC2Dump: Turning a Recovered Bot Token into Threat Intel</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=discord-c2-dump</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=discord-c2-dump</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Malware increasingly uses Discord as a command-and-control channel. When you pull a bot token and guild ID out of a sample in the lab, this Python tool walks the Discord REST API to dump everything the bot can see and scan it for IOCs.</description>
+    </item>
+    <item>
+      <title>Building a Bad USB: What a $5 Pico Taught Me About HID Attacks</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=building-bad-usb</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=building-bad-usb</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>A Raspberry Pi Pico running CircuitPython that enumerates as a USB HID keyboard and runs a DuckyScript payload — a full breakdown of the boot-time USB toggle, the payload parser, the key map, and the GP0 arming logic.</description>
+    </item>
+    <item>
+      <title>A Visit to CyberSecurity Malaysia: My Last Event Leading MBOT</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=csm-cyberjaya-visit</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=csm-cyberjaya-visit</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>My final event leading the MBOT UNITEN Student Chapter — a visit to CyberSecurity Malaysia in Cyberjaya, and a reflection on growth, leadership, and becoming someone new.</description>
+    </item>
+    <item>
+      <title>Speaking at CyberShield Summit 2026</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=cybershield-summit-2026</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=cybershield-summit-2026</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>How one simple conversation led to speaking at a national-level cybersecurity summit — sharing CTF, cybersecurity, and the Malaysia Board of Technologists with 360+ students across the country.</description>
+    </item>
+    <item>
+      <title>MBOT CodeRush 2026: An Experiment in Letting Go</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=mbot-coderush-2026</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=mbot-coderush-2026</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <description>No code, no competition results. Just a reflection on stepping back, trusting others, and discovering that the best leadership sometimes means giving others the space to lead.</description>
+    </item>
+    <item>
+      <title>Scholarship Journey: From Rejections to Peace</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=scholarship-journey</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=scholarship-journey</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <description>No CTF, no cybersecurity. Just an email that brought me back to one of the hardest chapters of my life — rejections, pressure, guilt, and eventually, peace.</description>
+    </item>
+    <item>
+      <title>The Micromanagement Trap in Leadership</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=micromanagement-trap-leadership</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=micromanagement-trap-leadership</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <description>A reflection from my conversation with a colleague at Southeast Asia Sustainable Environmental Leadership Program 2025 (SEASEL'25) on why micromanaging erodes trust — and what it really means to lead with confidence instead of control.</description>
+    </item>
+    <item>
+      <title>My First CTF: What I Expected vs Reality</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=my-first-ctf-experience</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=my-first-ctf-experience</guid>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+      <description>I thought my first CTF would be like in the movies. It was not. But I learned more in 48 hours than in weeks of studying.</description>
+    </item>
+    <item>
+      <title>Tools I Actually Use (and Why)</title>
+      <link>https://zakhwananuar.my/blog-post.html?id=tools-i-actually-use</link>
+      <guid isPermaLink="true">https://zakhwananuar.my/blog-post.html?id=tools-i-actually-use</guid>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
+      <description>A no-fluff list of the tools that actually end up in my CTF workflow — with honest notes on when they're useful and when they're not.</description>
+    </item>
+  </channel>
+</rss>

@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="post-meta">
       <span class="post-meta-item"><i class="fas fa-flag"></i> ${writeup.ctf || 'CTF'}</span>
       <span class="post-meta-item"><i class="far fa-calendar"></i> ${writeup.date}</span>
+      <span class="post-meta-item"><i class="far fa-clock"></i> ${readingTime(writeup.content)}</span>
       ${writeup.points ? `<span class="post-meta-item"><i class="fas fa-star"></i> ${writeup.points} pts</span>` : ''}
     </div>
   `;

@@ -66,7 +66,6 @@ const ACHIEVEMENTS_DATA = [
     date:      'June 2026',
     issuer:    'Universiti Malaya (PEKOM) × RE:HACK',
     summary:   'Attack & Defence final round with team "hehe i play ctf".',
-    // EDIT: add photos to assets/images/Achievements/umcs-ctf/ and list them here
     images:    [
       'assets/images/Achievements/umcs-ctf/2.jpg',
       'assets/images/Achievements/umcs-ctf/1.jpg',
@@ -80,7 +79,6 @@ const ACHIEVEMENTS_DATA = [
     date:      '2026',
     issuer:    'DIV:IDE Academy — DIV:IDE CTF 2026 Edition',
     summary:   'Session on digital forensics and file analysis fundamentals — identifying hidden data, analyzing file structures, and hands-on practical examples.',
-    // EDIT: add photos to assets/images/Achievements/divide-hunting-hidden-data/ and list them here
     images:    [
       'assets/images/Achievements/divide-hunting-hidden-data/1.jpg',
       'assets/images/Achievements/divide-hunting-hidden-data/2.jpg',
@@ -96,7 +94,6 @@ const ACHIEVEMENTS_DATA = [
     date:      '2026',
     issuer:    'DIV:IDE Academy — Hack@10 International CTF 2026 Edition',
     summary:   'Technical session on disk analysis to 60+ participants at an international CTF — uncovering hidden data and analyzing file system structures through hands-on examples.',
-    // EDIT: add photos to assets/images/Achievements/divide-delete-not-gone/ and list them here
     images:    [
       'assets/images/Achievements/divide-delete-not-gone/1.jpg',
       'assets/images/Achievements/divide-delete-not-gone/2.jpg',
@@ -138,7 +135,6 @@ const ACHIEVEMENTS_DATA = [
     date:      'October 2025',
     issuer:    'ASEAN Regional Program',
     summary:   'Represented Malaysia at a regional forum on youth leadership, sustainable development, innovation, and cross-cultural collaboration.',
-    // EDIT: add photos to assets/images/Achievements/asean-youth-leadership/ and list them here
     images:    [
       'assets/images/Achievements/asean-youth-leadership/1.jpg',
       'assets/images/Achievements/asean-youth-leadership/2.jpg',
