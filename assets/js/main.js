@@ -22,31 +22,6 @@ function readingTime(markdown) {
   return mins + ' min read';
 }
 
-// ---- Inject utility nav links on every page (avoids editing every file) ----
-function injectNavLink(href, label, activeRe, afterHref) {
-  const list = document.getElementById('navLinks');
-  if (!list || list.querySelector('a[href$="' + href + '"]')) return;
-
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.href = href;
-  a.className = 'nav-link';
-  a.textContent = label;
-  if (activeRe.test(location.pathname)) a.classList.add('active');
-  li.appendChild(a);
-
-  const anchor = afterHref
-    ? [...list.querySelectorAll('li')].find(x => x.querySelector('a[href$="' + afterHref + '"]'))
-    : null;
-  if (anchor && anchor.nextSibling) list.insertBefore(li, anchor.nextSibling);
-  else list.appendChild(li);
-}
-
-function injectExtraNav() {
-  injectNavLink('games.html', 'Games', /\/(games|game-[^/]*)\.html$/, 'contact.html');
-  injectNavLink('pastebin.html', 'Pastebin', /\/pastebin\.html$/, 'games.html');
-}
-
 // ---- Navbar scroll effect ----
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -187,7 +162,6 @@ window.setSocialMeta = setSocialMeta;
 
 // ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
-  injectExtraNav();
   initScrollAnimations();
   animateCounters();
 });

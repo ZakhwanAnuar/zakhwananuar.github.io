@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- EDIT: Update title -->
   <title>About — Zakhwan Anuar</title>
   <meta name="description" content="Background, skills, and focus areas of Zakhwan Anuar — a Computer Science (Cybersecurity) student and active CTF player focused on malware analysis, digital forensics, and reverse engineering." />
 
@@ -30,6 +31,22 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    /* subtle, low-key link to the arcade */
+    .about-arcade-wrap { text-align: center; margin: 48px 0 4px; }
+    .about-arcade {
+      display: inline-flex; align-items: baseline; gap: 6px;
+      font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
+      color: var(--accent); text-decoration: none;
+      transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .about-arcade .ar-p { color: var(--green); }
+    .about-arcade:hover {
+      color: #fff;
+      text-shadow: 0 0 12px var(--accent);
+      transform: translateY(-1px);
+    }
+  </style>
 </head>
 <body>
 
@@ -72,11 +89,14 @@
       <section class="about-grid section">
         <div class="about-left">
           <div class="about-photo-wrapper">
+            <!-- EDIT: Replace with your photo. Put your image in assets/images/profile.jpg -->
+            <!-- If you don't have a photo yet, the placeholder will show -->
             
             <img src="assets/images/profile.jpg" alt="Zakhwan Anuar" class="about-photo" />
             
           </div>
           <div class="about-quick-info">
+            <!-- EDIT: Update with your real info -->
             <div class="info-item">
               <i class="fas fa-map-marker-alt"></i>
               <span>Kuala Lumpur, Malaysia</span>
@@ -97,6 +117,7 @@
         </div>
 
         <div class="about-right">
+          <!-- EDIT: Write your full bio here. Multiple paragraphs are fine. -->
           <h2 class="about-section-title">Hi, I'm <span class="accent">Zakhwan Anuar</span></h2>
           <div class="about-bio">
             <p>
@@ -113,6 +134,7 @@
             </p>
           </div>
 
+          <!-- EDIT: Update your interests/focus areas -->
           <h3 class="about-sub-title">Focus Areas</h3>
           <div class="focus-tags">
             <span class="focus-tag">Malware Analysis</span>
@@ -123,6 +145,7 @@
             <span class="focus-tag">CTF Competitions</span>
           </div>
 
+          <!-- EDIT: Update career goals -->
           <h3 class="about-sub-title">Career Goals</h3>
           <p class="about-bio">
             I'm looking for opportunities in malware analysis, offensive security, penetration testing, and security research — I'm especially interested in malware analysis and security research right now.
@@ -140,6 +163,7 @@
 
         <div class="skills-grid">
 
+          <!-- EDIT: Add or remove skills in each category as needed -->
           <div class="skill-category">
             <h3 class="skill-category-title">
               <i class="fas fa-code"></i> Languages
@@ -201,6 +225,7 @@
               <i class="fas fa-tools"></i> Tools
             </h3>
             <div class="tools-grid">
+              <!-- EDIT: Add or remove tools as needed -->
               <span class="tool-tag">Burp Suite</span>
               <span class="tool-tag">Ghidra</span>
               <span class="tool-tag">GDB / pwndbg</span>
@@ -225,6 +250,7 @@
               <i class="fas fa-server"></i> Platforms & OS
             </h3>
             <div class="tools-grid">
+              <!-- EDIT: Add or remove platforms as needed -->
               <span class="tool-tag">Kali Linux</span>
               <span class="tool-tag">Ubuntu</span>
               <span class="tool-tag">Blue Team Labs Online</span>
@@ -237,6 +263,11 @@
 
         </div>
       </section>
+
+      <!-- low-key link to the arcade -->
+      <div class="about-arcade-wrap">
+        <a href="games.html" class="about-arcade"><span class="ar-p">&gt;_</span> boot arcade</a>
+      </div>
 
     </div>
   </main>
