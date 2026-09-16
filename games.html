@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games — Zakhwan Anuar</title>
+  <meta name="description" content="A small arcade of security-themed browser games: Malware Sweeper and Code Breaker. Pick one and play." />
+
+  <link rel="canonical" href="https://zakhwananuar.my/games.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Zakhwan Anuar" />
+  <meta property="og:title" content="Games — Zakhwan Anuar" />
+  <meta property="og:description" content="A small arcade of security-themed browser games: Malware Sweeper and Code Breaker." />
+  <meta property="og:url" content="https://zakhwananuar.my/games.html" />
+  <meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Games — Zakhwan Anuar" />
+  <meta name="twitter:description" content="A small arcade of security-themed browser games: Malware Sweeper and Code Breaker." />
+  <meta name="twitter:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    .games-intro { color: var(--text-2); font-size: 0.9rem; margin-bottom: 32px; max-width: 62ch; }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .game-tile {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--trans), border-color var(--trans), box-shadow var(--trans);
+    }
+    .game-tile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity var(--trans);
+    }
+    .game-tile:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-2);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+      color: var(--text);
+    }
+    .game-tile:hover::before { opacity: 1; }
+
+    .game-tile-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .game-tile-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text);
+    }
+    .game-tile-desc {
+      font-size: 0.86rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      margin: 0;
+      flex: 1;
+    }
+    .game-tile-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .game-tile-tag {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: var(--bg-4);
+      color: var(--text-3);
+      border: 1px solid var(--border);
+    }
+    .game-tile-play {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--trans);
+    }
+    .game-tile:hover .game-tile-play { gap: 11px; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// games</span>
+      <h1 class="page-title">Games</h1>
+      <p class="page-subtitle">Two I actually enjoy playing. Pick one.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+      <p class="games-intro">Small security-flavoured logic games, no installs. Best scores save in your browser. Click one to play.</p>
+
+      <div class="games-grid">
+
+        <a href="game-malware-sweeper.html" class="game-tile">
+          <div class="game-tile-icon"><i class="fas fa-virus"></i></div>
+          <h2 class="game-tile-title">Malware Sweeper</h2>
+          <p class="game-tile-desc">Sweep a network grid for hidden malware. Each number tells you how many neighbouring nodes are infected. Deduce the safe path, flag the threats, clear the board.</p>
+          <div class="game-tile-meta">
+            <span class="game-tile-tag">Logic · Minesweeper</span>
+            <span class="game-tile-play">Play <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a href="game-code-breaker.html" class="game-tile">
+          <div class="game-tile-icon"><i class="fas fa-fingerprint"></i></div>
+          <h2 class="game-tile-title">Code Breaker</h2>
+          <p class="game-tile-desc">Crack a hidden 4-digit access code in 10 guesses. Each guess colours your digits green, yellow or grey. Pure deduction, like Wordle for numbers.</p>
+          <div class="game-tile-meta">
+            <span class="game-tile-tag">Logic · Deduction</span>
+            <span class="game-tile-play">Play <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a href="game-sequence.html" class="game-tile">
+          <div class="game-tile-icon"><i class="fas fa-braille"></i></div>
+          <h2 class="game-tile-title">Sequence</h2>
+          <p class="game-tile-desc">Watch the access pattern light up on the keypad, then repeat it from memory. One step longer every round, and it speeds up. How far can you get?</p>
+          <div class="game-tile-meta">
+            <span class="game-tile-tag">Memory · Reflex</span>
+            <span class="game-tile-play">Play <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a href="game-aim-trainer.html" class="game-tile">
+          <div class="game-tile-icon"><i class="fas fa-crosshairs"></i></div>
+          <h2 class="game-tile-title">Aim Trainer</h2>
+          <p class="game-tile-desc">An FPS-style target range. Flick to the targets, land headshots for double points, and chase your accuracy against a 30-second clock.</p>
+          <div class="game-tile-meta">
+            <span class="game-tile-tag"><i class="fas fa-desktop"></i> Desktop only</span>
+            <span class="game-tile-play">Play <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a href="game-fps.html" class="game-tile">
+          <div class="game-tile-icon"><i class="fas fa-gamepad"></i></div>
+          <h2 class="game-tile-title">Breach Point</h2>
+          <p class="game-tile-desc">A real first-person 3D shooter. WASD to move, mouse to aim, click to drop the intruder drones closing in on you. Hold the point for 60 seconds.</p>
+          <div class="game-tile-meta">
+            <span class="game-tile-tag"><i class="fas fa-desktop"></i> 3D · Desktop only</span>
+            <span class="game-tile-play">Play <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <a href="game-kill-switch.html" class="game-tile">
+          <div class="game-tile-icon"><i class="fas fa-power-off"></i></div>
+          <h2 class="game-tile-title">Kill Switch</h2>
+          <p class="game-tile-desc">A Lights Out puzzle. Clicking a node flips it and its four neighbours. Shut the whole grid down in as few moves as possible. Every board is solvable.</p>
+          <div class="game-tile-meta">
+            <span class="game-tile-tag">Logic · Puzzle</span>
+            <span class="game-tile-play">Play <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

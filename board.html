@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Board</title>
+  <!-- Secret page: keep it out of search engines -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    .bd-wrap { max-width: 760px; margin: 0 auto; }
+    .bd-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .bd-live { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
+    .bd-live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
+    .bd-live.on .dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .bd-meta { margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
+
+    .bd-view, .bd-editor {
+      width: 100%; min-height: 260px; padding: 20px;
+      background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);
+      color: var(--text); font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.75;
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .bd-view.empty { color: var(--text-3); }
+    .bd-editor { resize: vertical; outline: none; }
+    .bd-editor:focus { border-color: var(--accent); }
+
+    .bd-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .bd-changed { font-family: var(--font-mono); font-size: 0.74rem; color: var(--yellow); display: none; }
+    .bd-changed.show { display: inline; }
+
+    .bd-lock { display: none; margin-top: 14px; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .bd-lock.show { display: flex; }
+    .bd-pass { padding: 9px 14px; background: var(--bg-3); border: 1px solid var(--border-2); border-radius: 6px; color: var(--text); font-family: var(--font-mono); font-size: 0.82rem; outline: none; }
+    .bd-pass:focus { border-color: var(--accent); }
+    .bd-err { color: var(--red); font-family: var(--font-mono); font-size: 0.76rem; }
+
+    /* Files */
+    .bd-files-card { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .bd-files-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .bd-files-title { font-family: var(--font-display); font-size: 1rem; color: var(--text); margin: 0; display: flex; align-items: center; gap: 8px; }
+    .bd-files-title i { color: var(--accent); }
+    .bd-files-head .btn { margin-left: auto; }
+    .bd-progress { height: 6px; background: var(--bg-4); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+    .bd-progress span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.15s ease; }
+    .bd-files { display: flex; flex-direction: column; gap: 8px; }
+    .bd-file { display: flex; align-items: center; gap: 12px; padding: 11px 14px; background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px; }
+    .bd-file i.type { color: var(--accent); font-size: 1rem; flex-shrink: 0; }
+    .bd-file-main { flex: 1; min-width: 0; }
+    .bd-file-name { color: var(--text); font-size: 0.86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bd-file-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-3); margin-top: 2px; }
+    .bd-file-dl, .bd-file-del { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 4px; font-size: 0.85rem; flex-shrink: 0; }
+    .bd-file-dl { color: var(--text-2); text-decoration: none; }
+    .bd-file-dl:hover { color: var(--accent); }
+    .bd-file-del { color: var(--text-3); }
+    .bd-file-del:hover { color: var(--red); }
+    .bd-files-empty { color: var(--text-3); font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 0; }
+
+    .bd-notice { background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 8px; padding: 20px 22px; color: var(--text-2); font-size: 0.9rem; line-height: 1.7; }
+    .bd-notice h3 { font-family: var(--font-display); color: var(--text); margin: 0 0 10px; font-size: 1.1rem; }
+    .bd-notice code { font-family: var(--font-mono); background: var(--bg); padding: 1px 6px; border-radius: 4px; color: var(--accent); }
+    .bd-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); margin-top: 8px; text-align: right; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// shared_board</span>
+      <h1 class="page-title">Board</h1>
+      <p class="page-subtitle">A shared message and files anyone with this link can see. Unlock to edit or upload.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="bd-wrap">
+
+        <!-- Shown when Firebase is not configured yet -->
+        <div class="bd-notice" id="bdSetup" hidden>
+          <h3>Not connected yet</h3>
+          <p>This board needs a free Firebase project (Realtime Database for the message + Storage for files) to share between visitors. Open <code>board.html</code>, paste your <code>firebaseConfig</code> into the marked block near the bottom, set your edit passphrase, and add the database + storage rules. Full steps are in the file's comments.</p>
+        </div>
+
+        <!-- The board -->
+        <div id="bdApp" hidden>
+          <div class="bd-bar">
+            <span class="bd-live" id="bdLive"><span class="dot"></span> <span id="bdLiveText">connecting…</span></span>
+            <span class="bd-meta" id="bdMeta"></span>
+          </div>
+
+          <!-- read view -->
+          <div id="bdReadWrap">
+            <div class="bd-view empty" id="bdView">loading…</div>
+            <div class="bd-actions">
+              <button class="btn btn-primary" id="bdEditBtn"><i class="fas fa-pen"></i> Edit</button>
+            </div>
+            <div class="bd-lock" id="bdLock">
+              <input type="password" class="bd-pass" id="bdPass" placeholder="passphrase to edit / upload" autocomplete="off" />
+              <button class="btn btn-secondary" id="bdUnlock">Unlock</button>
+              <span class="bd-err" id="bdErr" hidden>Wrong passphrase.</span>
+            </div>
+          </div>
+
+          <!-- edit view -->
+          <div id="bdEditWrap" hidden>
+            <textarea class="bd-editor" id="bdEditor" placeholder="Type the shared message…"></textarea>
+            <div class="bd-count" id="bdCount"></div>
+            <div class="bd-actions">
+              <button class="btn btn-primary" id="bdSave"><i class="fas fa-floppy-disk"></i> Save for everyone</button>
+              <button class="btn btn-ghost" id="bdCancel">Cancel</button>
+              <span class="bd-changed" id="bdChanged"><i class="fas fa-triangle-exclamation"></i> Someone else just changed this</span>
+            </div>
+          </div>
+
+          <!-- shared files -->
+          <div class="bd-files-card">
+            <div class="bd-files-head">
+              <h3 class="bd-files-title"><i class="fas fa-paperclip"></i> Shared files</h3>
+              <button class="btn btn-secondary" id="bdAttach"><i class="fas fa-upload"></i> Attach file</button>
+              <input type="file" id="bdFileInput" hidden />
+            </div>
+            <div class="bd-progress" id="bdProgress" hidden><span id="bdProgressBar"></span></div>
+            <div class="bd-files" id="bdFiles"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase SDK (compat builds work without a bundler) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+  /* ================================================================
+     SETUP — do these once, then the board (message + files) works
+     for everyone who has the link.
+
+     1. https://console.firebase.google.com  ->  create a free project.
+     2. Build > Realtime Database > Create Database (start in test mode).
+     3. Build > Storage > Get started (start in test mode).
+     4. Project settings (gear) > Your apps > Web (</>). Register the
+        app and copy the firebaseConfig object it shows. Paste it below,
+        replacing the empty one (keep storageBucket — it's needed for files).
+     5. Set EDIT_PASSPHRASE below to what editors must type.
+     6. Realtime Database > Rules  ->  paste and Publish:
+        {
+          "rules": {
+            "board":       { ".read": true, ".write": true,
+              "message": { ".validate": "newData.isString() && newData.val().length < 8000" } },
+            "board_files": { ".read": true, ".write": true }
+          }
+        }
+     7. Storage > Rules  ->  paste and Publish (caps uploads at 10 MB):
+        rules_version = '2';
+        service firebase.storage {
+          match /b/{bucket}/o {
+            match /board/{f} {
+              allow read: if true;
+              allow write: if request.resource == null || request.resource.size < 10 * 1024 * 1024;
+            }
+          }
+        }
+     NOTE: these rules allow anyone with the link to read/write/upload.
+     The passphrase is a convenience gate in the page, not real security.
+     ================================================================ */
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBYyxKC5wceTfRYAkeBJU2D-vHNgIrP-Lg",
+    authDomain: "website-807bc.firebaseapp.com",
+    databaseURL: "https://website-807bc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "website-807bc",
+    storageBucket: "website-807bc.firebasestorage.app",
+    messagingSenderId: "286779186002",
+    appId: "1:286779186002:web:dc43dcf1c4d0718ff5b88b"
+  };
+
+  // >>> Anyone who wants to EDIT or UPLOAD must type this <<<
+  const EDIT_PASSPHRASE = 'makluhijau';
+
+  const MAX_LEN = 8000;
+  const MAX_FILE = 10 * 1024 * 1024;   // 10 MB
+
+  (function board() {
+    const $ = (id) => document.getElementById(id);
+    const setup = $('bdSetup'), app = $('bdApp');
+
+    const configured = firebaseConfig && firebaseConfig.apiKey && firebaseConfig.databaseURL;
+    if (!configured || typeof firebase === 'undefined') { setup.hidden = false; return; }
+    app.hidden = false;
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const ref = db.ref('board');
+    const filesRef = db.ref('board_files');
+    const storage = firebase.storage();
+
+    const view = $('bdView'), meta = $('bdMeta');
+    const live = $('bdLive'), liveText = $('bdLiveText');
+    const readWrap = $('bdReadWrap'), editWrap = $('bdEditWrap');
+    const editor = $('bdEditor'), countEl = $('bdCount'), changed = $('bdChanged');
+    const lock = $('bdLock'), passEl = $('bdPass'), errEl = $('bdErr');
+    const attachBtn = $('bdAttach'), fileInput = $('bdFileInput');
+    const filesEl = $('bdFiles'), progress = $('bdProgress'), progressBar = $('bdProgressBar');
+
+    let unlocked = false, editing = false;
+    let remoteMsg = '', remoteUpdated = 0, editBaseline = 0;
+    let filesArr = [];
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fmt = (ts) => ts ? new Date(ts).toLocaleString() : '';
+    function humanSize(b) { if (b < 1024) return b + ' B'; if (b < 1048576) return (b / 1024).toFixed(1) + ' KB'; return (b / 1048576).toFixed(1) + ' MB'; }
+    function fileIcon(t) {
+      t = t || '';
+      if (/image/.test(t)) return 'fa-file-image';
+      if (/pdf/.test(t)) return 'fa-file-pdf';
+      if (/zip|rar|7z|tar|gzip|compressed/.test(t)) return 'fa-file-zipper';
+      if (/audio/.test(t)) return 'fa-file-audio';
+      if (/video/.test(t)) return 'fa-file-video';
+      if (/text|json|xml|csv|javascript/.test(t)) return 'fa-file-lines';
+      return 'fa-file';
+    }
+
+    /* ---- message ---- */
+    function renderRead() {
+      if (remoteMsg) { view.textContent = remoteMsg; view.classList.remove('empty'); }
+      else { view.textContent = '(empty — unlock and be the first to write something)'; view.classList.add('empty'); }
+      meta.textContent = remoteUpdated ? 'updated ' + fmt(remoteUpdated) : '';
+    }
+    ref.on('value', (snap) => {
+      const v = snap.val() || {};
+      remoteMsg = typeof v.message === 'string' ? v.message : '';
+      remoteUpdated = v.updated || 0;
+      live.classList.add('on'); liveText.textContent = 'live';
+      renderRead();
+      if (editing && remoteUpdated > editBaseline) changed.classList.add('show');
+    }, () => { live.classList.remove('on'); liveText.textContent = 'offline'; });
+
+    function enterEdit() {
+      editing = true; editBaseline = remoteUpdated; changed.classList.remove('show');
+      editor.value = remoteMsg; updateCount();
+      readWrap.hidden = true; editWrap.hidden = false; lock.classList.remove('show');
+      editor.focus();
+    }
+    function exitEdit() { editing = false; editWrap.hidden = true; readWrap.hidden = false; }
+    function updateCount() { countEl.textContent = editor.value.length + ' / ' + MAX_LEN; }
+
+    $('bdEditBtn').addEventListener('click', () => {
+      if (unlocked) { enterEdit(); return; }
+      lock.classList.toggle('show');
+      if (lock.classList.contains('show')) passEl.focus();
+    });
+    function tryUnlock() {
+      if (passEl.value === EDIT_PASSPHRASE) { unlocked = true; errEl.hidden = true; renderFiles(); enterEdit(); }
+      else { errEl.hidden = false; }
+    }
+    $('bdUnlock').addEventListener('click', tryUnlock);
+    passEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+    editor.addEventListener('input', updateCount);
+    $('bdSave').addEventListener('click', () => {
+      ref.set({ message: editor.value.slice(0, MAX_LEN), updated: Date.now() })
+        .then(exitEdit)
+        .catch(() => alert('Could not save — check your database rules and connection.'));
+    });
+    $('bdCancel').addEventListener('click', exitEdit);
+
+    /* ---- files ---- */
+    filesRef.on('value', (snap) => {
+      const val = snap.val() || {};
+      filesArr = Object.entries(val).map(([k, v]) => Object.assign({ k }, v)).sort((a, b) => b.updated - a.updated);
+      renderFiles();
+    });
+    function renderFiles() {
+      if (!filesArr.length) { filesEl.innerHTML = '<div class="bd-files-empty">// no files yet</div>'; return; }
+      filesEl.innerHTML = filesArr.map((f) => `
+        <div class="bd-file">
+          <i class="type fas ${fileIcon(f.type)}"></i>
+          <div class="bd-file-main">
+            <div class="bd-file-name">${esc(f.name)}</div>
+            <div class="bd-file-meta">${humanSize(f.size || 0)} · ${fmt(f.updated)}</div>
+          </div>
+          <a class="bd-file-dl" href="${esc(f.url)}" target="_blank" rel="noopener" download title="Download"><i class="fas fa-download"></i></a>
+          ${unlocked ? `<button class="bd-file-del" data-k="${f.k}" aria-label="Delete file"><i class="fas fa-trash"></i></button>` : ''}
+        </div>`).join('');
+    }
+
+    attachBtn.addEventListener('click', () => {
+      if (!unlocked) { lock.classList.add('show'); passEl.focus(); return; }
+      fileInput.click();
+    });
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      if (file.size > MAX_FILE) { alert('File too large (max 10 MB).'); fileInput.value = ''; return; }
+      const safe = file.name.replace(/[^\w.\-]+/g, '_');
+      const path = 'board/' + Date.now() + '_' + safe;
+      const task = storage.ref(path).put(file);
+      progress.hidden = false; progressBar.style.width = '0%';
+      task.on('state_changed',
+        (s) => { progressBar.style.width = Math.round(s.bytesTransferred / s.totalBytes * 100) + '%'; },
+        () => { progress.hidden = true; fileInput.value = ''; alert('Upload failed — check your Storage rules and connection.'); },
+        () => {
+          task.snapshot.ref.getDownloadURL().then((url) => {
+            filesRef.push({ name: file.name, size: file.size, type: file.type || '', path, url, updated: Date.now() });
+            progress.hidden = true; fileInput.value = '';
+          });
+        });
+    });
+
+    filesEl.addEventListener('click', (e) => {
+      const del = e.target.closest('.bd-file-del');
+      if (!del || !unlocked) return;
+      const f = filesArr.find((x) => x.k === del.dataset.k);
+      if (!f || !confirm('Delete "' + f.name + '" for everyone?')) return;
+      if (f.path) storage.ref(f.path).delete().catch(() => {});
+      filesRef.child(f.k).remove();
+    });
+
+    renderFiles();
+  })();
+  </script>
+</body>
+</html>

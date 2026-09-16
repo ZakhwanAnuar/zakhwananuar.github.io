@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aim Trainer — Zakhwan Anuar</title>
+  <meta name="description" content="Aim Trainer: an FPS-style target range. Flick to the targets, land headshots, and chase accuracy against the clock. Desktop and mouse only." />
+
+  <link rel="canonical" href="https://zakhwananuar.my/game-aim-trainer.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Zakhwan Anuar" />
+  <meta property="og:title" content="Aim Trainer — Zakhwan Anuar" />
+  <meta property="og:description" content="An FPS-style target range: flick, headshot, chase accuracy. Desktop only." />
+  <meta property="og:url" content="https://zakhwananuar.my/game-aim-trainer.html" />
+  <meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aim Trainer — Zakhwan Anuar" />
+  <meta name="twitter:description" content="An FPS-style target range: flick, headshot, chase accuracy. Desktop only." />
+  <meta name="twitter:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    /* Shared game shell */
+    .game-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-2); text-decoration: none; margin-bottom: 24px; transition: color var(--trans); }
+    .game-back:hover { color: var(--accent); }
+    .game-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .game-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .game-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text); margin: 0; display: flex; align-items: center; gap: 10px; }
+    .game-title i { color: var(--accent); }
+    .game-desc { font-size: 0.8rem; color: var(--text-3); margin: 4px 0 0; }
+    .game-scoreboard { display: flex; gap: 18px; font-family: var(--font-mono); }
+    .game-scoreboard .lbl { color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.62rem; display: block; }
+    .game-scoreboard .val { color: var(--accent); font-size: 1.1rem; font-weight: 700; }
+    .game-stage { position: relative; min-height: 300px; background: var(--bg-2); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .game-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 32px 24px; background: rgba(10,12,16,0.86); backdrop-filter: blur(3px); z-index: 8; }
+    .game-overlay[hidden] { display: none; }
+    .game-overlay h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--text); margin: 0; }
+    .game-overlay p { color: var(--text-2); font-size: 0.88rem; margin: 0; max-width: 42ch; }
+    .game-final { font-family: var(--font-mono); font-size: 0.92rem; color: var(--accent); }
+
+    /* Aim Trainer */
+    .aim-stage {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: none;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(0,217,255,0.06), transparent 55%),
+        repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,0.02) 39px 40px),
+        repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,0.02) 39px 40px),
+        var(--bg);
+    }
+    .target {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,71,87,0.16);
+      border: 2px solid var(--red);
+      transform: translate(-50%, -50%) scale(0);
+      animation: targetIn 0.1s ease forwards;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; padding: 0;
+    }
+    @keyframes targetIn { to { transform: translate(-50%, -50%) scale(1); } }
+    .target-head { width: 40%; height: 40%; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px rgba(255,71,87,0.6); }
+
+    .float-score { position: absolute; pointer-events: none; z-index: 7; font-family: var(--font-mono); font-weight: 700; font-size: 0.82rem; color: var(--accent); transform: translate(-50%, -50%); animation: floatUp 0.6s ease forwards; }
+    .float-score.head { color: #00ff88; }
+    @keyframes floatUp { to { transform: translate(-50%, -190%); opacity: 0; } }
+
+    /* Crosshair */
+    .aim-crosshair { position: absolute; width: 1px; height: 1px; transform: translate(-50%, -50%); pointer-events: none; z-index: 6; display: none; }
+    .aim-crosshair span { position: absolute; background: var(--accent); }
+    .aim-crosshair .v { width: 2px; height: 9px; left: -1px; }
+    .aim-crosshair .t { top: -13px; } .aim-crosshair .b { top: 4px; }
+    .aim-crosshair .h { height: 2px; width: 9px; top: -1px; }
+    .aim-crosshair .l { left: -13px; } .aim-crosshair .r { left: 4px; }
+    .aim-crosshair .dot { width: 2px; height: 2px; left: -1px; top: -1px; border-radius: 50%; }
+
+    .aim-hint { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); text-align: center; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <a href="games.html" class="game-back"><i class="fas fa-arrow-left"></i> All games</a>
+
+      <section class="game-card">
+        <div class="game-head">
+          <div>
+            <h2 class="game-title"><i class="fas fa-crosshairs"></i> Aim Trainer</h2>
+            <p class="game-desc">Flick to the targets and click. Hit the bright centre for a headshot bonus. 30 seconds.</p>
+          </div>
+          <div class="game-scoreboard">
+            <div><span class="lbl">Score</span><span class="val" id="aimScore">0</span></div>
+            <div><span class="lbl">Acc</span><span class="val" id="aimAcc">100%</span></div>
+            <div><span class="lbl">Time</span><span class="val" id="aimTime">30</span></div>
+            <div><span class="lbl">Best</span><span class="val" id="aimBest">0</span></div>
+          </div>
+        </div>
+        <div class="game-stage">
+          <div class="game-overlay" id="aimIdle">
+            <h3>Aim Trainer</h3>
+            <p>Targets pop up across the range. Click them fast &mdash; smaller ones score more, and the bright centre is a headshot for double points. Chained hits build a combo; a missed click resets it. You have 30 seconds.</p>
+            <button class="btn btn-primary" id="aimStart"><i class="fas fa-play"></i> Start</button>
+          </div>
+          <div class="game-overlay" id="aimOver" hidden>
+            <h3>Range clear</h3>
+            <p class="game-final" id="aimResult"></p>
+            <button class="btn btn-primary" id="aimRestart"><i class="fas fa-rotate-right"></i> Play again</button>
+          </div>
+          <div class="game-overlay" id="aimMobile" hidden>
+            <h3>Desktop only</h3>
+            <p>This one needs a mouse. Open it on a computer &mdash; touch screens can't do the precise flick-aiming this game is about.</p>
+            <a href="games.html" class="btn btn-secondary">Back to games</a>
+          </div>
+
+          <div style="width:100%;">
+            <div class="aim-stage" id="aimStage">
+              <div class="aim-crosshair" id="aimCrosshair">
+                <span class="v t"></span><span class="v b"></span>
+                <span class="h l"></span><span class="h r"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+            <p class="aim-hint">Left-click to shoot &middot; bright centre = headshot</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/games.js"></script>
+</body>
+</html>

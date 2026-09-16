@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pastebin — Zakhwan Anuar</title>
+  <meta name="description" content="A private browser pastebin. Write or paste snippets and they save locally on your device — nothing is uploaded." />
+
+  <link rel="canonical" href="https://zakhwananuar.my/pastebin.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Zakhwan Anuar" />
+  <meta property="og:title" content="Pastebin — Zakhwan Anuar" />
+  <meta property="og:description" content="A private, browser-only pastebin: snippets save locally on your device." />
+  <meta property="og:url" content="https://zakhwananuar.my/pastebin.html" />
+  <meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pastebin — Zakhwan Anuar" />
+  <meta name="twitter:description" content="A private, browser-only pastebin: snippets save locally on your device." />
+  <meta name="twitter:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    .pb-note {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3);
+      background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 22px;
+    }
+    .pb-note i { color: var(--accent); }
+
+    .pb-layout { display: grid; grid-template-columns: 300px 1fr; gap: 22px; align-items: start; }
+
+    /* Sidebar */
+    .pb-side { display: flex; flex-direction: column; gap: 12px; }
+    .pb-side-top { display: flex; gap: 10px; }
+    .pb-search {
+      flex: 1; padding: 9px 12px; background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--text); font-family: var(--font-mono); font-size: 0.8rem; outline: none;
+    }
+    .pb-search:focus { border-color: var(--accent); }
+    .pb-new {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px;
+      background: var(--accent); color: #04121a; border: none; border-radius: 6px;
+      font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; cursor: pointer;
+      transition: filter var(--trans);
+    }
+    .pb-new:hover { filter: brightness(0.92); }
+
+    .pb-list {
+      display: flex; flex-direction: column; gap: 6px;
+      max-height: 540px; overflow-y: auto;
+      border: 1px solid var(--border); border-radius: 8px; padding: 6px; background: var(--bg-2);
+    }
+    .pb-empty { padding: 28px 14px; text-align: center; color: var(--text-3); font-family: var(--font-mono); font-size: 0.8rem; }
+    .pb-item {
+      display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+      border-radius: 6px; cursor: pointer; border: 1px solid transparent;
+      transition: background var(--trans), border-color var(--trans);
+    }
+    .pb-item:hover { background: var(--bg-3); }
+    .pb-item.active { background: var(--bg-3); border-color: var(--accent); }
+    .pb-item-main { flex: 1; min-width: 0; }
+    .pb-item-title { font-size: 0.86rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pb-item-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-3); margin-top: 2px; }
+    .pb-del {
+      flex-shrink: 0; background: none; border: none; color: var(--text-3);
+      cursor: pointer; font-size: 0.8rem; padding: 4px; border-radius: 4px; transition: color var(--trans);
+    }
+    .pb-del:hover { color: var(--red); }
+
+    /* Editor */
+    .pb-main { display: flex; flex-direction: column; gap: 12px; }
+    .pb-title-input {
+      width: 100%; padding: 12px 16px; background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; outline: none;
+    }
+    .pb-title-input:focus { border-color: var(--accent); }
+    .pb-title-input::placeholder { color: var(--text-3); font-weight: 400; }
+
+    .pb-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .pb-btn {
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px;
+      background: var(--bg-3); border: 1px solid var(--border-2); border-radius: 6px;
+      color: var(--text-2); font-family: var(--font-mono); font-size: 0.76rem; cursor: pointer;
+      transition: border-color var(--trans), color var(--trans);
+    }
+    .pb-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .pb-btn.danger:hover { border-color: var(--red); color: var(--red); }
+    .pb-status { margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
+    .pb-status.saving { color: var(--yellow); }
+    .pb-status.saved { color: var(--green); }
+
+    .pb-editor {
+      width: 100%; min-height: 420px; resize: vertical;
+      padding: 16px; background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-family: var(--font-mono); font-size: 0.85rem;
+      line-height: 1.7; outline: none; tab-size: 4;
+    }
+    .pb-editor:focus { border-color: var(--accent); }
+    .pb-editor::placeholder { color: var(--text-3); }
+    .pb-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); text-align: right; }
+
+    @media (max-width: 780px) {
+      .pb-layout { grid-template-columns: 1fr; }
+      .pb-list { max-height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="section-tag">// pastebin</span>
+      <h1 class="page-title">Pastebin</h1>
+      <p class="page-subtitle">A scratchpad for snippets. Saved right here in your browser.</p>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="pb-note">
+        <i class="fas fa-lock"></i>
+        Private to this browser. Everything you write is stored locally on this device only, never uploaded. Clearing your browser data will erase it.
+      </div>
+
+      <div class="pb-layout">
+        <!-- Sidebar -->
+        <aside class="pb-side">
+          <div class="pb-side-top">
+            <input type="text" class="pb-search" id="pbSearch" placeholder="search pastes..." autocomplete="off" />
+            <button class="pb-new" id="pbNew"><i class="fas fa-plus"></i> New</button>
+          </div>
+          <div class="pb-list" id="pbList"></div>
+        </aside>
+
+        <!-- Editor -->
+        <section class="pb-main">
+          <input type="text" class="pb-title-input" id="pbTitle" placeholder="Untitled paste" />
+          <div class="pb-toolbar">
+            <button class="pb-btn" id="pbSave"><i class="fas fa-floppy-disk"></i> Save</button>
+            <button class="pb-btn" id="pbCopy"><i class="fas fa-copy"></i> Copy</button>
+            <button class="pb-btn" id="pbDownload"><i class="fas fa-download"></i> Download</button>
+            <button class="pb-btn danger" id="pbDelete"><i class="fas fa-trash"></i> Delete</button>
+            <span class="pb-status saved" id="pbStatus">Saved</span>
+          </div>
+          <textarea class="pb-editor" id="pbEditor" placeholder="Paste or type anything — commands, flags, notes, snippets. It saves as you go."></textarea>
+          <div class="pb-count" id="pbCount">0 chars · 0 lines</div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function pastebin() {
+      const KEY = 'wb_pastes';
+      const list = document.getElementById('pbList');
+      const search = document.getElementById('pbSearch');
+      const titleEl = document.getElementById('pbTitle');
+      const editor = document.getElementById('pbEditor');
+      const statusEl = document.getElementById('pbStatus');
+      const countEl = document.getElementById('pbCount');
+
+      let pastes = load();
+      let currentId = null;
+      let saveTimer = null;
+
+      function load() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
+      function persist() { try { localStorage.setItem(KEY, JSON.stringify(pastes)); } catch (e) {} }
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, (c) =>
+          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      }
+      function fmt(ts) {
+        return new Date(ts).toLocaleString(undefined,
+          { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      }
+      function setStatus(state) {
+        statusEl.className = 'pb-status ' + state;
+        statusEl.textContent = state === 'saving' ? 'Saving…' : 'Saved';
+      }
+      function updateCount() {
+        const v = editor.value;
+        countEl.textContent = `${v.length} char${v.length === 1 ? '' : 's'} · ${v ? v.split('\n').length : 0} lines`;
+      }
+
+      function renderList() {
+        const q = search.value.trim().toLowerCase();
+        const items = pastes
+          .filter((p) => !q || (p.title || '').toLowerCase().includes(q) || p.content.toLowerCase().includes(q))
+          .sort((a, b) => b.updated - a.updated);
+
+        if (!items.length) {
+          list.innerHTML = `<div class="pb-empty">${q ? '// no matches' : '// no pastes yet'}</div>`;
+          return;
+        }
+        list.innerHTML = items.map((p) => `
+          <div class="pb-item${p.id === currentId ? ' active' : ''}" data-id="${p.id}">
+            <div class="pb-item-main">
+              <div class="pb-item-title">${esc(p.title || 'Untitled')}</div>
+              <div class="pb-item-meta">${fmt(p.updated)} · ${p.content.length} chars</div>
+            </div>
+            <button class="pb-del" data-del="${p.id}" aria-label="Delete paste"><i class="fas fa-trash"></i></button>
+          </div>`).join('');
+      }
+
+      function select(id) {
+        const p = pastes.find((x) => x.id === id);
+        if (!p) return;
+        currentId = id;
+        titleEl.value = p.title || '';
+        editor.value = p.content || '';
+        updateCount(); setStatus('saved'); renderList();
+      }
+
+      function newPaste() {
+        currentId = null;
+        titleEl.value = ''; editor.value = '';
+        updateCount(); setStatus('saved'); renderList();
+        titleEl.focus();
+      }
+
+      function upsert() {
+        const content = editor.value;
+        const title = titleEl.value.trim();
+        if (content.trim() === '' && title === '') return;   // nothing worth saving yet
+        if (currentId) {
+          const p = pastes.find((x) => x.id === currentId);
+          if (p) { p.title = title; p.content = content; p.updated = Date.now(); }
+        } else {
+          currentId = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+          pastes.push({ id: currentId, title, content, updated: Date.now() });
+        }
+        persist(); renderList(); setStatus('saved');
+      }
+
+      function scheduleSave() {
+        setStatus('saving');
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(upsert, 600);
+      }
+
+      function del(id) {
+        pastes = pastes.filter((p) => p.id !== id);
+        persist();
+        if (id === currentId) {
+          const newest = [...pastes].sort((a, b) => b.updated - a.updated)[0];
+          if (newest) select(newest.id); else newPaste();
+        } else {
+          renderList();
+        }
+      }
+
+      // events
+      editor.addEventListener('input', () => { updateCount(); scheduleSave(); });
+      titleEl.addEventListener('input', scheduleSave);
+      search.addEventListener('input', renderList);
+      document.getElementById('pbNew').addEventListener('click', newPaste);
+      document.getElementById('pbSave').addEventListener('click', () => { clearTimeout(saveTimer); upsert(); });
+
+      document.getElementById('pbCopy').addEventListener('click', () => {
+        if (!editor.value) return;
+        navigator.clipboard && navigator.clipboard.writeText(editor.value).then(() => {
+          const s = statusEl.textContent; statusEl.textContent = 'Copied ✓';
+          setTimeout(() => (statusEl.textContent = s), 1200);
+        });
+      });
+
+      document.getElementById('pbDownload').addEventListener('click', () => {
+        if (!editor.value && !titleEl.value) return;
+        const name = (titleEl.value.trim() || 'paste').replace(/[^a-z0-9_-]+/gi, '_').slice(0, 40);
+        const blob = new Blob([editor.value], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = name + '.txt';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      });
+
+      document.getElementById('pbDelete').addEventListener('click', () => {
+        if (currentId) del(currentId);
+        else newPaste();
+      });
+
+      list.addEventListener('click', (e) => {
+        const delBtn = e.target.closest('[data-del]');
+        if (delBtn) { e.stopPropagation(); del(delBtn.dataset.del); return; }
+        const item = e.target.closest('.pb-item');
+        if (item) select(item.dataset.id);
+      });
+
+      // init: open the most recent paste, if any
+      const newest = [...pastes].sort((a, b) => b.updated - a.updated)[0];
+      renderList();
+      if (newest) select(newest.id);
+      updateCount();
+    })();
+  </script>
+</body>
+</html>
