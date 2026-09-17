@@ -113,11 +113,15 @@
         <!-- Shown when Firebase is not configured yet -->
         <div class="bd-notice" id="bdSetup" hidden>
           <h3>Not connected yet</h3>
-          <p>This board needs a free Firebase Realtime Database. Paste your <code>firebaseConfig</code> into the marked block near the bottom of <code>board.html</code> and publish the open rules (in the SETUP comment).</p>
+          <p>This board needs a free Firebase Realtime Database. Paste your <code>firebaseConfig</code> into the marked block near the bottom of <code>waklu.html</code> and publish the open rules (in the SETUP comment).</p>
         </div>
 
         <!-- The board -->
         <div id="bdApp" hidden>
+          <div class="bd-note">
+            <i class="fas fa-triangle-exclamation"></i>
+            Open board: anyone with this link can edit it, no password. Don't put anything sensitive here.
+          </div>
 
           <div class="bd-bar">
             <span class="bd-live" id="bdLive"><span class="dot"></span> <span id="bdLiveText">connecting…</span></span>
