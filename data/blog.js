@@ -424,7 +424,7 @@ One conversation can open different opportunities.
 
 The "Experiment".
 
- ![Question](assets/images/Blog/coderush.JPG)
+ ![Question](assets/images/Blog/CodeRush.JPG)
 ---
 
 ## The Quote That Started It All
