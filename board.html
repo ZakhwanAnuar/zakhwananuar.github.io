@@ -18,6 +18,13 @@
 
   <style>
     .bd-wrap { max-width: 760px; margin: 0 auto; }
+    .bd-note {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3);
+      background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow);
+      border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; line-height: 1.6;
+    }
+    .bd-note i { color: var(--yellow); }
     .bd-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
     .bd-live { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
     .bd-live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
@@ -25,7 +32,7 @@
     .bd-meta { margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
 
     .bd-view, .bd-editor {
-      width: 100%; min-height: 260px; padding: 20px;
+      width: 100%; min-height: 300px; padding: 20px;
       background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);
       color: var(--text); font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.75;
       white-space: pre-wrap; word-break: break-word;
@@ -37,14 +44,9 @@
     .bd-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
     .bd-changed { font-family: var(--font-mono); font-size: 0.74rem; color: var(--yellow); display: none; }
     .bd-changed.show { display: inline; }
+    .bd-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); margin-top: 8px; text-align: right; }
 
-    .bd-lock { display: none; margin-top: 14px; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .bd-lock.show { display: flex; }
-    .bd-pass { padding: 9px 14px; background: var(--bg-3); border: 1px solid var(--border-2); border-radius: 6px; color: var(--text); font-family: var(--font-mono); font-size: 0.82rem; outline: none; }
-    .bd-pass:focus { border-color: var(--accent); }
-    .bd-err { color: var(--red); font-family: var(--font-mono); font-size: 0.76rem; }
-
-    /* Files */
+    /* Files (hidden unless FILES_ENABLED) */
     .bd-files-card { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
     .bd-files-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
     .bd-files-title { font-family: var(--font-display); font-size: 1rem; color: var(--text); margin: 0; display: flex; align-items: center; gap: 8px; }
@@ -68,7 +70,6 @@
     .bd-notice { background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 8px; padding: 20px 22px; color: var(--text-2); font-size: 0.9rem; line-height: 1.7; }
     .bd-notice h3 { font-family: var(--font-display); color: var(--text); margin: 0 0 10px; font-size: 1.1rem; }
     .bd-notice code { font-family: var(--font-mono); background: var(--bg); padding: 1px 6px; border-radius: 4px; color: var(--accent); }
-    .bd-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); margin-top: 8px; text-align: right; }
     [hidden] { display: none !important; }
   </style>
 </head>
@@ -101,7 +102,7 @@
     <div class="container">
       <span class="section-tag">// shared_board</span>
       <h1 class="page-title">Board</h1>
-      <p class="page-subtitle">A shared message and files anyone with this link can see. Unlock to edit or upload.</p>
+      <p class="page-subtitle">A shared message anyone with this link can read and edit.</p>
     </div>
   </div>
 
@@ -112,11 +113,12 @@
         <!-- Shown when Firebase is not configured yet -->
         <div class="bd-notice" id="bdSetup" hidden>
           <h3>Not connected yet</h3>
-          <p>This board needs a free Firebase project (Realtime Database for the message + Storage for files) to share between visitors. Open <code>board.html</code>, paste your <code>firebaseConfig</code> into the marked block near the bottom, set your edit passphrase, and add the database + storage rules. Full steps are in the file's comments.</p>
+          <p>This board needs a free Firebase Realtime Database. Paste your <code>firebaseConfig</code> into the marked block near the bottom of <code>board.html</code> and publish the open rules (in the SETUP comment).</p>
         </div>
 
         <!-- The board -->
         <div id="bdApp" hidden>
+
           <div class="bd-bar">
             <span class="bd-live" id="bdLive"><span class="dot"></span> <span id="bdLiveText">connecting…</span></span>
             <span class="bd-meta" id="bdMeta"></span>
@@ -127,11 +129,6 @@
             <div class="bd-view empty" id="bdView">loading…</div>
             <div class="bd-actions">
               <button class="btn btn-primary" id="bdEditBtn"><i class="fas fa-pen"></i> Edit</button>
-            </div>
-            <div class="bd-lock" id="bdLock">
-              <input type="password" class="bd-pass" id="bdPass" placeholder="passphrase to edit / upload" autocomplete="off" />
-              <button class="btn btn-secondary" id="bdUnlock">Unlock</button>
-              <span class="bd-err" id="bdErr" hidden>Wrong passphrase.</span>
             </div>
           </div>
 
@@ -146,8 +143,8 @@
             </div>
           </div>
 
-          <!-- shared files -->
-          <div class="bd-files-card">
+          <!-- shared files (hidden unless FILES_ENABLED) -->
+          <div class="bd-files-card" id="bdFilesCard">
             <div class="bd-files-head">
               <h3 class="bd-files-title"><i class="fas fa-paperclip"></i> Shared files</h3>
               <button class="btn btn-secondary" id="bdAttach"><i class="fas fa-upload"></i> Attach file</button>
@@ -180,17 +177,10 @@
   <script src="assets/js/main.js"></script>
   <script>
   /* ================================================================
-     SETUP — do these once, then the board (message + files) works
-     for everyone who has the link.
-
-     1. https://console.firebase.google.com  ->  create a free project.
-     2. Build > Realtime Database > Create Database (start in test mode).
-     3. Build > Storage > Get started (start in test mode).
-     4. Project settings (gear) > Your apps > Web (</>). Register the
-        app and copy the firebaseConfig object it shows. Paste it below,
-        replacing the empty one (keep storageBucket — it's needed for files).
-     5. Set EDIT_PASSPHRASE below to what editors must type.
-     6. Realtime Database > Rules  ->  paste and Publish:
+     SETUP
+     1. Firebase project + Realtime Database + web config are already set.
+     2. Realtime Database > Rules  ->  paste and Publish. This board is
+        intentionally OPEN: anyone with the link can read AND write, no login.
         {
           "rules": {
             "board":       { ".read": true, ".write": true,
@@ -198,18 +188,10 @@
             "board_files": { ".read": true, ".write": true }
           }
         }
-     7. Storage > Rules  ->  paste and Publish (caps uploads at 10 MB):
-        rules_version = '2';
-        service firebase.storage {
-          match /b/{bucket}/o {
-            match /board/{f} {
-              allow read: if true;
-              allow write: if request.resource == null || request.resource.size < 200 * 1024 * 1024;
-            }
-          }
-        }
-     NOTE: these rules allow anyone with the link to read/write/upload.
-     The passphrase is a convenience gate in the page, not real security.
+     NOTE: because it is open, anyone with the link (or a bot that finds it) can
+     edit or wipe it. Don't put anything sensitive here. Keep the URL private.
+     (Files stay off until you enable Storage on the Blaze plan and set
+      FILES_ENABLED = true; its Storage rule would be `allow write: if true;`.)
      ================================================================ */
 
   const firebaseConfig = {
@@ -222,11 +204,10 @@
     appId: "1:286779186002:web:dc43dcf1c4d0718ff5b88b"
   };
 
-  // >>> Anyone who wants to EDIT or UPLOAD must type this <<<
-  const EDIT_PASSPHRASE = 'makluhijau';
-
   const MAX_LEN = 8000;
-  const MAX_FILE = 200 * 1024 * 1024;   // 200 MB
+  const MAX_FILE = 200 * 1024 * 1024;   // 200 MB per file
+  // Files need Firebase Storage (Blaze plan). Leave false to hide the upload UI.
+  const FILES_ENABLED = false;
 
   (function board() {
     const $ = (id) => document.getElementById(id);
@@ -239,18 +220,15 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     const ref = db.ref('board');
-    const filesRef = db.ref('board_files');
-    const storage = firebase.storage();
 
     const view = $('bdView'), meta = $('bdMeta');
     const live = $('bdLive'), liveText = $('bdLiveText');
     const readWrap = $('bdReadWrap'), editWrap = $('bdEditWrap');
     const editor = $('bdEditor'), countEl = $('bdCount'), changed = $('bdChanged');
-    const lock = $('bdLock'), passEl = $('bdPass'), errEl = $('bdErr');
     const attachBtn = $('bdAttach'), fileInput = $('bdFileInput');
     const filesEl = $('bdFiles'), progress = $('bdProgress'), progressBar = $('bdProgressBar');
 
-    let unlocked = false, editing = false;
+    let editing = false;
     let remoteMsg = '', remoteUpdated = 0, editBaseline = 0;
     let filesArr = [];
 
@@ -272,7 +250,7 @@
     /* ---- message ---- */
     function renderRead() {
       if (remoteMsg) { view.textContent = remoteMsg; view.classList.remove('empty'); }
-      else { view.textContent = '(empty — unlock and be the first to write something)'; view.classList.add('empty'); }
+      else { view.textContent = '(empty — click Edit and be the first to write something)'; view.classList.add('empty'); }
       meta.textContent = remoteUpdated ? 'updated ' + fmt(remoteUpdated) : '';
     }
     ref.on('value', (snap) => {
@@ -287,23 +265,13 @@
     function enterEdit() {
       editing = true; editBaseline = remoteUpdated; changed.classList.remove('show');
       editor.value = remoteMsg; updateCount();
-      readWrap.hidden = true; editWrap.hidden = false; lock.classList.remove('show');
+      readWrap.hidden = true; editWrap.hidden = false;
       editor.focus();
     }
     function exitEdit() { editing = false; editWrap.hidden = true; readWrap.hidden = false; }
     function updateCount() { countEl.textContent = editor.value.length + ' / ' + MAX_LEN; }
 
-    $('bdEditBtn').addEventListener('click', () => {
-      if (unlocked) { enterEdit(); return; }
-      lock.classList.toggle('show');
-      if (lock.classList.contains('show')) passEl.focus();
-    });
-    function tryUnlock() {
-      if (passEl.value === EDIT_PASSPHRASE) { unlocked = true; errEl.hidden = true; renderFiles(); enterEdit(); }
-      else { errEl.hidden = false; }
-    }
-    $('bdUnlock').addEventListener('click', tryUnlock);
-    passEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+    $('bdEditBtn').addEventListener('click', enterEdit);
     editor.addEventListener('input', updateCount);
     $('bdSave').addEventListener('click', () => {
       ref.set({ message: editor.value.slice(0, MAX_LEN), updated: Date.now() })
@@ -313,11 +281,6 @@
     $('bdCancel').addEventListener('click', exitEdit);
 
     /* ---- files ---- */
-    filesRef.on('value', (snap) => {
-      const val = snap.val() || {};
-      filesArr = Object.entries(val).map(([k, v]) => Object.assign({ k }, v)).sort((a, b) => b.updated - a.updated);
-      renderFiles();
-    });
     function renderFiles() {
       if (!filesArr.length) { filesEl.innerHTML = '<div class="bd-files-empty">// no files yet</div>'; return; }
       filesEl.innerHTML = filesArr.map((f) => `
@@ -328,43 +291,54 @@
             <div class="bd-file-meta">${humanSize(f.size || 0)} · ${fmt(f.updated)}</div>
           </div>
           <a class="bd-file-dl" href="${esc(f.url)}" target="_blank" rel="noopener" download title="Download"><i class="fas fa-download"></i></a>
-          ${unlocked ? `<button class="bd-file-del" data-k="${f.k}" aria-label="Delete file"><i class="fas fa-trash"></i></button>` : ''}
+          <button class="bd-file-del" data-k="${f.k}" aria-label="Delete file"><i class="fas fa-trash"></i></button>
         </div>`).join('');
     }
 
-    attachBtn.addEventListener('click', () => {
-      if (!unlocked) { lock.classList.add('show'); passEl.focus(); return; }
-      fileInput.click();
-    });
-    fileInput.addEventListener('change', () => {
-      const file = fileInput.files[0];
-      if (!file) return;
-      if (file.size > MAX_FILE) { alert('File too large (max 10 MB).'); fileInput.value = ''; return; }
-      const safe = file.name.replace(/[^\w.\-]+/g, '_');
-      const path = 'board/' + Date.now() + '_' + safe;
-      const task = storage.ref(path).put(file);
-      progress.hidden = false; progressBar.style.width = '0%';
-      task.on('state_changed',
-        (s) => { progressBar.style.width = Math.round(s.bytesTransferred / s.totalBytes * 100) + '%'; },
-        () => { progress.hidden = true; fileInput.value = ''; alert('Upload failed — check your Storage rules and connection.'); },
-        () => {
-          task.snapshot.ref.getDownloadURL().then((url) => {
-            filesRef.push({ name: file.name, size: file.size, type: file.type || '', path, url, updated: Date.now() });
-            progress.hidden = true; fileInput.value = '';
+    if (FILES_ENABLED) {
+      const filesRef = db.ref('board_files');
+      const storage = firebase.storage();
+
+      filesRef.on('value', (snap) => {
+        const val = snap.val() || {};
+        filesArr = Object.entries(val).map(([k, v]) => Object.assign({ k }, v)).sort((a, b) => b.updated - a.updated);
+        renderFiles();
+      });
+
+      attachBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        if (file.size > MAX_FILE) { alert('File too large (max ' + Math.round(MAX_FILE / 1048576) + ' MB).'); fileInput.value = ''; return; }
+        const safe = file.name.replace(/[^\w.\-]+/g, '_');
+        const path = 'board/' + Date.now() + '_' + safe;
+        const task = storage.ref(path).put(file);
+        progress.hidden = false; progressBar.style.width = '0%';
+        task.on('state_changed',
+          (s) => { progressBar.style.width = Math.round(s.bytesTransferred / s.totalBytes * 100) + '%'; },
+          () => { progress.hidden = true; fileInput.value = ''; alert('Upload failed — check your Storage rules and connection.'); },
+          () => {
+            task.snapshot.ref.getDownloadURL().then((url) => {
+              filesRef.push({ name: file.name, size: file.size, type: file.type || '', path, url, updated: Date.now() });
+              progress.hidden = true; fileInput.value = '';
+            });
           });
-        });
-    });
+      });
 
-    filesEl.addEventListener('click', (e) => {
-      const del = e.target.closest('.bd-file-del');
-      if (!del || !unlocked) return;
-      const f = filesArr.find((x) => x.k === del.dataset.k);
-      if (!f || !confirm('Delete "' + f.name + '" for everyone?')) return;
-      if (f.path) storage.ref(f.path).delete().catch(() => {});
-      filesRef.child(f.k).remove();
-    });
+      filesEl.addEventListener('click', (e) => {
+        const del = e.target.closest('.bd-file-del');
+        if (!del) return;
+        const f = filesArr.find((x) => x.k === del.dataset.k);
+        if (!f || !confirm('Delete "' + f.name + '" for everyone?')) return;
+        if (f.path) storage.ref(f.path).delete().catch(() => {});
+        filesRef.child(f.k).remove();
+      });
 
-    renderFiles();
+      renderFiles();
+    } else {
+      const card = document.getElementById('bdFilesCard');
+      if (card) card.hidden = true;
+    }
   })();
   </script>
 </body>
