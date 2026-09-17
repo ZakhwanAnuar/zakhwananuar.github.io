@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://zakhwananuar.my/sitemap.xml
+
+kepada yang nak cuba cuba hek website saya. pls dont ya
