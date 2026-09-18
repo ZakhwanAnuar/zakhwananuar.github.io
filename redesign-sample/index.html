@@ -68,36 +68,54 @@
   <!-- LIGHT + WARM palette override (same design, new colours) -->
   <style>
     :root {
-      --bg:          #F7F8FA;   /* light, faintly cool page */
-      --bg-2:        #EEF1F5;   /* slightly deeper surface */
+      --bg:          #FFFFFF;   /* white page */
+      --bg-2:        #F5F5F6;   /* light surface */
       --bg-3:        #FFFFFF;   /* cards, nav */
-      --bg-4:        #E7ECF2;   /* hover */
+      --bg-4:        #ECECEE;   /* hover */
 
-      --accent:      #2F6FE0;   /* universal blue accent */
-      --accent-dim:  #2F6FE022;
-      --accent-2:    #1E4FB0;   /* deeper blue (was purple) */
+      /* accent goes monochrome; colour lives only in the gradient below */
+      --accent:      #17171A;   /* near-black */
+      --accent-dim:  #17171A14;
+      --accent-2:    #444448;   /* dark grey */
 
-      --text:        #1C2430;   /* slate near-black */
-      --text-2:      #58616F;   /* muted */
-      --text-3:      #98A1AE;   /* very muted */
+      --text:        #131316;   /* near-black */
+      --text-2:      #55565E;   /* muted */
+      --text-3:      #9A9BA3;   /* very muted */
 
-      --border:      #E2E7EE;
-      --border-2:    #D2D9E2;
+      --border:      #E7E7EA;
+      --border-2:    #D6D6DB;
 
-      --green:       #1E9E62;
-      --red:         #DC4B4B;
-      --yellow:      #D99A16;
-      --orange:      #E0752A;
+      --green:       #2E9E5B;
+      --red:         #D9534F;
+      --yellow:      #C99A16;
+      --orange:      #D9752A;
     }
     /* Body/base surfaces sometimes set explicitly */
     body { background: var(--bg); color: var(--text); }
 
     /* Fix spots that hardcode dark colours instead of using variables */
-    .navbar.scrolled { background: rgba(247, 248, 250, 0.9) !important; }
+    .navbar.scrolled { background: rgba(255, 255, 255, 0.9) !important; }
     .hero-grid-overlay {
       background-image:
-        linear-gradient(rgba(28, 36, 48, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(28, 36, 48, 0.04) 1px, transparent 1px) !important;
+        linear-gradient(rgba(19, 19, 22, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19, 19, 22, 0.035) 1px, transparent 1px) !important;
+    }
+
+    /* THE gradient — the only colour on the page */
+    .name-line.accent {
+      background: linear-gradient(100deg, #00d9ff, #7c3aed);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(100deg, #00d9ff, #7c3aed) !important;
+      border-color: transparent !important;
+      color: #fff !important;
+    }
+    .highlight {
+      background: linear-gradient(100deg, #00d9ff, #7c3aed);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
     }
   </style>
 </head>
