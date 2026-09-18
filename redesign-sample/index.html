@@ -90,33 +90,30 @@
       --yellow:      #C99A16;
       --orange:      #D9752A;
     }
-    /* Body/base surfaces sometimes set explicitly */
-    body { background: var(--bg); color: var(--text); }
-
-    /* Fix spots that hardcode dark colours instead of using variables */
-    .navbar.scrolled { background: rgba(255, 255, 255, 0.9) !important; }
-    .hero-grid-overlay {
+    /* Graph-paper grid across the WHOLE page (petak-petak) */
+    body {
+      background-color: var(--bg);
+      color: var(--text);
       background-image:
-        linear-gradient(rgba(19, 19, 22, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(19, 19, 22, 0.035) 1px, transparent 1px) !important;
+        linear-gradient(rgba(19, 19, 22, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19, 19, 22, 0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      background-position: -1px -1px;
+      background-attachment: fixed;
     }
+    /* let the page grid show through — drop solid section/footer fills */
+    .hero-grid-overlay { display: none !important; }
+    .section-alt { background: transparent !important; }
+    .footer { background: transparent !important; border-top: 1px solid var(--border); }
 
-    /* THE gradient — the only colour on the page */
-    .name-line.accent {
-      background: linear-gradient(100deg, #00d9ff, #7c3aed);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; color: transparent;
-    }
+    /* pure black & white — no gradient */
+    .navbar.scrolled { background: rgba(255, 255, 255, 0.9) !important; }
     .btn-primary {
-      background: linear-gradient(100deg, #00d9ff, #7c3aed) !important;
-      border-color: transparent !important;
+      background: var(--text) !important;
       color: #fff !important;
+      border: 1.5px solid var(--text) !important;
     }
-    .highlight {
-      background: linear-gradient(100deg, #00d9ff, #7c3aed);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent; color: transparent;
-    }
+    .btn-primary:hover { background: #fff !important; color: var(--text) !important; }
   </style>
 </head>
 <body>
