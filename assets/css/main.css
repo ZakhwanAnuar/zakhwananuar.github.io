@@ -1860,6 +1860,22 @@ code {
   font-family: var(--font-mono);
 }
 
+.footer-visits {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-visits i {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+.footer-visits #visitorCount {
+  color: var(--text-2);
+}
+
 .footer-links {
   display: flex;
   gap: 16px;
