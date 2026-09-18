@@ -3,146 +3,279 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zakhwan Anuar</title>
-  <meta name="description" content="Computer Science student in cybersecurity, CTF player, and builder of small security tools." />
+  <base href="../" />
+  <!-- ============================================================
+       EDIT: Change the title and description to your own info
+       ============================================================ -->
+  <title>Zakhwan Anuar — Cybersecurity Student</title>
+  <meta name="description" content="Computer Science student specializing in Cybersecurity, CTF player, and developer." />
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://zakhwananuar.my/" />
+
+  <!-- RSS feed -->
+  <link rel="alternate" type="application/rss+xml" title="Zakhwan Anuar Blog" href="feed.xml" />
+
+  <!-- Structured data: helps search engines understand who this is -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zakhwan Anuar",
+    "url": "https://zakhwananuar.my",
+    "jobTitle": "Cybersecurity Student",
+    "description": "Computer Science student specializing in cybersecurity, CTF player, and security tool builder.",
+    "image": "https://zakhwananuar.my/assets/images/profile.jpg",
+    "sameAs": [
+      "https://github.com/zakhwananuar",
+      "https://www.linkedin.com/in/zakhwan-anuar-88800a217/"
+    ],
+    "knowsAbout": ["Digital Forensics", "Reverse Engineering", "Malware Analysis", "Capture The Flag", "Cybersecurity"],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Universiti Tenaga Nasional"
+    }
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Zakhwan Anuar" />
+  <meta property="og:title" content="Zakhwan Anuar — Cybersecurity Student & CTF Player" />
+  <meta property="og:description" content="Computer Science student specializing in Cybersecurity, CTF player, and developer." />
+  <meta property="og:url" content="https://zakhwananuar.my/" />
+  <meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zakhwan Anuar — Cybersecurity Student & CTF Player" />
+  <meta name="twitter:description" content="Computer Science student specializing in Cybersecurity, CTF player, and developer." />
+  <meta name="twitter:image" content="https://zakhwananuar.my/assets/images/og-default.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- LIGHT + WARM palette override (same design, new colours) -->
   <style>
     :root {
-      --bg:   #fdfcfa;
-      --fg:   #222020;
-      --mut:  #6b6862;
-      --link: #7a2e1e;   /* understated warm link */
-      --rule: #e7e3db;
+      --bg:          #FAF6EF;   /* warm off-white page */
+      --bg-2:        #F4EEE3;   /* slightly deeper surface */
+      --bg-3:        #FFFFFF;   /* cards, nav */
+      --bg-4:        #EFE7D8;   /* hover */
+
+      --accent:      #E07A1F;   /* warm amber accent */
+      --accent-dim:  #E07A1F22;
+      --accent-2:    #B5531D;   /* deep terracotta (was purple) */
+
+      --text:        #23201A;   /* near-black, warm */
+      --text-2:      #6E665A;   /* muted */
+      --text-3:      #A79D8B;   /* very muted */
+
+      --border:      #E7DFCF;
+      --border-2:    #D8CDB8;
+
+      --green:       #2E9E5B;
+      --red:         #D9534F;
+      --yellow:      #E0A21A;
+      --orange:      #E07A1F;
     }
-    * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font: 18px/1.65 Charter, Georgia, Cambria, "Times New Roman", serif;
-      padding: 0 20px;
+    /* Body/base surfaces sometimes set explicitly */
+    body { background: var(--bg); color: var(--text); }
+
+    /* Fix spots that hardcode dark colours instead of using variables */
+    .navbar.scrolled { background: rgba(250, 246, 239, 0.9) !important; }
+    .hero-grid-overlay {
+      background-image:
+        linear-gradient(rgba(35, 32, 26, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35, 32, 26, 0.045) 1px, transparent 1px) !important;
     }
-    .page { max-width: 640px; margin: 0 auto; padding: 56px 0 72px; }
-
-    a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
-    a:hover { text-decoration-thickness: 2px; }
-
-    /* top nav — plain inline links */
-    nav { font-size: 15px; margin-bottom: 52px; }
-    nav a { color: var(--mut); text-decoration: none; margin-right: 16px; display: inline-block; }
-    nav a:hover { color: var(--link); }
-    nav a.here { color: var(--fg); }
-
-    h1 { font-size: 27px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.01em; }
-    .role { color: var(--mut); margin: 0 0 26px; font-size: 18px; }
-    .intro { margin: 0 0 8px; }
-
-    h2 {
-      font-size: 15px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-      color: var(--mut); margin: 48px 0 14px; font-family: system-ui, sans-serif;
-    }
-
-    /* simple entry lists */
-    ul.list { list-style: none; margin: 0; padding: 0; }
-    ul.list li { margin: 0 0 16px; }
-    ul.list .t { font-weight: 600; }
-    ul.list .d { color: var(--mut); }
-    ul.list .meta { color: var(--mut); font-size: 15px; font-family: system-ui, sans-serif; }
-
-    .more { font-size: 15px; font-family: system-ui, sans-serif; margin-top: 6px; }
-
-    hr { border: 0; border-top: 1px solid var(--rule); margin: 56px 0 20px; }
-    footer { font-size: 15px; color: var(--mut); font-family: system-ui, sans-serif; }
-    footer a { color: var(--mut); }
-    footer a:hover { color: var(--link); }
-
-    .note { max-width: 640px; margin: 0 auto; color: var(--mut); font-size: 13px; font-family: system-ui, sans-serif; padding-top: 18px; }
   </style>
 </head>
 <body>
-  <div class="note">Design preview — dead-simple, text-first. Links below are placeholders.</div>
-  <main class="page">
 
-    <nav>
-      <a href="#" class="here">Home</a>
-      <a href="#">About</a>
-      <a href="#">Projects</a>
-      <a href="#">Writeups</a>
-      <a href="#">Blog</a>
-      <a href="#">Achievements</a>
-      <a href="#">Resume</a>
-      <a href="#">Contact</a>
-    </nav>
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- EDIT: Change this to your name or handle -->
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">Holla!</span>
+        <span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-    <h1>Zakhwan Anuar</h1>
-    <p class="role">Cybersecurity student &amp; CTF player.</p>
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <canvas id="matrixCanvas"></canvas>
+      <div class="hero-grid-overlay"></div>
+    </div>
+    <div class="hero-content container">
+      <div class="hero-text">
+        <!-- EDIT: Change greeting, name, title, and summary -->
+        <p class="hero-greeting">Hello, world. I'm</p>
+        <h1 class="hero-name">
+          <span class="name-line">Zakhwan</span>
+          <span class="name-line accent">Anuar</span>
+        </h1>
+        <p class="hero-title">
+          <span class="typed-text" id="typedText"></span>
+          <!-- secret: the blinking cursor links to the private board (padded for an easy tap on mobile) -->
+          <a href="waklu.html" aria-label="board" tabindex="-1" style="color:inherit;text-decoration:none;cursor:text;display:inline-block;padding:16px 22px;margin:-16px -22px;vertical-align:middle;-webkit-tap-highlight-color:transparent;"><span class="cursor">|</span></a>
+        </p>
+        <p class="hero-summary">
+          <!-- EDIT: Write a short 2–3 sentence bio about yourself -->
+          Computer Science student specializing in <span class="highlight">Cybersecurity</span>. 
+          Active CTF player with a focus on Digital Forensics, Reverse Engineering, and Malware Analysis. 
+          Building things, breaking things — learning from both.
+        </p>
+        <!-- EDIT: Update href values with your real links -->
+        <div class="hero-actions">
+          <a href="projects.html" class="btn btn-primary">View Projects</a>
+          <a href="writeups.html" class="btn btn-secondary">CTF Writeups</a>
+          <a href="contact.html" class="btn btn-ghost" target="_blank">
+            <i class="fas fa-envelope"></i> Contact Me
+          </a>
+        </div>
+        <div class="hero-social">
+          <!-- EDIT: Replace # with your actual profile URLs -->
+          <a href="https://github.com/zakhwananuar" class="social-link" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/zakhwan-anuar-88800a217/" class="social-link" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <!-- EDIT: Replace with your CTF profile if you use one (e.g., CTFtime) -->
+          <a href="https://ctftime.org/user" class="social-link" target="_blank" aria-label="CTFtime">
+            <i class="fas fa-flag"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title">whoami.sh</span>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-    <p class="intro">
-      I&rsquo;m a Computer Science student focused on cybersecurity — mostly digital
-      forensics, reverse engineering and malware analysis. I play CTFs, build small
-      tools, and write up what I figure out along the way.
-    </p>
-    <p class="intro">
-      Based in Malaysia. Currently looking for a security internship. You can find me on
-      <a href="#">GitHub</a>, <a href="#">LinkedIn</a>, and <a href="#">CTFtime</a>.
-    </p>
+  <!-- ============================================================
+       LATEST BLOG PREVIEW
+       ============================================================ -->
+  <section class="section" id="latest-blog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// latest_thoughts</span>
+        <h2 class="section-title">Latest Blog Post</h2>
+      </div>
+      <div id="latestBlogContainer">
+        <!-- Populated by JS from data/blog.js -->
+      </div>
+      <div class="section-cta">
+        <a href="blog.html" class="btn btn-secondary">All Posts <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
 
-    <h2>Latest writing</h2>
-    <ul class="list">
-      <li>
-        <a class="t" href="#">What a semester of CTFs taught me about patience</a><br>
-        <span class="meta">18 Sept 2026</span> — <span class="d">on slow challenges and why they teach the most.</span>
-      </li>
-    </ul>
-    <p class="more"><a href="#">All posts &rarr;</a></p>
+  <!-- ============================================================
+       RECENT WRITEUPS PREVIEW
+       ============================================================ -->
+  <section class="section section-alt" id="recent-writeups">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// recent_writeups</span>
+        <h2 class="section-title">Latest CTF Writeups</h2>
+      </div>
+      <div class="writeups-preview-grid" id="recentWriteupsGrid">
+        <!-- Populated by JS from data/writeups.js -->
+      </div>
+      <div class="section-cta">
+        <a href="writeups.html" class="btn btn-secondary">All Writeups <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
 
-    <h2>Recent writeups</h2>
-    <ul class="list">
-      <li>
-        <a class="t" href="#">Hidden in the metadata</a>
-        <span class="meta">· forensics</span><br>
-        <span class="d">A flag tucked into EXIF fields and a carved thumbnail from a broken image.</span>
-      </li>
-      <li>
-        <a class="t" href="#">Unpacking a simple crackme</a>
-        <span class="meta">· reverse engineering</span><br>
-        <span class="d">Static and dynamic analysis to defeat a home-grown licence check.</span>
-      </li>
-      <li>
-        <a class="t" href="#">A cookie that trusted too much</a>
-        <span class="meta">· web</span><br>
-        <span class="d">Turning a weak session token into a full account takeover.</span>
-      </li>
-    </ul>
-    <p class="more"><a href="#">All writeups &rarr;</a></p>
+  <!-- ============================================================
+       FEATURED PROJECTS PREVIEW
+       ============================================================ -->
+  <section class="section" id="featured-projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// featured_projects</span>
+        <h2 class="section-title">Selected Projects</h2>
+      </div>
+      <div class="projects-preview-grid" id="featuredProjectsGrid">
+        <!-- Populated by JS from data/projects.js -->
+      </div>
+      <div class="section-cta">
+        <a href="projects.html" class="btn btn-secondary">All Projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
 
-    <h2>Projects</h2>
-    <ul class="list">
-      <li>
-        <a class="t" href="#">Portable WiFi security lab</a>
-        <span class="meta">· ESP32-S3, C++</span><br>
-        <span class="d">A pocket console for authorized wireless assessments — scanning, rogue-AP and captive-portal demos for red-team labs.</span>
-      </li>
-      <li>
-        <a class="t" href="#">Discord C2 threat-intel tool</a>
-        <span class="meta">· Python</span><br>
-        <span class="d">For authorized malware analysis: pulls channels, messages and attachments abused as C2, then scans for IOCs.</span>
-      </li>
-      <li>
-        <a class="t" href="#">Bad-USB study board</a>
-        <span class="meta">· Raspberry Pi Pico</span><br>
-        <span class="d">A CircuitPython HID board for studying keystroke injection safely, for defensive awareness.</span>
-      </li>
-    </ul>
-    <p class="more"><a href="#">All projects &rarr;</a></p>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <!-- EDIT: Change name -->
+      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar. Built with ☕ and curiosity.</p>
+      <p class="footer-visits"><i class="fas fa-eye"></i> <span id="visitorCount">…</span> visits</p>
+      <div class="footer-links">
+        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
 
-    <hr>
-    <footer>
-      &copy; 2026 Zakhwan Anuar · <span id="visitorCount">1,240</span> visits ·
-      <a href="#">GitHub</a> · <a href="#">LinkedIn</a>
-    </footer>
+  <!-- Scripts -->
+  <script src="data/projects.js"></script>
+  <script src="data/writeups.js"></script>
+  <script src="data/blog.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/home.js"></script>
+  <script src="assets/js/visitors.js"></script>
 
-  </main>
+  
 </body>
 </html>
