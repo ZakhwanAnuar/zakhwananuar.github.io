@@ -8,149 +8,158 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     :root {
-      --paper:   #F7F5F0;   /* warm paper */
-      --ink:     #1B1A17;   /* near-black */
-      --ink-2:   #4C4A44;
-      --ink-3:   #8C877C;   /* muted */
-      --accent:  #9A3B2E;   /* muted brick red — warm, editorial */
-      --line:    #DDD8CD;   /* hairline */
-      --line-2:  #C9C3B5;
-      --serif:   'Newsreader', Georgia, 'Times New Roman', serif;
+      --bg:      #F2EDE3;   /* warm bone */
+      --bg-2:    #E9E2D3;   /* panel */
+      --ink:     #1A1712;   /* near-black */
+      --ink-2:   #524C40;
+      --ink-3:   #8C8676;
+      --accent:  #D9531E;   /* warm orange */
+      --accent-d:#B23F13;
+      --line:    #D8D1C1;
+      --disp:    'Bricolage Grotesque', system-ui, sans-serif;
       --sans:    'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      --maxw:    1000px;
+      --maxw:    1080px;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0; background: var(--paper); color: var(--ink);
+      margin: 0; background: var(--bg); color: var(--ink);
       font-family: var(--sans); font-size: 16px; line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
     .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+    .label { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
 
-    /* Labels / eyebrows */
-    .label {
-      font-size: 0.74rem; letter-spacing: .16em; text-transform: uppercase;
-      color: var(--ink-3); font-weight: 600;
+    /* ---------- top strip ---------- */
+    .strip {
+      background: var(--ink); color: #EDE7DA;
+      font-size: .78rem; letter-spacing: .04em;
     }
-    .arrow-link {
-      display: inline-flex; align-items: center; gap: 7px;
-      color: var(--ink); border-bottom: 1px solid var(--ink);
-      padding-bottom: 2px; font-weight: 500; font-size: 0.95rem;
-      transition: color .2s ease, border-color .2s ease, gap .2s ease;
-    }
-    .arrow-link:hover { color: var(--accent); border-color: var(--accent); gap: 12px; }
-    .arrow-link.muted { color: var(--ink-2); border-color: var(--line-2); }
-    .arrow-link.muted:hover { color: var(--accent); border-color: var(--accent); }
+    .strip .wrap { display: flex; justify-content: space-between; gap: 16px; padding: 9px 28px; }
+    .strip .dotted { display: inline-flex; align-items: center; gap: 8px; }
+    .strip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(217,83,30,.25); }
 
-    /* ---------- Header ---------- */
-    header { border-bottom: 1px solid var(--line); }
-    .bar {
-      max-width: var(--maxw); margin: 0 auto; padding: 20px 28px;
-      display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
-    }
-    .brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; letter-spacing: .01em; }
-    nav { display: flex; gap: 22px; flex-wrap: wrap; }
-    nav a { font-size: 0.9rem; color: var(--ink-2); transition: color .2s ease; }
-    nav a:hover, nav a.active { color: var(--accent); }
-    .menu-btn { display: none; background: none; border: 0; font-size: 1.2rem; cursor: pointer; color: var(--ink); }
+    /* ---------- nav ---------- */
+    .nav { position: sticky; top: 0; z-index: 40; background: rgba(242,237,227,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; }
+    .brand { font-family: var(--disp); font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; }
+    .brand b { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: .92rem; color: var(--ink-2); transition: color .2s; }
+    .nav-links a:hover, .nav-links a.on { color: var(--accent); }
+    .burger { display: none; background: none; border: 0; font-size: 1.2rem; color: var(--ink); cursor: pointer; }
 
-    /* ---------- Hero ---------- */
-    .hero { padding: 84px 0 70px; border-bottom: 1px solid var(--line); }
-    .hero .label { display: block; margin-bottom: 26px; }
+    /* ---------- buttons ---------- */
+    .btn { display: inline-flex; align-items: center; gap: 9px; font-weight: 500; font-size: .95rem; padding: 13px 22px; border-radius: 3px; border: 1.5px solid var(--ink); transition: all .18s ease; }
+    .btn-solid { background: var(--ink); color: var(--bg); }
+    .btn-solid:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+    .btn-line { background: transparent; color: var(--ink); }
+    .btn-line:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .tlink { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; color: var(--ink); border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; transition: all .18s ease; }
+    .tlink:hover { color: var(--accent); border-color: var(--accent); gap: 12px; }
+
+    /* ---------- hero ---------- */
+    .hero { padding: 70px 0 40px; }
+    .hero .label { display: block; margin-bottom: 20px; }
     .hero h1 {
-      font-family: var(--serif); font-weight: 500;
-      font-size: clamp(2.7rem, 7vw, 5rem); line-height: 1.04;
-      letter-spacing: -.015em; margin: 0 0 26px; max-width: 16ch;
+      font-family: var(--disp); font-weight: 800; letter-spacing: -.03em; line-height: .92;
+      font-size: clamp(3.6rem, 13vw, 9rem); margin: 0 0 28px;
     }
-    .hero h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
-    .hero-lead {
-      font-size: 1.15rem; color: var(--ink-2); max-width: 52ch; margin: 0 0 34px;
-      font-family: var(--serif);
-    }
-    .hero-actions { display: flex; gap: 26px; flex-wrap: wrap; align-items: center; margin-bottom: 52px; }
+    .hero h1 .l2 { color: var(--accent); }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: end; }
+    .hero-lead { font-size: 1.18rem; color: var(--ink-2); max-width: 46ch; margin: 0 0 30px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .hero-side { border-left: 2px solid var(--ink); padding-left: 22px; }
+    .hero-side p { margin: 0 0 16px; color: var(--ink-2); font-size: .96rem; }
+    .hero-side .who { font-family: var(--disp); font-weight: 600; color: var(--ink); font-size: 1.05rem; }
 
-    /* facts row (replaces the photo) */
-    .facts {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--line); border: 1px solid var(--line);
-    }
-    .fact { background: var(--paper); padding: 18px 20px; }
-    .fact dt { font-size: 0.72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
-    .fact dd { margin: 0; font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
-    .fact dd .dim { color: var(--ink-3); }
+    /* stats */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+    .stat { padding: 22px 6px 20px; border-right: 1px solid var(--line); }
+    .stat:last-child { border-right: 0; }
+    .stat .n { font-family: var(--disp); font-weight: 700; font-size: 2.4rem; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+    .stat .n em { color: var(--accent); font-style: normal; }
+    .stat .t { display: block; margin-top: 8px; font-size: .82rem; color: var(--ink-3); }
 
-    /* ---------- Section scaffold ---------- */
-    section.block { padding: 66px 0; border-bottom: 1px solid var(--line); }
-    .head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 34px; }
-    .head .idx { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 1.1rem; }
-    .head h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -.01em; margin: 0; }
-    .head .spacer { flex: 1; border-bottom: 1px dotted var(--line-2); transform: translateY(-4px); }
+    /* ---------- section ---------- */
+    .block { padding: 66px 0; }
+    .block.alt { background: var(--bg-2); }
+    .head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 36px; }
+    .head .idx { font-family: var(--disp); font-weight: 700; color: var(--accent); font-size: 1rem; }
+    .head h2 { font-family: var(--disp); font-weight: 700; font-size: clamp(1.9rem, 4.5vw, 2.8rem); letter-spacing: -.02em; margin: 0; }
+    .head .rule { flex: 1; border-bottom: 1px solid var(--line); transform: translateY(-5px); }
 
-    /* Featured post */
-    .feature { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start; }
-    .feature .date { font-family: var(--serif); font-style: italic; color: var(--ink-3); font-size: 1rem; white-space: nowrap; padding-top: 6px; }
-    .feature h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.18; margin: 0 0 14px; letter-spacing: -.01em; }
-    .feature p { color: var(--ink-2); font-size: 1.05rem; margin: 0 0 20px; max-width: 60ch; }
+    /* featured post */
+    .feature { display: grid; grid-template-columns: 150px 1fr; gap: 34px; align-items: start; padding-bottom: 6px; }
+    .feature .when { font-family: var(--disp); font-weight: 600; font-size: 1rem; color: var(--ink-3); }
+    .feature .when span { display: block; font-weight: 700; font-size: 2.4rem; color: var(--ink); line-height: 1; letter-spacing: -.02em; }
+    .feature h3 { font-family: var(--disp); font-weight: 700; font-size: clamp(1.6rem, 3.6vw, 2.3rem); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 14px; }
+    .feature p { color: var(--ink-2); font-size: 1.06rem; max-width: 60ch; margin: 0 0 20px; }
 
-    /* Editorial list rows (writeups + projects) */
-    .rows { border-top: 1px solid var(--line); }
-    .row {
-      display: grid; grid-template-columns: 40px 1fr auto; gap: 24px; align-items: baseline;
-      padding: 26px 4px; border-bottom: 1px solid var(--line);
-      transition: background .2s ease, padding-left .2s ease;
-    }
-    .row:hover { background: rgba(154,59,46,.04); padding-left: 12px; }
-    .row .num { font-family: var(--serif); font-style: italic; color: var(--ink-3); font-size: 1.05rem; }
-    .row .rlabel { display: block; }
-    .row h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; margin: 8px 0 8px; letter-spacing: -.005em; }
-    .row p { color: var(--ink-2); font-size: 0.98rem; margin: 0 0 12px; max-width: 58ch; }
-    .stack { display: flex; gap: 14px; flex-wrap: wrap; }
-    .stack span { font-size: 0.8rem; color: var(--ink-3); }
-    .stack span::before { content: "#"; color: var(--line-2); margin-right: 1px; }
-    .row .go { color: var(--ink-3); font-size: 1rem; align-self: center; transition: color .2s ease, transform .2s ease; }
-    .row:hover .go { color: var(--accent); transform: translateX(4px); }
+    /* ruled blocks grid */
+    .blocks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px 40px; }
+    .item { border-top: 2px solid var(--ink); padding: 22px 0 26px; transition: padding-left .2s ease; }
+    .item:hover { padding-left: 10px; }
+    .item .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .item h3 { font-family: var(--disp); font-weight: 700; font-size: 1.4rem; letter-spacing: -.01em; margin: 12px 0 10px; transition: color .2s ease; }
+    .item:hover h3 { color: var(--accent); }
+    .item p { color: var(--ink-2); font-size: .97rem; margin: 0 0 14px; }
+    .item .no { font-family: var(--disp); font-weight: 700; color: var(--ink-3); }
+    .item .tags { display: flex; gap: 12px; flex-wrap: wrap; }
+    .item .tags span { font-size: .8rem; color: var(--ink-3); }
+    .item .tags span::before { content: "#"; color: var(--line); }
 
-    .block-cta { margin-top: 34px; }
+    .block-cta { margin-top: 40px; }
 
-    /* ---------- Footer ---------- */
-    footer { padding: 40px 0; }
+    /* footer */
+    footer { border-top: 2px solid var(--ink); padding: 40px 0; }
     .foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .foot p { margin: 0; color: var(--ink-3); font-size: 0.88rem; }
-    .foot .visits i { color: var(--accent); margin-right: 5px; }
+    .foot p { margin: 0; color: var(--ink-3); font-size: .88rem; }
+    .foot .visits i { color: var(--accent); margin-right: 6px; }
     .foot .social { display: flex; gap: 18px; }
-    .foot .social a { color: var(--ink-3); transition: color .2s ease; }
+    .foot .social a { color: var(--ink-2); transition: color .2s; }
     .foot .social a:hover { color: var(--accent); }
 
-    .note { background: transparent; border-bottom: 1px solid var(--line); color: var(--ink-3); font-size: 0.8rem; text-align: center; padding: 8px 16px; letter-spacing: .02em; }
+    .note { background: var(--bg-2); color: var(--ink-3); font-size: .78rem; text-align: center; padding: 7px 16px; letter-spacing: .04em; }
 
-    @media (max-width: 760px) {
-      nav { display: none; }
-      .menu-btn { display: block; }
-      .facts { grid-template-columns: 1fr; }
-      .feature { grid-template-columns: 1fr; gap: 8px; }
-      .feature .date { padding-top: 0; }
-      .row { grid-template-columns: 28px 1fr; }
-      .row .go { display: none; }
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .burger { display: block; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+      .hero-side { border-left: 0; border-top: 2px solid var(--ink); padding-left: 0; padding-top: 20px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+      .feature { grid-template-columns: 1fr; gap: 12px; }
+      .feature .when span { display: inline; font-size: 1rem; }
+      .blocks { grid-template-columns: 1fr; gap: 0; }
     }
   </style>
 </head>
 <body>
 
-  <div class="note">Design preview · lighter, editorial direction · sample cards use placeholder text</div>
+  <div class="note">Design preview — a fresh, warmer direction. Cards use placeholder text; stats are illustrative.</div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="bar">
-      <a href="#" class="brand">Zakhwan Anuar</a>
-      <nav>
-        <a href="#" class="active">Home</a>
+  <!-- top strip -->
+  <div class="strip">
+    <div class="wrap">
+      <span>Zakhwan Anuar — Cybersecurity &amp; CTF</span>
+      <span class="dotted"><span class="dot"></span> Kuala Lumpur · open to internships</span>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <div class="nav">
+    <div class="wrap">
+      <a href="#" class="brand">za<b>.</b></a>
+      <div class="nav-links">
+        <a href="#" class="on">Home</a>
         <a href="#">About</a>
         <a href="#">Projects</a>
         <a href="#">Writeups</a>
@@ -158,141 +167,135 @@
         <a href="#">Achievements</a>
         <a href="#">Resume</a>
         <a href="#">Contact</a>
-      </nav>
-      <button class="menu-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
+      <button class="burger" aria-label="Menu"><i class="fas fa-bars"></i></button>
     </div>
-  </header>
+  </div>
 
-  <!-- HERO -->
+  <!-- hero -->
   <section class="hero">
     <div class="wrap">
-      <span class="label">Cybersecurity · CTF · Malaysia</span>
-      <h1>I build things, then take them <em>apart.</em></h1>
-      <p class="hero-lead">
-        Computer Science student focused on cybersecurity — digital forensics,
-        reverse engineering and malware analysis. I play CTFs, build small tools,
-        and write up what I learn along the way.
-      </p>
-      <div class="hero-actions">
-        <a href="#" class="arrow-link">View projects <i class="fas fa-arrow-right"></i></a>
-        <a href="#" class="arrow-link muted">Read CTF writeups <i class="fas fa-arrow-right"></i></a>
-        <a href="#" class="arrow-link muted">Get in touch</a>
+      <span class="label">Computer Science · Cybersecurity · CTF player</span>
+      <h1>Zakhwan<br><span class="l2">Anuar.</span></h1>
+      <div class="hero-grid">
+        <div>
+          <p class="hero-lead">
+            I study cybersecurity and spend my weekends on CTFs — digital forensics,
+            reverse engineering and malware analysis. I build small tools, break a few,
+            and write up what I learn.
+          </p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-solid">View projects <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-line">CTF writeups</a>
+            <a href="#" class="tlink">Get in touch</a>
+          </div>
+        </div>
+        <aside class="hero-side">
+          <p class="who">What I'm into</p>
+          <p>Forensics, reverse engineering and malware analysis — the puzzle side of security.</p>
+          <p class="who">Right now</p>
+          <p>Playing CTFs, building tools, and writing about both.</p>
+        </aside>
       </div>
-      <dl class="facts">
-        <div class="fact"><dt>Focus</dt><dd>Forensics · RE · Malware</dd></div>
-        <div class="fact"><dt>Currently</dt><dd>CTFs &amp; <span class="dim">building tools</span></dd></div>
-        <div class="fact"><dt>Find me</dt><dd>GitHub · LinkedIn · CTFtime</dd></div>
-      </dl>
+
+      <div class="stats">
+        <div class="stat"><div class="n">20<em>+</em></div><span class="t">CTF writeups</span></div>
+        <div class="stat"><div class="n">12</div><span class="t">Projects shipped</span></div>
+        <div class="stat"><div class="n">15<em>+</em></div><span class="t">CTFs played</span></div>
+        <div class="stat"><div class="n">’23</div><span class="t">Started tinkering</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- 01 JOURNAL -->
+  <!-- 01 journal -->
   <section class="block">
     <div class="wrap">
-      <div class="head">
-        <span class="idx">01</span><h2>Journal</h2><span class="spacer"></span><span class="label">Latest post</span>
-      </div>
+      <div class="head"><span class="idx">01</span><h2>Journal</h2><span class="rule"></span><span class="label">Latest post</span></div>
       <article class="feature">
-        <span class="date">18 Sept 2026</span>
+        <div class="when"><span>18</span>Sept 2026</div>
         <div>
           <h3>What a semester of CTFs taught me about patience</h3>
-          <p>A reflection on the challenges that took days to solve, the rabbit holes
-             that went nowhere, and why the slow ones ended up teaching me the most.</p>
-          <a href="#" class="arrow-link">Read the post <i class="fas fa-arrow-right"></i></a>
+          <p>A reflection on the challenges that took days to solve, the rabbit holes that
+             went nowhere, and why the slow ones ended up teaching me the most.</p>
+          <a href="#" class="tlink">Read the post <i class="fas fa-arrow-right"></i></a>
         </div>
       </article>
-      <div class="block-cta"><a href="#" class="arrow-link muted">All posts <i class="fas fa-arrow-right"></i></a></div>
+      <div class="block-cta"><a href="#" class="tlink">All posts <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
-  <!-- 02 WRITEUPS -->
+  <!-- 02 writeups -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="head"><span class="idx">02</span><h2>CTF writeups</h2><span class="rule"></span><span class="label">Recent</span></div>
+      <div class="blocks">
+        <a class="item" href="#">
+          <div class="top"><span class="label">Forensics</span><span class="no">01</span></div>
+          <h3>Hidden in the metadata</h3>
+          <p>Recovering a flag tucked away in EXIF fields and a carved thumbnail from a corrupted image.</p>
+          <div class="tags"><span>forensics</span><span>steg</span></div>
+        </a>
+        <a class="item" href="#">
+          <div class="top"><span class="label">Reverse Engineering</span><span class="no">02</span></div>
+          <h3>Unpacking a simple crackme</h3>
+          <p>A static and dynamic approach to defeat a home-grown licence check, one instruction at a time.</p>
+          <div class="tags"><span>re</span><span>ghidra</span></div>
+        </a>
+        <a class="item" href="#">
+          <div class="top"><span class="label">Web</span><span class="no">03</span></div>
+          <h3>A cookie that trusted too much</h3>
+          <p>Chaining a weak session token into a full account takeover, step by step.</p>
+          <div class="tags"><span>web</span><span>auth</span></div>
+        </a>
+        <a class="item" href="#">
+          <div class="top"><span class="label">Crypto</span><span class="no">04</span></div>
+          <h3>Small primes, big mistakes</h3>
+          <p>Why a rushed RSA setup handed the whole key over with a bit of factoring.</p>
+          <div class="tags"><span>crypto</span><span>rsa</span></div>
+        </a>
+      </div>
+      <div class="block-cta"><a href="#" class="tlink">All writeups <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+  </section>
+
+  <!-- 03 projects -->
   <section class="block">
     <div class="wrap">
-      <div class="head">
-        <span class="idx">02</span><h2>CTF writeups</h2><span class="spacer"></span><span class="label">Recent</span>
-      </div>
-      <div class="rows">
-        <a class="row" href="#">
-          <span class="num">01</span>
-          <div>
-            <span class="label rlabel">Forensics</span>
-            <h3>Hidden in the metadata</h3>
-            <p>Recovering a flag tucked away in EXIF fields and a carved thumbnail from a corrupted image.</p>
-            <div class="stack"><span>forensics</span><span>steg</span></div>
-          </div>
-          <i class="fas fa-arrow-right go"></i>
+      <div class="head"><span class="idx">03</span><h2>Selected projects</h2><span class="rule"></span><span class="label">Things I've built</span></div>
+      <div class="blocks">
+        <a class="item" href="#">
+          <div class="top"><span class="label">ESP32-S3 · C++</span><span class="no">01</span></div>
+          <h3>Portable WiFi security lab</h3>
+          <p>A pocket console for authorized wireless assessments — scanning, rogue-AP simulation and captive-portal demos for red-team labs.</p>
+          <div class="tags"><span>esp32</span><span>wifi</span></div>
         </a>
-        <a class="row" href="#">
-          <span class="num">02</span>
-          <div>
-            <span class="label rlabel">Reverse Engineering</span>
-            <h3>Unpacking a simple crackme</h3>
-            <p>A static + dynamic approach to defeat a home-grown licence check, one instruction at a time.</p>
-            <div class="stack"><span>re</span><span>ghidra</span></div>
-          </div>
-          <i class="fas fa-arrow-right go"></i>
+        <a class="item" href="#">
+          <div class="top"><span class="label">Python</span><span class="no">02</span></div>
+          <h3>Discord C2 threat-intel tool</h3>
+          <p>For authorized malware analysis: enumerates channels, messages and attachments abused as C2, then scans for indicators of compromise.</p>
+          <div class="tags"><span>python</span><span>dfir</span></div>
         </a>
-        <a class="row" href="#">
-          <span class="num">03</span>
-          <div>
-            <span class="label rlabel">Web</span>
-            <h3>A cookie that trusted too much</h3>
-            <p>Chaining a weak session token into a full account takeover, step by step.</p>
-            <div class="stack"><span>web</span><span>auth</span></div>
-          </div>
-          <i class="fas fa-arrow-right go"></i>
+        <a class="item" href="#">
+          <div class="top"><span class="label">Raspberry Pi Pico</span><span class="no">03</span></div>
+          <h3>Bad-USB study board</h3>
+          <p>A CircuitPython HID board for studying keystroke injection safely — built to understand the attack for defensive awareness.</p>
+          <div class="tags"><span>hid</span><span>hardware</span></div>
+        </a>
+        <a class="item" href="#">
+          <div class="top"><span class="label">Web · JS</span><span class="no">04</span></div>
+          <h3>This site &amp; its little arcade</h3>
+          <p>A hand-built portfolio with a few hidden games and easter eggs tucked inside for the curious.</p>
+          <div class="tags"><span>frontend</span><span>fun</span></div>
         </a>
       </div>
-      <div class="block-cta"><a href="#" class="arrow-link muted">All writeups <i class="fas fa-arrow-right"></i></a></div>
+      <div class="block-cta"><a href="#" class="tlink">All projects <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
-  <!-- 03 PROJECTS -->
-  <section class="block">
-    <div class="wrap">
-      <div class="head">
-        <span class="idx">03</span><h2>Selected projects</h2><span class="spacer"></span><span class="label">Things I've built</span>
-      </div>
-      <div class="rows">
-        <a class="row" href="#">
-          <span class="num">01</span>
-          <div>
-            <span class="label rlabel">ESP32-S3 · C++</span>
-            <h3>Portable WiFi security lab</h3>
-            <p>A pocket console for authorized wireless assessments — scanning, rogue-AP simulation and captive-portal demos for red-team labs.</p>
-            <div class="stack"><span>esp32</span><span>wifi</span></div>
-          </div>
-          <i class="fas fa-arrow-right go"></i>
-        </a>
-        <a class="row" href="#">
-          <span class="num">02</span>
-          <div>
-            <span class="label rlabel">Python</span>
-            <h3>Discord C2 threat-intel tool</h3>
-            <p>For authorized malware analysis: enumerates channels, messages and attachments abused as C2, then scans for indicators of compromise.</p>
-            <div class="stack"><span>python</span><span>dfir</span></div>
-          </div>
-          <i class="fas fa-arrow-right go"></i>
-        </a>
-        <a class="row" href="#">
-          <span class="num">03</span>
-          <div>
-            <span class="label rlabel">Raspberry Pi Pico</span>
-            <h3>Bad-USB study board</h3>
-            <p>A CircuitPython HID board for studying keystroke injection safely — built to understand the attack for defensive awareness.</p>
-            <div class="stack"><span>hid</span><span>hardware</span></div>
-          </div>
-          <i class="fas fa-arrow-right go"></i>
-        </a>
-      </div>
-      <div class="block-cta"><a href="#" class="arrow-link muted">All projects <i class="fas fa-arrow-right"></i></a></div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+  <!-- footer -->
   <footer>
     <div class="wrap foot">
-      <p>© 2026 Zakhwan Anuar</p>
+      <p>© 2026 Zakhwan Anuar — built by hand.</p>
       <p class="visits"><i class="fas fa-eye"></i><span id="visitorCount">1,240</span> visits</p>
       <div class="social">
         <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
