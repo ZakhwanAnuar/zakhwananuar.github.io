@@ -68,36 +68,36 @@
   <!-- LIGHT + WARM palette override (same design, new colours) -->
   <style>
     :root {
-      --bg:          #FAF6EF;   /* warm off-white page */
-      --bg-2:        #F4EEE3;   /* slightly deeper surface */
+      --bg:          #F7F8FA;   /* light, faintly cool page */
+      --bg-2:        #EEF1F5;   /* slightly deeper surface */
       --bg-3:        #FFFFFF;   /* cards, nav */
-      --bg-4:        #EFE7D8;   /* hover */
+      --bg-4:        #E7ECF2;   /* hover */
 
-      --accent:      #E07A1F;   /* warm amber accent */
-      --accent-dim:  #E07A1F22;
-      --accent-2:    #B5531D;   /* deep terracotta (was purple) */
+      --accent:      #2F6FE0;   /* universal blue accent */
+      --accent-dim:  #2F6FE022;
+      --accent-2:    #1E4FB0;   /* deeper blue (was purple) */
 
-      --text:        #23201A;   /* near-black, warm */
-      --text-2:      #6E665A;   /* muted */
-      --text-3:      #A79D8B;   /* very muted */
+      --text:        #1C2430;   /* slate near-black */
+      --text-2:      #58616F;   /* muted */
+      --text-3:      #98A1AE;   /* very muted */
 
-      --border:      #E7DFCF;
-      --border-2:    #D8CDB8;
+      --border:      #E2E7EE;
+      --border-2:    #D2D9E2;
 
-      --green:       #2E9E5B;
-      --red:         #D9534F;
-      --yellow:      #E0A21A;
-      --orange:      #E07A1F;
+      --green:       #1E9E62;
+      --red:         #DC4B4B;
+      --yellow:      #D99A16;
+      --orange:      #E0752A;
     }
     /* Body/base surfaces sometimes set explicitly */
     body { background: var(--bg); color: var(--text); }
 
     /* Fix spots that hardcode dark colours instead of using variables */
-    .navbar.scrolled { background: rgba(250, 246, 239, 0.9) !important; }
+    .navbar.scrolled { background: rgba(247, 248, 250, 0.9) !important; }
     .hero-grid-overlay {
       background-image:
-        linear-gradient(rgba(35, 32, 26, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(35, 32, 26, 0.045) 1px, transparent 1px) !important;
+        linear-gradient(rgba(28, 36, 48, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28, 36, 48, 0.04) 1px, transparent 1px) !important;
     }
   </style>
 </head>
