@@ -124,24 +124,9 @@
       border-color: var(--text) !important;
     }
 
-    /* framed "about" card that replaces the whoami.sh terminal */
-    .hero-card {
-      background: var(--bg-3);
-      border: 2px solid #AEAEB6;
-      border-radius: var(--radius-lg);
-      padding: 30px 32px;
-      align-self: center;
-    }
-    .hero-card .hc-tag { font-family: var(--font-mono); color: var(--text-3); font-size: .78rem; letter-spacing: .05em; }
-    .hero-card .hc-name { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; letter-spacing: -.01em; margin: 14px 0 4px; color: var(--text); }
-    .hero-card .hc-role { color: var(--text-2); font-size: .96rem; margin: 0 0 22px; }
-    .hero-card .hc-list { margin: 0 0 22px; display: grid; gap: 14px; }
-    .hero-card .hc-list > div { display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: start; }
-    .hero-card dt { color: var(--text-3); font-size: .74rem; text-transform: uppercase; letter-spacing: .07em; padding-top: 2px; }
-    .hero-card dd { margin: 0; color: var(--text); font-size: .92rem; line-height: 1.45; }
-    .hero-card .hc-links { display: flex; gap: 18px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 18px; }
-    .hero-card .hc-links a { color: var(--text); text-decoration: none; font-size: .88rem; border-bottom: 1.5px solid var(--text-3); padding-bottom: 1px; transition: border-color .2s ease; }
-    .hero-card .hc-links a:hover { border-color: var(--text); }
+    /* single-column hero (terminal removed) — keep it left-aligned, full width */
+    .hero-content { width: 100% !important; grid-template-columns: 1fr !important; justify-items: start !important; }
+    .hero-text { max-width: 780px; justify-self: start !important; }
   </style>
 </head>
 <body>
@@ -222,21 +207,7 @@
           </a>
         </div>
       </div>
-      <aside class="hero-card">
-        <span class="hc-tag">// about</span>
-        <p class="hc-name">Zakhwan Anuar</p>
-        <p class="hc-role">Cybersecurity student &amp; CTF player</p>
-        <dl class="hc-list">
-          <div><dt>Focus</dt><dd>Digital forensics, reverse engineering, malware analysis</dd></div>
-          <div><dt>Based in</dt><dd>Kuala Lumpur, Malaysia</dd></div>
-          <div><dt>Status</dt><dd>Open to internships &amp; collaborations</dd></div>
-        </dl>
-        <div class="hc-links">
-          <a href="https://github.com/zakhwananuar" target="_blank">GitHub &#8599;</a>
-          <a href="https://www.linkedin.com/in/zakhwan-anuar-88800a217/" target="_blank">LinkedIn &#8599;</a>
-          <a href="https://ctftime.org/user" target="_blank">CTFtime &#8599;</a>
-        </div>
-      </aside>
+      
     </div>
     <div class="hero-scroll-hint">
       <span>scroll</span>
