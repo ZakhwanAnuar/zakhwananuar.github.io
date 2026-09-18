@@ -86,7 +86,23 @@
     }
     .nf-term-body .prompt { color: var(--accent); }
     .nf-term-body .err    { color: var(--red); }
+    .nf-term-body .ok     { color: var(--accent); }
+    .nf-term-body .muted  { color: var(--text-3); }
     .nf-term-body .path   { color: var(--text); word-break: break-all; }
+    .nf-term-body .line   { white-space: pre-wrap; word-break: break-word; }
+    .nf-inputline { display: flex; align-items: center; gap: 8px; }
+    .nf-inputline input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: 0;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      caret-color: var(--accent);
+    }
     .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
     @media (max-width: 480px) {
@@ -126,23 +142,28 @@
       <h2 class="nf-title">Page not found</h2>
       <p class="nf-sub">The page you're looking for doesn't exist, moved, or never did. Let's get you back on track.</p>
 
-      <div class="nf-term" aria-hidden="true">
+      <div class="nf-term">
         <div class="nf-term-bar">
           <span class="nf-dot r"></span><span class="nf-dot y"></span><span class="nf-dot g"></span>
-          <span class="nf-term-name">bash</span>
+          <span class="nf-term-name">bash — type a command</span>
         </div>
-        <div class="nf-term-body">
-          <div><span class="prompt">$</span> locate <span class="path" id="nfPath">requested/page</span></div>
-          <div><span class="err">locate: 0 results</span> (HTTP 404)</div>
-          <div><span class="prompt">$</span> cd /home &amp;&amp; ls</div>
-          <div>projects/  writeups/  blog/  about/  contact/</div>
+        <div class="nf-term-body" id="nfTerm">
+          <div id="nfOut">
+            <div class="line"><span class="prompt">$</span> locate <span class="path" id="nfPath">requested/page</span></div>
+            <div class="line"><span class="err">locate: 0 results</span> (HTTP 404)</div>
+            <div class="line"><span class="muted">This terminal works. Type</span> <span class="ok">help</span><span class="muted">, or</span> <span class="ok">arcade</span> <span class="muted">to play some games.</span></div>
+          </div>
+          <div class="nf-inputline">
+            <span class="prompt">$</span>
+            <input id="nfCmd" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal command input" />
+          </div>
         </div>
       </div>
 
       <div class="nf-actions">
         <a href="/index.html" class="btn btn-primary"><i class="fas fa-home"></i> Return home</a>
-        <a href="/writeups.html" class="btn btn-secondary">Browse writeups</a>
-        <a href="/blog.html" class="btn btn-ghost">Read the blog</a>
+        <a href="/games.html" class="btn btn-secondary"><i class="fas fa-gamepad"></i> Enter the arcade</a>
+        <a href="/writeups.html" class="btn btn-ghost">Browse writeups</a>
       </div>
     </div>
   </main>
@@ -160,13 +181,88 @@
 
   <script src="/assets/js/main.js"></script>
   <script>
-    // Show the path the visitor actually tried to reach
-    (function () {
-      var el = document.getElementById('nfPath');
-      if (el) {
+    // Interactive 404 terminal — the requested path is shown, then the
+    // visitor can poke around with real commands (help, ls, arcade, ...).
+    (function terminal() {
+      var pathEl = document.getElementById('nfPath');
+      if (pathEl) {
         var p = (location.pathname + location.search).replace(/^\//, '');
-        el.textContent = p || 'requested/page';
+        pathEl.textContent = p || 'requested/page';
       }
+
+      var out = document.getElementById('nfOut');
+      var term = document.getElementById('nfTerm');
+      var input = document.getElementById('nfCmd');
+      if (!out || !term || !input) return;
+
+      var PAGES = {
+        home: '/index.html', about: '/about.html', projects: '/projects.html',
+        writeups: '/writeups.html', blog: '/blog.html', achievements: '/achievements.html',
+        resume: '/resume.html', contact: '/contact.html',
+        arcade: '/games.html', games: '/games.html',
+        board: '/waklu.html', pastebin: '/pastebin.html', notes: '/notes.html'
+      };
+
+      function esc(s) {
+        return String(s).replace(/[&<>]/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c];
+        });
+      }
+      function print(html) {
+        var d = document.createElement('div');
+        d.className = 'line';
+        d.innerHTML = html;
+        out.appendChild(d);
+        term.scrollTop = term.scrollHeight;
+      }
+      function open(url, label) {
+        print('<span class="ok">' + label + '…</span>');
+        setTimeout(function () { window.location.href = url; }, 600);
+      }
+
+      var COMMANDS = {
+        help: function () {
+          print('Commands: <span class="ok">help</span> <span class="ok">ls</span> <span class="ok">whoami</span> ' +
+                '<span class="ok">arcade</span> <span class="ok">board</span> <span class="ok">pastebin</span> ' +
+                '<span class="ok">notes</span> <span class="ok">cd &lt;page&gt;</span> <span class="ok">clear</span> <span class="ok">home</span>');
+        },
+        ls: function () {
+          print('projects/  writeups/  blog/  about/  contact/  resume/');
+          print('<span class="muted">hidden:</span> arcade/  board/  pastebin/  notes/');
+        },
+        whoami: function () { print('zakhwan — cybersecurity student &amp; CTF player.'); },
+        arcade: function () { open('/games.html', 'entering the arcade'); },
+        games: function () { open('/games.html', 'entering the arcade'); },
+        board: function () { open('/waklu.html', 'opening the board'); },
+        pastebin: function () { open('/pastebin.html', 'opening the pastebin'); },
+        notes: function () { open('/notes.html', 'opening notes'); },
+        home: function () { open('/index.html', 'going home'); },
+        sudo: function () { print('<span class="err">nice try 😏</span> — user is not in the sudoers file.'); },
+        flag: function () { print('<span class="ok">flag{y0u_g0t_l0st_but_f0und_a_flag}</span>'); },
+        date: function () { print(esc(new Date().toString())); },
+        clear: function () { out.innerHTML = ''; }
+      };
+
+      function run(raw) {
+        var cmd = raw.trim();
+        print('<span class="prompt">$</span> ' + esc(cmd));
+        if (!cmd) return;
+        var parts = cmd.split(/\s+/);
+        var name = parts[0].toLowerCase();
+        if (COMMANDS[name]) { COMMANDS[name](); return; }
+        if ((name === 'cd' || name === 'open' || name === 'cat') && parts[1]) {
+          var t = parts[1].toLowerCase().replace(/\/$/, '');
+          if (PAGES[t]) { open(PAGES[t], name + ' ' + t); }
+          else { print('<span class="err">' + name + ': ' + esc(parts[1]) + ': no such page</span>'); }
+          return;
+        }
+        print('<span class="err">' + esc(name) + ': command not found</span> — try <span class="ok">help</span>');
+      }
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { run(input.value); input.value = ''; }
+      });
+      term.addEventListener('click', function () { input.focus(); });
     })();
   </script>
   <script src="assets/js/visitors.js"></script>

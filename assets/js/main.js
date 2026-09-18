@@ -165,3 +165,84 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   animateCounters();
 });
+
+/* ================================================================
+   Console easter egg — a hidden command hub for anyone who cracks
+   open DevTools. Type help() in the console to explore.
+================================================================ */
+(function consoleHub() {
+  if (window.__hub) return;
+  window.__hub = true;
+
+  var cyan = 'color:#00d9ff';
+  var purple = 'color:#7c3aed';
+  var dim = 'color:#8a8f98';
+  var b = 'font-weight:700';
+  var mono = 'font-family:ui-monospace,monospace';
+
+  var banner =
+    '\n' +
+    '  ███████╗ █████╗ ██╗  ██╗\n' +
+    '  ╚══███╔╝██╔══██╗██║ ██╔╝\n' +
+    '    ███╔╝ ███████║█████╔╝ \n' +
+    '   ███╔╝  ██╔══██║██╔═██╗ \n' +
+    '  ███████╗██║  ██║██║  ██╗\n' +
+    '  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝';
+
+  console.log('%c' + banner, cyan + ';' + mono + ';' + b);
+  console.log('%cYou opened the console. Curious — I respect that. %cType %chelp()%c to see what you can do.',
+    dim, dim, cyan + ';' + b, dim);
+
+  // Print "opening…" then navigate a moment later so the message is readable.
+  function go(url, label) {
+    console.log('%c→ ' + label + '…', purple + ';' + b);
+    setTimeout(function () { window.location.href = url; }, 650);
+    return undefined;
+  }
+
+  window.help = function help() {
+    var rows = [
+      ['help()', 'this menu'],
+      ['whoami()', 'who is this guy'],
+      ['arcade()', 'my hidden arcade (games)'],
+      ['board()', 'a secret live message board'],
+      ['pastebin()', 'a private, local-only pastebin'],
+      ['notes()', 'my notes stash'],
+      ['contact()', 'get in touch'],
+      ['flag()', 'for my fellow CTF players']
+    ];
+    console.log('%cAvailable commands:', cyan + ';' + b);
+    rows.forEach(function (r) {
+      console.log('%c  ' + r[0].padEnd(12) + '%c' + r[1], cyan + ';' + mono, dim);
+    });
+    return '// tip: some of these open hidden pages 👀';
+  };
+
+  window.whoami = function whoami() {
+    console.log('%cZakhwan Anuar%c — Computer Science student, cybersecurity + CTF.',
+      cyan + ';' + b, dim);
+    console.log('%cDigital forensics · reverse engineering · malware analysis.', dim);
+    return 'root@zakhwananuar:~#';
+  };
+
+  window.arcade   = function arcade()   { return go('/games.html',   'loading the arcade'); };
+  window.board    = function board()    { return go('/waklu.html',   'opening the board'); };
+  window.pastebin = function pastebin() { return go('/pastebin.html', 'opening the pastebin'); };
+  window.notes    = function notes()    { return go('/notes.html',   'opening my notes'); };
+  window.contact  = function contact()  { return go('/contact.html', 'opening contact'); };
+
+  window.flag = function flag() {
+    console.log('%cflag{c0ns0le_curi0sity_rewarded}', purple + ';' + b + ';' + mono);
+    console.log('%cNice find. Now go try the terminal on my 404 page → /404.html', dim);
+    return undefined;
+  };
+
+  // A little joke for the reflexive sudo-ers.
+  Object.defineProperty(window, 'sudo', {
+    get: function () {
+      console.log('%cnice try 😏 — you are not in the sudoers file. This incident will be reported.', dim);
+      return undefined;
+    },
+    configurable: true
+  });
+})();
