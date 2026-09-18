@@ -200,7 +200,7 @@
         writeups: '/writeups.html', blog: '/blog.html', achievements: '/achievements.html',
         resume: '/resume.html', contact: '/contact.html',
         arcade: '/games.html', games: '/games.html',
-        board: '/waklu.html', pastebin: '/pastebin.html', notes: '/notes.html'
+        board: '/waklu.html', notes: '/notes.html'
       };
 
       function esc(s) {
@@ -223,18 +223,17 @@
       var COMMANDS = {
         help: function () {
           print('Commands: <span class="ok">help</span> <span class="ok">ls</span> <span class="ok">whoami</span> ' +
-                '<span class="ok">arcade</span> <span class="ok">board</span> <span class="ok">pastebin</span> ' +
-                '<span class="ok">notes</span> <span class="ok">cd &lt;page&gt;</span> <span class="ok">clear</span> <span class="ok">home</span>');
+                '<span class="ok">arcade</span> <span class="ok">board</span> <span class="ok">notes</span> ' +
+                '<span class="ok">cd &lt;page&gt;</span> <span class="ok">clear</span> <span class="ok">home</span>');
         },
         ls: function () {
           print('projects/  writeups/  blog/  about/  contact/  resume/');
-          print('<span class="muted">hidden:</span> arcade/  board/  pastebin/  notes/');
+          print('<span class="muted">hidden:</span> arcade/  board/  notes/');
         },
         whoami: function () { print('zakhwan — cybersecurity student &amp; CTF player.'); },
         arcade: function () { open('/games.html', 'entering the arcade'); },
         games: function () { open('/games.html', 'entering the arcade'); },
         board: function () { open('/waklu.html', 'opening the board'); },
-        pastebin: function () { open('/pastebin.html', 'opening the pastebin'); },
         notes: function () { open('/notes.html', 'opening notes'); },
         home: function () { open('/index.html', 'going home'); },
         sudo: function () { print('<span class="err">nice try 😏</span> — user is not in the sudoers file.'); },

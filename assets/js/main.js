@@ -180,16 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var b = 'font-weight:700';
   var mono = 'font-family:ui-monospace,monospace';
 
-  var banner =
-    '\n' +
-    '  ███████╗ █████╗ ██╗  ██╗\n' +
-    '  ╚══███╔╝██╔══██╗██║ ██╔╝\n' +
-    '    ███╔╝ ███████║█████╔╝ \n' +
-    '   ███╔╝  ██╔══██║██╔═██╗ \n' +
-    '  ███████╗██║  ██║██║  ██╗\n' +
-    '  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝';
-
-  console.log('%c' + banner, cyan + ';' + mono + ';' + b);
+  console.log('%cWh1teB3ar', cyan + ';' + mono + ';font-size:30px;font-weight:800;text-shadow:0 0 8px #00d9ff55');
   console.log('%cYou opened the console. Curious — I respect that. %cType %chelp()%c to see what you can do.',
     dim, dim, cyan + ';' + b, dim);
 
@@ -205,9 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ['help()', 'this menu'],
       ['whoami()', 'who is this guy'],
       ['arcade()', 'my hidden arcade (games)'],
-      ['board()', 'a secret live message board'],
-      ['pastebin()', 'a private, local-only pastebin'],
-      ['notes()', 'my notes stash'],
       ['contact()', 'get in touch'],
       ['flag()', 'for my fellow CTF players']
     ];
@@ -226,9 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.arcade   = function arcade()   { return go('/games.html',   'loading the arcade'); };
-  window.board    = function board()    { return go('/waklu.html',   'opening the board'); };
-  window.pastebin = function pastebin() { return go('/pastebin.html', 'opening the pastebin'); };
-  window.notes    = function notes()    { return go('/notes.html',   'opening my notes'); };
   window.contact  = function contact()  { return go('/contact.html', 'opening contact'); };
 
   window.flag = function flag() {
