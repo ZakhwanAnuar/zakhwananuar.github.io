@@ -6,348 +6,295 @@
   <title>Zakhwan Anuar — Cybersecurity Student</title>
   <meta name="description" content="Computer Science student in cybersecurity, CTF player, and builder of small security tools." />
 
-  <!-- Fonts: warm serif for headings, clean sans for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     :root {
-      --paper:      #FBF8F2;   /* warm off-white background */
-      --paper-2:    #F4EFE6;   /* slightly deeper panel */
-      --card:       #FFFFFF;
-      --ink:        #26302B;   /* soft near-black, green-tinted */
-      --ink-2:      #55605A;   /* secondary text */
-      --ink-3:      #8A938D;   /* muted / captions */
-      --accent:     #3E7C6B;   /* calm muted teal */
-      --accent-2:   #C97B4A;   /* warm terracotta, sparingly */
-      --line:       #E6DFD2;   /* hairline borders */
-      --shadow:     0 1px 2px rgba(38,48,43,.04), 0 8px 24px rgba(38,48,43,.06);
-      --radius:     18px;
-      --font-head:  'Fraunces', Georgia, 'Times New Roman', serif;
-      --font-body:  'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      --maxw:       1080px;
+      --paper:   #F7F5F0;   /* warm paper */
+      --ink:     #1B1A17;   /* near-black */
+      --ink-2:   #4C4A44;
+      --ink-3:   #8C877C;   /* muted */
+      --accent:  #9A3B2E;   /* muted brick red — warm, editorial */
+      --line:    #DDD8CD;   /* hairline */
+      --line-2:  #C9C3B5;
+      --serif:   'Newsreader', Georgia, 'Times New Roman', serif;
+      --sans:    'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --maxw:    1000px;
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.65;
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: var(--sans); font-size: 16px; line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 
-    /* ---------- Buttons ---------- */
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 22px; border-radius: 999px;
-      font-weight: 500; font-size: 0.95rem;
-      border: 1px solid transparent; cursor: pointer;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    /* Labels / eyebrows */
+    .label {
+      font-size: 0.74rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 600;
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #356a5b; }
-    .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line); }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-    .btn-ghost { background: transparent; color: var(--ink-2); }
-    .btn-ghost:hover { color: var(--accent); }
+    .arrow-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--ink); border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px; font-weight: 500; font-size: 0.95rem;
+      transition: color .2s ease, border-color .2s ease, gap .2s ease;
+    }
+    .arrow-link:hover { color: var(--accent); border-color: var(--accent); gap: 12px; }
+    .arrow-link.muted { color: var(--ink-2); border-color: var(--line-2); }
+    .arrow-link.muted:hover { color: var(--accent); border-color: var(--accent); }
 
-    /* ---------- Nav ---------- */
-    .navbar {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(251,248,242,.82);
-      backdrop-filter: saturate(140%) blur(10px);
-      border-bottom: 1px solid var(--line);
+    /* ---------- Header ---------- */
+    header { border-bottom: 1px solid var(--line); }
+    .bar {
+      max-width: var(--maxw); margin: 0 auto; padding: 20px 28px;
+      display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
     }
-    .nav-container {
-      max-width: var(--maxw); margin: 0 auto; padding: 14px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo { font-family: var(--font-head); font-weight: 600; font-size: 1.15rem; letter-spacing: -.01em; }
-    .nav-logo .dot { color: var(--accent); }
-    .nav-links { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; }
-    .nav-link { color: var(--ink-2); font-size: 0.94rem; transition: color .2s ease; }
-    .nav-link:hover, .nav-link.active { color: var(--accent); }
-    .nav-toggle { display: none; background: none; border: 0; cursor: pointer; flex-direction: column; gap: 5px; }
-    .nav-toggle span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+    .brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; letter-spacing: .01em; }
+    nav { display: flex; gap: 22px; flex-wrap: wrap; }
+    nav a { font-size: 0.9rem; color: var(--ink-2); transition: color .2s ease; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    .menu-btn { display: none; background: none; border: 0; font-size: 1.2rem; cursor: pointer; color: var(--ink); }
 
     /* ---------- Hero ---------- */
-    .hero { padding: 76px 0 64px; }
-    .hero-grid {
-      display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center;
+    .hero { padding: 84px 0 70px; border-bottom: 1px solid var(--line); }
+    .hero .label { display: block; margin-bottom: 26px; }
+    .hero h1 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2.7rem, 7vw, 5rem); line-height: 1.04;
+      letter-spacing: -.015em; margin: 0 0 26px; max-width: 16ch;
     }
-    .hero-eyebrow {
-      font-size: 0.9rem; color: var(--accent); font-weight: 600;
-      letter-spacing: .02em; margin: 0 0 14px;
+    .hero h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
+    .hero-lead {
+      font-size: 1.15rem; color: var(--ink-2); max-width: 52ch; margin: 0 0 34px;
+      font-family: var(--serif);
     }
-    .hero-name {
-      font-family: var(--font-head); font-weight: 600;
-      font-size: clamp(2.6rem, 6vw, 4.1rem); line-height: 1.02;
-      letter-spacing: -.02em; margin: 0 0 18px;
-    }
-    .hero-name .soft { color: var(--ink-3); font-style: italic; }
-    .hero-role {
-      font-size: 1.15rem; color: var(--ink); font-weight: 500; margin: 0 0 16px;
-    }
-    .hero-summary { color: var(--ink-2); font-size: 1.05rem; max-width: 46ch; margin: 0 0 28px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
-    .hero-social { display: flex; gap: 16px; }
-    .hero-social a {
-      width: 42px; height: 42px; border-radius: 50%;
-      display: grid; place-items: center;
-      border: 1px solid var(--line); color: var(--ink-2);
-      transition: all .2s ease;
-    }
-    .hero-social a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+    .hero-actions { display: flex; gap: 26px; flex-wrap: wrap; align-items: center; margin-bottom: 52px; }
 
-    /* Portrait */
-    .hero-photo { position: relative; justify-self: center; }
-    .hero-photo img {
-      width: min(340px, 78vw); aspect-ratio: 4/5; object-fit: cover;
-      border-radius: 24px; box-shadow: var(--shadow);
-      border: 6px solid #fff;
+    /* facts row (replaces the photo) */
+    .facts {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--line); border: 1px solid var(--line);
     }
-    .hero-photo::after {
-      content: ""; position: absolute; inset: 18px -18px -18px 18px; z-index: -1;
-      border-radius: 24px; background: var(--paper-2);
-    }
-    .hero-badge {
-      position: absolute; left: -14px; bottom: 20px;
-      background: #fff; border: 1px solid var(--line); border-radius: 14px;
-      padding: 10px 14px; box-shadow: var(--shadow);
-      font-size: 0.86rem; color: var(--ink-2); display: flex; align-items: center; gap: 8px;
-    }
-    .hero-badge .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .fact { background: var(--paper); padding: 18px 20px; }
+    .fact dt { font-size: 0.72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+    .fact dd { margin: 0; font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
+    .fact dd .dim { color: var(--ink-3); }
 
-    /* ---------- Sections ---------- */
-    .section { padding: 60px 0; }
-    .section-alt { background: var(--paper-2); }
-    .section-header { margin-bottom: 34px; }
-    .eyebrow { color: var(--accent); font-weight: 600; font-size: 0.9rem; letter-spacing: .02em; }
-    .section-title {
-      font-family: var(--font-head); font-weight: 600;
-      font-size: clamp(1.7rem, 4vw, 2.4rem); letter-spacing: -.02em;
-      margin: 6px 0 0;
-    }
-    .section-cta { margin-top: 34px; }
+    /* ---------- Section scaffold ---------- */
+    section.block { padding: 66px 0; border-bottom: 1px solid var(--line); }
+    .head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 34px; }
+    .head .idx { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 1.1rem; }
+    .head h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -.01em; margin: 0; }
+    .head .spacer { flex: 1; border-bottom: 1px dotted var(--line-2); transform: translateY(-4px); }
 
-    /* Featured blog card */
-    .blog-feature {
-      display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
-      background: var(--card); border: 1px solid var(--line);
-      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
-    }
-    .blog-feature .thumb { background: linear-gradient(135deg, #e8efe9, #f3ebdd); min-height: 220px; display: grid; place-items: center; color: var(--accent); font-size: 2.4rem; }
-    .blog-feature .body { padding: 30px 32px; }
-    .meta { color: var(--ink-3); font-size: 0.85rem; margin-bottom: 10px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .blog-feature h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.5rem; margin: 0 0 12px; letter-spacing: -.01em; }
-    .blog-feature p { color: var(--ink-2); margin: 0 0 18px; }
-    .readmore { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+    /* Featured post */
+    .feature { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start; }
+    .feature .date { font-family: var(--serif); font-style: italic; color: var(--ink-3); font-size: 1rem; white-space: nowrap; padding-top: 6px; }
+    .feature h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.18; margin: 0 0 14px; letter-spacing: -.01em; }
+    .feature p { color: var(--ink-2); font-size: 1.05rem; margin: 0 0 20px; max-width: 60ch; }
 
-    /* Card grids */
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .card {
-      background: var(--card); border: 1px solid var(--line);
-      border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow);
-      transition: transform .18s ease, box-shadow .18s ease;
-      display: flex; flex-direction: column;
+    /* Editorial list rows (writeups + projects) */
+    .rows { border-top: 1px solid var(--line); }
+    .row {
+      display: grid; grid-template-columns: 40px 1fr auto; gap: 24px; align-items: baseline;
+      padding: 26px 4px; border-bottom: 1px solid var(--line);
+      transition: background .2s ease, padding-left .2s ease;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 6px 14px rgba(38,48,43,.08), 0 18px 40px rgba(38,48,43,.10); }
-    .card .kicker { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
-    .card h3 { font-family: var(--font-head); font-weight: 600; font-size: 1.22rem; margin: 0 0 10px; letter-spacing: -.01em; }
-    .card p { color: var(--ink-2); font-size: 0.95rem; margin: 0 0 18px; flex: 1; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      font-size: 0.78rem; color: var(--ink-2); background: var(--paper-2);
-      border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px;
-    }
-    .card-link { margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+    .row:hover { background: rgba(154,59,46,.04); padding-left: 12px; }
+    .row .num { font-family: var(--serif); font-style: italic; color: var(--ink-3); font-size: 1.05rem; }
+    .row .rlabel { display: block; }
+    .row h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; margin: 8px 0 8px; letter-spacing: -.005em; }
+    .row p { color: var(--ink-2); font-size: 0.98rem; margin: 0 0 12px; max-width: 58ch; }
+    .stack { display: flex; gap: 14px; flex-wrap: wrap; }
+    .stack span { font-size: 0.8rem; color: var(--ink-3); }
+    .stack span::before { content: "#"; color: var(--line-2); margin-right: 1px; }
+    .row .go { color: var(--ink-3); font-size: 1rem; align-self: center; transition: color .2s ease, transform .2s ease; }
+    .row:hover .go { color: var(--accent); transform: translateX(4px); }
+
+    .block-cta { margin-top: 34px; }
 
     /* ---------- Footer ---------- */
-    .footer { border-top: 1px solid var(--line); padding: 34px 0; background: var(--paper); }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .footer-copy { color: var(--ink-3); font-size: 0.88rem; margin: 0; }
-    .footer-visits { color: var(--ink-3); font-size: 0.88rem; margin: 0; display: flex; align-items: center; gap: 7px; }
-    .footer-visits i { color: var(--accent); }
-    .footer-links { display: flex; gap: 16px; }
-    .footer-links a { color: var(--ink-3); transition: color .2s ease; }
-    .footer-links a:hover { color: var(--accent); }
+    footer { padding: 40px 0; }
+    .foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .foot p { margin: 0; color: var(--ink-3); font-size: 0.88rem; }
+    .foot .visits i { color: var(--accent); margin-right: 5px; }
+    .foot .social { display: flex; gap: 18px; }
+    .foot .social a { color: var(--ink-3); transition: color .2s ease; }
+    .foot .social a:hover { color: var(--accent); }
 
-    /* ---------- Responsive ---------- */
-    @media (max-width: 860px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: left; }
-      .hero-photo { order: -1; justify-self: start; }
-      .blog-feature { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .nav-toggle { display: flex; }
-    }
-    @media (max-width: 520px) {
-      .hero { padding: 48px 0 40px; }
-      .hero-actions .btn { flex: 1; justify-content: center; }
-    }
+    .note { background: transparent; border-bottom: 1px solid var(--line); color: var(--ink-3); font-size: 0.8rem; text-align: center; padding: 8px 16px; letter-spacing: .02em; }
 
-    .sample-note {
-      background: #fff7ec; border: 1px solid #f0dcc0; color: #8a5a2b;
-      font-size: 0.85rem; text-align: center; padding: 8px 16px;
+    @media (max-width: 760px) {
+      nav { display: none; }
+      .menu-btn { display: block; }
+      .facts { grid-template-columns: 1fr; }
+      .feature { grid-template-columns: 1fr; gap: 8px; }
+      .feature .date { padding-top: 0; }
+      .row { grid-template-columns: 28px 1fr; }
+      .row .go { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <div class="sample-note">Design preview — a lighter, calmer take on your homepage. Blog / writeup / project cards below use placeholder content.</div>
+  <div class="note">Design preview · lighter, editorial direction · sample cards use placeholder text</div>
 
-  <!-- NAV -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">Zakhwan Anuar<span class="dot">.</span></a>
-      <ul class="nav-links">
-        <li><a href="#" class="nav-link active">Home</a></li>
-        <li><a href="#" class="nav-link">About</a></li>
-        <li><a href="#" class="nav-link">Projects</a></li>
-        <li><a href="#" class="nav-link">Writeups</a></li>
-        <li><a href="#" class="nav-link">Blog</a></li>
-        <li><a href="#" class="nav-link">Achievements</a></li>
-        <li><a href="#" class="nav-link">Resume</a></li>
-        <li><a href="#" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <!-- HEADER -->
+  <header>
+    <div class="bar">
+      <a href="#" class="brand">Zakhwan Anuar</a>
+      <nav>
+        <a href="#" class="active">Home</a>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Writeups</a>
+        <a href="#">Blog</a>
+        <a href="#">Achievements</a>
+        <a href="#">Resume</a>
+        <a href="#">Contact</a>
+      </nav>
+      <button class="menu-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
     </div>
-  </nav>
+  </header>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <p class="hero-eyebrow">Hi, I'm</p>
-        <h1 class="hero-name">Zakhwan <span class="soft">Anuar</span></h1>
-        <p class="hero-role">Cybersecurity student &amp; CTF player</p>
-        <p class="hero-summary">
-          Computer Science student focused on cybersecurity — digital forensics,
-          reverse engineering, and malware analysis. I like building small tools,
-          taking things apart, and writing up what I learn along the way.
-        </p>
-        <div class="hero-actions">
-          <a href="#" class="btn btn-primary">View projects</a>
-          <a href="#" class="btn btn-secondary">CTF writeups</a>
-          <a href="#" class="btn btn-ghost"><i class="fas fa-envelope"></i> Get in touch</a>
-        </div>
-        <div class="hero-social">
-          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" aria-label="CTFtime"><i class="fas fa-flag"></i></a>
-        </div>
+    <div class="wrap">
+      <span class="label">Cybersecurity · CTF · Malaysia</span>
+      <h1>I build things, then take them <em>apart.</em></h1>
+      <p class="hero-lead">
+        Computer Science student focused on cybersecurity — digital forensics,
+        reverse engineering and malware analysis. I play CTFs, build small tools,
+        and write up what I learn along the way.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="arrow-link">View projects <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="arrow-link muted">Read CTF writeups <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="arrow-link muted">Get in touch</a>
       </div>
-      <div class="hero-photo">
-        <img src="../assets/images/profile.jpg" alt="Zakhwan Anuar" />
-        <div class="hero-badge"><span class="pulse"></span> Open to internships</div>
-      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Focus</dt><dd>Forensics · RE · Malware</dd></div>
+        <div class="fact"><dt>Currently</dt><dd>CTFs &amp; <span class="dim">building tools</span></dd></div>
+        <div class="fact"><dt>Find me</dt><dd>GitHub · LinkedIn · CTFtime</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- LATEST BLOG -->
-  <section class="section" id="latest-blog">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">From the blog</span>
-        <h2 class="section-title">Latest post</h2>
+  <!-- 01 JOURNAL -->
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <span class="idx">01</span><h2>Journal</h2><span class="spacer"></span><span class="label">Latest post</span>
       </div>
-      <article class="blog-feature">
-        <div class="thumb"><i class="fas fa-pen-nib"></i></div>
-        <div class="body">
-          <div class="meta"><span>18 Sept 2026</span><span>· 6 min read</span></div>
+      <article class="feature">
+        <span class="date">18 Sept 2026</span>
+        <div>
           <h3>What a semester of CTFs taught me about patience</h3>
           <p>A reflection on the challenges that took days to solve, the rabbit holes
              that went nowhere, and why the slow ones ended up teaching me the most.</p>
-          <a href="#" class="readmore">Read post →</a>
+          <a href="#" class="arrow-link">Read the post <i class="fas fa-arrow-right"></i></a>
         </div>
       </article>
-      <div class="section-cta"><a href="#" class="btn btn-secondary">All posts →</a></div>
+      <div class="block-cta"><a href="#" class="arrow-link muted">All posts <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
-  <!-- WRITEUPS -->
-  <section class="section section-alt" id="recent-writeups">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">CTF notes</span>
-        <h2 class="section-title">Latest writeups</h2>
+  <!-- 02 WRITEUPS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <span class="idx">02</span><h2>CTF writeups</h2><span class="spacer"></span><span class="label">Recent</span>
       </div>
-      <div class="grid">
-        <article class="card">
-          <div class="kicker">Forensics</div>
-          <h3>Hidden in the metadata</h3>
-          <p>Recovering a flag tucked away in EXIF fields and a carved thumbnail from a corrupted image.</p>
-          <div class="tags"><span class="tag">forensics</span><span class="tag">steg</span></div>
-          <a href="#" class="card-link">Read writeup →</a>
-        </article>
-        <article class="card">
-          <div class="kicker">Reverse Engineering</div>
-          <h3>Unpacking a simple crackme</h3>
-          <p>Walking through a static + dynamic approach to defeat a home-grown licence check.</p>
-          <div class="tags"><span class="tag">re</span><span class="tag">ghidra</span></div>
-          <a href="#" class="card-link">Read writeup →</a>
-        </article>
-        <article class="card">
-          <div class="kicker">Web</div>
-          <h3>A cookie that trusted too much</h3>
-          <p>Chaining a weak session token into an account takeover, step by step.</p>
-          <div class="tags"><span class="tag">web</span><span class="tag">auth</span></div>
-          <a href="#" class="card-link">Read writeup →</a>
-        </article>
+      <div class="rows">
+        <a class="row" href="#">
+          <span class="num">01</span>
+          <div>
+            <span class="label rlabel">Forensics</span>
+            <h3>Hidden in the metadata</h3>
+            <p>Recovering a flag tucked away in EXIF fields and a carved thumbnail from a corrupted image.</p>
+            <div class="stack"><span>forensics</span><span>steg</span></div>
+          </div>
+          <i class="fas fa-arrow-right go"></i>
+        </a>
+        <a class="row" href="#">
+          <span class="num">02</span>
+          <div>
+            <span class="label rlabel">Reverse Engineering</span>
+            <h3>Unpacking a simple crackme</h3>
+            <p>A static + dynamic approach to defeat a home-grown licence check, one instruction at a time.</p>
+            <div class="stack"><span>re</span><span>ghidra</span></div>
+          </div>
+          <i class="fas fa-arrow-right go"></i>
+        </a>
+        <a class="row" href="#">
+          <span class="num">03</span>
+          <div>
+            <span class="label rlabel">Web</span>
+            <h3>A cookie that trusted too much</h3>
+            <p>Chaining a weak session token into a full account takeover, step by step.</p>
+            <div class="stack"><span>web</span><span>auth</span></div>
+          </div>
+          <i class="fas fa-arrow-right go"></i>
+        </a>
       </div>
-      <div class="section-cta"><a href="#" class="btn btn-secondary">All writeups →</a></div>
+      <div class="block-cta"><a href="#" class="arrow-link muted">All writeups <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="section" id="featured-projects">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Things I've built</span>
-        <h2 class="section-title">Selected projects</h2>
+  <!-- 03 PROJECTS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <span class="idx">03</span><h2>Selected projects</h2><span class="spacer"></span><span class="label">Things I've built</span>
       </div>
-      <div class="grid">
-        <article class="card">
-          <div class="kicker">ESP32-S3 · C++</div>
-          <h3>Portable WiFi security lab</h3>
-          <p>A pocket console for authorized wireless assessments — scanning, rogue-AP simulation, and captive-portal demos for red-team labs.</p>
-          <div class="tags"><span class="tag">ESP32</span><span class="tag">WiFi</span></div>
-          <a href="#" class="card-link">View project →</a>
-        </article>
-        <article class="card">
-          <div class="kicker">Python</div>
-          <h3>Discord C2 threat-intel tool</h3>
-          <p>For authorized malware analysis: enumerates channels, messages and attachments abused as C2, then scans for indicators of compromise.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">DFIR</span></div>
-          <a href="#" class="card-link">View project →</a>
-        </article>
-        <article class="card">
-          <div class="kicker">Raspberry Pi Pico</div>
-          <h3>Bad-USB study board</h3>
-          <p>A CircuitPython HID board for studying keystroke-injection safely — built to understand the attack for defensive awareness.</p>
-          <div class="tags"><span class="tag">HID</span><span class="tag">hardware</span></div>
-          <a href="#" class="card-link">View project →</a>
-        </article>
+      <div class="rows">
+        <a class="row" href="#">
+          <span class="num">01</span>
+          <div>
+            <span class="label rlabel">ESP32-S3 · C++</span>
+            <h3>Portable WiFi security lab</h3>
+            <p>A pocket console for authorized wireless assessments — scanning, rogue-AP simulation and captive-portal demos for red-team labs.</p>
+            <div class="stack"><span>esp32</span><span>wifi</span></div>
+          </div>
+          <i class="fas fa-arrow-right go"></i>
+        </a>
+        <a class="row" href="#">
+          <span class="num">02</span>
+          <div>
+            <span class="label rlabel">Python</span>
+            <h3>Discord C2 threat-intel tool</h3>
+            <p>For authorized malware analysis: enumerates channels, messages and attachments abused as C2, then scans for indicators of compromise.</p>
+            <div class="stack"><span>python</span><span>dfir</span></div>
+          </div>
+          <i class="fas fa-arrow-right go"></i>
+        </a>
+        <a class="row" href="#">
+          <span class="num">03</span>
+          <div>
+            <span class="label rlabel">Raspberry Pi Pico</span>
+            <h3>Bad-USB study board</h3>
+            <p>A CircuitPython HID board for studying keystroke injection safely — built to understand the attack for defensive awareness.</p>
+            <div class="stack"><span>hid</span><span>hardware</span></div>
+          </div>
+          <i class="fas fa-arrow-right go"></i>
+        </a>
       </div>
-      <div class="section-cta"><a href="#" class="btn btn-secondary">All projects →</a></div>
+      <div class="block-cta"><a href="#" class="arrow-link muted">All projects <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <p class="footer-copy">© 2026 Zakhwan Anuar. Built with care and curiosity.</p>
-      <p class="footer-visits"><i class="fas fa-eye"></i> <span id="visitorCount">1,240</span> visits</p>
-      <div class="footer-links">
+  <footer>
+    <div class="wrap foot">
+      <p>© 2026 Zakhwan Anuar</p>
+      <p class="visits"><i class="fas fa-eye"></i><span id="visitorCount">1,240</span> visits</p>
+      <div class="social">
         <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       </div>
