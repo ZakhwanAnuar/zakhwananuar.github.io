@@ -1,0 +1,114 @@
+const { chromium } = require('playwright');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const {pathToFileURL} = require('node:url');
+const root = path.resolve(__dirname,'..');
+const output = path.join(root,'verification');
+fs.mkdirSync(output,{recursive:true});
+const data = {};
+for(const [file,name] of [['projects','PROJECTS_DATA'],['blog','BLOG_DATA'],['writeups','WRITEUPS_DATA'],['achievements','ACHIEVEMENTS_DATA']]) {
+  data[file]=vm.runInNewContext(fs.readFileSync(path.join(root,'data',file+'.js'),'utf8')+';'+name);
+}
+(async()=>{
+  const browser=await chromium.launch({headless:true,channel:'chrome'});
+  const page=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+  const errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  const go=async file=>{await page.goto(pathToFileURL(path.join(root,file.split('?')[0])).href+(file.includes('?')?'?'+file.split('?')[1]:''));await page.waitForTimeout(150);};
+  const loadImages=async()=>{
+    await page.locator('img[loading="lazy"]').evaluateAll(images=>images.forEach(img=>img.loading='eager'));
+    await page.evaluate(()=>Promise.all([...document.images].map(img=>img.decode().catch(()=>{}))));
+  };
+  const assert=(condition,message)=>{if(!condition)throw new Error(message);};
+  await go('index.html');
+  await loadImages();
+  await page.screenshot({path:path.join(output,'desktop-home.png'),fullPage:true});
+  await page.screenshot({path:path.join(output,'desktop-hero.png')});
+  assert(await page.locator('#home-projects .project-row').count()===3,'Home projects missing');
+  assert(await page.locator('.personal-intro h1').innerText()==='Zakhwan Anuar.','Identity heading missing');
+  assert(await page.locator('#field-canvas').count()===0,'Old decorative canvas still present');
+  await page.locator('#evidence-tab-1').click();
+  assert((await page.locator('#evidence-image').getAttribute('src')).includes('m2_edge_history'),'Evidence tab failed');
+  await page.locator('#evidence-tab-1').press('ArrowRight');
+  assert(await page.locator('#evidence-tab-2').getAttribute('aria-selected')==='true','Evidence keyboard navigation failed');
+  await page.locator('#open-evidence').click();
+  assert((await page.locator('#image-count').innerText())==='3 / 3','Evidence gallery index failed');
+  await page.keyboard.press('Escape');
+  await page.locator('#project-tab-1').click();
+  assert((await page.locator('#home-project-preview a').getAttribute('href')).includes('DiscordC2Dump'),'Project selection failed');
+  await page.locator('#project-tab-1').press('ArrowDown');
+  assert(await page.locator('#project-tab-2').getAttribute('aria-selected')==='true','Project keyboard selection failed');
+  await page.locator('#project-tab-2').press('Home');
+  assert(await page.locator('#project-tab-0').getAttribute('aria-selected')==='true','Project Home navigation failed');
+  await page.setViewportSize({width:390,height:844});
+  await page.locator('.menu-toggle').click();
+  assert(await page.locator('#site-menu').evaluate(d=>d.open),'Menu failed');
+  await page.keyboard.press('Escape');
+  await page.setViewportSize({width:1440,height:1000});
+  await go('projects.html?q=ESP32');
+  assert(await page.locator('.project-exhibit').count()===1,'Interest search link failed');
+  assert(await page.locator('#collection-search').inputValue()==='ESP32','Search link state missing');
+  await go('achievements.html?moment=umcs-ctf-2026-2nd');
+  assert(await page.locator('#image-viewer').evaluate(d=>d.open),'Moment deep link failed');
+  assert((await page.locator('#viewer-caption').innerText()).includes('1st Runner Up'),'Wrong moment gallery');
+  await page.keyboard.press('Escape');
+  await go('projects.html');
+  assert(await page.locator('.project-exhibit').count()===data.projects.length,'Projects missing');
+  await page.locator('[data-project]').first().click();
+  assert(await page.locator('#project-viewer').evaluate(d=>d.open),'Project modal failed');
+  await page.keyboard.press('Escape');
+  await page.locator('#collection-search').fill('Chameleon');
+  assert(await page.locator('.project-exhibit').count()===1,'Project search failed');
+  await page.locator('#collection-search').fill('no-such-project');
+  assert(await page.locator('.empty-state').count()===1,'Empty state missing');
+  await go('writeups.html');
+  await page.locator('.event-index-row').first().click();
+  await page.locator('.challenge-row').first().waitFor();
+  assert(await page.locator('.challenge-row').count()>0,'Event challenges missing');
+  await page.locator('.challenge-row').first().click();
+  await page.locator('#reader-body h2').first().waitFor();
+  assert(await page.locator('#reader-body h2').count()>0,'Writeup failed');
+  assert(await page.locator('#reader-toc a').count()>0,'TOC missing');
+  await page.screenshot({path:path.join(output,'desktop-writeup.png')});
+  await go('blog.html');
+  assert(await page.locator('.journal-row').count()===data.blog.length,'Blog missing');
+  await page.locator('[data-filter="hardware"]').click();
+  assert(await page.locator('.journal-row').count()===data.blog.filter(p=>p.tags.includes('hardware')).length,'Blog category failed');
+  await page.locator('.journal-row').first().click();
+  await page.locator('#reader-body p').first().waitFor();
+  assert((await page.locator('#reader-body').innerText()).length>1000,'Blog body missing');
+  await go('achievements.html');
+  await page.locator('.archive-item').first().click();
+  assert(await page.locator('#image-viewer').evaluate(d=>d.open),'Image viewer failed');
+  await page.locator('#image-next').click();
+  assert((await page.locator('#image-count').innerText()).startsWith('2 /'),'Gallery navigation failed');
+  await page.keyboard.press('Escape');
+  const routes=['about','resume','contact','games','notes','404','game-malware-sweeper','game-code-breaker','game-sequence','game-kill-switch','game-aim-trainer','game-fps'];
+  for(const route of routes) {
+    await go(route+'.html');
+    assert(await page.locator('main').count()>0,route+' main missing');
+  }
+  await page.setViewportSize({width:390,height:844});
+  const overflows=[];
+  for(const route of ['index','projects','writeups','blog','achievements',...routes]) {
+    await go(route+'.html');
+    const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
+    if(overflow.scroll>overflow.width+1)overflows.push({route,...overflow});
+    if(['index','projects','about','games'].includes(route)){
+      await loadImages();
+      await page.screenshot({path:path.join(output,`mobile-${route}.png`),fullPage:true});
+      if(route==='index')await page.screenshot({path:path.join(output,'mobile-hero.png')});
+    }
+  }
+  await go('writeup.html?id='+data.writeups[0].id);
+  await page.screenshot({path:path.join(output,'mobile-writeup.png'),fullPage:false});
+  const readerOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
+  assert(!readerOverflow,'Mobile reader overflow');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await go('index.html');
+  assert(await page.locator('.cursor').evaluate(c=>getComputedStyle(c).display)==='none','Custom cursor still active');
+  console.log(JSON.stringify({content:{projects:data.projects.length,blog:data.blog.length,writeups:data.writeups.length,achievements:data.achievements.length},errors,overflows},null,2));
+  await browser.close();
+  if(errors.length||overflows.length)process.exitCode=1;
+})().catch(error=>{console.error(error);process.exit(1);});

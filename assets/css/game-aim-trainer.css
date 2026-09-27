@@ -1,0 +1,62 @@
+
+    /* Shared game shell */
+    .game-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-2); text-decoration: none; margin-bottom: 24px; transition: color var(--trans); }
+    .game-back:hover { color: var(--accent); }
+    .game-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .game-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .game-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text); margin: 0; display: flex; align-items: center; gap: 10px; }
+    .game-title i { color: var(--accent); }
+    .game-desc { font-size: 0.8rem; color: var(--text-3); margin: 4px 0 0; }
+    .game-scoreboard { display: flex; gap: 18px; font-family: var(--font-mono); }
+    .game-scoreboard .lbl { color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.62rem; display: block; }
+    .game-scoreboard .val { color: var(--accent); font-size: 1.1rem; font-weight: 700; }
+    .game-stage { position: relative; min-height: 300px; background: var(--bg-2); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .game-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 32px 24px; background: rgba(10,12,16,0.86); backdrop-filter: blur(3px); z-index: 8; }
+    .game-overlay[hidden] { display: none; }
+    .game-overlay h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--text); margin: 0; }
+    .game-overlay p { color: var(--text-2); font-size: 0.88rem; margin: 0; max-width: 42ch; }
+    .game-final { font-family: var(--font-mono); font-size: 0.92rem; color: var(--accent); }
+
+    /* Aim Trainer */
+    .aim-stage {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: none;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(0,217,255,0.06), transparent 55%),
+        repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,0.02) 39px 40px),
+        repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,0.02) 39px 40px),
+        var(--bg);
+    }
+    .target {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,71,87,0.16);
+      border: 2px solid var(--red);
+      transform: translate(-50%, -50%) scale(0);
+      animation: targetIn 0.1s ease forwards;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; padding: 0;
+    }
+    @keyframes targetIn { to { transform: translate(-50%, -50%) scale(1); } }
+    .target-head { width: 40%; height: 40%; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px rgba(255,71,87,0.6); }
+
+    .float-score { position: absolute; pointer-events: none; z-index: 7; font-family: var(--font-mono); font-weight: 700; font-size: 0.82rem; color: var(--accent); transform: translate(-50%, -50%); animation: floatUp 0.6s ease forwards; }
+    .float-score.head { color: #00ff88; }
+    @keyframes floatUp { to { transform: translate(-50%, -190%); opacity: 0; } }
+
+    /* Crosshair */
+    .aim-crosshair { position: absolute; width: 1px; height: 1px; transform: translate(-50%, -50%); pointer-events: none; z-index: 6; display: none; }
+    .aim-crosshair span { position: absolute; background: var(--accent); }
+    .aim-crosshair .v { width: 2px; height: 9px; left: -1px; }
+    .aim-crosshair .t { top: -13px; } .aim-crosshair .b { top: 4px; }
+    .aim-crosshair .h { height: 2px; width: 9px; top: -1px; }
+    .aim-crosshair .l { left: -13px; } .aim-crosshair .r { left: 4px; }
+    .aim-crosshair .dot { width: 2px; height: 2px; left: -1px; top: -1px; border-radius: 50%; }
+
+    .aim-hint { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); text-align: center; margin-top: 12px; }
+  

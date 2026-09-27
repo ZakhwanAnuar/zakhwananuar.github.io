@@ -1,0 +1,23 @@
+const {chromium}=require('playwright');
+const sharp=require('sharp');
+const path=require('node:path');
+const {pathToFileURL}=require('node:url');
+(async()=>{
+  const browser=await chromium.launch({channel:'chrome',headless:true});
+  const page=await browser.newPage({viewport:{width:1440,height:1000}});
+  await page.goto(pathToFileURL(path.resolve(__dirname,'../game-fps.html')).href);
+  await page.locator('#fpsStart').click();
+  await page.waitForTimeout(400);
+  const locked=await page.evaluate(()=>Boolean(document.pointerLockElement));
+  const before=await page.locator('#fpsCanvas').screenshot();
+  await page.keyboard.down('w');await page.waitForTimeout(300);await page.keyboard.up('w');
+  const after=await page.locator('#fpsCanvas').screenshot();
+  const {data,info}=await sharp(after).raw().toBuffer({resolveWithObject:true});
+  let visible=0;
+  for(let i=0;i<data.length;i+=info.channels)if(data[i]>30||data[i+1]>30||data[i+2]>30)visible++;
+  if(!locked||before.equals(after)||visible<1000)throw new Error('FPS rendering/movement check failed');
+  await page.screenshot({path:path.resolve(__dirname,'../verification/desktop-fps.png')});
+  await page.keyboard.press('Escape');
+  console.log(JSON.stringify({pointerLock:locked,movement:true,visiblePixels:visible}));
+  await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});

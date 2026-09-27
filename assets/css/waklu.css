@@ -1,0 +1,56 @@
+
+    .bd-wrap { max-width: 760px; margin: 0 auto; }
+    .bd-note {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3);
+      background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow);
+      border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; line-height: 1.6;
+    }
+    .bd-note i { color: var(--yellow); }
+    .bd-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .bd-live { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
+    .bd-live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
+    .bd-live.on .dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .bd-meta { margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
+
+    .bd-view, .bd-editor {
+      width: 100%; min-height: 300px; padding: 20px;
+      background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);
+      color: var(--text); font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.75;
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .bd-view.empty { color: var(--text-3); }
+    .bd-editor { resize: vertical; outline: none; }
+    .bd-editor:focus { border-color: var(--accent); }
+
+    .bd-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .bd-changed { font-family: var(--font-mono); font-size: 0.74rem; color: var(--yellow); display: none; }
+    .bd-changed.show { display: inline; }
+    .bd-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); margin-top: 8px; text-align: right; }
+
+    /* Files (hidden unless FILES_ENABLED) */
+    .bd-files-card { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .bd-files-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .bd-files-title { font-family: var(--font-display); font-size: 1rem; color: var(--text); margin: 0; display: flex; align-items: center; gap: 8px; }
+    .bd-files-title i { color: var(--accent); }
+    .bd-files-head .btn { margin-left: auto; }
+    .bd-progress { height: 6px; background: var(--bg-4); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+    .bd-progress span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.15s ease; }
+    .bd-files { display: flex; flex-direction: column; gap: 8px; }
+    .bd-file { display: flex; align-items: center; gap: 12px; padding: 11px 14px; background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px; }
+    .bd-file i.type { color: var(--accent); font-size: 1rem; flex-shrink: 0; }
+    .bd-file-main { flex: 1; min-width: 0; }
+    .bd-file-name { color: var(--text); font-size: 0.86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bd-file-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-3); margin-top: 2px; }
+    .bd-file-dl, .bd-file-del { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 4px; font-size: 0.85rem; flex-shrink: 0; }
+    .bd-file-dl { color: var(--text-2); text-decoration: none; }
+    .bd-file-dl:hover { color: var(--accent); }
+    .bd-file-del { color: var(--text-3); }
+    .bd-file-del:hover { color: var(--red); }
+    .bd-files-empty { color: var(--text-3); font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 0; }
+
+    .bd-notice { background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 8px; padding: 20px 22px; color: var(--text-2); font-size: 0.9rem; line-height: 1.7; }
+    .bd-notice h3 { font-family: var(--font-display); color: var(--text); margin: 0 0 10px; font-size: 1.1rem; }
+    .bd-notice code { font-family: var(--font-mono); background: var(--bg); padding: 1px 6px; border-radius: 4px; color: var(--accent); }
+    [hidden] { display: none !important; }
+  

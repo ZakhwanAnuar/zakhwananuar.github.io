@@ -1,122 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Board</title>
-  <!-- Secret page: keep it out of search engines -->
-  <meta name="robots" content="noindex, nofollow" />
-
-  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-
-  <style>
-    .bd-wrap { max-width: 760px; margin: 0 auto; }
-    .bd-note {
-      display: flex; align-items: center; gap: 10px;
-      font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-3);
-      background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow);
-      border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; line-height: 1.6;
-    }
-    .bd-note i { color: var(--yellow); }
-    .bd-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-    .bd-live { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
-    .bd-live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
-    .bd-live.on .dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
-    .bd-meta { margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3); }
-
-    .bd-view, .bd-editor {
-      width: 100%; min-height: 300px; padding: 20px;
-      background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);
-      color: var(--text); font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.75;
-      white-space: pre-wrap; word-break: break-word;
-    }
-    .bd-view.empty { color: var(--text-3); }
-    .bd-editor { resize: vertical; outline: none; }
-    .bd-editor:focus { border-color: var(--accent); }
-
-    .bd-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-    .bd-changed { font-family: var(--font-mono); font-size: 0.74rem; color: var(--yellow); display: none; }
-    .bd-changed.show { display: inline; }
-    .bd-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-3); margin-top: 8px; text-align: right; }
-
-    /* Files (hidden unless FILES_ENABLED) */
-    .bd-files-card { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .bd-files-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
-    .bd-files-title { font-family: var(--font-display); font-size: 1rem; color: var(--text); margin: 0; display: flex; align-items: center; gap: 8px; }
-    .bd-files-title i { color: var(--accent); }
-    .bd-files-head .btn { margin-left: auto; }
-    .bd-progress { height: 6px; background: var(--bg-4); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
-    .bd-progress span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.15s ease; }
-    .bd-files { display: flex; flex-direction: column; gap: 8px; }
-    .bd-file { display: flex; align-items: center; gap: 12px; padding: 11px 14px; background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px; }
-    .bd-file i.type { color: var(--accent); font-size: 1rem; flex-shrink: 0; }
-    .bd-file-main { flex: 1; min-width: 0; }
-    .bd-file-name { color: var(--text); font-size: 0.86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .bd-file-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-3); margin-top: 2px; }
-    .bd-file-dl, .bd-file-del { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 4px; font-size: 0.85rem; flex-shrink: 0; }
-    .bd-file-dl { color: var(--text-2); text-decoration: none; }
-    .bd-file-dl:hover { color: var(--accent); }
-    .bd-file-del { color: var(--text-3); }
-    .bd-file-del:hover { color: var(--red); }
-    .bd-files-empty { color: var(--text-3); font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 0; }
-
-    .bd-notice { background: var(--bg-3); border: 1px solid var(--border); border-left: 3px solid var(--yellow); border-radius: 8px; padding: 20px 22px; color: var(--text-2); font-size: 0.9rem; line-height: 1.7; }
-    .bd-notice h3 { font-family: var(--font-display); color: var(--text); margin: 0 0 10px; font-size: 1.1rem; }
-    .bd-notice code { font-family: var(--font-mono); background: var(--bg); padding: 1px 6px; border-radius: 4px; color: var(--accent); }
-    [hidden] { display: none !important; }
-  </style>
-</head>
-<body>
-
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-bracket">[</span>
-        <span class="logo-text">Holla!</span>
-        <span class="logo-bracket">]</span>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="writeups.html" class="nav-link">Writeups</a></li>
-        <li><a href="blog.html" class="nav-link">Blog</a></li>
-        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
-        <li><a href="resume.html" class="nav-link">Resume</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <div class="page-header">
-    <div class="container">
-      <span class="section-tag">// shared_board</span>
-      <h1 class="page-title">Board</h1>
-      <p class="page-subtitle">A shared message anyone with this link can read and edit.</p>
-    </div>
-  </div>
-
-  <main class="main-content">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The unlisted board | Zakhwan Anuar</title>
+<meta name="description" content="Zakhwan Anuar. Cybersecurity student, builder and CTF player. Projects, investigations, field notes and experiments.">
+<meta property="og:title" content="The unlisted board | Zakhwan Anuar"><meta property="og:type" content="website">
+<meta property="og:image" content="https://zakhwananuar.my/assets/images/og-default1.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://zakhwananuar.my/waklu.html">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/images/favicon.svg"><link rel="stylesheet" href="assets/vendor/icons.css">
+<link rel="stylesheet" href="assets/css/main.css"><link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/calm.css"><link rel="stylesheet" href="assets/vendor/highlight.css">
+<script defer src="assets/js/media.js"></script><script defer src="assets/js/core.js"></script><script defer src="assets/js/catalog.js"></script><script defer src="assets/js/reader.js"></script><script defer src="assets/js/visitors.js"></script><script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script><script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script><script defer src="assets/js/waklu.js"></script><link rel="stylesheet" href="assets/css/waklu.css"></head><body data-page="waklu" class="legacy">
+<a class="skip" href="#content">Skip to content</a><div class="read-progress" aria-hidden="true"></div><div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+<header class="site-header"><a class="wordmark" href="index.html" aria-label="Home">Home</a><nav class="quick-nav" aria-label="Main navigation"><a href="about.html" >About</a><a href="projects.html" >Projects</a><a href="writeups.html" >Writeups</a><a href="blog.html" >Blog</a><a href="achievements.html" >Achievements</a><a href="resume.html" >Resume</a><a href="contact.html" >Contact</a></nav><a class="header-secret" href="waklu.html" aria-label="Secret page" title="A quiet corner"><i class="fa-solid fa-key" aria-hidden="true"></i></a><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu">Menu <i class="fa-solid fa-bars" aria-hidden="true"></i></button></header>
+<dialog id="site-menu" class="site-menu"><div class="menu-top"><span class="mono">ZAKHWAN ANUAR</span><button class="icon-button" data-close aria-label="Close site index"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div><nav aria-label="Main navigation"><a href="index.html" ><span class="mono">01</span>Home<span aria-hidden="true">&#8599;</span></a><a href="about.html" ><span class="mono">02</span>About<span aria-hidden="true">&#8599;</span></a><a href="projects.html" ><span class="mono">03</span>Projects<span aria-hidden="true">&#8599;</span></a><a href="writeups.html" ><span class="mono">04</span>CTF writeups<span aria-hidden="true">&#8599;</span></a><a href="blog.html" ><span class="mono">05</span>Blog<span aria-hidden="true">&#8599;</span></a><a href="achievements.html" ><span class="mono">06</span>Achievements<span aria-hidden="true">&#8599;</span></a><a href="games.html" ><span class="mono">07</span>Playground<span aria-hidden="true">&#8599;</span></a><a href="resume.html" ><span class="mono">08</span>Resume<span aria-hidden="true">&#8599;</span></a><a href="contact.html" ><span class="mono">09</span>Contact<span aria-hidden="true">&#8599;</span></a></nav><div class="menu-bottom mono">KUALA LUMPUR, MALAYSIA <a href="mailto:zakhwananuar05@gmail.com">GET IN TOUCH &#8599;</a></div></dialog>
+<div class="page-intro"><span class="eyebrow">ZAKHWAN ANUAR</span><h1>The unlisted board</h1><p>A shared corner of the internet.</p></div><main id="content" class="main-content">
     <div class="container">
       <div class="bd-wrap">
 
-        <!-- Shown when Firebase is not configured yet -->
+        
         <div class="bd-notice" id="bdSetup" hidden>
           <h3>Not connected yet</h3>
           <p>This board needs a free Firebase Realtime Database. Paste your <code>firebaseConfig</code> into the marked block near the bottom of <code>waklu.html</code> and publish the open rules (in the SETUP comment).</p>
         </div>
 
-        <!-- The board -->
+        
         <div id="bdApp" hidden>
           <div class="bd-note">
             <i class="fas fa-triangle-exclamation"></i>
@@ -128,7 +34,7 @@
             <span class="bd-meta" id="bdMeta"></span>
           </div>
 
-          <!-- read view -->
+          
           <div id="bdReadWrap">
             <div class="bd-view empty" id="bdView">loading…</div>
             <div class="bd-actions">
@@ -136,7 +42,7 @@
             </div>
           </div>
 
-          <!-- edit view -->
+          
           <div id="bdEditWrap" hidden>
             <textarea class="bd-editor" id="bdEditor" placeholder="Type the shared message…"></textarea>
             <div class="bd-count" id="bdCount"></div>
@@ -147,7 +53,7 @@
             </div>
           </div>
 
-          <!-- shared files (hidden unless FILES_ENABLED) -->
+          
           <div class="bd-files-card" id="bdFilesCard">
             <div class="bd-files-head">
               <h3 class="bd-files-title"><i class="fas fa-paperclip"></i> Shared files</h3>
@@ -162,190 +68,7 @@
       </div>
     </div>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <p class="footer-copy">&copy; <span id="footerYear"></span> Zakhwan Anuar.</p>
-      <p class="footer-visits"><i class="fas fa-eye"></i> <span id="visitorCount">…</span> visits</p>
-      <div class="footer-links">
-        <a href="https://github.com/zakhwananuar" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Firebase SDK (compat builds work without a bundler) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
-
-  <script src="assets/js/main.js"></script>
-  <script>
-  /* ================================================================
-     SETUP
-     1. Firebase project + Realtime Database + web config are already set.
-     2. Realtime Database > Rules  ->  paste and Publish. This board is
-        intentionally OPEN: anyone with the link can read AND write, no login.
-        {
-          "rules": {
-            "board":       { ".read": true, ".write": true,
-              "message": { ".validate": "newData.isString() && newData.val().length < 8000" } },
-            "board_files": { ".read": true, ".write": true }
-          }
-        }
-     NOTE: because it is open, anyone with the link (or a bot that finds it) can
-     edit or wipe it. Don't put anything sensitive here. Keep the URL private.
-     (Files stay off until you enable Storage on the Blaze plan and set
-      FILES_ENABLED = true; its Storage rule would be `allow write: if true;`.)
-     ================================================================ */
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBYyxKC5wceTfRYAkeBJU2D-vHNgIrP-Lg",
-    authDomain: "website-807bc.firebaseapp.com",
-    databaseURL: "https://website-807bc-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "website-807bc",
-    storageBucket: "website-807bc.firebasestorage.app",
-    messagingSenderId: "286779186002",
-    appId: "1:286779186002:web:dc43dcf1c4d0718ff5b88b"
-  };
-
-  const MAX_LEN = 8000;
-  const MAX_FILE = 200 * 1024 * 1024;   // 200 MB per file
-  // Files need Firebase Storage (Blaze plan). Leave false to hide the upload UI.
-  const FILES_ENABLED = false;
-
-  (function board() {
-    const $ = (id) => document.getElementById(id);
-    const setup = $('bdSetup'), app = $('bdApp');
-
-    const configured = firebaseConfig && firebaseConfig.apiKey && firebaseConfig.databaseURL;
-    if (!configured || typeof firebase === 'undefined') { setup.hidden = false; return; }
-    app.hidden = false;
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    const ref = db.ref('board');
-
-    const view = $('bdView'), meta = $('bdMeta');
-    const live = $('bdLive'), liveText = $('bdLiveText');
-    const readWrap = $('bdReadWrap'), editWrap = $('bdEditWrap');
-    const editor = $('bdEditor'), countEl = $('bdCount'), changed = $('bdChanged');
-    const attachBtn = $('bdAttach'), fileInput = $('bdFileInput');
-    const filesEl = $('bdFiles'), progress = $('bdProgress'), progressBar = $('bdProgressBar');
-
-    let editing = false;
-    let remoteMsg = '', remoteUpdated = 0, editBaseline = 0;
-    let filesArr = [];
-
-    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const fmt = (ts) => ts ? new Date(ts).toLocaleString() : '';
-    function humanSize(b) { if (b < 1024) return b + ' B'; if (b < 1048576) return (b / 1024).toFixed(1) + ' KB'; return (b / 1048576).toFixed(1) + ' MB'; }
-    function fileIcon(t) {
-      t = t || '';
-      if (/image/.test(t)) return 'fa-file-image';
-      if (/pdf/.test(t)) return 'fa-file-pdf';
-      if (/zip|rar|7z|tar|gzip|compressed/.test(t)) return 'fa-file-zipper';
-      if (/audio/.test(t)) return 'fa-file-audio';
-      if (/video/.test(t)) return 'fa-file-video';
-      if (/text|json|xml|csv|javascript/.test(t)) return 'fa-file-lines';
-      return 'fa-file';
-    }
-
-    /* ---- message ---- */
-    function renderRead() {
-      if (remoteMsg) { view.textContent = remoteMsg; view.classList.remove('empty'); }
-      else { view.textContent = '(empty — click Edit and be the first to write something)'; view.classList.add('empty'); }
-      meta.textContent = remoteUpdated ? 'updated ' + fmt(remoteUpdated) : '';
-    }
-    ref.on('value', (snap) => {
-      const v = snap.val() || {};
-      remoteMsg = typeof v.message === 'string' ? v.message : '';
-      remoteUpdated = v.updated || 0;
-      live.classList.add('on'); liveText.textContent = 'live';
-      renderRead();
-      if (editing && remoteUpdated > editBaseline) changed.classList.add('show');
-    }, () => { live.classList.remove('on'); liveText.textContent = 'offline'; });
-
-    function enterEdit() {
-      editing = true; editBaseline = remoteUpdated; changed.classList.remove('show');
-      editor.value = remoteMsg; updateCount();
-      readWrap.hidden = true; editWrap.hidden = false;
-      editor.focus();
-    }
-    function exitEdit() { editing = false; editWrap.hidden = true; readWrap.hidden = false; }
-    function updateCount() { countEl.textContent = editor.value.length + ' / ' + MAX_LEN; }
-
-    $('bdEditBtn').addEventListener('click', enterEdit);
-    editor.addEventListener('input', updateCount);
-    $('bdSave').addEventListener('click', () => {
-      ref.set({ message: editor.value.slice(0, MAX_LEN), updated: Date.now() })
-        .then(exitEdit)
-        .catch(() => alert('Could not save — check your database rules and connection.'));
-    });
-    $('bdCancel').addEventListener('click', exitEdit);
-
-    /* ---- files ---- */
-    function renderFiles() {
-      if (!filesArr.length) { filesEl.innerHTML = '<div class="bd-files-empty">// no files yet</div>'; return; }
-      filesEl.innerHTML = filesArr.map((f) => `
-        <div class="bd-file">
-          <i class="type fas ${fileIcon(f.type)}"></i>
-          <div class="bd-file-main">
-            <div class="bd-file-name">${esc(f.name)}</div>
-            <div class="bd-file-meta">${humanSize(f.size || 0)} · ${fmt(f.updated)}</div>
-          </div>
-          <a class="bd-file-dl" href="${esc(f.url)}" target="_blank" rel="noopener" download title="Download"><i class="fas fa-download"></i></a>
-          <button class="bd-file-del" data-k="${f.k}" aria-label="Delete file"><i class="fas fa-trash"></i></button>
-        </div>`).join('');
-    }
-
-    if (FILES_ENABLED) {
-      const filesRef = db.ref('board_files');
-      const storage = firebase.storage();
-
-      filesRef.on('value', (snap) => {
-        const val = snap.val() || {};
-        filesArr = Object.entries(val).map(([k, v]) => Object.assign({ k }, v)).sort((a, b) => b.updated - a.updated);
-        renderFiles();
-      });
-
-      attachBtn.addEventListener('click', () => fileInput.click());
-      fileInput.addEventListener('change', () => {
-        const file = fileInput.files[0];
-        if (!file) return;
-        if (file.size > MAX_FILE) { alert('File too large (max ' + Math.round(MAX_FILE / 1048576) + ' MB).'); fileInput.value = ''; return; }
-        const safe = file.name.replace(/[^\w.\-]+/g, '_');
-        const path = 'board/' + Date.now() + '_' + safe;
-        const task = storage.ref(path).put(file);
-        progress.hidden = false; progressBar.style.width = '0%';
-        task.on('state_changed',
-          (s) => { progressBar.style.width = Math.round(s.bytesTransferred / s.totalBytes * 100) + '%'; },
-          () => { progress.hidden = true; fileInput.value = ''; alert('Upload failed — check your Storage rules and connection.'); },
-          () => {
-            task.snapshot.ref.getDownloadURL().then((url) => {
-              filesRef.push({ name: file.name, size: file.size, type: file.type || '', path, url, updated: Date.now() });
-              progress.hidden = true; fileInput.value = '';
-            });
-          });
-      });
-
-      filesEl.addEventListener('click', (e) => {
-        const del = e.target.closest('.bd-file-del');
-        if (!del) return;
-        const f = filesArr.find((x) => x.k === del.dataset.k);
-        if (!f || !confirm('Delete "' + f.name + '" for everyone?')) return;
-        if (f.path) storage.ref(f.path).delete().catch(() => {});
-        filesRef.child(f.k).remove();
-      });
-
-      renderFiles();
-    } else {
-      const card = document.getElementById('bdFilesCard');
-      if (card) card.hidden = true;
-    }
-  })();
-  </script>
-  <script src="assets/js/visitors.js"></script>
-</body>
-</html>
+<footer class="site-footer"><p><span>&copy; <span data-year></span> Zakhwan Anuar</span><br>Still learning. Still building.<br><span class="footer-visits"><i class="fa-solid fa-eye" aria-hidden="true"></i> <span id="visitorCount">...</span> visits</span></p><div><a href="https://github.com/zakhwananuar" target="_blank" rel="noopener">GitHub &#8599;</a><a href="https://linkedin.com/in/zakhwan-anuar-88800a217" target="_blank" rel="noopener">LinkedIn &#8599;</a></div><a href="#" class="icon-button" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a></footer>
+<div class="cursor" aria-hidden="true"><span></span></div><div class="toast" role="status"></div>
+<dialog id="image-viewer" class="image-viewer"><div class="viewer-top"><span id="viewer-caption"></span><button class="icon-button" data-close aria-label="Close image"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div><img alt=""><div class="viewer-bottom"><button class="icon-button" id="image-prev" aria-label="Previous image"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button><span class="mono" id="image-count"></span><button class="icon-button" id="image-next" aria-label="Next image"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div></dialog>
+<noscript><p class="no-js">The index and static pages work without JavaScript. Enable JavaScript to browse the content collections and play games.</p></noscript></body></html>

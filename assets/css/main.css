@@ -28,6 +28,7 @@
    1. CSS VARIABLES — Edit colors/fonts here to retheme the whole site
 ================================================================ */
 :root {
+  --surface-2: var(--bg-2);
   /* Core palette */
   --bg:          #0a0c10;   /* Page background */
   --bg-2:        #0f1117;   /* Slightly lighter surface */

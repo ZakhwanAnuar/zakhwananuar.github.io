@@ -154,7 +154,7 @@ function setSocialMeta({ title, description, url, image, type } = {}) {
     link.setAttribute('href', abs);
   }
   // Fall back to the default share image when no per-item image is set.
-  const img = absoluteUrl(image || 'assets/images/og-default.png');
+  const img = absoluteUrl(image || 'assets/images/og-default1.png');
   upsertMeta('property', 'og:image', img);
   upsertMeta('name', 'twitter:image', img);
 }

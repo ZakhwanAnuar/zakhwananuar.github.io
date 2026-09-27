@@ -1,0 +1,92 @@
+
+    .nf-wrap {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 80px;
+    }
+    .nf-inner { width: 100%; max-width: 640px; }
+    .nf-code {
+      font-family: var(--font-display);
+      font-size: 100px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--text);
+      margin: 0 0 8px;
+    }
+    .nf-code span { color: var(--accent); }
+    .nf-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 10px;
+    }
+    .nf-sub {
+      color: var(--text-2);
+      font-size: 0.95rem;
+      margin: 0 0 28px;
+      max-width: 46ch;
+    }
+    /* Terminal panel */
+    .nf-term {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    .nf-term-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 14px;
+      background: var(--bg-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .nf-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .nf-dot.r { background: #ff5f56; }
+    .nf-dot.y { background: #ffbd2e; }
+    .nf-dot.g { background: #27c93f; }
+    .nf-term-name {
+      margin-left: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+    .nf-term-body {
+      padding: 18px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--text-2);
+      overflow-x: auto;
+    }
+    .nf-term-body .prompt { color: var(--accent); }
+    .nf-term-body .err    { color: var(--red); }
+    .nf-term-body .ok     { color: var(--accent); }
+    .nf-term-body .muted  { color: var(--text-3); }
+    .nf-term-body .path   { color: var(--text); word-break: break-all; }
+    .nf-term-body .line   { white-space: pre-wrap; word-break: break-word; }
+    .nf-inputline { display: flex; align-items: center; gap: 8px; }
+    .nf-inputline input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: 0;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      caret-color: var(--accent);
+    }
+    .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 480px) {
+      .nf-actions .btn { flex: 1; justify-content: center; }
+    }
+  

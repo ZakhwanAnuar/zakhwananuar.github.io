@@ -1,0 +1,30 @@
+(() => {
+  if (document.body.dataset.page !== 'index') return;
+  const sections = [...document.querySelectorAll('main>section.section-pad')];
+  const names = ['The person','Selected work','CTF fieldwork','The journal','The archive','After hours','Say hello'];
+  const dock = document.createElement('nav');
+  dock.className = 'chapter-dock';
+  dock.setAttribute('aria-label','Homepage chapters');
+  dock.hidden = true;
+  dock.innerHTML = `<button class="chapter-prev" aria-label="Previous chapter" title="Previous chapter">${Site.icon('arrow-up')}</button><a class="chapter-current" href="#identity"><span class="mono"></span><span class="chapter-name"></span></a><button class="chapter-next" aria-label="Next chapter" title="Next chapter">${Site.icon('arrow-down')}</button><div class="chapter-progress" aria-hidden="true"></div>`;
+  document.body.append(dock);
+  sections.forEach((section,i) => {if (!section.id) section.id = `chapter-${i+1}`;});
+  let active = 0, pending = false;
+  const move = offset => sections[Math.max(0,Math.min(sections.length-1,active+offset))].scrollIntoView();
+  dock.querySelector('.chapter-prev').addEventListener('click',()=>move(-1));
+  dock.querySelector('.chapter-next').addEventListener('click',()=>move(1));
+  const update = () => {
+    active = Math.max(0,sections.findLastIndex(section=>section.getBoundingClientRect().top<innerHeight*.45));
+    dock.hidden = sections[0].getBoundingClientRect().top>innerHeight*.5 || document.querySelector('.site-footer').getBoundingClientRect().top<innerHeight;
+    dock.querySelector('.chapter-current').href = '#'+sections[active].id;
+    dock.querySelector('.mono').textContent = `${String(active+1).padStart(2,'0')} / 07`;
+    dock.querySelector('.chapter-name').textContent = names[active];
+    dock.querySelector('.chapter-prev').disabled = active===0;
+    dock.querySelector('.chapter-next').disabled = active===sections.length-1;
+    const percent = Math.max(0,Math.min(1,scrollY/(document.documentElement.scrollHeight-innerHeight)));
+    dock.querySelector('.chapter-progress').style.transform=`scaleX(${percent})`;
+    pending=false;
+  };
+  addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(update);}},{passive:true});
+  update();
+})();

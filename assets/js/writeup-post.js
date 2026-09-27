@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title:       `${writeup.title} — ${writeup.ctf || 'CTF'} Writeup`,
       description: writeup.summary || writeup.title,
       url:         `writeup.html?id=${writeup.id}`,
-      image:       writeup.ogImage,   // falls back to og-default.png
+      image:       writeup.ogImage,   // falls back to og-default1.png
       type:        'article',
     });
   } else {
