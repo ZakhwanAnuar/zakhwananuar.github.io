@@ -95,6 +95,15 @@ def heading(number, title, description):
     return f'<div class="page-intro"><span class="eyebrow">ZAKHWAN ANUAR</span><h1>{title}</h1><p>{description}</p></div>'
 
 
+def root_relative_404(result):
+    for prefix in ('href="assets/', 'src="assets/', 'href="index.html', 'href="about.html',
+                   'href="projects.html', 'href="writeups.html', 'href="blog.html',
+                   'href="achievements.html', 'href="games.html', 'href="resume.html',
+                   'href="contact.html', 'href="waklu.html'):
+        result = result.replace(prefix, prefix.replace('"', '"/', 1))
+    return result
+
+
 def build():
     pages = {
         'index': ('Zakhwan Anuar', ('projects', 'blog', 'writeups', 'achievements', 'curation')),
@@ -164,6 +173,8 @@ def build():
         scripts.append(f'assets/js/{slug}.js')
         result = shell(slug, title, content, legacy=True, extra_scripts=scripts)
         result = result.replace('</head>', f'<link rel="stylesheet" href="assets/css/{slug}.css"></head>')
+        if slug == '404':
+            result = root_relative_404(result)
         (ROOT / f'{slug}.html').write_text(result, encoding='utf-8')
     note = '<main id="content" class="catalog-page"><div class="page-intro"><span class="eyebrow">UNLISTED / A LITTLE NOTE</span><h1>Holla!</h1><p>tell your man and others to join my next workshop yaa &#128541;</p></div><a class="text-link" href="games.html">Back to the playground &#8599;</a></main>'
     (ROOT / 'notes.html').write_text(shell('notes', 'A little note', note), encoding='utf-8')

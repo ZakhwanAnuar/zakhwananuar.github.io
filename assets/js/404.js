@@ -14,11 +14,11 @@
       if (!out || !term || !input) return;
 
       var PAGES = {
-        home: 'index.html', about: 'about.html', projects: 'projects.html',
-        writeups: 'writeups.html', blog: 'blog.html', achievements: 'achievements.html',
-        resume: 'resume.html', contact: 'contact.html',
-        arcade: 'games.html', games: 'games.html',
-        board: 'waklu.html', notes: 'notes.html'
+        home: '/index.html', about: '/about.html', projects: '/projects.html',
+        writeups: '/writeups.html', blog: '/blog.html', achievements: '/achievements.html',
+        resume: '/resume.html', contact: '/contact.html',
+        arcade: '/games.html', games: '/games.html',
+        board: '/waklu.html', notes: '/notes.html'
       };
 
       function esc(s) {
@@ -49,11 +49,11 @@
           print('<span class="muted">hidden:</span> arcade/  board/  notes/');
         },
         whoami: function () { print('zakhwan — cybersecurity student &amp; CTF player.'); },
-        arcade: function () { open('games.html', 'entering the arcade'); },
-        games: function () { open('games.html', 'entering the arcade'); },
-        board: function () { open('waklu.html', 'opening the board'); },
-        notes: function () { open('notes.html', 'opening notes'); },
-        home: function () { open('index.html', 'going home'); },
+        arcade: function () { open('/games.html', 'entering the arcade'); },
+        games: function () { open('/games.html', 'entering the arcade'); },
+        board: function () { open('/waklu.html', 'opening the board'); },
+        notes: function () { open('/notes.html', 'opening notes'); },
+        home: function () { open('/index.html', 'going home'); },
         sudo: function () { print('<span class="err">nice try 😏</span> — user is not in the sudoers file.'); },
         flag: function () { print('<span class="ok">flag{y0u_g0t_l0st_but_f0und_a_flag}</span>'); },
         date: function () { print(esc(new Date().toString())); },
