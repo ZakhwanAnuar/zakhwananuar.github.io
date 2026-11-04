@@ -106,6 +106,10 @@ Ghidra shows that the DLL imports \`GetFileSizeEx\`, \`SetFilePointerEx\`, and \
 
 The loader opens CoreUI_sys.ax with GDI+. It reads every pixel with GdipBitmapGetPixel and keeps the red channel while skipping zero values. The resulting data is about 3,176 Base64 characters. The blue and green channels are mostly noise so the image still looks normal.
 
+The extracted BMP appears as coloured noise when opened normally. This is expected because the payload is stored in the pixel values rather than as visible text.
+
+<img src="assets/images/Blog/Fake-Court-Summons-ValleyRAT/coreui-sys.bmp" alt="CoreUI_sys.bmp showing coloured pixel noise" width="300">
+
 The extraction script reads the red channel, skips zero values, joins the result as Base64, and decodes it into a binary payload:
 
 \`\`\`python
