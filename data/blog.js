@@ -122,7 +122,7 @@ The loader opens CoreUI_sys.ax with GDI+. It reads every pixel with GdipBitmapGe
 
 The extracted BMP appears as coloured noise when opened normally. This is expected because the payload is stored in the pixel values rather than as visible text.
 
-<img src="assets/images/Blog/Fake-Court-Summons-ValleyRAT/coreui-sys.bmp" alt="CoreUI_sys.bmp showing coloured pixel noise" width="300">
+<img src="assets/images/Blog/Fake-Court-Summons-ValleyRAT/coreui-sys-preview.png" alt="CoreUI_sys.bmp showing coloured pixel noise" width="300">
 
 The extraction script reads the red channel, skips zero values, joins the result as Base64, and decodes it into a binary payload:
 
@@ -161,7 +161,7 @@ The extracted payload disassembles as 32-bit x86 shellcode. The instruction \`MO
 
 ![32-bit shellcode disassembly](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-disassembly.png)
 
-Strings from the decoded payload include \`ntdll\`, \`Ws2_32\`, \`codemark\`, and \`101.33.117.120\`. This supports the presence of Windows API and network functionality in the payload.
+Strings from the decoded payload include \`ntdll\`, \`Ws2_32\`, \`codemark\`, and \`101[.]33[.]117[.]120\`. This supports the presence of Windows API and network functionality in the payload.
 
 ![Decoded payload strings](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-strings.png)
 
@@ -185,9 +185,15 @@ It then attempts to contact the C2 over TCP port 778. A UDP path is also present
 
 ## Configuration
 
-The configuration is stored as a reversed key-value string appended to the shellcode. The important values are:
+The configuration is stored as a reversed UTF-16LE key-value string appended to the shellcode. The decoded values are:
 
-- C2 address: 101.33.117.120
+\`\`\`
+|p1:101[.]33[.]117[.]120|o1:778|t1:1|p2:101[.]33[.]117[.]120|o2:778|t2:1|p3:127.0.0.1|o3:80|t3:1|dd:1|cl:1|fz:默认|bb:1.0|bz:2026.11. 4|jp:0|bh:0|ll:0|dl:0|sh:0|kl:0|bd:0|
+\`\`\`
+
+The important values are:
+
+- C2 address: 101[.]33[.]117[.]120
 - C2 port: 778
 - Transport flag: 1
 - Marker: codemark
@@ -202,7 +208,7 @@ The process dump confirmed the static findings:
 - GDI+ and Windows imaging components were loaded.
 - An RWX memory region at 0xd80000 matched the extracted shellcode.
 - ws2_32.dll and mswsock.dll were loaded.
-- Multiple socket structures pointed to 101.33.117.120:778.
+- Multiple socket structures pointed to 101[.]33[.]117[.]120:778.
 - No second-stage PE was present in the dump, so the C2 may not have answered.
 
 The memory view also shows private RWX regions, while the loaded-module view shows \`E:\\msvcr100.dll\` and \`ws2_32.dll\` inside the process. Together, these findings support in-memory shellcode execution and network capability.
@@ -233,6 +239,7 @@ The \`0xd80000\` address came from the captured dump. In the separate live PID 1
 | Defense Evasion | T1574.002 DLL Sideloading | Malicious msvcr100.dll |
 | Defense Evasion | T1027.003 Steganography | Payload hidden in BMP pixels |
 | Defense Evasion | T1027.007 Dynamic API Resolution | Hashed API names |
+| Defense Evasion | T1564.001 Hidden Files and Directories | Hidden DLL and AX files in the mounted image |
 | Defense Evasion | T1620 Reflective Code Loading | Shellcode runs from memory |
 | Command and Control | T1095 Non-Application Layer Protocol | Raw TCP connection to port 778 |
 
@@ -253,6 +260,7 @@ The target appears to be Malaysian finance staff, but the exact goal is unknown.
 ## Indicators of Compromise (IOCs)
 
 - C2: 101[.]33[.]117[.]120:778
+- Launcher: \`NA.pdf 1.EXE\` (\`NameControlServer.exe\`), a signed Microsoft binary abused as the loader
 - ZIP SHA-256: 77c21d7c23e96d2103d4c41d5911e83d38ae2e5ba520e44e16183bdf3f970211
 - IMG SHA-256: 2ff01c64f5f5cb076659d82865513a7fa632c02e7721a05d21c889090d559d21
 - Malicious DLL SHA-256: 3157305efe2849745c0fa5167754a234fc48759af1b084bb29e2fa97563ff4c1
