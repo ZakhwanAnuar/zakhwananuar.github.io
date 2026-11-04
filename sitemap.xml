@@ -2,122 +2,174 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://zakhwananuar.my/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/about.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/projects.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/writeups.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/blog.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/achievements.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/resume.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/contact.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
     <loc>https://zakhwananuar.my/games.html</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=chameleon-wifi-esp32</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/fake-court-summons-valleyrat/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=discord-c2-dump</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/chameleon-wifi-esp32/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=building-bad-usb</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/discord-c2-dump/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=csm-cyberjaya-visit</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/building-bad-usb/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=cybershield-summit-2026</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/csm-cyberjaya-visit/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=mbot-coderush-2026</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/cybershield-summit-2026/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=scholarship-journey</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/mbot-coderush-2026/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=micromanagement-trap-leadership</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/scholarship-journey/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=my-first-ctf-experience</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/micromanagement-trap-leadership/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/blog-post.html?id=tools-i-actually-use</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/my-first-ctf-experience/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=umcs-metamon-1-to-7</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/blog/tools-i-actually-use/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=hack10-2026-looks-normal-to-me</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/umcs-ctf-2026/metamon-1-to-7/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=hack10-2026-grid-transfer-error</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/hack-10-international-ctf-2026/looks-normal-to-me/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=hack10-2026-alphazer0</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/hack-10-international-ctf-2026/grid-transfer-error/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=Hack@10-2026-malware-or-not</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/hack-10-international-ctf-2026/alphazer0/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=divide-2026-cant-let-go</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/hack-10-international-ctf-2026/malware-or-not/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=divide-2026-kelajuan-aka-speed</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/can/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=divide-2026-open-your-eyes</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/kelajuan-aka-speed/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=divide-2026-something-left-behind</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/open-your-eyes/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=divide-2026-alien-is-our-friend</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/something-left-behind/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
   <url>
-    <loc>https://zakhwananuar.my/writeup.html?id=divide-2026-unusual-incident</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/alien-is-our-friend/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/unusual-incident/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/writeups/events/ihack-2026/feel-my-wrath/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/ChameleonWifi/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/DiscordC2Dump/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/Bad-USB/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/PassHunter/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/Student-Enrollment-Management-System/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/log-analyzer/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/projects/password-audit/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/writeups/events/div-ide-ctf-2026/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/writeups/events/hack-10-international-ctf-2026/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/writeups/events/umcs-ctf-2026/</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://zakhwananuar.my/writeups/events/ihack-2026/</loc>
+    <lastmod>2026-11-05</lastmod>
   </url>
 </urlset>

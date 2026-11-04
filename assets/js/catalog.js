@@ -13,9 +13,10 @@
     const preview = code ? code.split('\n').slice(0,7).join('\n') : project.tech.join('\n');
     return `<${button ? 'button' : 'div'} class="project-art" ${button ? `data-project="${e(project.id)}" aria-label="Explore ${e(project.title)}"` : ''}><span class="source-caption">${icon('code')} ${code ? 'From the build notes' : 'Built with'}</span><pre>${e(preview)}</pre><span class="mono">${e(project.title.split(':')[0])}</span></${button ? 'button' : 'div'}>`;
   };
-  const journalRow = item => `<a class="journal-row" href="blog-post.html?id=${encodeURIComponent(item.id)}"><span class="mono">${e(item.date)}</span><div><h3>${e(item.title)}</h3><p>${e(item.summary)}</p></div>${articleImage(item) ? `<img class="journal-image" src="${e(articleImage(item))}" alt="" loading="lazy">` : `<span class="mono">${e(item.tags[0])}<br>${minutes(item.content)} MIN READ</span>`}${icon('arrow-up-right-from-square')}</a>`;
+  const journalRow = item => `<a class="journal-row" href="blog/${encodeURIComponent(item.id)}/"><span class="mono">${e(item.date)}</span><div><h3>${e(item.title)}</h3><p>${e(item.summary)}</p></div>${articleImage(item) ? `<img class="journal-image" src="${e(articleImage(item))}" alt="" loading="lazy">` : `<span class="mono">${e(item.tags[0])}<br>${minutes(item.content)} MIN READ</span>`}${icon('arrow-up-right-from-square')}</a>`;
   const events = [...new Set(writeups.map(w => w.ctf))].map(name => ({name,items:writeups.filter(w => w.ctf === name)}));
-  const eventURL = name => `ctf-event.html?ctf=${encodeURIComponent(name)}`;
+  const slugify = value => value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const eventURL = name => `/writeups/events/${slugify(name)}/`;
   const archiveItem = item => `<button class="archive-item" data-achievement="${e(item.id)}" aria-label="View ${e(item.title)}"><div class="archive-image">${item.images.length ? `<img src="${e(item.images[0])}" loading="lazy" alt="${e(item.title)}">` : '<span class="empty-state">A moment to remember.</span>'}</div><div class="archive-info"><h3>${e(item.title)}</h3>${icon('arrow-up-right-from-square')}</div><p>${e(item.placement)}${item.placement ? ' / ' : ''}${e(item.issuer)}</p><span class="mono">${e(item.date)} &nbsp; ${item.images.length} PHOTOGRAPH${item.images.length === 1 ? '' : 'S'}</span></button>`;
   const bindArchive = () => document.querySelectorAll('[data-achievement]').forEach(button => button.addEventListener('click', () => {
     const item = achievements.find(a => a.id === button.dataset.achievement);
@@ -60,7 +61,7 @@
       const item = selectedProjects[index];
       const panel = document.querySelector('#home-project-preview');
       panel.setAttribute('aria-labelledby',`project-tab-${index}`);
-      panel.innerHTML = `${projectArt(item,projects.indexOf(item),false)}<div class="project-preview-bottom"><span>${e(item.tech.slice(0,2).join(' / '))}</span><a class="text-link" href="projects.html?project=${encodeURIComponent(item.id)}">Project details ${icon('arrow-up-right-from-square')}</a></div>`;
+      panel.innerHTML = `${projectArt(item,projects.indexOf(item),false)}<div class="project-preview-bottom"><span>${e(item.tech.slice(0,2).join(' / '))}</span><a class="text-link" href="/projects/${encodeURIComponent(item.id)}/">Project details ${icon('arrow-up-right-from-square')}</a></div>`;
       projectHost.querySelectorAll('[role="tab"]').forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;});
     };
     projectHost.querySelectorAll('[role="tab"]').forEach((tab,i)=>{
@@ -78,7 +79,7 @@
     const selectedWriteup = writeups.find(w=>w.id===selections?.writeup);
     const selectedMoment = achievements.find(a=>a.id===selections?.achievement);
     if (selections && selectedWriteup && selectedMoment) {
-      document.querySelector('#home-featured').innerHTML = `<article class="featured-study"><div class="feature-top"><span class="feature-label">SELECTED WRITEUP</span><span>${e(selectedWriteup.ctf)}</span></div><a class="feature-title" href="writeup.html?id=${encodeURIComponent(selectedWriteup.id)}"><h2>${e(selectedWriteup.title)}</h2>${icon('arrow-up-right-from-square')}</a><p>Tracing a compromised Windows machine, from browser history to a Discord-backed implant.</p><div class="evidence-tabs" role="tablist" aria-label="Evidence screenshots">${selections.evidence.map((item,i)=>`<button role="tab" id="evidence-tab-${i}" aria-controls="evidence-panel" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-evidence="${i}">${e(item.label)}</button>`).join('')}</div><div id="evidence-panel" role="tabpanel" aria-labelledby="evidence-tab-0"><button id="open-evidence" aria-label="Enlarge evidence screenshot"><img id="evidence-image" src="${e(selections.evidence[0].src)}" alt="${e(selections.evidence[0].alt)}"></button></div><a class="feature-read" href="writeup.html?id=${encodeURIComponent(selectedWriteup.id)}">Read the full writeup <span>${minutes(selectedWriteup.content)} min read ${icon('arrow-right')}</span></a></article><a class="featured-moment" href="achievements.html?moment=${encodeURIComponent(selectedMoment.id)}" data-home-achievement="${e(selectedMoment.id)}"><div class="moment-photo"><img src="${e(selections.achievementImage)}" alt="Zakhwan at UM Cybersecurity Summit with the first runner-up award"><span class="moment-date">${e(selectedMoment.date)}</span></div><div class="moment-caption"><span class="feature-label">OUTSIDE THE CODE</span><h2>Good company.<br>A good competition.</h2><span>${e(selectedMoment.placement)} / UMCS CTF 2026 ${icon('arrow-up-right-from-square')}</span></div></a>`;
+      document.querySelector('#home-featured').innerHTML = `<article class="featured-study"><div class="feature-top"><span class="feature-label">SELECTED WRITEUP</span><span>${e(selectedWriteup.ctf)}</span></div><a class="feature-title" href="/writeups/events/${slugify(selectedWriteup.ctf)}/${slugify(selectedWriteup.title)}/"><h2>${e(selectedWriteup.title)}</h2>${icon('arrow-up-right-from-square')}</a><p>Tracing a compromised Windows machine, from browser history to a Discord-backed implant.</p><div class="evidence-tabs" role="tablist" aria-label="Evidence screenshots">${selections.evidence.map((item,i)=>`<button role="tab" id="evidence-tab-${i}" aria-controls="evidence-panel" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-evidence="${i}">${e(item.label)}</button>`).join('')}</div><div id="evidence-panel" role="tabpanel" aria-labelledby="evidence-tab-0"><button id="open-evidence" aria-label="Enlarge evidence screenshot"><img id="evidence-image" src="${e(selections.evidence[0].src)}" alt="${e(selections.evidence[0].alt)}"></button></div><a class="feature-read" href="/writeups/events/${slugify(selectedWriteup.ctf)}/${slugify(selectedWriteup.title)}/">Read the full writeup <span>${minutes(selectedWriteup.content)} min read ${icon('arrow-right')}</span></a></article><a class="featured-moment" href="achievements.html?moment=${encodeURIComponent(selectedMoment.id)}" data-home-achievement="${e(selectedMoment.id)}"><div class="moment-photo"><img src="${e(selections.achievementImage)}" alt="Zakhwan at UM Cybersecurity Summit with the first runner-up award"><span class="moment-date">${e(selectedMoment.date)}</span></div><div class="moment-caption"><span class="feature-label">OUTSIDE THE CODE</span><h2>Good company.<br>A good competition.</h2><span>${e(selectedMoment.placement)} / UMCS CTF 2026 ${icon('arrow-up-right-from-square')}</span></div></a>`;
       document.querySelector('[data-home-achievement]').addEventListener('click', event => {
         event.preventDefault();
         showImages(selectedMoment.images.map(src => ({src, alt:`${selectedMoment.title} / ${selectedMoment.date}${selectedMoment.summary ? ' / ' + selectedMoment.summary : ''}`})));
@@ -117,9 +118,9 @@
       if (!item) return;
       const i = projects.indexOf(item);
       const relatedBlog = blog.find(post => post.content.includes(item.github) || post.title.toLowerCase().includes(item.title.split(':')[0].toLowerCase()));
-      document.querySelector('#project-detail').innerHTML = `<div class="project-detail-grid">${projectArt(item,i,false)}<div><span class="mono">${e(item.tags.join(' / '))}</span><h2>${e(item.title)}</h2><p>${e(item.description)}</p><p class="mono" style="margin-top:25px">${e(item.tech.join(' / '))}</p><div class="project-detail-links">${item.github ? `<a class="text-link" href="${e(item.github)}" target="_blank" rel="noopener">Source code ${icon('arrow-up-right-from-square')}</a>` : ''}${item.demo ? `<a class="text-link" href="${e(item.demo)}" target="_blank" rel="noopener">Live demo ${icon('arrow-up-right-from-square')}</a>` : ''}${relatedBlog ? `<a class="text-link" href="blog-post.html?id=${encodeURIComponent(relatedBlog.id)}">Read the build story ${icon('arrow-right')}</a>` : ''}</div></div></div>`;
+      document.querySelector('#project-detail').innerHTML = `<div class="project-detail-grid">${projectArt(item,i,false)}<div><span class="mono">${e(item.tags.join(' / '))}</span><h2>${e(item.title)}</h2><p>${e(item.description)}</p><p class="mono" style="margin-top:25px">${e(item.tech.join(' / '))}</p><div class="project-detail-links">${item.github ? `<a class="text-link" href="${e(item.github)}" target="_blank" rel="noopener">Source code ${icon('arrow-up-right-from-square')}</a>` : ''}${item.demo ? `<a class="text-link" href="${e(item.demo)}" target="_blank" rel="noopener">Live demo ${icon('arrow-up-right-from-square')}</a>` : ''}${relatedBlog ? `<a class="text-link" href="/blog/${encodeURIComponent(relatedBlog.id)}/">Read the build story ${icon('arrow-right')}</a>` : ''}</div></div></div>`;
       Site.showDialog(modal);
-      try {history.replaceState(null,'',`?project=${encodeURIComponent(id)}`);} catch {}
+      try {history.replaceState(null,'',`/projects/${encodeURIComponent(id)}/`);} catch {}
     };
     modal.addEventListener('close', () => {try {history.replaceState(null,'',location.pathname);} catch {}});
     render = () => {
@@ -129,7 +130,7 @@
       document.querySelectorAll('[data-project]').forEach(button => button.addEventListener('click', () => openProject(button.dataset.project)));
     };
     render();
-    const requested = new URLSearchParams(location.search).get('project');
+    const requested = location.pathname.match(/\/projects\/([^/]+)\/?$/)?.[1] || new URLSearchParams(location.search).get('project');
     if (requested) openProject(requested);
   }
   if (page === 'writeups') {
@@ -142,7 +143,8 @@
     render();
   }
   if (page === 'ctf-event') {
-    const name = new URLSearchParams(location.search).get('ctf');
+    const eventSlug = location.pathname.match(/\/writeups\/events\/([^/]+)\/?$/)?.[1];
+    const name = eventSlug ? events.find(item => slugify(item.name) === eventSlug)?.name : new URLSearchParams(location.search).get('ctf');
     const event = events.find(item => item.name === name);
     document.querySelector('#event-title').textContent = event ? event.name : 'Event not found.';
     if (event) {
@@ -151,7 +153,7 @@
       filterTabs(event.items.map(w => w.category));
       render = () => {
         const filtered = event.items.filter(w => (state.filter === 'all' || w.category === state.filter) && matches([w.title,w.summary,w.category].join(' ')));
-        document.querySelector('#challenge-list').innerHTML = filtered.map((w,i) => `<a class="challenge-row" href="writeup.html?id=${encodeURIComponent(w.id)}"><span class="mono">${number(i)}</span><div><h2>${e(w.title)}</h2><p>${e(w.summary)}</p></div><span class="mono">${e(w.category)} / ${e(w.difficulty)}${w.points != null ? '<br>' + e(w.points) + ' POINTS' : ''}</span>${icon('arrow-up-right-from-square')}</a>`).join('') || noResults;
+        document.querySelector('#challenge-list').innerHTML = filtered.map((w,i) => `<a class="challenge-row" href="/writeups/events/${slugify(w.ctf)}/${slugify(w.title)}/"><span class="mono">${number(i)}</span><div><h2>${e(w.title)}</h2><p>${e(w.summary)}</p></div><span class="mono">${e(w.category)} / ${e(w.difficulty)}${w.points != null ? '<br>' + e(w.points) + ' POINTS' : ''}</span>${icon('arrow-up-right-from-square')}</a>`).join('') || noResults;
         count(`${filtered.length} / ${event.items.length} CHALLENGES`);
       };
       render();

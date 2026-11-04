@@ -26,7 +26,7 @@ const BLOG_DATA = [
 
   {
     id:      'fake-court-summons-valleyrat',
-    title:   'Fake Court Summons on WhatsApp',
+    title:   'Analysis of a Fake Court Summons Malware Sample',
     date:    'November 2026',
     tags:    ['malware-analysis', 'threat-intel', 'phishing'],
     summary: 'A fake Kuala Lumpur High Court summons delivered through WhatsApp leads to an IMG disk image, DLL sideloading, shellcode hidden in a BMP, and a ValleyRAT-style C2 connection.',

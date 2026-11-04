@@ -30,11 +30,23 @@ def ids_from(js_file):
     text = (ROOT / "data" / js_file).read_text(encoding="utf-8")
     return re.findall(r"\bid:\s*['\"]([^'\"]+)['\"]", text)
 
+def fields_from(js_file, field):
+    text = (ROOT / "data" / js_file).read_text(encoding="utf-8")
+    return re.findall(rf"\b{field}:\s*['\"]([^'\"]+)['\"]", text)
+
+def slugify(value):
+    return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+
 def main():
     today = date.today().isoformat()
     urls = list(STATIC)
-    urls += [f"/blog-post.html?id={i}" for i in ids_from("blog.js")]
-    urls += [f"/writeup.html?id={i}" for i in ids_from("writeups.js")]
+    urls += [f"/blog/{i}/" for i in ids_from("blog.js")]
+    writeup_ids = ids_from("writeups.js")
+    writeup_titles = fields_from("writeups.js", "title")
+    writeup_events = fields_from("writeups.js", "ctf")
+    urls += [f"/writeups/events/{slugify(event)}/{slugify(title)}/" for event, title in zip(writeup_events, writeup_titles)]
+    urls += [f"/projects/{i}/" for i in ids_from("projects.js")]
+    urls += [f"/writeups/events/{slugify(i)}/" for i in sorted(set(fields_from("writeups.js", "ctf")))]
 
     body = "\n".join(
         f"  <url>\n    <loc>{escape(SITE + u)}</loc>\n"

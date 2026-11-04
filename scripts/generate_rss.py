@@ -68,7 +68,7 @@ def main():
 
     items = []
     for pid, title, date, summary in posts:
-        link = f"{SITE}/blog-post.html?id={pid}"
+        link = f"{SITE}/blog/{pid}/"
         pub = format_datetime(parse_date(date))
         items.append(
             "    <item>\n"
