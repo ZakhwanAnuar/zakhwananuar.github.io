@@ -36,7 +36,7 @@ const BLOG_DATA = [
 
 ## Overview
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/whatsapp-lure.png)
+![WhatsApp fake court summons](assets/images/Blog/Fake-Court-Summons-ValleyRAT/whatsapp-lure.png)
 
 On 4 November 2026, my friend told me that his friend's WhatsApp account had been hacked and was being used to send him a ZIP file. He asked me to analyse the malware.
 
@@ -66,17 +66,17 @@ The IMG could not be opened normally on a phone, so the victim was pushed toward
 
 ## Attack Chain
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/attack-chain.svg)
+![Malware attack chain](assets/images/Blog/Fake-Court-Summons-ValleyRAT/attack-chain.svg)
 
 ## Files Inside the IMG
 
 At first, only NA.pdf 1.EXE is visible in the mounted drive. The other two files are hidden: msvcr100.dll and CoreUI_sys.ax. After hidden files are shown, the full file set is visible.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/iso-files.png)
+![Files inside the mounted IMG](assets/images/Blog/Fake-Court-Summons-ValleyRAT/iso-files.png)
 
 Detect It Easy identifies the mounted image as an ISO 9660 filesystem and reports a size of about 10.07 MiB.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/detect-it-easy-img.png)
+![Detect It Easy IMG analysis](assets/images/Blog/Fake-Court-Summons-ValleyRAT/detect-it-easy-img.png)
 
 | File | Description |
 | --- | --- |
@@ -96,11 +96,11 @@ This is the main execution trick: the victim starts a file that appears legitima
 
 Ghidra shows that the DLL imports \`GetFileSizeEx\`, \`SetFilePointerEx\`, and \`ReadFile\`. These APIs let it find the size of a file, move through its contents, and read the data.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-getfilesizeex.png)
+![Ghidra GetFileSizeEx reference](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-getfilesizeex.png)
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-setfilepointer.png)
+![Ghidra SetFilePointerEx reference](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-setfilepointer.png)
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-readfile.png)
+![Ghidra ReadFile reference](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-readfile.png)
 
 ## Payload Hidden in the BMP
 
@@ -133,19 +133,19 @@ print("Payload size:", len(payload))
 
 After making a copy and changing the extension to \`.bmp\`, HxD shows the \`42 4D\` BMP signature. The rest of the file is pixel data that looks like random noise.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/bmp-hex-header.png)
+![BMP header in HxD](assets/images/Blog/Fake-Court-Summons-ValleyRAT/bmp-hex-header.png)
 
 The red-channel extraction produced 3,176 characters. Base64 decoding produced a 2,381-byte binary payload.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-extraction.png)
+![Payload extraction output](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-extraction.png)
 
 The extracted payload disassembles as 32-bit x86 shellcode. The instruction \`MOV EAX, DWORD PTR FS:[0x30]\` accesses the Process Environment Block (PEB), which can be used to resolve Windows APIs dynamically.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-disassembly.png)
+![32-bit shellcode disassembly](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-disassembly.png)
 
 Strings from the decoded payload include \`ntdll\`, \`Ws2_32\`, \`codemark\`, and \`101.33.117.120\`. This supports the presence of Windows API and network functionality in the payload.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-strings.png)
+![Decoded payload strings](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-strings.png)
 
 ## In-Memory Execution
 
@@ -153,11 +153,11 @@ The loader allocates executable memory with VirtualAlloc, copies the decoded she
 
 Ghidra shows imports for \`VirtualAlloc\`, \`VirtualProtect\`, and \`VirtualQuery\`. These APIs can allocate memory, change memory permissions, and inspect memory regions.
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualalloc.png)
+![Ghidra VirtualAlloc reference](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualalloc.png)
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualprotect.png)
+![Ghidra VirtualProtect reference](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualprotect.png)
 
-![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualquery.png)
+![Ghidra VirtualQuery reference](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualquery.png)
 
 These imports support the loader analysis, but they do not alone prove that the payload executed.
 

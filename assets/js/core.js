@@ -41,7 +41,7 @@
       slide.tabIndex = index === galleryIndex ? -1 : 0;
       slide.setAttribute('aria-label', `${index === galleryIndex ? 'Current' : 'View'} photograph ${index + 1}`);
     });
-    document.querySelector('#viewer-caption').textContent = item.alt || '';
+    document.querySelector('#viewer-caption').textContent = '';
     document.querySelector('#image-count').textContent = `${galleryIndex + 1} / ${gallery.length}`;
     document.querySelector('#image-prev').disabled = galleryIndex === 0;
     document.querySelector('#image-next').disabled = galleryIndex === gallery.length - 1;
