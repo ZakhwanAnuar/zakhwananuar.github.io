@@ -38,10 +38,6 @@ const BLOG_DATA = [
 
 ![WhatsApp fake court summons](assets/images/Blog/Fake-Court-Summons-ValleyRAT/whatsapp-lure.png)
 
-## How I Triaged It
-
-I treated the ZIP, IMG, EXE, DLL, BMP, and memory dump as separate evidence. I started with file type, size, hashes, and the files inside the image before looking at behaviour. The sample was analysed in an isolated lab, and the final C2 stage was not executed or recovered.
-
 On 4 November 2026, my friend told me that his friend's WhatsApp account had been hacked and was being used to send him a ZIP file. He asked me to analyse the malware.
 
 The message contained a file named WA-22NCC-041-112026_3185.zip and claimed to be a summons from the Commercial Division of the Kuala Lumpur High Court. It asked the recipient to forward it to the company's Finance Manager and open it on a computer.
@@ -61,6 +57,10 @@ This analysis is based on the delivered files and one process memory dump. The s
 | C2 | 101[.]33[.]117[.]120:778 |
 | Family assessment | ValleyRAT / Winos 4.0, moderate confidence |
 | Main limitation | The second-stage payload was not captured |
+
+## How I Triaged It
+
+I treated the ZIP, IMG, EXE, DLL, BMP, and memory dump as separate evidence. I started with file type, size, hashes, and the files inside the image before looking at behaviour. The sample was analysed in an isolated lab, and the final C2 stage was not executed or recovered.
 
 ## Delivery and Social Engineering
 
@@ -90,7 +90,7 @@ Detect It Easy identifies the mounted image as an ISO 9660 filesystem and report
 
 The DLL is much larger than a normal copy of msvcr100.dll and exports many functions to look like a runtime library. Its DllMain does little, while the exported functions run the loader routine.
 
-The launcher is not the main payload. It is a signed Microsoft executable that imports \`MSVCR100.dll\`, so the copy placed beside it is loaded first from the mounted image. The DLL is about 10.4 MB, has no Microsoft signature, and exposes an unusually large export table. These differences are enough to treat it as malicious even before following every function.
+The launcher is not the main payload. It is a signed Microsoft executable that imports \`MSVCR100.dll\`, so the copy placed beside it is loaded first from the mounted image. The DLL is 10,387,968 bytes (10.4 MB decimal / 9.91 MiB on disk, 9.94 MiB mapped in memory). It has no Microsoft signature and exposes an unusually large export table. These differences are enough to treat it as malicious even before following every function.
 
 CFF Explorer identifies the file as a 32-bit PE DLL, 9.91 MB in size, with no known file match. The displayed hashes also identify the exact sample analysed here.
 
@@ -102,7 +102,7 @@ The signed executable imports MSVCR100.dll. Windows searches the executable's ow
 
 This is the main execution trick: the victim starts a file that appears legitimate, while the malicious DLL is loaded automatically beside it.
 
-Runtime inspection confirms that \`NA.pdf 1.EXE\` loaded the 9.94 MB \`msvcr100.dll\` from the mounted image. The same process also loaded \`CoreUI_SYS.AX\`, GDI+, Winsock, and NTDLL components.
+Runtime inspection confirms that \`NA.pdf 1.EXE\` loaded the 9.94 MiB mapped image of \`msvcr100.dll\` from the mounted image. The same process also loaded \`CoreUI_SYS.AX\`, GDI+, Winsock, and NTDLL components.
 
 ![Runtime modules loaded by NA.pdf 1.EXE](assets/images/Blog/Fake-Court-Summons-ValleyRAT/runtime-modules-crop.png)
 
@@ -206,6 +206,8 @@ The process dump confirmed the static findings:
 - No second-stage PE was present in the dump, so the C2 may not have answered.
 
 The memory view also shows private RWX regions, while the loaded-module view shows \`E:\\msvcr100.dll\` and \`ws2_32.dll\` inside the process. Together, these findings support in-memory shellcode execution and network capability.
+
+The \`0xd80000\` address came from the captured dump. In the separate live PID 1500 inspection, ASLR placed private RWX regions at different addresses, including \`0xf00000\`, \`0xb20000\`, \`0x2630000\`, and \`0x2640000\`.
 
 ![Private RWX memory regions in NA.pdf 1.EXE](assets/images/Blog/Fake-Court-Summons-ValleyRAT/memory-rwx-regions-crop.png)
 
