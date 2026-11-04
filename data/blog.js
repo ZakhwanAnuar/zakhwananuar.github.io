@@ -106,7 +106,46 @@ Ghidra shows that the DLL imports \`GetFileSizeEx\`, \`SetFilePointerEx\`, and \
 
 The loader opens CoreUI_sys.ax with GDI+. It reads every pixel with GdipBitmapGetPixel and keeps the red channel while skipping zero values. The resulting data is about 3,176 Base64 characters. The blue and green channels are mostly noise so the image still looks normal.
 
-After Base64 decoding, the loader gets about 2,381 bytes of x86 shellcode followed by the marker codemark and a configuration block.
+The extraction script reads the red channel, skips zero values, joins the result as Base64, and decodes it into a binary payload:
+
+\`\`\`python
+from PIL import Image
+import base64
+
+img = Image.open("CoreUI_sys.bmp").convert("RGB")
+
+data = ""
+
+for r, g, b in img.getdata():
+    if r != 0:
+        data += chr(r)
+
+print("Extracted characters:", len(data))
+print(data[:100])
+
+payload = base64.b64decode(data)
+
+with open("payload.bin", "wb") as f:
+    f.write(payload)
+
+print("Payload size:", len(payload))
+\`\`\`
+
+After making a copy and changing the extension to \`.bmp\`, HxD shows the \`42 4D\` BMP signature. The rest of the file is pixel data that looks like random noise.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/bmp-hex-header.png)
+
+The red-channel extraction produced 3,176 characters. Base64 decoding produced a 2,381-byte binary payload.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-extraction.png)
+
+The extracted payload disassembles as 32-bit x86 shellcode. The instruction \`MOV EAX, DWORD PTR FS:[0x30]\` accesses the Process Environment Block (PEB), which can be used to resolve Windows APIs dynamically.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-disassembly.png)
+
+Strings from the decoded payload include \`ntdll\`, \`Ws2_32\`, \`codemark\`, and \`101.33.117.120\`. This supports the presence of Windows API and network functionality in the payload.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/payload-strings.png)
 
 ## In-Memory Execution
 
