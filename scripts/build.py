@@ -2,6 +2,8 @@
 from pathlib import Path
 from html.parser import HTMLParser
 from html import escape
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'source'
@@ -184,7 +186,9 @@ def build():
         updated = text.replace('og-default.png', 'og-default1.png')
         if updated != text:
             path.write_text(updated, encoding='utf-8')
-    print('Built 21 pages with one shared navigation/footer shell.')
+    for script in ('generate_routes.py', 'generate_sitemap.py', 'generate_rss.py'):
+        subprocess.run([sys.executable, str(ROOT / 'scripts' / script)], check=True)
+    print('Built the site and regenerated clean routes, sitemap, and RSS feed.')
 
 
 if __name__ == '__main__':

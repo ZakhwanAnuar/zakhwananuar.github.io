@@ -1,0 +1,3 @@
+#!/bin/sh
+python scripts/update.py || exit 1
+git add sitemap.xml feed.xml blog projects writeups
