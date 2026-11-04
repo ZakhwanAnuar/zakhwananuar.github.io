@@ -1462,4 +1462,125 @@ An image there reveals the second part of the flag:
     `,
   },
 
+  // ================================================================
+  // iHack 2026 — FORENSICS
+  // ================================================================
+
+  {
+    id:         'ihack-2026-feel-my-wrath',
+    title:      'Feel My Wrath',
+    ctf:        'iHack 2026',
+    category:   'Forensics',
+    difficulty: 'Medium-Hard',
+    points:     null,
+    date:       '2026',
+    summary:    'A VirtualBox ELF core dump leads from a suspicious FL Studio plugin to a flag hidden in a CLAP binary.',
+
+    content: `
+
+## Challenge Overview
+
+<img src="assets/images/CTF/iHack/Forensics/ihack-forensics-3.png" alt="Feel My Wrath challenge" width="700">
+
+![Core dump file identification](assets/images/CTF/iHack/Forensics/ihack-forensics-4.png)
+
+We are given second.dmp. It is an ELF VirtualBox core dump, so I used Volatility 3 to inspect it.
+
+## Step 1: Find the Interesting Process
+
+Start with the process list:
+
+\`\`\`bash
+vol -f second.dmp windows.pslist
+\`\`\`
+
+![Volatility process list showing FL64.exe](assets/images/CTF/iHack/Forensics/ihack-forensics-5.png)
+
+Next, inspect how FL64.exe was launched:
+
+\`\`\`bash
+vol -f second.dmp windows.cmdline
+\`\`\`
+
+![Command-line output for the FL Studio process](assets/images/CTF/iHack/Forensics/ihack-forensics-6.png)
+
+FL64.exe is PID 4180. Its child process, msedgewebview2.exe, is PID 9188. WebView2 is normal for FL Studio, so I continued checking the files loaded by FL Studio.
+
+I also dumped both processes and searched their strings, but there was no complete flag.
+
+## Step 2: Recover FL Studio Files
+
+Scan the dump for file objects and filter the results for plugin-related artefacts:
+
+\`\`\`bash
+vol -f second.dmp windows.filescan > scan.txt
+\`\`\`
+
+![Volatility file scan completing successfully](assets/images/CTF/iHack/Forensics/ihack-forensics-7.png)
+
+Filter the scan output for FL Studio and plugin-related files:
+
+\`\`\`bash
+strings scan.txt | grep -Ei 'fl studio|image-line|plugin|clap|fst|flp|dll|vst|vst3|preset|project'
+\`\`\`
+
+![Grep output identifying Arranger FST and CLAP files](assets/images/CTF/iHack/Forensics/ihack-forensics-8.png)
+
+The interesting files were Arranger.clap and Arranger.fst. The CLAP file is executable plugin code, so I dumped it for analysis.
+
+![Volatility dumpfiles output for Arranger.clap](assets/images/CTF/iHack/Forensics/ihack-forensics-9.png)
+
+![File command confirming the extracted PE32 plus DLL](assets/images/CTF/iHack/Forensics/ihack-forensics-10.png)
+
+## Step 3: Analyse the CLAP Plugin
+
+The extracted file is a 64-bit Windows DLL. I found strings related to key generation, so I opened it in Ghidra for further analysis.
+
+I opened the file in Ghidra, Searching for ihack did not show the full flag.
+
+![Ghidra view of the suspicious function](assets/images/CTF/iHack/Forensics/ihack-forensics-11.png)
+
+After spending some time in ghidra, function FUN_18003efe0 stood out. It allocated a 64 byte buffer, wrote several fixed hexadecimal values into that buffer, and returned it through param_1[1]. That was different from the cleanup and Windows error-handling functions elsewhere in the binary. 
+
+![Comparison of nearby plugin functions](assets/images/CTF/iHack/Forensics/ihack-forensics-12.png)
+
+## Step 4: Reconstruct the Flag
+
+The function writes the flag bytes in chunks. Recreating those writes in Python reveals the final string:
+
+The values are little-endian. For example, 0x63616869 becomes 69 68 61 63, or ihac. I decoded each value and joined the text.
+
+\`\`\`python
+buf = bytearray(0x40)
+
+def w(off, data):
+    buf[off:off + len(data)] = data
+
+w(0, bytes.fromhex('69686163'))
+w(4, bytes.fromhex('6b7b'))
+w(6, bytes.fromhex('77683474'))
+w(10, bytes.fromhex('5f64'))
+w(12, bytes.fromhex('305f315f6b6e3077'))
+w(20, bytes.fromhex('5f34623075745f74'))
+w(28, bytes.fromhex('6831735f7730726c'))
+w(36, bytes.fromhex('645f6f665f'))
+w(41, bytes.fromhex('6473707d'))
+
+print(buf.rstrip(b'\\x00').decode('latin1'))
+\`\`\`
+
+![Decoded flag output](assets/images/CTF/iHack/Forensics/ihack-forensics-13.png)
+
+## Flag
+
+ihack{wh4t_d0_1_kn0w_4b0ut_th1s_w0rld_of_dsp}
+    `,
+  },
+
 ];
+
+// Keep the newest event at the top of the catalog.
+WRITEUPS_DATA.sort((a, b) => {
+  const newest = (entry) => entry.ctf === 'iHack 2026' ? 0 : 1;
+  return newest(a) - newest(b);
+});

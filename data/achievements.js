@@ -34,10 +34,10 @@ const ACHIEVEMENTS_DATA = [
   {
     id:        'bahtera-siber-3108-ctf-2026',
     title:     'Bahtera Siber 3108 CTF: Warisan Takhta',
-    placement: '8th Place · 3× First Blood',
+    placement: '8th Place',
     date:      'August 2026',
     issuer:    'Bahtera Digital Technology',
-    summary:   'Top-10 finish (8th, 3,200 pts) with a few First Bloods',
+    summary:   '8th place / 460 participants',
     images:    [
       'assets/images/Achievements/bahterasiber2026/bahterasiber1.jpeg',
       'assets/images/Achievements/bahterasiber2026/2.jpeg',
