@@ -25,6 +25,185 @@
 const BLOG_DATA = [
 
   {
+    id:      'fake-court-summons-valleyrat',
+    title:   'Fake Court Summons on WhatsApp',
+    date:    'November 2026',
+    tags:    ['malware-analysis', 'threat-intel', 'phishing'],
+    summary: 'A fake Kuala Lumpur High Court summons delivered through WhatsApp leads to an IMG disk image, DLL sideloading, shellcode hidden in a BMP, and a ValleyRAT-style C2 connection.',
+    ogImage: null,
+
+    content: `
+
+## Overview
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/whatsapp-lure.png)
+
+On 4 November 2026, my friend told me that his friend's WhatsApp account had been hacked and was being used to send him a ZIP file. He asked me to analyse the malware.
+
+The message contained a file named WA-22NCC-041-112026_3185.zip and claimed to be a summons from the Commercial Division of the Kuala Lumpur High Court. It asked the recipient to forward it to the company's Finance Manager and open it on a computer.
+
+The ZIP contained a 10.5 MB IMG disk image with an ISO 9660 filesystem. Inside it was a signed Microsoft executable, a large malicious DLL, and a small BMP file. The executable sideloaded the DLL, which decoded shellcode from the BMP and tried to connect to 101[.]33[.]117[.]120:778.
+
+This analysis is based on the delivered files and one process memory dump. The second-stage payload was not captured, so its full capabilities are unknown.
+
+## Executive Summary
+
+| Item | Finding |
+| --- | --- |
+| Delivery | WhatsApp message with a fake court summons |
+| Container | ZIP containing a 10.5 MB IMG disk image |
+| Main technique | DLL sideloading through msvcr100.dll |
+| Hidden payload | Base64 shellcode stored in BMP pixel data |
+| C2 | 101[.]33[.]117[.]120:778 |
+| Family assessment | ValleyRAT / Winos 4.0, moderate confidence |
+| Main limitation | The second-stage payload was not captured |
+
+## Delivery and Social Engineering
+
+The message used a court summons as the lure. It created urgency and targeted finance staff, who may handle payments or banking access. The instruction to forward the file also helped spread it inside an organisation.
+
+The IMG could not be opened normally on a phone, so the victim was pushed towards using a Windows computer. The filename WA-22NCC-041-112026_3185.zip was designed to look like a real case reference.
+
+## Attack Chain
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/attack-chain.svg)
+
+## Files Inside the IMG
+
+At first, only NA.pdf 1.EXE is visible in the mounted drive. The other two files are hidden: msvcr100.dll and CoreUI_sys.ax. After hidden files are shown, the full file set is visible.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/iso-files.png)
+
+Detect It Easy identifies the mounted image as an ISO 9660 filesystem and reports a size of about 10.07 MiB.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/detect-it-easy-img.png)
+
+| File | Description |
+| --- | --- |
+| NA.pdf 1.EXE | Genuine Microsoft-signed Office executable used as the launcher |
+| msvcr100.dll | Malicious DLL loaded from the same folder |
+| CoreUI_sys.ax | 61x61 BMP containing the encoded payload |
+
+The DLL is much larger than a normal copy of msvcr100.dll and exports many functions to look like a runtime library. Its DllMain does little, while the exported functions run the loader routine.
+
+## DLL Sideloading
+
+The signed executable imports MSVCR100.dll. Windows searches the executable's own directory first, so it loads the malicious copy from the mounted IMG instead of the real system library.
+
+This is the main execution trick: the victim starts a file that appears legitimate, while the malicious DLL is loaded automatically beside it.
+
+### File-reading APIs
+
+Ghidra shows that the DLL imports \`GetFileSizeEx\`, \`SetFilePointerEx\`, and \`ReadFile\`. These APIs let it find the size of a file, move through its contents, and read the data.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-getfilesizeex.png)
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-setfilepointer.png)
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-readfile.png)
+
+## Payload Hidden in the BMP
+
+The loader opens CoreUI_sys.ax with GDI+. It reads every pixel with GdipBitmapGetPixel and keeps the red channel while skipping zero values. The resulting data is about 3,176 Base64 characters. The blue and green channels are mostly noise so the image still looks normal.
+
+After Base64 decoding, the loader gets about 2,381 bytes of x86 shellcode followed by the marker codemark and a configuration block.
+
+## In-Memory Execution
+
+The loader allocates executable memory with VirtualAlloc, copies the decoded shellcode into it, and jumps to it. The shellcode runs inside the same process. No separate process is created and no decoded payload is written to disk.
+
+Ghidra shows imports for \`VirtualAlloc\`, \`VirtualProtect\`, and \`VirtualQuery\`. These APIs can allocate memory, change memory permissions, and inspect memory regions.
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualalloc.png)
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualprotect.png)
+
+![](assets/images/Blog/Fake-Court-Summons-ValleyRAT/ghidra-virtualquery.png)
+
+These imports support the loader analysis, but they do not alone prove that the payload executed.
+
+The shellcode resolves APIs by hashing their names. The resolved functions include WSAStartup, socket, getaddrinfo, connect, send, and recv.
+
+It then attempts to contact the C2 over TCP port 778. A UDP path is also present. The next stage is received into executable memory, XOR-decoded with 0xCC, and executed.
+
+## Configuration
+
+The configuration is stored as a reversed key-value string appended to the shellcode. The important values are:
+
+- C2 address: 101.33.117.120
+- C2 port: 778
+- Transport flag: 1
+- Marker: codemark
+
+The marker and configuration format are consistent with ValleyRAT / Winos 4.0, but the family identification is moderate confidence rather than absolute proof.
+
+## Memory-Dump Evidence
+
+The process dump confirmed the static findings:
+
+- NA.pdf 1.EXE ran with msvcr100.dll loaded from the mounted drive.
+- GDI+ and Windows imaging components were loaded.
+- An RWX memory region at 0xd80000 matched the extracted shellcode.
+- ws2_32.dll and mswsock.dll were loaded.
+- Multiple socket structures pointed to 101.33.117.120:778.
+- No second-stage PE was present in the dump, so the C2 may not have answered.
+
+| Evidence | What it shows |
+| --- | --- |
+| Mounted drive process | NA.pdf 1.EXE ran from the IMG |
+| Loaded DLL | msvcr100.dll came from the same folder as the launcher |
+| RWX memory at 0xd80000 | Decoded shellcode was copied into executable memory |
+| GDI+ and imaging DLLs | The loader opened and processed the BMP |
+| ws2_32.dll and mswsock.dll | Network code was active |
+| 18 socket-address structures | Repeated connection attempts to the C2 |
+| No second-stage PE | The follow-up payload was not recovered |
+
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Evidence |
+| --- | --- | --- |
+| Initial Access | T1566 Phishing | WhatsApp lure |
+| Execution | T1204.002 User Execution | Victim runs the fake PDF executable |
+| Defense Evasion | T1036.007 Double File Extension | NA.pdf 1.EXE |
+| Defense Evasion | T1574.002 DLL Sideloading | Malicious msvcr100.dll |
+| Defense Evasion | T1027.003 Steganography | Payload hidden in BMP pixels |
+| Defense Evasion | T1027.007 Dynamic API Resolution | Hashed API names |
+| Defense Evasion | T1620 Reflective Code Loading | Shellcode runs from memory |
+| Command and Control | T1095 Non-Application Layer Protocol | Raw TCP connection to port 778 |
+
+## Assessment
+
+The ZIP, IMG, and DLL are malicious with high confidence. The C2 behaviour is also strongly supported because the static code, configuration, and memory dump agree.
+
+The target appears to be Malaysian finance staff, but the exact goal is unknown. Financial theft and remote access are possible motives, but the second stage was not captured.
+
+| Assessment | Confidence |
+| --- | --- |
+| ZIP, IMG, and DLL are malicious | High |
+| Shellcode tries to reach the C2 | High |
+| Campaign targets Malaysian finance staff | Moderate |
+| Malware is ValleyRAT / Winos 4.0 | Moderate |
+| Final goal is financial theft | Low |
+
+## Indicators
+
+- C2: 101[.]33[.]117[.]120:778
+- ZIP SHA-256: 77c21d7c23e96d2103d4c41d5911e83d38ae2e5ba520e44e16183bdf3f970211
+- IMG SHA-256: 2ff01c64f5f5cb076659d82865513a7fa632c02e7721a05d21c889090d559d21
+- Malicious DLL SHA-256: 3157305efe2849745c0fa5167754a234fc48759af1b084bb29e2fa97563ff4c1
+- BMP SHA-256: 2d28d846ba7f31b97e2a20cbac1d0183ecbc4e41e9fae4c33b1fc66ddccac983
+- Shellcode SHA-256: 3fc133be6b6419faa5c47c2c6b8e037cf5712d48545199d1e662300a5280b03a
+
+## What to Do
+
+Block the C2 address and port, search endpoint and chat telemetry for the file hashes, and ask staff whether they received or opened the ZIP. Any machine that mounted or ran the IMG should be isolated and investigated.
+
+Users should also be reminded that court documents should not be trusted just because they arrive through WhatsApp, especially when the message asks them to forward and open an attachment.
+
+    `,
+  },
+
+  {
     id:      'chameleon-wifi-esp32',
     title:   'ChameleonFW: Building an ESP32-S3 WiFi Research Rig',
     date:    'July 2026',

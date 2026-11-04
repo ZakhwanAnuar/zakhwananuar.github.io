@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1540" role="img" aria-labelledby="title desc">
+  <title id="title">Fake court summons malware attack chain</title>
+  <desc id="desc">A vertical flow from WhatsApp lure to C2 connection.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0b1220"/><stop offset="1" stop-color="#16233a"/></linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 Z" fill="#f59e0b"/></marker>
+    <style>.box{fill:#172942;stroke:#42617f;stroke-width:2;rx:18}.danger{stroke:#e08a24}.title{font:700 32px Arial,sans-serif;fill:#f8fafc}.label{font:700 24px Arial,sans-serif;fill:#f8fafc;text-anchor:middle}.sub{font:17px Arial,sans-serif;fill:#b9c8d8;text-anchor:middle}.num{font:700 18px Arial,sans-serif;fill:#f59e0b}.arrow{stroke:#f59e0b;stroke-width:5;fill:none;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect width="1200" height="1540" fill="url(#bg)"/>
+  <text x="600" y="65" class="title" text-anchor="middle">Fake Court Summons Malware Attack Chain</text>
+  <text x="600" y="98" class="sub">WhatsApp lure → DLL sideloading → BMP payload → shellcode → C2</text>
+  <path class="arrow" d="M600 240 V285"/><path class="arrow" d="M600 405 V450"/><path class="arrow" d="M600 570 V615"/><path class="arrow" d="M600 735 V780"/><path class="arrow" d="M600 900 V945"/><path class="arrow" d="M600 1065 V1110"/><path class="arrow" d="M600 1230 V1275"/>
+  <rect x="300" y="135" width="600" height="105" class="box danger"/><text x="325" y="165" class="num">01</text><text x="600" y="178" class="label">WhatsApp lure</text><text x="600" y="210" class="sub">Fake court summons targeting finance staff</text>
+  <rect x="300" y="300" width="600" height="105" class="box"/><text x="325" y="330" class="num">02</text><text x="600" y="343" class="label">ZIP attachment</text><text x="600" y="375" class="sub">Case-style filename containing an ISO</text>
+  <rect x="300" y="465" width="600" height="105" class="box"/><text x="325" y="495" class="num">03</text><text x="600" y="508" class="label">ISO mounted on Windows</text><text x="600" y="540" class="sub">The victim runs the file from the mounted drive</text>
+  <rect x="300" y="630" width="600" height="105" class="box danger"/><text x="325" y="660" class="num">04</text><text x="600" y="673" class="label">NA.pdf 1.EXE</text><text x="600" y="705" class="sub">Signed launcher starts from the ISO</text>
+  <rect x="300" y="795" width="600" height="105" class="box danger"/><text x="325" y="825" class="num">05</text><text x="600" y="838" class="label">DLL sideloading</text><text x="600" y="870" class="sub">Malicious msvcr100.dll loads beside the launcher</text>
+  <rect x="300" y="960" width="600" height="105" class="box danger"/><text x="325" y="990" class="num">06</text><text x="600" y="1003" class="label">BMP payload extraction</text><text x="600" y="1035" class="sub">CoreUI_sys.ax red-channel data becomes Base64</text>
+  <rect x="300" y="1125" width="600" height="105" class="box danger"/><text x="325" y="1155" class="num">07</text><text x="600" y="1168" class="label">Shellcode runs in memory</text><text x="600" y="1200" class="sub">VirtualAlloc / RWX memory / no dropped payload</text>
+  <rect x="300" y="1290" width="600" height="105" class="box danger"/><text x="325" y="1320" class="num">08</text><text x="600" y="1333" class="label">C2 connection</text><text x="600" y="1365" class="sub">101.33.117.120:778</text>
+  <text x="600" y="1470" class="sub">Static analysis and memory evidence confirm the chain.</text>
+</svg>
