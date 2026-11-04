@@ -224,7 +224,7 @@ The target appears to be Malaysian finance staff, but the exact goal is unknown.
 | Malware is ValleyRAT / Winos 4.0 | Moderate |
 | Final goal is financial theft | Low |
 
-## Indicators
+## Indicators of Compromise (IOCs)
 
 - C2: 101[.]33[.]117[.]120:778
 - ZIP SHA-256: 77c21d7c23e96d2103d4c41d5911e83d38ae2e5ba520e44e16183bdf3f970211
