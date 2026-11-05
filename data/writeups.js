@@ -1528,7 +1528,7 @@ strings scan.txt | grep -Ei 'fl studio|image-line|plugin|clap|fst|flp|dll|vst|vs
 
 ![Grep output identifying Arranger FST and CLAP files](assets/images/CTF/iHack/Forensics/ihack-forensics-8.png)
 
-The interesting files were **Arranger.clap** and **Arranger.fst**. The `.fst` file is an FL Studio state/project artefact, while the `.clap` file is executable plugin code. Because executable code can contain flag-generation logic, the CLAP file is the stronger lead. I dumped it so it could be analysed independently of the memory image.
+The interesting files were **Arranger.clap** and **Arranger.fst**. The \`.fst\` file is an FL Studio state/project artefact, while the \`.clap\` file is executable plugin code. Because executable code can contain flag-generation logic, the CLAP file is the stronger lead. I dumped it so it could be analysed independently of the memory image.
 
 ![Volatility dumpfiles output for Arranger.clap](assets/images/CTF/iHack/Forensics/ihack-forensics-9.png)
 

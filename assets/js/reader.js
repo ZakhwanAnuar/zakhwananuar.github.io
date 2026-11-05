@@ -4,7 +4,9 @@
   if (!body) return;
   const {escape: e, icon, minutes, imagePath, showImages} = Site;
   const isWriteup = document.body.dataset.page === 'writeup';
-  const collection = isWriteup ? WRITEUPS_DATA : BLOG_DATA;
+  const collection = isWriteup
+    ? (typeof WRITEUPS_DATA === 'undefined' ? [] : WRITEUPS_DATA)
+    : (typeof BLOG_DATA === 'undefined' ? [] : BLOG_DATA);
   const slugifyEvent = value => value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const routeMatch = location.pathname.match(/\/blog\/([^/]+)\/?$/);
   const writeupMatch = location.pathname.match(/\/writeups\/events\/([^/]+)\/([^/]+)\/?$/);
@@ -14,7 +16,7 @@
   const id = item?.id || requestedId;
   if (!item) {
     document.querySelector('#reader-title').textContent = 'This entry could not be found.';
-    body.innerHTML = `<p><a href="${routeRoot}${isWriteup ? 'writeups' : 'blog'}.html">Return to the ${isWriteup ? 'investigation index' : 'journal'}.</a></p>`;
+    body.innerHTML = `<p><a href="${isWriteup ? 'writeups.html' : 'blog.html'}">Return to the ${isWriteup ? 'investigation index' : 'journal'}.</a></p>`;
     return;
   }
   document.title = `${item.title} | Zakhwan Anuar`;
@@ -23,7 +25,7 @@
   document.querySelector('meta[name="description"]').content = item.summary || item.title;
   document.querySelector('meta[property="og:title"]').content = item.title;
   document.querySelector('meta[property="og:image"]').content = new URL(imagePath(item.ogImage || 'assets/images/og-default1.png'), 'https://zakhwananuar.my/').href;
-  document.querySelector('link[rel="canonical"]').href = isWriteup ? `https://zakhwananuar.my/writeups/events/${encodeURIComponent(writeupMatch[1])}/${encodeURIComponent(id)}/` : `https://zakhwananuar.my/blog/${encodeURIComponent(id)}/`;
+  document.querySelector('link[rel="canonical"]').href = isWriteup ? `https://zakhwananuar.my/writeup.html?id=${encodeURIComponent(id)}` : `https://zakhwananuar.my/blog-post.html?id=${encodeURIComponent(id)}`;
   const metadata = [item.date, isWriteup ? `${item.category} / ${item.difficulty}` : item.tags.join(' / '), `${minutes(item.content)} MIN READ`];
   if (isWriteup && item.points != null) metadata.push(`${item.points} POINTS`);
   document.querySelector('#reader-meta').textContent = metadata.join('  /  ');
@@ -83,7 +85,7 @@
     const score = entry => isWriteup ? Number(entry.ctf === item.ctf) : entry.tags.filter(tag => item.tags.includes(tag)).length;
     return score(b)-score(a);
   }).slice(0,3);
-  document.querySelector('#related').innerHTML = `<h2>${isWriteup ? 'Keep investigating.' : 'Keep reading.'}</h2>` + related.map(entry => `<a class="journal-row" href="${routeRoot}${isWriteup ? `writeups/events/${encodeURIComponent(slugifyEvent(entry.ctf))}` : 'blog'}/${encodeURIComponent(isWriteup ? slugifyEvent(entry.title) : entry.id)}/"><span class="mono">${e(entry.date)}</span><div><h3>${e(entry.title)}</h3></div><span class="mono">${e(isWriteup ? entry.category : entry.tags[0])}</span>${icon('arrow-right')}</a>`).join('');
+  document.querySelector('#related').innerHTML = `<h2>${isWriteup ? 'Keep investigating.' : 'Keep reading.'}</h2>` + related.map(entry => `<a class="journal-row" href="${isWriteup ? `writeup.html?id=${encodeURIComponent(entry.id)}` : `blog-post.html?id=${encodeURIComponent(entry.id)}`}"><span class="mono">${e(entry.date)}</span><div><h3>${e(entry.title)}</h3></div><span class="mono">${e(isWriteup ? entry.category : entry.tags[0])}</span>${icon('arrow-right')}</a>`).join('');
   const progress = document.querySelector('.read-progress');
   let pending = false;
   const update = () => {
